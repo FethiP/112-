@@ -8,13 +8,12 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="KIRKLARELİ 112">
     
-<link rel="apple-touch-icon" href="https://fethip.github.io/112-/logo112.png?v=20">
-<link rel="icon" type="image/png" href="https://fethip.github.io/112-/logo112.png">
+    <link rel="apple-touch-icon" href="https://fethip.github.io/112-/112.png?v=12">
+    <link rel="icon" type="image/png" href="https://fethip.github.io/112-/112.png">
     
     <title>112 Kırklareli | KKM + Saha | AHA/ERC 2025</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
     <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 :root{
@@ -59,6 +58,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .role-glow{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);width:80px;height:40px;border-radius:50%;filter:blur(15px);pointer-events:none;}
 .role-btn.kkm .role-glow{background:var(--blue);}
 .role-btn.saha .role-glow{background:var(--green);}
+
+/* ===== LOGIN ===== */
+#loginBox{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,rgba(6,12,26,0) 0%,rgba(6,12,26,0.98) 18%,#060c1a 100%);padding:32px 28px 40px;display:none;flex-direction:column;gap:10px;}
+#loginBox.show{display:flex;}
+.login-title{font-size:0.75rem;font-weight:800;color:var(--text);text-align:center;margin-bottom:4px;letter-spacing:1px;}
+.login-sub{font-size:0.55rem;color:var(--muted);text-align:center;margin-bottom:8px;}
+.login-input-wrap{position:relative;}
+.login-input-wrap i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:0.75rem;}
+.login-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:14px;padding:11px 12px 11px 34px;color:var(--text);font-size:0.7rem;outline:none;transition:border 0.2s;}
+.login-input:focus{border-color:var(--accent);}
+.login-input::placeholder{color:var(--muted);}
+.login-btn{background:linear-gradient(135deg,var(--red),var(--red2));border:none;padding:13px;width:100%;border-radius:30px;color:white;font-weight:800;cursor:pointer;font-size:0.78rem;letter-spacing:1px;margin-top:4px;}
+.login-btn:active{transform:scale(0.97);}
+.login-err{color:#f87171;font-size:0.6rem;text-align:center;display:none;}
+.login-err.show{display:block;}
 
 /* ===== APP ===== */
 .app{display:none;height:100vh;overflow:hidden;flex-direction:column;}
@@ -271,7 +285,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="splash-title">112 KIRKLARELİ</div>
   <div class="splash-sub">KKM OPERASYON + SAHA EKİBİ</div>
   <div class="splash-aha">⚕️ AHA / ERC 2025 KILAVUZLARI</div>
-  <div class="role-buttons">
+
+  <!-- LOGIN KUTUSU -->
+  <div id="loginBox" class="show">
+    <div class="login-title">🔐 GİRİŞ</div>
+    <div class="login-sub">Sisteme erişmek için kimlik doğrulama gereklidir</div>
+    <div class="login-input-wrap">
+      <i class="fas fa-user"></i>
+      <input class="login-input" id="loginUser" type="text" placeholder="Kullanıcı adı" autocomplete="off">
+    </div>
+    <div class="login-input-wrap">
+      <i class="fas fa-lock"></i>
+      <input class="login-input" id="loginPass" type="password" placeholder="Şifre" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <div class="login-err" id="loginErr">❌ Kullanıcı adı veya şifre hatalı!</div>
+    <button class="login-btn" onclick="doLogin()"><i class="fas fa-right-to-bracket"></i> &nbsp;GİRİŞ YAP</button>
+  </div>
+
+  <!-- ROL SEÇİMİ (giriş sonrası) -->
+  <div class="role-buttons" id="roleBox" style="display:none;">
     <div class="role-btn kkm" onclick="selectRole('kkm')">
       <div class="role-glow"></div>
       <i class="fas fa-headset"></i>
@@ -284,7 +316,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <h3>SAHA EKİBİ</h3>
       <p>Ambulans Personeli<br>Algoritmalar & Dozlar</p>
     </div>
-  </div>
+  </div><!-- /role-buttons -->
 </div>
 
 <!-- ============ KKM ARAYÜZÜ ============ -->
@@ -496,10 +528,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <!-- VT -->
       <div class="rhythm-card" onclick="showAlgo('vt')">
         <div class="rhythm-header"><span class="rhythm-name">⚡ VENTRİKÜLER TAŞİKARDİ (VT)</span><span class="rhythm-label lbl-shock">⚡ KARDİYOVERSİYON</span></div>
-        <div class="ecg-wrap"><svg class="ecg-line" viewBox="0 0 800 40" preserveAspectRatio="none" style="width:200%;animation:ecgScroll 1.8s linear infinite;">
-          <path class="ecg-path" stroke="#f97316" d="M0,20 L15,20 L18,2 L22,38 L26,20 L55,20 L58,2 L62,38 L66,20 L95,20 L98,2 L102,38 L106,20 L135,20 L138,2 L142,38 L146,20 L175,20 L178,2 L182,38 L186,20 L215,20 L218,2 L222,38 L226,20 L255,20 L258,2 L262,38 L266,20 L295,20 L298,2 L302,38 L306,20 L335,20 L338,2 L342,38 L346,20 L375,20 L378,2 L382,38 L386,20 L415,20 L418,2 L422,38 L426,20 L455,20 L458,2 L462,38 L466,20 L495,20 L498,2 L502,38 L506,20 L535,20 L538,2 L542,38 L546,20 L575,20 L578,2 L582,38 L586,20 L615,20 L618,2 L622,38 L626,20 L655,20 L658,2 L662,38 L666,20 L695,20 L698,2 L702,38 L706,20 L735,20 L738,2 L742,38 L746,20 L775,20 L778,2 L782,38 L786,20"/>
+        <div class="ecg-wrap"><svg class="ecg-line" viewBox="0 0 800 40" preserveAspectRatio="none" style="width:200%;animation:ecgScroll 2.4s linear infinite;">
+          <!-- Gerçekçi VT: Geniş, monofazik, düzenli sinüzoidal dalgalar ~150/dk, QRS genişliği artmış -->
+          <path class="ecg-path" stroke="#f97316" stroke-width="1.8" fill="none"
+            d="M0,20
+               L3,20 L5,19 L7,16 L9,10 L11,4 L13,2 L15,3 L17,6 L19,11 L21,17 L23,22 L25,28 L27,34 L29,37 L31,38 L33,37 L35,33 L37,28 L39,23 L41,20
+               L44,20 L46,19 L48,16 L50,10 L52,4 L54,2 L56,3 L58,6 L60,11 L62,17 L64,22 L66,28 L68,34 L70,37 L72,38 L74,37 L76,33 L78,28 L80,23 L82,20
+               L85,20 L87,19 L89,16 L91,10 L93,4 L95,2 L97,3 L99,6 L101,11 L103,17 L105,22 L107,28 L109,34 L111,37 L113,38 L115,37 L117,33 L119,28 L121,23 L123,20
+               L126,20 L128,19 L130,16 L132,10 L134,4 L136,2 L138,3 L140,6 L142,11 L144,17 L146,22 L148,28 L150,34 L152,37 L154,38 L156,37 L158,33 L160,28 L162,23 L164,20
+               L167,20 L169,19 L171,16 L173,10 L175,4 L177,2 L179,3 L181,6 L183,11 L185,17 L187,22 L189,28 L191,34 L193,37 L195,38 L197,37 L199,33 L201,28 L203,23 L205,20
+               L208,20 L210,19 L212,16 L214,10 L216,4 L218,2 L220,3 L222,6 L224,11 L226,17 L228,22 L230,28 L232,34 L234,37 L236,38 L238,37 L240,33 L242,28 L244,23 L246,20
+               L249,20 L251,19 L253,16 L255,10 L257,4 L259,2 L261,3 L263,6 L265,11 L267,17 L269,22 L271,28 L273,34 L275,37 L277,38 L279,37 L281,33 L283,28 L285,23 L287,20
+               L290,20 L292,19 L294,16 L296,10 L298,4 L300,2 L302,3 L304,6 L306,11 L308,17 L310,22 L312,28 L314,34 L316,37 L318,38 L320,37 L322,33 L324,28 L326,23 L328,20
+               L331,20 L333,19 L335,16 L337,10 L339,4 L341,2 L343,3 L345,6 L347,11 L349,17 L351,22 L353,28 L355,34 L357,37 L359,38 L361,37 L363,33 L365,28 L367,23 L369,20
+               L372,20 L374,19 L376,16 L378,10 L380,4 L382,2 L384,3 L386,6 L388,11 L390,17 L392,22 L394,28 L396,34 L398,37 L400,38 L402,37 L404,33 L406,28 L408,23 L410,20
+               L413,20 L415,19 L417,16 L419,10 L421,4 L423,2 L425,3 L427,6 L429,11 L431,17 L433,22 L435,28 L437,34 L439,37 L441,38 L443,37 L445,33 L447,28 L449,23 L451,20
+               L454,20 L456,19 L458,16 L460,10 L462,4 L464,2 L466,3 L468,6 L470,11 L472,17 L474,22 L476,28 L478,34 L480,37 L482,38 L484,37 L486,33 L488,28 L490,23 L492,20"/>
         </svg></div>
-        <div class="rhythm-desc">Geniş QRS, düzenli, hızlı. Nabız varsa: Kardiyoversiyon. Nabız yoksa: VF protokolü</div>
+        <div class="rhythm-desc">Geniş QRS (&gt;0.12sn), düzenli sinüzoidal dalgalar, 120-200/dk. Nabız varsa: Kardiyoversiyon. Nabız yoksa: VF protokolü</div>
       </div>
       <!-- SVT -->
       <div class="rhythm-card" onclick="showAlgo('svt')">
@@ -535,6 +581,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <path class="ecg-path" stroke="#22c55e" d="M0,20 L10,20 L13,17 L16,22 L19,20 L25,20 L28,4 L32,36 L34,12 L37,20 L40,20 L50,20 L53,17 L56,22 L59,20 L65,20 L68,4 L72,36 L74,12 L77,20 L80,20 L90,20 L93,17 L96,22 L99,20 L105,20 L108,4 L112,36 L114,12 L117,20 L120,20 L130,20 L133,17 L136,22 L139,20 L145,20 L148,4 L152,36 L154,12 L157,20 L160,20 L170,20 L173,17 L176,22 L179,20 L185,20 L188,4 L192,36 L194,12 L197,20 L200,20 L210,20 L213,17 L216,22 L219,20 L225,20 L228,4 L232,36 L234,12 L237,20 L240,20 L250,20 L253,17 L256,22 L259,20 L265,20 L268,4 L272,36 L274,12 L277,20 L280,20 L290,20 L293,17 L296,22 L299,20 L305,20 L308,4 L312,36 L314,12 L317,20 L320,20 L330,20 L333,17 L336,22 L339,20 L345,20 L348,4 L352,36 L354,12 L357,20 L360,20 L370,20 L373,17 L376,22 L379,20 L385,20 L388,4 L392,36 L394,12 L397,20 L400,20 L410,20 L413,17 L416,22 L419,20 L425,20 L428,4 L432,36 L434,12 L437,20 L440,20 L450,20 L453,17 L456,22 L459,20 L465,20 L468,4 L472,36 L474,12 L477,20 L480,20"/>
         </svg></div>
         <div class="rhythm-desc">P→QRS→T, düzenli, 60-100/dk. Referans ritim.</div>
+      </div>
+      <!-- TORSADES DE POINTES -->
+      <div class="rhythm-card" onclick="showAlgo('vt')">
+        <div class="rhythm-header"><span class="rhythm-name">🌀 TORSADES DE POINTES</span><span class="rhythm-label lbl-shock">⚡ MgSO4 + ŞOK</span></div>
+        <div class="ecg-wrap"><svg class="ecg-line" viewBox="0 0 800 40" preserveAspectRatio="none" style="width:200%;animation:ecgScroll 1.6s linear infinite;">
+          <!-- Torsades: dalgalanarak eksen dönen geniş kompleksler, tipik "bükülme" görünümü -->
+          <path class="ecg-path" stroke="#f43f5e" stroke-width="1.6" fill="none"
+            d="M0,20 L2,19 L4,17 L6,13 L8,8 L10,4 L12,2 L14,4 L16,9 L18,15 L20,21 L22,27 L24,33 L26,36 L28,37 L30,35 L32,30 L34,24 L36,20
+               L38,20 L40,19 L42,17 L44,13 L46,8 L48,5 L50,3 L52,5 L54,10 L56,16 L58,21 L60,26 L62,31 L64,35 L66,37 L68,36 L70,32 L72,26 L74,20
+               L76,20 L78,21 L80,23 L82,27 L84,31 L86,35 L88,37 L90,36 L92,32 L94,27 L96,22 L98,17 L100,12 L102,8 L104,5 L106,4 L108,5 L110,8 L112,13 L114,18 L116,20
+               L118,20 L120,21 L122,24 L124,28 L126,32 L128,36 L130,38 L132,36 L134,32 L136,27 L138,22 L140,16 L142,11 L144,7 L146,4 L148,3 L150,5 L152,9 L154,14 L156,20
+               L158,20 L160,22 L162,25 L164,29 L166,33 L168,37 L170,38 L172,36 L174,31 L176,25 L178,19 L180,14 L182,9 L184,5 L186,3 L188,4 L190,7 L192,12 L194,17 L196,20
+               L198,20 L200,22 L202,26 L204,30 L206,34 L208,37 L210,38 L212,36 L214,30 L216,24 L218,18 L220,13 L222,8 L224,5 L226,3 L228,4 L230,8 L232,13 L234,18 L236,20
+               L238,20 L240,21 L242,24 L244,28 L246,33 L248,37 L250,38 L252,35 L254,29 L256,23 L258,17 L260,12 L262,7 L264,4 L266,3 L268,5 L270,9 L272,15 L274,20
+               L276,20 L278,19 L280,16 L282,12 L284,7 L286,4 L288,2 L290,4 L292,8 L294,14 L296,20 L298,25 L300,30 L302,34 L304,37 L306,36 L308,31 L310,25 L312,20
+               L314,20 L316,19 L318,15 L320,10 L322,6 L324,3 L326,2 L328,4 L330,9 L332,15 L334,21 L336,27 L338,32 L340,36 L342,37 L344,35 L346,29 L348,23 L350,20
+               L352,20 L354,21 L356,24 L358,28 L360,33 L362,36 L364,38 L366,36 L368,31 L370,25 L372,19 L374,13 L376,8 L378,5 L380,3 L382,4 L384,8 L386,14 L388,20
+               L390,20 L392,22 L394,26 L396,30 L398,34 L400,37 L402,38 L404,35 L406,29 L408,23 L410,16 L412,10 L414,6 L416,3 L418,3 L420,6 L422,11 L424,17 L426,20
+               L428,20 L430,21 L432,25 L434,30 L436,34 L438,37 L440,38 L442,35 L444,29 L446,22 L448,16 L450,11 L452,6 L454,3 L456,3 L458,6 L460,12 L462,18 L464,20"/>
+        </svg></div>
+        <div class="rhythm-desc">Dönüp bükülen eksen, geniş QRS, QT uzun. IV MgSO4 2g! Kararsız → Defibrilasyon 360J</div>
+      </div>
+      <!-- 3. DERECE AV BLOK -->
+      <div class="rhythm-card" onclick="showAlgo('bradikardi')">
+        <div class="rhythm-header"><span class="rhythm-name">🚫 TAM AV BLOK (3. Derece)</span><span class="rhythm-label lbl-unstable">⚡ ACİL PACİNG</span></div>
+        <div class="ecg-wrap"><svg class="ecg-line" viewBox="0 0 800 40" preserveAspectRatio="none" style="width:200%;animation:ecgScroll 4s linear infinite;">
+          <!-- 3. derece AV blok: P dalgaları hızlı ve düzenli, QRS yavaş ve bağımsız -->
+          <path class="ecg-path" stroke="#60a5fa" stroke-width="1.4" fill="none"
+            d="M0,20 L5,20 L7,17 L9,23 L11,20 L30,20 L32,17 L34,23 L36,20 L55,20 L57,17 L59,23 L61,20 L80,20 L82,17 L84,23 L86,20 L105,20 L107,17 L109,23 L111,20 L130,20 L132,17 L134,23 L136,20 L155,20 L157,17 L159,23 L161,20 L180,20 L182,17 L184,23 L186,20 L205,20 L207,17 L209,23 L211,20 L230,20 L232,17 L234,23 L236,20 L255,20 L257,17 L259,23 L261,20 L280,20 L282,17 L284,23 L286,20 L305,20 L307,17 L309,23 L311,20 L330,20 L332,17 L334,23 L336,20 L355,20 L357,17 L359,23 L361,20 L380,20 L382,17 L384,23 L386,20 L405,20 L407,17 L409,23 L411,20 L430,20 L432,17 L434,23 L436,20 L455,20 L457,17 L459,23 L461,20 L480,20"/>
+          <!-- Yavaş QRS kompleksleri (bağımsız, escape ritmi ~35/dk) -->
+          <path stroke="#f97316" stroke-width="2" fill="none"
+            d="M0,20 L70,20 L73,5 L77,38 L79,15 L83,20 L160,20 L163,5 L167,38 L169,15 L173,20 L250,20 L253,5 L257,38 L259,15 L263,20 L340,20 L343,5 L347,38 L349,15 L353,20 L430,20 L433,5 L437,38 L439,15 L443,20"/>
+        </svg></div>
+        <div class="rhythm-desc">P dalgaları (mavi) ve QRS (turuncu) birbirinden bağımsız. Atropin etkisiz! ACİL TCP pacing!</div>
       </div>
     </div>
 
@@ -666,7 +746,74 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       </div>
     </div>
 
-    <!-- İLAÇ DOZLARI -->
+    <!-- YENİ AHA/ERC 2025 ALGORİTMALAR -->
+    <div class="sec"><i class="fas fa-heart-pulse"></i> POST-ARREST & DOLAŞIM</div>
+    <div class="card-grid">
+      <div class="algo-card c-green" onclick="showAlgo('rosc')">
+        <div class="card-badge" style="background:var(--green);">ROSC</div>
+        <div class="card-icon">💚</div>
+        <h3>ROSC SONRASI BAKIM</h3>
+        <p>TTM, O2 hedefi, STEMI, vazopresör</p>
+      </div>
+      <div class="algo-card c-red" onclick="showAlgo('pe')">
+        <div class="card-badge" style="background:var(--red);">PE</div>
+        <div class="card-icon">🩸</div>
+        <h3>PULMONER EMBOLİ</h3>
+        <p>Masif PE, trombolitik, heparin</p>
+      </div>
+      <div class="algo-card c-purple" onclick="showAlgo('tamponad')">
+        <div class="card-badge" style="background:var(--purple);">TAMPONAD</div>
+        <div class="card-icon">💊</div>
+        <h3>KARDİYAK TAMPONAD</h3>
+        <p>Beck triadı, PEA, perikardiyo</p>
+      </div>
+      <div class="algo-card c-cyan" onclick="showAlgo('pulmOdem')">
+        <div class="card-badge" style="background:var(--cyan);">ÖD</div>
+        <div class="card-icon">🫁</div>
+        <h3>PULMONER ÖDEM</h3>
+        <p>CPAP, NTG, Furosemid, NIMV</p>
+      </div>
+      <div class="algo-card c-orange" onclick="showAlgo('aortDiseksiyon')">
+        <div class="card-badge" style="background:var(--orange);">AORT</div>
+        <div class="card-icon">🩺</div>
+        <h3>AORT DİSEKSİYONU</h3>
+        <p>Yırtıcı ağrı, KB kontrolü, cerrahi</p>
+      </div>
+      <div class="algo-card c-red" onclick="showAlgo('hiypertansifAcil')">
+        <div class="card-badge" style="background:var(--red);">HT ACİL</div>
+        <div class="card-icon">🔺</div>
+        <h3>HİPERTANSİF ACİL</h3>
+        <p>Hedef organ hasarı, Labetalol, NTG</p>
+      </div>
+    </div>
+
+    <div class="sec"><i class="fas fa-user-doctor"></i> METABOLİK & DİĞER ACİLLER</div>
+    <div class="card-grid">
+      <div class="algo-card c-yellow" onclick="showAlgo('dka')">
+        <div class="card-badge" style="background:var(--yellow);color:black;">DKA</div>
+        <div class="card-icon">🍬</div>
+        <h3>DİYABETİK KETOASIDOZ</h3>
+        <p>KŞ yüksek, asidoz, sıvı, K+</p>
+      </div>
+      <div class="algo-card c-blue" onclick="showAlgo('bogulma')">
+        <div class="card-badge" style="background:var(--blue);">BOĞULMA</div>
+        <div class="card-icon">🌊</div>
+        <h3>BOĞULMA / DROWNING</h3>
+        <p>5 kurtarma solunumu, hipotermi</p>
+      </div>
+      <div class="algo-card c-teal" onclick="showAlgo('spinalTravma')">
+        <div class="card-badge" style="background:var(--teal,#14b8a6);">NEXUS</div>
+        <div class="card-icon">🦴</div>
+        <h3>SPİNAL TRAVMA</h3>
+        <p>NEXUS, C-collar, spinal şok</p>
+      </div>
+      <div class="algo-card c-pink" onclick="showAlgo('yenidogan')">
+        <div class="card-badge" style="background:#ec4899;">NLS</div>
+        <div class="card-icon">👼</div>
+        <h3>YENİDOĞAN RESÜS.</h3>
+        <p>NLS — ERC 2021, oda havası, 3:1</p>
+      </div>
+    </div>
     <div class="sec"><i class="fas fa-syringe"></i> İLAÇ DOZLARI (KİLOYA GÖRE)</div>
     <div class="info-box">
       <div class="dose-header">
@@ -1424,6 +1571,197 @@ const algoData={
       <li>Entübasyon: Anestezi uzmanıyla beraber!</li>
     </ul></div>
     <div class="m-box warning">⚠️ EPİGLOTİT'TE: Ağız muayenesi, kan alma, yatırma yapmadan HEMEN sevk! Solunum durabilir!</div>
+  `},
+
+  rosc:{title:'💚 ROSC SONRASI BAKIM — AHA/ERC 2025',html:`
+    <div class="m-box diagnosis"><strong>🔍 ROSC (Return of Spontaneous Circulation):</strong> Organize ritim + Nabız geri döndü → Post-resüsitasyon bakımı başlat!</div>
+    <div class="m-section"><div class="m-section-title">🅰️ Hava Yolu & Solunum</div>
+    <ul class="step-list">
+      <li>SpO2 ≥94-98% hedef — aşırı O2 verme (hiperoksemi zararlı!)</li>
+      <li>EtCO2 normal (35-45 mmHg) — hiperventilasyon YOK</li>
+      <li>Entübe değilse değerlendir — GKS ≤8 ise entübe et</li>
+    </ul></div>
+    <div class="m-section"><div class="m-section-title">🅱️ Dolaşım</div>
+    <ul class="step-list">
+      <li>SKB ≥100 mmHg hedef (≥90 minimum)</li>
+      <li>Hipotansiyon: Kristaloid bolus 250-500 mL → Noradrenalin/Dopamin</li>
+      <li>12 derivasyon EKG: STEMI? → Acil PCI merkezi</li>
+      <li>IV/IO erişim sağlam mı? Güvenli damar yolunu değerlendir</li>
+    </ul></div>
+    <div class="m-section"><div class="m-section-title">🌡️ Hedefli Sıcaklık Yönetimi (TTM)</div>
+    <ul class="step-list">
+      <li>Ateş önle: Vücut ısısı &lt;37.5°C tut (48 saat)</li>
+      <li>Bilinç geri dönmemişse: Aktif soğutma — 32-36°C hedef (hastanede)</li>
+      <li>Soğutmaya başlama: IV soğuk SF, soğuk pansuman (sahada)</li>
+    </ul></div>
+    <div class="m-box treatment"><strong>💊 ROSC İlaçları:</strong><br>
+    <div class="m-drug"><span>Noradrenalin (hipotansiyon)</span><span class="m-drug-dose">0.1-0.5 mcg/kg/dk infüzyon</span></div>
+    <div class="m-drug"><span>Dopamin (bradikardi+hipotansiyon)</span><span class="m-drug-dose">5-20 mcg/kg/dk infüzyon</span></div>
+    <div class="m-drug"><span>Glukoz kontrolü</span><span class="m-drug-dose">Kan şekeri 6-10 mmol/L (108-180 mg/dL)</span></div>
+    </div>
+    <div class="m-box warning">⚠️ ROSC sonrası SANİYELER ÖNEMLİ: O2 ayarla, EKG çek, KB stabilize et, ateş önle, STEMI'yi ekarte et!</div>
+  `},
+
+  pe:{title:'🩸 PULMONER EMBOLİ (PE) — AHA/ERC 2025',html:`
+    <div class="m-box diagnosis"><strong>🔍 KLİNİK ŞÜPHE:</strong><br>
+    Ani nefes darlığı + Plöritik göğüs ağrısı + Taşikardi + Hipoksi + DVT bulguları<br>
+    Risk faktörü: İmmobilizasyon, kanser, gebelik, uzun yolculuk, DVT hikayesi</div>
+    <div class="m-section"><div class="m-section-title">🔴 MASSİF PE (Arrest veya Şok)</div>
+    <ul class="step-list">
+      <li>KPR: PE arrestinde manuel kompresyon daha iyi olabilir</li>
+      <li>Adrenalin 1 mg IV/IO — KPR sırasında</li>
+      <li>Trombolitik düşün (Alteplaz 50 mg IV bolus — arreste karar verildiyse)</li>
+      <li>KPR'a en az 60-90 dk devam et (fibrinoliz etkisi için)</li>
+    </ul></div>
+    <div class="m-section"><div class="m-section-title">🟡 SUBMASSİF PE (Stabil ama yük büyük)</div>
+    <ul class="step-list">
+      <li>O2 yüksek akım (SpO2 ≥94%)</li>
+      <li>IV erişim, sıvı dikkatli (sağ ventrikül yüklü!)</li>
+      <li>Heparin 80 IU/kg IV bolus → infüzyon</li>
+      <li>Noradrenalin: SKB &lt;90 ise</li>
+    </ul></div>
+    <div class="m-box info"><strong>EKG BULGULARI:</strong> S1Q3T3 (nadir ama tipik) | Sağ dal bloğu | Taşikardi | V1-V4 T inversiyonu</div>
+    <div class="m-box warning">⚠️ PE'da sıvı körce verme! Sağ ventrikülü doldurur, sol ventrikülü sıkıştırır → Kardiyak output düşer!</div>
+  `},
+
+  hiypertansifAcil:{title:'🔺 HİPERTANSİF ACİL',html:`
+    <div class="m-box diagnosis"><strong>🔍 TANI:</strong> SKB ≥180 + DBK ≥120 + Hedef organ hasarı (inme, MI, böbrek yetmezliği, göz, kalp yetmezliği)</div>
+    <div class="m-section"><div class="m-section-title">🔴 HİPERTANSİF ENSEFALOPATI / İNME</div>
+    <ul class="step-list">
+      <li>İnme varsa KB'yi AGRESIF DÜŞÜRME — tPA adayı değilse &lt;220 dokunma</li>
+      <li>tPA adayı ise hedef: SKB &lt;185 / DBK &lt;110</li>
+      <li>Labetalol 10-20 mg IV (titrasyon ile)</li>
+      <li>Nikardipin infüzyon (ideal ajan, titrasyon kolay)</li>
+    </ul></div>
+    <div class="m-section"><div class="m-section-title">🟡 HİPERTANSİF ACİL — GENEL</div>
+    <ul class="step-list">
+      <li>Sakin, sessiz ortam — stres KB yükseltir</li>
+      <li>O2 ver, IV erişim aç</li>
+      <li>İlk 1 saatte KB'yi %20-25 düşür (çok hızlı düşürme iskemiye neden olur!)</li>
+      <li>Labetalol 20 mg IV yavaş (veya Metoprolol)</li>
+      <li>Nitrogliserin 0.4 mg SL (göğüs ağrısı eşlik ediyorsa)</li>
+    </ul></div>
+    <div class="m-box warning">⚠️ KB'yi çok hızlı düşürme! Beyin otoregulayon bozulmuştur. Ani düşüş → inme, körlük, böbrek yetmezliği!</div>
+  `},
+
+  bogulma:{title:'🌊 BOĞULMA / NEAR-DROWNING — ERC 2021',html:`
+    <div class="m-box diagnosis"><strong>🔍 BOĞULMA:</strong> Suya maruz kalma → Hipoksi → Solunum arresti → Kardiyak arrest</div>
+    <ul class="step-list">
+      <li>Güvenli kurtarma — kurtarıcı riski önce değerlendir!</li>
+      <li>Servikal travma: Dalma olayıysa C-collar (su sporları, alkol)</li>
+      <li>5 KURTARMA SOLUNUMU — önce hava yolu aç!</li>
+      <li>Nabız yok → KPR başlat (30:2)</li>
+      <li>O2 yüksek akım — NRM maske (Hipoksi birincil neden!)</li>
+      <li>Islak kıyafetleri çıkar — Hipotermiyi önle/tedavi et</li>
+      <li>Aktif ısınma: Isıtılmış battaniye, ılık IV sıvı</li>
+    </ul>
+    <div class="m-box info"><strong>BOĞULMADA KPR:</strong> Hava yolu önce! 5 kurtarma solunumu, sonra 30:2. Solunum arresti kalp arrestinden önce gelir!</div>
+    <div class="m-box warning">⚠️ SOĞUK SUDA BOĞULMA: "No one is dead until warm and dead!" — Hipotermi varsa KPR uzat! ECMO merkezine sevk!</div>
+  `},
+
+  pulmOdem:{title:'🫁 AKUT PULMONER ÖDEM / KALYETMEZLİĞİ',html:`
+    <div class="m-box diagnosis"><strong>🔍 TANI:</strong> Akut nefes darlığı + Pembe köpüklü balgam + Krepitan raller (tüm akciğer) + SpO2 düşüklüğü + Hipertansiyon (çoğunlukla)</div>
+    <ul class="step-list">
+      <li>Otur — bacaklar sarkıt (venöz dönüşü azalt)</li>
+      <li>CPAP/BiPAP: SpO2 &lt;94% veya solunum sıkıntısı → NIMV ilk seçim!</li>
+      <li>NTG (Nitrogliserin) 0.4 mg SL — her 5 dk (SKB >100 ise)</li>
+      <li>NTG infüzyon: 10-20 mcg/dk → 200 mcg/dk titre et</li>
+      <li>Furosemid 40-80 mg IV yavaş (volüm yüklü hastada)</li>
+      <li>Morfin 2-4 mg IV (anksiyete, preload azaltma)</li>
+      <li>SpO2 &lt;90% CPAP'a rağmen → Entübasyon</li>
+    </ul>
+    <div class="m-box treatment"><strong>💊 TEMEL İLAÇLAR:</strong><br>
+    <div class="m-drug"><span>NTG SL</span><span class="m-drug-dose">0.4 mg — her 5 dk (SKB >100)</span></div>
+    <div class="m-drug"><span>Furosemid</span><span class="m-drug-dose">40-80 mg IV yavaş</span></div>
+    <div class="m-drug"><span>Morfin</span><span class="m-drug-dose">2-4 mg IV titre et</span></div>
+    </div>
+    <div class="m-box warning">⚠️ KARDİYOJENİK ŞOK EŞLİKTE İSE: Furosemid ve NTG dikkatli! Dopamin/Dobutamin başla!</div>
+  `},
+
+  dka:{title:'🍬 DİYABETİK KETOASİDOZ (DKA)',html:`
+    <div class="m-box diagnosis"><strong>🔍 TANI:</strong> Kan şekeri >250 mg/dL + Keton (idrarda/kanda) + Metabolik asidoz<br>Klinik: Kusma, karın ağrısı, Kussmaul solunumu (derin hızlı), meyve kokusu, bilinç bozukluğu</div>
+    <ul class="step-list">
+      <li>IV erişim: 2 geniş damar yolu</li>
+      <li>Sıvı 1. saat: NaCl %0.9 — 1000 mL hızlı bolus</li>
+      <li>Kan şekeri, bilinç, vital bulgular takip</li>
+      <li>Potasyum ölç! K+ &lt;3.5 → İnsülin başlamadan önce potasyum ver</li>
+      <li>Hafif DKA (GKS normal): Sıvı + Sevk</li>
+      <li>Ağır DKA (GKS &lt;14, şok): Agresif sıvı + Hızlı sevk</li>
+    </ul>
+    <div class="m-box info"><strong>SAHADA FARK:</strong> Hipoglisemi ile karıştırma — KŞ ölç! DKA'da KŞ yüksek. Hipoglisemide KŞ düşük. İkisini karıştırma!</div>
+    <div class="m-box warning">⚠️ DKA'DA İNSÜLİN SAHAda BAŞLAMA! Potasyum takibi olmadan insülin → Hipokalemi → Kardiyak arrest!</div>
+  `},
+
+  tamponad:{title:'💊 KARDİYAK TAMPONAD',html:`
+    <div class="m-box diagnosis"><strong>🔍 BECK TRİYADI:</strong><br>
+    1️⃣ Hipotansiyon (SKB &lt;90)<br>
+    2️⃣ Distansiyone boyun venleri (JVD)<br>
+    3️⃣ Muffled (uzak) kalp sesleri<br><br>
+    Ayrıca: Paradoks nabız (>10 mmHg inspirasyonda düşüş), EKG'de küçük voltaj + elektriksel alternans</div>
+    <ul class="step-list">
+      <li>O2 yüksek akım, IV erişim aç</li>
+      <li>Dikkatli sıvı: 250-500 mL bolus (preload artır)</li>
+      <li>Pozitif basınçlı ventilasyondan KAÇIN (kardiyak output düşer!)</li>
+      <li>PEA arresti şüphesi: 5T listesinde tamponad!</li>
+      <li>Perikardiyo sentez: Xiphoid altı yaklaşım — hastanede!</li>
+      <li>Travmatik tamponad + arrest: Resüssitatif torakotomi kararı</li>
+    </ul>
+    <div class="m-box warning">⚠️ KPR sırasında PEA'da TAMPONAD DÜŞÜN! Kompresyon tamponadı geçici olarak dekompose edebilir!</div>
+  `},
+
+  aortDiseksiyon:{title:'🩺 AORT DİSEKSİYONU',html:`
+    <div class="m-box diagnosis"><strong>🔍 KLİNİK ŞÜPHE:</strong><br>
+    Ani başlayan yırtıcı/bıçak saplanır göğüs/sırt ağrısı + Hipertansiyon hikayesi<br>
+    Kollarda farklı KB (>20 mmHg fark) | Nörolojik defisit | Nabız kayıpları</div>
+    <ul class="step-list">
+      <li>O2 ver, IV erişim (iki koldan)</li>
+      <li>KB hedefi: SKB 100-120 mmHg (düşük tut — rüptür önle)</li>
+      <li>Ağrı: Morfin 2-4 mg IV titre et</li>
+      <li>Labetalol 10-20 mg IV (kalp hızı ve KB kontrol)</li>
+      <li>Hiçbir antikoagülan VERME!</li>
+      <li>Acil kardiyovasküler cerrahi merkez sevki!</li>
+    </ul>
+    <div class="m-box info"><strong>TİP A (Asendan — Acil Cerrahi!):</strong> Göğüs ağrısı dominant. Tip B (Desendan — Medikal).</div>
+    <div class="m-box warning">⚠️ STEMI ile karıştırma — Diseksiyonda tromboliz verilirse ÖLÜM! EKG normal veya nonspesifik ise aort düşün!</div>
+  `},
+
+  spinalTravma:{title:'🦴 SPİNAL TRAVMA / BOYUN YARALANMASI',html:`
+    <div class="m-box diagnosis"><strong>🔍 NEXUS KRİTERLERİ (Tümü yoksa immobilizasyon gerekmez):</strong><br>
+    1. Ense orta hat hassasiyeti<br>
+    2. Bilinç değişikliği<br>
+    3. Nörolojik defisit<br>
+    4. Dikkat dağıtıcı ağrı/yaralanma<br>
+    5. Alkol/madde etkisi<br>
+    → Herhangi biri varsa: C-COLLAR + İMMOBİLİZASYON!</div>
+    <ul class="step-list">
+      <li>Manuel servikal immobilizasyon — hava yolu açılana kadar</li>
+      <li>C-Collar uygula (boyun nötral pozisyonda)</li>
+      <li>Hava yolu: GKS ≤8 → RSI ile dikkatli entübasyon (inline immobilizasyon)</li>
+      <li>Spinal şok: Bradikardi + Hipotansiyon (vasodilatasyon) → Sıvı + Atropin</li>
+      <li>Log-roll tekniği ile hareket ettir</li>
+      <li>Nörolojik defisit: Parestezi, güçsüzlük, mesane disfonksiyonu</li>
+    </ul>
+    <div class="m-box warning">⚠️ SPİNAL ŞOK: Hipotansiyon + Bradikardi (sempatik denervasyonu). Hemorajik şoktan ayır: Hemorajik şokta taşikardi olur!</div>
+  `},
+
+  yenidogan:{title:'👼 YENİDOĞAN RESÜSİTASYONU (NLS) — ERC 2021',html:`
+    <div class="m-box diagnosis"><strong>🔍 İLK DEĞERLENDİRME (doğumdan sonra 30 saniyede):</strong><br>
+    1. Term bebek mi? (37+ hafta)<br>
+    2. Tonüs var mı?<br>
+    3. Ağlıyor mu / soluyor mu?<br>
+    → Hepsi evet: Anneyle temas, ısıt, izle</div>
+    <div class="m-section"><div class="m-section-title">📋 RESÜSSITASYON ADIMI (Yanıt vermiyorsa)</div>
+    <ul class="step-list">
+      <li>ISI: Isıtılmış battaniye, ıslak kıyafet çıkar</li>
+      <li>HAVA YOLU: Başı nötral pozisyona al, gerekirse aspire et</li>
+      <li>UYAR: Ayak tabanı uyarısı, sırt ovuşturma (max 30 sn)</li>
+      <li>SpO2 ve kalp hızı değerlendir</li>
+      <li>KH &lt;100/dk veya solunum yok → 5 İNFLASYON (maskeyle, 2-3 sn)</li>
+      <li>KH &lt;60/dk → Göğüs kompresyonu: Başparmak tekniği, 3:1 oran, 120 olay/dk</li>
+      <li>IO/UV yol: Adrenalin 10-30 mcg/kg (0.01-0.03 mg/kg)</li>
+    </ul></div>
+    <div class="m-box info"><strong>APGAR:</strong> 0-3: Ağır depresyon | 4-6: Orta | 7-10: Normal. Resüsitasyona APGAR bekleme, hemen başla!</div>
+    <div class="m-box warning">⚠️ YENİDOĞANDA OKSIJEN: İlk başta ODA HAVASI kullan (%21)! Aşırı O2 zarar verir. SpO2 hedefi 1. dk: %60-70, 10. dk: %85-95</div>
   `}
 };
 
@@ -1435,6 +1773,24 @@ function showAlgo(key){
 
 // INIT
 document.getElementById('kkmContainer').style.display='block';
+
+// LOGIN
+function doLogin(){
+  const u=document.getElementById('loginUser').value.trim().toLowerCase();
+  const p=document.getElementById('loginPass').value.trim();
+  const err=document.getElementById('loginErr');
+  // kabul edilen: kullanıcı adı "kırklareli" veya "kirklareli", şifre "112"
+  const okUser=['kırklareli','kirklareli','kırklarel̇i'];
+  if(okUser.includes(u) && p==='112'){
+    err.classList.remove('show');
+    document.getElementById('loginBox').style.display='none';
+    document.getElementById('roleBox').style.display='flex';
+  } else {
+    err.classList.add('show');
+    document.getElementById('loginPass').value='';
+    document.getElementById('loginPass').focus();
+  }
+}
 </script>
 </body>
 </html>

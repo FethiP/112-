@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -21,7 +22,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 /* ===== SPLASH ===== */
 #splash{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 30%,#0a1628 0%,#060c1a 70%);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;}
 .splash-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
-.star{position:absolute;border-radius:50%;animation:twinkle var(--d,2s) ease-in-out infinite;}
+.star{position:absolute;border-radius:50%;animation:twinkle var(–d,2s) ease-in-out infinite;}
 @keyframes twinkle{0%,100%{opacity:0.2;transform:scale(1);}50%{opacity:1;transform:scale(1.4);}}
 .splash-lights{display:flex;gap:6px;margin-bottom:18px;}
 .light{width:10px;height:10px;border-radius:50%;animation:blink 0.6s ease-in-out infinite;}
@@ -29,40 +30,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .light.w{background:#ffffff;animation-delay:0.2s;}
 .light.b{background:#2563eb;animation-delay:0.4s;}
 @keyframes blink{0%,100%{opacity:1;transform:scale(1);box-shadow:0 0 8px currentColor;}50%{opacity:0.3;transform:scale(0.7);box-shadow:none;}}
-.splash-logo{width:90px;height:90px;background:linear-gradient(135deg,var(--red),var(--red2));border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;box-shadow:0 0 40px rgba(220,38,38,0.5);margin-bottom:16px;animation:logoPulse 2s ease-in-out infinite;}
+.splash-logo{width:90px;height:90px;background:linear-gradient(135deg,var(–red),var(–red2));border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;box-shadow:0 0 40px rgba(220,38,38,0.5);margin-bottom:16px;animation:logoPulse 2s ease-in-out infinite;}
 @keyframes logoPulse{0%,100%{box-shadow:0 0 30px rgba(220,38,38,0.4);}50%{box-shadow:0 0 60px rgba(220,38,38,0.8),0 0 100px rgba(220,38,38,0.3);}}
 .splash-title{font-size:2rem;font-weight:900;letter-spacing:2px;text-align:center;background:linear-gradient(135deg,#fff 30%,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
-.splash-sub{font-size:0.65rem;color:var(--muted);text-align:center;margin-bottom:8px;letter-spacing:1px;}
-.splash-aha{font-size:0.6rem;color:var(--yellow);margin-bottom:36px;background:rgba(234,179,8,0.1);border:1px solid rgba(234,179,8,0.3);padding:4px 12px;border-radius:20px;}
+.splash-sub{font-size:0.65rem;color:var(–muted);text-align:center;margin-bottom:8px;letter-spacing:1px;}
+.splash-aha{font-size:0.6rem;color:var(–yellow);margin-bottom:36px;background:rgba(234,179,8,0.1);border:1px solid rgba(234,179,8,0.3);padding:4px 12px;border-radius:20px;}
 .role-buttons{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
-.role-btn{background:linear-gradient(135deg,var(--card),var(--card2));border:2px solid var(--border);border-radius:20px;padding:20px 24px;text-align:center;cursor:pointer;transition:all 0.2s;min-width:150px;position:relative;overflow:hidden;}
-.role-btn::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity 0.2s;}
-.role-btn.kkm{border-color:var(--blue);}
+.role-btn{background:linear-gradient(135deg,var(–card),var(–card2));border:2px solid var(–border);border-radius:20px;padding:20px 24px;text-align:center;cursor:pointer;transition:all 0.2s;min-width:150px;position:relative;overflow:hidden;}
+.role-btn::before{content:’’;position:absolute;inset:0;opacity:0;transition:opacity 0.2s;}
+.role-btn.kkm{border-color:var(–blue);}
 .role-btn.kkm::before{background:linear-gradient(135deg,rgba(37,99,235,0.15),transparent);}
-.role-btn.saha{border-color:var(--green);}
+.role-btn.saha{border-color:var(–green);}
 .role-btn.saha::before{background:linear-gradient(135deg,rgba(22,163,74,0.15),transparent);}
 .role-btn:active{transform:scale(0.95);opacity:0.9;}
 .role-btn:hover::before{opacity:1;}
 .role-btn i{font-size:2.2rem;display:block;margin-bottom:10px;}
-.role-btn.kkm i{color:var(--blue);}
-.role-btn.saha i{color:var(--green);}
+.role-btn.kkm i{color:var(–blue);}
+.role-btn.saha i{color:var(–green);}
 .role-btn h3{font-size:1rem;margin-bottom:4px;font-weight:700;}
-.role-btn p{font-size:0.5rem;color:var(--muted);line-height:1.4;}
+.role-btn p{font-size:0.5rem;color:var(–muted);line-height:1.4;}
 .role-glow{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);width:80px;height:40px;border-radius:50%;filter:blur(15px);pointer-events:none;}
-.role-btn.kkm .role-glow{background:var(--blue);}
-.role-btn.saha .role-glow{background:var(--green);}
+.role-btn.kkm .role-glow{background:var(–blue);}
+.role-btn.saha .role-glow{background:var(–green);}
 
 /* ===== LOGIN ===== */
 #loginBox{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,rgba(6,12,26,0) 0%,rgba(6,12,26,0.98) 18%,#060c1a 100%);padding:32px 28px 40px;display:none;flex-direction:column;gap:10px;}
 #loginBox.show{display:flex;}
-.login-title{font-size:0.75rem;font-weight:800;color:var(--text);text-align:center;margin-bottom:4px;letter-spacing:1px;}
-.login-sub{font-size:0.55rem;color:var(--muted);text-align:center;margin-bottom:8px;}
+.login-title{font-size:0.75rem;font-weight:800;color:var(–text);text-align:center;margin-bottom:4px;letter-spacing:1px;}
+.login-sub{font-size:0.55rem;color:var(–muted);text-align:center;margin-bottom:8px;}
 .login-input-wrap{position:relative;}
-.login-input-wrap i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:0.75rem;}
-.login-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:14px;padding:11px 12px 11px 34px;color:var(--text);font-size:0.7rem;outline:none;transition:border 0.2s;}
-.login-input:focus{border-color:var(--accent);}
-.login-input::placeholder{color:var(--muted);}
-.login-btn{background:linear-gradient(135deg,var(--red),var(--red2));border:none;padding:13px;width:100%;border-radius:30px;color:white;font-weight:800;cursor:pointer;font-size:0.78rem;letter-spacing:1px;margin-top:4px;}
+.login-input-wrap i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(–muted);font-size:0.75rem;}
+.login-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid var(–border);border-radius:14px;padding:11px 12px 11px 34px;color:var(–text);font-size:0.7rem;outline:none;transition:border 0.2s;}
+.login-input:focus{border-color:var(–accent);}
+.login-input::placeholder{color:var(–muted);}
+.login-btn{background:linear-gradient(135deg,var(–red),var(–red2));border:none;padding:13px;width:100%;border-radius:30px;color:white;font-weight:800;cursor:pointer;font-size:0.78rem;letter-spacing:1px;margin-top:4px;}
 .login-btn:active{transform:scale(0.97);}
 .login-err{color:#f87171;font-size:0.6rem;text-align:center;display:none;}
 .login-err.show{display:block;}
@@ -72,14 +73,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 /* HEADER */
 .app-header{padding:12px 16px 14px;flex-shrink:0;}
-.header-kkm{background:linear-gradient(135deg,#1a3a6b 0%,#0a1628 100%);border-bottom:1px solid var(--blue);}
-.header-saha{background:linear-gradient(135deg,#1a3a2a 0%,#0a1628 100%);border-bottom:1px solid var(--green);}
+.header-kkm{background:linear-gradient(135deg,#1a3a6b 0%,#0a1628 100%);border-bottom:1px solid var(–blue);}
+.header-saha{background:linear-gradient(135deg,#1a3a2a 0%,#0a1628 100%);border-bottom:1px solid var(–green);}
 .header-inner{display:flex;align-items:center;gap:10px;}
 .header-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
-.header-kkm .header-icon{background:rgba(37,99,235,0.2);color:var(--blue);}
-.header-saha .header-icon{background:rgba(22,163,74,0.2);color:var(--green);}
+.header-kkm .header-icon{background:rgba(37,99,235,0.2);color:var(–blue);}
+.header-saha .header-icon{background:rgba(22,163,74,0.2);color:var(–green);}
 .header-title{font-size:0.95rem;font-weight:800;letter-spacing:0.5px;}
-.header-badge{font-size:0.5rem;color:var(--muted);margin-top:1px;}
+.header-badge{font-size:0.5rem;color:var(–muted);margin-top:1px;}
 .header-lights{display:flex;gap:4px;margin-left:auto;}
 .hlv{width:7px;height:7px;border-radius:50%;animation:blink 0.7s ease-in-out infinite;}
 .hlv.r{background:#ef4444;}
@@ -87,26 +88,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .hlv.b{background:#3b82f6;animation-delay:0.46s;}
 
 /* SEARCH */
-.search-bar{margin:8px 12px;background:var(--card);border:1px solid var(--border);border-radius:30px;padding:8px 14px;display:flex;align-items:center;gap:8px;}
-.search-bar i{color:var(--muted);font-size:0.75rem;flex-shrink:0;}
-.search-bar input{background:transparent;border:none;color:var(--text);width:100%;font-size:0.72rem;outline:none;}
-.search-bar input::placeholder{color:var(--muted);}
+.search-bar{margin:8px 12px;background:var(–card);border:1px solid var(–border);border-radius:30px;padding:8px 14px;display:flex;align-items:center;gap:8px;}
+.search-bar i{color:var(–muted);font-size:0.75rem;flex-shrink:0;}
+.search-bar input{background:transparent;border:none;color:var(–text);width:100%;font-size:0.72rem;outline:none;}
+.search-bar input::placeholder{color:var(–muted);}
 
 /* CONTAINER */
 .container{flex:1;overflow-y:auto;padding:10px 12px 16px;}
 .container::-webkit-scrollbar{width:3px;}
-.container::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+.container::-webkit-scrollbar-thumb{background:var(–border);border-radius:3px;}
 
 /* SECTION TITLE */
-.sec{font-size:0.7rem;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin:14px 0 8px;display:flex;align-items:center;gap:6px;}
-.sec::after{content:'';flex:1;height:1px;background:var(--border);}
+.sec{font-size:0.7rem;font-weight:700;color:var(–muted);letter-spacing:1px;text-transform:uppercase;margin:14px 0 8px;display:flex;align-items:center;gap:6px;}
+.sec::after{content:’’;flex:1;height:1px;background:var(–border);}
 
 /* NAV */
-.bottom-nav{background:rgba(6,12,26,0.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:6px 8px 14px;display:flex;justify-content:space-around;flex-shrink:0;}
-.nav-item{color:var(--muted);display:flex;flex-direction:column;align-items:center;font-size:0.48rem;gap:2px;cursor:pointer;padding:4px 8px;border-radius:10px;transition:all 0.2s;}
+.bottom-nav{background:rgba(6,12,26,0.97);backdrop-filter:blur(20px);border-top:1px solid var(–border);padding:6px 8px 14px;display:flex;justify-content:space-around;flex-shrink:0;}
+.nav-item{color:var(–muted);display:flex;flex-direction:column;align-items:center;font-size:0.48rem;gap:2px;cursor:pointer;padding:4px 8px;border-radius:10px;transition:all 0.2s;}
 .nav-item i{font-size:1rem;}
-.nav-item.active-kkm{color:var(--blue);background:rgba(37,99,235,0.1);}
-.nav-item.active-saha{color:var(--green);background:rgba(22,163,74,0.1);}
+.nav-item.active-kkm{color:var(–blue);background:rgba(37,99,235,0.1);}
+.nav-item.active-saha{color:var(–green);background:rgba(22,163,74,0.1);}
 
 /* CARDS */
 .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;}
@@ -129,7 +130,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 /* ===== GERÇEKÇI EKG CANVAS SISTEMI ===== */
 .rhythm-section{margin-bottom:4px;}
-.rhythm-card{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:8px;cursor:pointer;margin-bottom:7px;transition:transform 0.15s;}
+.rhythm-card{background:var(–card);border-radius:14px;border:1px solid var(–border);padding:8px;cursor:pointer;margin-bottom:7px;transition:transform 0.15s;}
 .rhythm-card:active{transform:scale(0.98);}
 .rhythm-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;flex-wrap:wrap;gap:4px;}
 .rhythm-name{font-size:0.68rem;font-weight:700;}
@@ -143,120 +144,228 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 /* EKG Canvas */
 .ecg-wrap{background:#050e1a;border-radius:8px;padding:4px;margin-bottom:5px;position:relative;overflow:hidden;}
 .ecg-canvas{display:block;width:100%;height:48px;}
-.rhythm-desc{font-size:0.52rem;color:var(--muted);}
+.rhythm-desc{font-size:0.52rem;color:var(–muted);}
 
 /* CPR CARD */
-.cpr-card{background:linear-gradient(135deg,#1a0a0a,#2d0808);border:1px solid var(--red);border-radius:14px;padding:12px;margin-bottom:8px;text-align:center;}
-.cpr-timer{font-family:'Courier New',monospace;font-size:2.4rem;font-weight:900;color:var(--red);text-shadow:0 0 20px rgba(220,38,38,0.7);letter-spacing:4px;}
-.cpr-phase{font-size:0.6rem;margin:4px 0;color:var(--yellow);}
+.cpr-card{background:linear-gradient(135deg,#1a0a0a,#2d0808);border:1px solid var(–red);border-radius:14px;padding:12px;margin-bottom:8px;text-align:center;}
+.cpr-timer{font-family:‘Courier New’,monospace;font-size:2.4rem;font-weight:900;color:var(–red);text-shadow:0 0 20px rgba(220,38,38,0.7);letter-spacing:4px;}
+.cpr-phase{font-size:0.6rem;margin:4px 0;color:var(–yellow);}
 .cpr-buttons{display:flex;gap:6px;justify-content:center;margin-top:8px;}
 .cpr-btn{border:none;padding:6px 14px;border-radius:30px;color:white;font-weight:700;cursor:pointer;font-size:0.62rem;}
-.cpr-start{background:var(--red);}
-.cpr-stop{background:var(--blue);}
+.cpr-start{background:var(–red);}
+.cpr-stop{background:var(–blue);}
 .cpr-reset{background:#475569;}
-.cpr-stats{display:flex;justify-content:space-between;margin-top:8px;font-size:0.52rem;color:var(--muted);}
-.cpr-adr-alert{color:var(--yellow);font-weight:700;font-size:0.65rem;animation:blink-adr 0.5s ease-in-out infinite;}
+.cpr-stats{display:flex;justify-content:space-between;margin-top:8px;font-size:0.52rem;color:var(–muted);}
+.cpr-adr-alert{color:var(–yellow);font-weight:700;font-size:0.65rem;animation:blink-adr 0.5s ease-in-out infinite;}
 @keyframes blink-adr{0%,100%{opacity:1;}50%{opacity:0.3;}}
 
 /* KKM CALL FORM */
-.kkm-call-card{background:linear-gradient(135deg,#0a1f3d,#060c1a);border:1px solid var(--blue);border-radius:14px;padding:12px;margin-bottom:10px;}
-.kkm-call-title{font-size:0.72rem;font-weight:700;margin-bottom:8px;color:var(--blue);display:flex;align-items:center;gap:6px;}
-.call-form select,.call-form input,.call-form textarea{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:10px;font-size:0.65rem;margin-bottom:7px;outline:none;}
+.kkm-call-card{background:linear-gradient(135deg,#0a1f3d,#060c1a);border:1px solid var(–blue);border-radius:14px;padding:12px;margin-bottom:10px;}
+.kkm-call-title{font-size:0.72rem;font-weight:700;margin-bottom:8px;color:var(–blue);display:flex;align-items:center;gap:6px;}
+.call-form select,.call-form input,.call-form textarea{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(–border);color:var(–text);padding:8px 10px;border-radius:10px;font-size:0.65rem;margin-bottom:7px;outline:none;}
 .call-form select option{background:#111827;}
-.call-btn{background:linear-gradient(135deg,var(--green),#15803d);border:none;padding:11px;width:100%;border-radius:30px;color:white;font-weight:700;cursor:pointer;font-size:0.75rem;}
+.call-btn{background:linear-gradient(135deg,var(–green),#15803d);border:none;padding:11px;width:100%;border-radius:30px;color:white;font-weight:700;cursor:pointer;font-size:0.75rem;}
 .call-btn:active{transform:scale(0.97);}
 
 /* PROTOCOL CARDS */
-.proto-card{background:var(--card);border-radius:12px;padding:10px 12px;margin-bottom:7px;border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.15s;}
-.proto-card:active{background:var(--card2);}
+.proto-card{background:var(–card);border-radius:12px;padding:10px 12px;margin-bottom:7px;border:1px solid var(–border);cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.15s;}
+.proto-card:active{background:var(–card2);}
 .proto-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
 .proto-text h4{font-size:0.65rem;font-weight:700;margin-bottom:2px;}
-.proto-text p{font-size:0.5rem;color:var(--muted);}
-.proto-arrow{margin-left:auto;color:var(--muted);font-size:0.7rem;}
+.proto-text p{font-size:0.5rem;color:var(–muted);}
+.proto-arrow{margin-left:auto;color:var(–muted);font-size:0.7rem;}
 
 /* TEAM CARD */
-.team-card{background:var(--card);border-radius:10px;padding:8px 10px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);}
+.team-card{background:var(–card);border-radius:10px;padding:8px 10px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(–border);}
 .live-dot{display:inline-block;width:6px;height:6px;background:#22c55e;border-radius:50%;margin-right:5px;animation:pulse 1.5s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
 .team-name{font-size:0.63rem;font-weight:600;}
-.team-dist{font-size:0.5rem;color:var(--muted);}
-.dispatch-btn{background:var(--blue);border:none;padding:4px 10px;border-radius:20px;color:white;font-size:0.52rem;cursor:pointer;}
+.team-dist{font-size:0.5rem;color:var(–muted);}
+.dispatch-btn{background:var(–blue);border:none;padding:4px 10px;border-radius:20px;color:white;font-size:0.52rem;cursor:pointer;}
 
-/* DOSE */
-.dose-header{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
-.dose-header input{width:70px;padding:5px 8px;border-radius:10px;background:var(--card2);border:1px solid var(--border);color:white;font-size:0.65rem;}
-.dose-calc-btn{background:var(--blue);border:none;padding:5px 12px;border-radius:20px;color:white;font-size:0.6rem;cursor:pointer;}
-.drug-item{background:var(--card);border-radius:8px;padding:7px 10px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;border-left:3px solid var(--blue);}
+/* LANG TOGGLE */
+.lang-btn{background:rgba(255,255,255,0.1);border:1px solid var(–border);color:var(–text);border-radius:20px;padding:3px 9px;font-size:0.55rem;font-weight:700;cursor:pointer;letter-spacing:1px;margin-right:6px;}
+.lang-btn:active{transform:scale(0.95);}
+
+/* GELİŞİM CARDS */
+.gelisim-card{background:var(–card);border-radius:12px;padding:10px 12px;margin-bottom:7px;border:1px solid var(–border);cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.15s;}
+.gelisim-card:active{background:var(–card2);}
+.gelisim-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.gelisim-text h4{font-size:0.65rem;font-weight:700;margin-bottom:2px;}
+.gelisim-text p{font-size:0.5rem;color:var(–muted);}
+
+/* QUIZ */
+.quiz-start-card{background:linear-gradient(135deg,#0f1f3d,#0a1628);border:1px solid var(–blue);border-radius:14px;padding:16px;text-align:center;margin-bottom:8px;}
+.quiz-cat-btn{background:var(–card2);border:1px solid var(–border);color:var(–muted);border-radius:20px;padding:5px 12px;font-size:0.55rem;cursor:pointer;font-weight:600;}
+.quiz-cat-btn.active-cat{background:rgba(37,99,235,0.25);border-color:var(–blue);color:#93c5fd;}
+.quiz-launch-btn{background:linear-gradient(135deg,var(–blue),#1d4ed8);border:none;padding:11px 24px;border-radius:30px;color:white;font-weight:800;cursor:pointer;font-size:0.72rem;letter-spacing:0.5px;}
+.quiz-launch-btn:active{transform:scale(0.97);}
+.quiz-q-card{background:var(–card);border-radius:14px;padding:14px;border:1px solid var(–border);}
+.quiz-progress-bar{height:4px;background:var(–border);border-radius:2px;margin-bottom:10px;}
+.quiz-progress-fill{height:100%;background:linear-gradient(90deg,var(–blue),#22d3ee);border-radius:2px;transition:width 0.4s ease;}
+.quiz-meta{display:flex;justify-content:space-between;font-size:0.52rem;color:var(–muted);margin-bottom:10px;}
+.quiz-question{font-size:0.7rem;font-weight:700;line-height:1.6;margin-bottom:12px;color:var(–text);}
+.quiz-opt{display:block;width:100%;text-align:left;background:rgba(255,255,255,0.04);border:1px solid var(–border);color:var(–text);border-radius:10px;padding:9px 12px;margin-bottom:6px;cursor:pointer;font-size:0.6rem;line-height:1.5;transition:all 0.15s;}
+.quiz-opt:active{transform:scale(0.98);}
+.quiz-opt.correct{background:rgba(22,163,74,0.18);border-color:#22c55e;color:#4ade80;}
+.quiz-opt.wrong{background:rgba(220,38,38,0.18);border-color:#ef4444;color:#fca5a5;}
+.quiz-opt.disabled{pointer-events:none;}
+.quiz-feedback{border-radius:10px;padding:9px 12px;font-size:0.6rem;line-height:1.6;margin-top:6px;}
+.quiz-feedback.ok{background:rgba(22,163,74,0.12);border-left:3px solid #22c55e;}
+.quiz-feedback.fail{background:rgba(220,38,38,0.12);border-left:3px solid #ef4444;}
+.quiz-next-btn{background:var(–blue);border:none;padding:9px;width:100%;border-radius:30px;color:white;font-weight:700;cursor:pointer;font-size:0.65rem;margin-top:8px;}
+.quiz-result-card{background:var(–card);border-radius:14px;padding:20px;text-align:center;border:1px solid var(–border);}
+.quiz-result-score{font-size:2rem;font-weight:900;color:#4ade80;letter-spacing:2px;}
+.quiz-result-msg{font-size:0.65rem;color:var(–muted);margin-top:4px;}
+.quiz-wrong-item{background:rgba(220,38,38,0.08);border-left:3px solid #ef4444;border-radius:8px;padding:7px 10px;margin-bottom:5px;text-align:left;font-size:0.55rem;color:var(–text);}
+
+/* ===== HARİTA ===== */
+.harita-card{background:var(–card);border-radius:14px;border:1px solid var(–border);padding:10px;margin-bottom:8px;}
+.harita-legend{display:flex;gap:12px;margin-bottom:8px;font-size:0.52rem;}
+.h-leg{font-weight:700;}
+.h-leg-hazir{color:#22c55e;}.h-leg-yolda{color:#eab308;}.h-leg-mesgul{color:#ef4444;}
+.harita-wrap{margin-bottom:8px;}
+.harita-list{display:flex;flex-direction:column;gap:5px;max-height:180px;overflow-y:auto;}
+.harita-list::-webkit-scrollbar{width:3px;}
+.harita-list::-webkit-scrollbar-thumb{background:var(–border);}
+.h-station-row{background:var(–card2);border-radius:8px;padding:6px 10px;display:flex;align-items:center;gap:8px;border:1px solid var(–border);}
+.h-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.h-name{font-size:0.58rem;font-weight:600;flex:1;}
+.h-adres{font-size:0.48rem;color:var(–muted);}
+.h-nav-btn{background:var(–blue);border:none;padding:3px 8px;border-radius:14px;color:white;font-size:0.48rem;cursor:pointer;white-space:nowrap;}
+/* ===== VAKA KAYIT ===== */
+.vaka-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;}
+.vaka-stat{background:var(–card);border-radius:10px;padding:8px;text-align:center;border:1px solid var(–border);}
+.vaka-stat-num{font-size:1.3rem;font-weight:900;}.vaka-stat-lbl{font-size:0.48rem;color:var(–muted);}
+.vaka-form-card{background:var(–card);border-radius:14px;border:1px solid var(–border);padding:12px;margin-bottom:8px;}
+.vaka-item{background:var(–card2);border-radius:10px;padding:8px 10px;margin-bottom:5px;border-left:3px solid var(–blue);}
+.vaka-item-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
+.vaka-tip{font-size:0.6rem;font-weight:700;}.vaka-time{font-size:0.48rem;color:var(–muted);}
+.vaka-detail{font-size:0.52rem;color:var(–muted);}
+.vaka-del{background:rgba(220,38,38,0.2);border:none;color:#ef4444;padding:2px 7px;border-radius:10px;font-size:0.48rem;cursor:pointer;}
+/* ===== HASTA DEĞERLENDİRME ===== */
+.hasta-form-card{background:var(–card);border-radius:14px;border:1px solid var(–border);padding:12px;margin-bottom:8px;}
+.hasta-tabs{display:flex;gap:5px;margin-bottom:12px;overflow-x:auto;}.hasta-tabs::-webkit-scrollbar{display:none;}
+.hasta-tab{background:var(–card2);border:1px solid var(–border);color:var(–muted);border-radius:20px;padding:5px 14px;font-size:0.58rem;cursor:pointer;white-space:nowrap;font-weight:600;}
+.hasta-tab.active-tab{background:rgba(37,99,235,0.2);border-color:var(–blue);color:#93c5fd;}
+.abcde-row{background:rgba(255,255,255,0.03);border-radius:10px;padding:8px 10px;margin-bottom:6px;border:1px solid var(–border);}
+.abcde-lbl{display:inline-block;width:22px;height:22px;border-radius:6px;text-align:center;line-height:22px;font-size:0.65rem;font-weight:900;margin-right:6px;flex-shrink:0;vertical-align:middle;}
+.abcde-a{background:#dc2626;color:white;}.abcde-b{background:#2563eb;color:white;}.abcde-c{background:#16a34a;color:white;}.abcde-d{background:#7c3aed;color:white;}.abcde-e{background:#ea580c;color:white;}
+.abcde-title{font-size:0.6rem;font-weight:700;vertical-align:middle;}
+.abcde-opts{display:flex;gap:10px;margin-top:5px;flex-wrap:wrap;}
+.abcde-opts label{display:flex;align-items:center;gap:3px;font-size:0.55rem;color:var(–muted);cursor:pointer;}
+.abcde-opts input[type=radio]{accent-color:var(–blue);}
+.hasta-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(–border);color:var(–text);padding:7px 10px;border-radius:8px;font-size:0.6rem;outline:none;margin-top:4px;}
+.hasta-rapor-btn{background:linear-gradient(135deg,var(–blue),#1d4ed8);border:none;padding:9px;width:100%;border-radius:30px;color:white;font-weight:700;cursor:pointer;font-size:0.65rem;margin-top:10px;}
+.vital-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+.vital-item{background:rgba(255,255,255,0.03);border-radius:10px;padding:8px 6px;text-align:center;border:1px solid var(–border);}
+.vital-icon{font-size:1.2rem;margin-bottom:4px;}.vital-input{width:100%;background:transparent;border:none;border-bottom:1px solid var(–border);color:var(–text);text-align:center;font-size:0.65rem;font-weight:700;padding:3px 0;outline:none;}
+.vital-label{font-size:0.45rem;color:var(–muted);margin-top:3px;}
+.vital-alert{border-radius:8px;padding:6px 10px;margin-bottom:4px;font-size:0.58rem;}
+.vital-alert.warn{background:rgba(234,179,8,0.12);border-left:3px solid #eab308;}
+.vital-alert.crit{background:rgba(220,38,38,0.12);border-left:3px solid #ef4444;}
+.vital-alert.ok{background:rgba(22,163,74,0.12);border-left:3px solid #22c55e;}
+.gks-section{margin-bottom:10px;}.gks-title{font-size:0.6rem;font-weight:700;color:var(–yellow);margin-bottom:6px;}
+.gks-opts{display:flex;flex-direction:column;gap:4px;}
+.gks-opt{display:flex;align-items:center;gap:7px;font-size:0.58rem;background:rgba(255,255,255,0.03);border-radius:8px;padding:5px 8px;cursor:pointer;border:1px solid transparent;}
+.gks-opt:has(input:checked){background:rgba(37,99,235,0.15);border-color:var(–blue);}
+.gks-opt span{background:var(–blue);color:white;width:18px;height:18px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:0.55rem;font-weight:700;flex-shrink:0;}
+.gks-result{background:linear-gradient(135deg,#1e3a5f,#0a1f3d);border-radius:10px;padding:10px;text-align:center;font-size:1.2rem;font-weight:900;color:var(–text);border:1px solid var(–blue);margin-top:8px;}
+.gks-interpret{text-align:center;font-size:0.6rem;margin-top:5px;padding:5px;border-radius:8px;}
+.opq-row{margin-bottom:8px;}
+.opq-lbl{display:inline-block;background:var(–orange);color:white;width:20px;height:20px;border-radius:6px;text-align:center;line-height:20px;font-size:0.6rem;font-weight:900;margin-right:5px;vertical-align:middle;}
+.opq-title{font-size:0.58rem;font-weight:600;}
+/* ===== SESLİ UYARI ===== */
+.sesli-card{background:var(–card);border-radius:14px;border:1px solid var(–border);padding:12px;margin-bottom:8px;}
+.sesli-title{font-size:0.65rem;font-weight:700;color:var(–muted);margin-bottom:8px;letter-spacing:0.5px;}
+.sesli-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.sesli-btn{border:none;padding:11px 8px;border-radius:12px;color:white;font-weight:800;font-size:0.6rem;cursor:pointer;letter-spacing:0.3px;transition:transform 0.1s,opacity 0.1s;}
+.sesli-btn:active{transform:scale(0.94);opacity:0.85;}
+.sesli-red{background:linear-gradient(135deg,#991b1b,#7f1d1d);}.sesli-orange{background:linear-gradient(135deg,#9a3412,#7c2d12);}
+.sesli-yellow{background:linear-gradient(135deg,#92400e,#78350f);color:#fde68a;}.sesli-blue{background:linear-gradient(135deg,#1e3a8a,#1e40af);}
+.sesli-green{background:linear-gradient(135deg,#14532d,#166534);}.sesli-purple{background:linear-gradient(135deg,#4c1d95,#5b21b6);}
+.stimer-row{background:rgba(255,255,255,0.03);border-radius:10px;padding:8px 10px;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;border:1px solid var(–border);}
+.stimer-name{font-size:0.6rem;font-weight:700;}.stimer-desc{font-size:0.48rem;color:var(–muted);}
+.stimer-ctrl{display:flex;align-items:center;gap:8px;}
+.stimer-display{font-family:‘Courier New’,monospace;font-size:0.85rem;font-weight:900;color:#4ade80;min-width:42px;text-align:center;}
+.stimer-btn-s{background:var(–green);border:none;width:26px;height:26px;border-radius:50%;color:white;font-size:0.65rem;cursor:pointer;}
+
+{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
+.dose-header input{width:70px;padding:5px 8px;border-radius:10px;background:var(–card2);border:1px solid var(–border);color:white;font-size:0.65rem;}
+.dose-calc-btn{background:var(–blue);border:none;padding:5px 12px;border-radius:20px;color:white;font-size:0.6rem;cursor:pointer;}
+.drug-item{background:var(–card);border-radius:8px;padding:7px 10px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;border-left:3px solid var(–blue);}
 .drug-name{font-size:0.6rem;}
 .drug-dose{color:#4ade80;font-weight:700;font-size:0.62rem;}
 
 /* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:5000;display:none;align-items:flex-end;justify-content:center;}
-.modal-sheet{background:var(--card);width:100%;max-width:500px;max-height:90vh;border-radius:24px 24px 0 0;padding:16px;overflow-y:auto;}
+.modal-sheet{background:var(–card);width:100%;max-width:500px;max-height:90vh;border-radius:24px 24px 0 0;padding:16px;overflow-y:auto;}
 .modal-sheet::-webkit-scrollbar{width:3px;}
-.modal-sheet::-webkit-scrollbar-thumb{background:var(--border);}
-.modal-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 12px;}
-.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.modal-sheet::-webkit-scrollbar-thumb{background:var(–border);}
+.modal-handle{width:40px;height:4px;background:var(–border);border-radius:2px;margin:0 auto 12px;}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(–border);}
 .modal-title{font-size:0.8rem;font-weight:700;}
-.modal-close{width:28px;height:28px;border-radius:50%;background:var(--card2);border:none;color:var(--text);cursor:pointer;font-size:0.8rem;}
+.modal-close{width:28px;height:28px;border-radius:50%;background:var(–card2);border:none;color:var(–text);cursor:pointer;font-size:0.8rem;}
 
 /* MODAL CONTENT */
 .m-section{margin-bottom:10px;}
-.m-section-title{font-size:0.65rem;font-weight:700;color:var(--yellow);margin-bottom:6px;display:flex;align-items:center;gap:5px;}
+.m-section-title{font-size:0.65rem;font-weight:700;color:var(–yellow);margin-bottom:6px;display:flex;align-items:center;gap:5px;}
 .m-box{border-radius:10px;padding:8px 10px;margin-bottom:6px;font-size:0.6rem;line-height:1.7;}
-.m-box.diagnosis{background:rgba(234,179,8,0.08);border-left:3px solid var(--yellow);}
-.m-box.treatment{background:rgba(22,163,74,0.08);border-left:3px solid var(--green);}
+.m-box.diagnosis{background:rgba(234,179,8,0.08);border-left:3px solid var(–yellow);}
+.m-box.treatment{background:rgba(22,163,74,0.08);border-left:3px solid var(–green);}
 .m-box.warning{background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.3);}
-.m-box.info{background:rgba(37,99,235,0.08);border-left:3px solid var(--blue);}
-.m-box.success{background:rgba(22,163,74,0.1);border-left:3px solid var(--green);}
+.m-box.info{background:rgba(37,99,235,0.08);border-left:3px solid var(–blue);}
+.m-box.success{background:rgba(22,163,74,0.1);border-left:3px solid var(–green);}
 .m-box.citizen{background:rgba(234,179,8,0.12);border:1px solid rgba(234,179,8,0.4);border-radius:10px;}
 .step-list{list-style:none;counter-reset:s;}
-.step-list li{counter-increment:s;margin-bottom:7px;padding:7px 8px 7px 34px;background:#0f172a;border-radius:8px;border-left:2px solid var(--blue);font-size:0.6rem;position:relative;line-height:1.6;}
-.step-list li::before{content:counter(s);position:absolute;left:8px;top:50%;transform:translateY(-50%);background:var(--blue);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.55rem;font-weight:700;}
+.step-list li{counter-increment:s;margin-bottom:7px;padding:7px 8px 7px 34px;background:#0f172a;border-radius:8px;border-left:2px solid var(–blue);font-size:0.6rem;position:relative;line-height:1.6;}
+.step-list li::before{content:counter(s);position:absolute;left:8px;top:50%;transform:translateY(-50%);background:var(–blue);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.55rem;font-weight:700;}
 .m-drug{background:#0a1628;border-radius:8px;padding:6px 10px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;font-size:0.6rem;}
 .m-drug-dose{color:#4ade80;font-weight:700;}
 .m-badge{display:inline-block;padding:2px 6px;border-radius:20px;font-size:0.48rem;font-weight:700;margin-right:4px;}
-.mb-red{background:var(--red);color:white;}
-.mb-green{background:var(--green);color:white;}
-.mb-yellow{background:var(--yellow);color:black;}
-.mb-blue{background:var(--blue);color:white;}
-.mb-orange{background:var(--orange);color:white;}
+.mb-red{background:var(–red);color:white;}
+.mb-green{background:var(–green);color:white;}
+.mb-yellow{background:var(–yellow);color:black;}
+.mb-blue{background:var(–blue);color:white;}
+.mb-orange{background:var(–orange);color:white;}
 
 /* INFO BOXES */
-.info-box{background:rgba(37,99,235,0.1);border-left:3px solid var(--blue);border-radius:8px;padding:8px;margin:6px 0;font-size:0.6rem;}
+.info-box{background:rgba(37,99,235,0.1);border-left:3px solid var(–blue);border-radius:8px;padding:8px;margin:6px 0;font-size:0.6rem;}
 .warn-box{background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.3);border-radius:8px;padding:8px;margin:6px 0;font-size:0.6rem;}
 
 /* STATION */
-.station-item{background:var(--card);border-radius:10px;padding:7px 10px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--border);}
+.station-item{background:var(–card);border-radius:10px;padding:7px 10px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(–border);}
 .station-name{font-size:0.62rem;font-weight:600;}
-.station-addr{font-size:0.5rem;color:var(--muted);}
-.nav-btn{background:var(--blue);border:none;padding:3px 8px;border-radius:20px;color:white;font-size:0.5rem;cursor:pointer;}
+.station-addr{font-size:0.5rem;color:var(–muted);}
+.nav-btn{background:var(–blue);border:none;padding:3px 8px;border-radius:20px;color:white;font-size:0.5rem;cursor:pointer;}
 
 /* TRIYAJ */
 .triyaj-bar{display:flex;gap:4px;margin-bottom:8px;}
 .triyaj-item{flex:1;border-radius:10px;padding:10px 6px;text-align:center;cursor:pointer;}
-.t-red{background:rgba(220,38,38,0.2);border:1px solid var(--red);}
-.t-yellow{background:rgba(234,179,8,0.2);border:1px solid var(--yellow);}
-.t-green{background:rgba(22,163,74,0.2);border:1px solid var(--green);}
+.t-red{background:rgba(220,38,38,0.2);border:1px solid var(–red);}
+.t-yellow{background:rgba(234,179,8,0.2);border:1px solid var(–yellow);}
+.t-green{background:rgba(22,163,74,0.2);border:1px solid var(–green);}
 .t-black{background:rgba(100,116,139,0.2);border:1px solid #475569;}
 .triyaj-item .t-icon{font-size:1.2rem;display:block;margin-bottom:3px;}
 .triyaj-item .t-label{font-size:0.55rem;font-weight:700;}
-.triyaj-item .t-name{font-size:0.48rem;color:var(--muted);}
+.triyaj-item .t-name{font-size:0.48rem;color:var(–muted);}
 
 /* CITIZEN GUIDANCE CARD */
 .citizen-card{background:linear-gradient(135deg,rgba(234,179,8,0.1),rgba(6,12,26,0.9));border:1px solid rgba(234,179,8,0.4);border-radius:14px;padding:12px;margin-bottom:7px;cursor:pointer;display:flex;align-items:center;gap:10px;}
 .citizen-icon{font-size:1.8rem;flex-shrink:0;}
-.citizen-text h4{font-size:0.65rem;font-weight:700;color:var(--yellow);margin-bottom:2px;}
-.citizen-text p{font-size:0.5rem;color:var(--muted);}
+.citizen-text h4{font-size:0.65rem;font-weight:700;color:var(–yellow);margin-bottom:2px;}
+.citizen-text p{font-size:0.5rem;color:var(–muted);}
 
 @media(max-width:380px){.algo-card h3{font-size:0.65rem;}.cpr-timer{font-size:2rem;}}
 .fade-in{animation:fadeIn 0.3s ease;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 </style>
+
 </head>
 <body>
 
 <!-- ============ SPLASH ============ -->
+
 <div id="splash">
   <div class="splash-bg" id="splashBg"></div>
   <div class="splash-lights">
@@ -301,6 +410,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <!-- ============ KKM ARAYÜZÜ ============ -->
+
 <div class="app" id="appKKM">
   <div class="app-header header-kkm">
     <div class="header-inner">
@@ -315,171 +425,245 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
   <div class="container" id="kkmContainer">
 
-    <div class="kkm-call-card">
-      <div class="kkm-call-title"><i class="fas fa-phone-alt"></i> YENİ ACİL ÇAĞRI</div>
-      <div class="call-form">
-        <div class="info-box" style="margin-bottom:8px;">
-          <strong>📞 ÇAĞRI SIRASI (AHA 2025):</strong><br>
-          1️⃣ "Acil durumunuz nedir?" → 2️⃣ "Adresinizi söyler misiniz?" → 3️⃣ "Hasta bilinci açık mı?"
-        </div>
-        <select id="kkmType">
-          <option value="">🔴 Acil durum tipini seçin</option>
-          <option>Kardiyak Arrest / KPR</option>
-          <option>Göğüs Ağrısı / AKS / STEMI</option>
-          <option>İnme / Felç (Stroke)</option>
-          <option>Trafik Kazası / Sıkışma</option>
-          <option>Major Travma</option>
-          <option>Nöbet / Epilepsi</option>
-          <option>Nefes Darlığı / KOAH-Astım</option>
-          <option>Anafilaksi / Şok</option>
-          <option>Hipoglisemi / Şeker düşüklüğü</option>
-          <option>Pnömotoraks</option>
-          <option>Yanık / Kimyasal</option>
-          <option>KBRN Olayı</option>
-          <option>Kitlesel Kaza (≥5 yaralı)</option>
-          <option>Obstetrik Acil / Doğum</option>
-          <option>Pediatrik Acil</option>
-          <option>Boğulma</option>
-          <option>Zehirlenme</option>
-        </select>
-        <input type="text" id="kkmAddr" placeholder="📍 İlçe, Mahalle, Cadde, Bina No">
-        <select id="kkmDistrict">
-          <option>Kırklareli Merkez</option><option>Lüleburgaz</option><option>Babaeski</option>
-          <option>Demirköy</option><option>Pınarhisar</option><option>Vize</option>
-          <option>Pehlivanköy</option><option>Kofçaz</option><option>İğneada</option><option>Kıyıköy</option>
-        </select>
-        <select id="kkmPatients">
-          <option value="1">👤 1 hasta</option><option value="2">👥 2 hasta</option>
-          <option value="3-4">👥 3-4 hasta</option><option value="5+">🚨 5+ hasta (Kitlesel)</option>
-        </select>
-        <select id="kkmConsciousness">
-          <option>Bilinç durumu?</option>
-          <option>✅ Bilinç açık, konuşuyor</option>
-          <option>⚠️ Şuur bulanık</option>
-          <option>🔴 Bilinç kapalı, uyandırılamıyor</option>
-          <option>🔴 Solunum yok / Kardiyak Arrest</option>
-        </select>
-        <textarea id="kkmNote" rows="2" placeholder="Ek bilgi (yaş, semptom süresi, yapılan müdahale)"></textarea>
-        <button class="call-btn" onclick="processCall()"><i class="fas fa-paper-plane"></i> ÇAĞRIYI İŞLEME AL</button>
-      </div>
+```
+<div class="kkm-call-card">
+  <div class="kkm-call-title"><i class="fas fa-phone-alt"></i> YENİ ACİL ÇAĞRI</div>
+  <div class="call-form">
+    <div class="info-box" style="margin-bottom:8px;">
+      <strong>📞 ÇAĞRI SIRASI (AHA 2025):</strong><br>
+      1️⃣ "Acil durumunuz nedir?" → 2️⃣ "Adresinizi söyler misiniz?" → 3️⃣ "Hasta bilinci açık mı?"
     </div>
+    <select id="kkmType">
+      <option value="">🔴 Acil durum tipini seçin</option>
+      <option>Kardiyak Arrest / KPR</option>
+      <option>Göğüs Ağrısı / AKS / STEMI</option>
+      <option>İnme / Felç (Stroke)</option>
+      <option>Trafik Kazası / Sıkışma</option>
+      <option>Major Travma</option>
+      <option>Nöbet / Epilepsi</option>
+      <option>Nefes Darlığı / KOAH-Astım</option>
+      <option>Anafilaksi / Şok</option>
+      <option>Hipoglisemi / Şeker düşüklüğü</option>
+      <option>Pnömotoraks</option>
+      <option>Yanık / Kimyasal</option>
+      <option>KBRN Olayı</option>
+      <option>Kitlesel Kaza (≥5 yaralı)</option>
+      <option>Obstetrik Acil / Doğum</option>
+      <option>Pediatrik Acil</option>
+      <option>Boğulma</option>
+      <option>Zehirlenme</option>
+    </select>
+    <input type="text" id="kkmAddr" placeholder="📍 İlçe, Mahalle, Cadde, Bina No">
+    <select id="kkmDistrict">
+      <option>Kırklareli Merkez</option><option>Lüleburgaz</option><option>Babaeski</option>
+      <option>Demirköy</option><option>Pınarhisar</option><option>Vize</option>
+      <option>Pehlivanköy</option><option>Kofçaz</option><option>İğneada</option><option>Kıyıköy</option>
+    </select>
+    <select id="kkmPatients">
+      <option value="1">👤 1 hasta</option><option value="2">👥 2 hasta</option>
+      <option value="3-4">👥 3-4 hasta</option><option value="5+">🚨 5+ hasta (Kitlesel)</option>
+    </select>
+    <select id="kkmConsciousness">
+      <option>Bilinç durumu?</option>
+      <option>✅ Bilinç açık, konuşuyor</option>
+      <option>⚠️ Şuur bulanık</option>
+      <option>🔴 Bilinç kapalı, uyandırılamıyor</option>
+      <option>🔴 Solunum yok / Kardiyak Arrest</option>
+    </select>
+    <textarea id="kkmNote" rows="2" placeholder="Ek bilgi (yaş, semptom süresi, yapılan müdahale)"></textarea>
+    <button class="call-btn" onclick="processCall()"><i class="fas fa-paper-plane"></i> ÇAĞRIYI İŞLEME AL</button>
+  </div>
+</div>
 
-    <!-- VATANDAŞ TELEFON MÜDAHALELERİ -->
-    <div class="sec"><i class="fas fa-person-circle-exclamation"></i> VATANDAŞA TELEFON MÜDAHALESİ</div>
-    <div style="background:rgba(234,179,8,0.06);border:1px solid rgba(234,179,8,0.2);border-radius:10px;padding:8px 10px;margin-bottom:8px;font-size:0.58rem;color:var(--muted);">
-      💡 Ambulans gelene kadar vatandaşa telefon üzerinden verilecek adım adım talimatlar
-    </div>
+<!-- VATANDAŞ TELEFON MÜDAHALELERİ -->
+<div class="sec"><i class="fas fa-person-circle-exclamation"></i> VATANDAŞA TELEFON MÜDAHALESİ</div>
+<div style="background:rgba(234,179,8,0.06);border:1px solid rgba(234,179,8,0.2);border-radius:10px;padding:8px 10px;margin-bottom:8px;font-size:0.58rem;color:var(--muted);">
+  💡 Ambulans gelene kadar vatandaşa telefon üzerinden verilecek adım adım talimatlar
+</div>
 
-    <div class="citizen-card" onclick="showKKM('citizenKPR')">
-      <div class="citizen-icon">💔</div>
-      <div class="citizen-text"><h4>🔴 KARDİYAK ARREST — Vatandaş KPR Talimatı</h4><p>Bilinç kapalı, nefes yok — adım adım kompresyon talimatı</p></div>
-    </div>
-    <div class="citizen-card" onclick="showKKM('citizenBoğulma')">
-      <div class="citizen-icon">🌊</div>
-      <div class="citizen-text"><h4>🔵 BOĞULMA — Kurtarma & KPR Talimatı</h4><p>Sudan çıkarma, 5 kurtarma solunumu, kompresyon</p></div>
-    </div>
-    <div class="citizen-card" onclick="showKKM('citizenHeimlick')">
-      <div class="citizen-icon">🍖</div>
-      <div class="citizen-text"><h4>🟠 YABANCI CİSİM TIKANMASI — Heimlich</h4><p>Yetişkin, çocuk, bebek — adım adım Heimlich talimatı</p></div>
-    </div>
-    <div class="citizen-card" onclick="showKKM('citizenKanama')">
-      <div class="citizen-icon">🩸</div>
-      <div class="citizen-text"><h4>🔴 AĞIR KANAMA — Baskı & Turnike</h4><p>Kanama kontrolü için vatandaş baskı ve turnike talimatı</p></div>
-    </div>
-    <div class="citizen-card" onclick="showKKM('citizenInme')">
-      <div class="citizen-icon">🧠</div>
-      <div class="citizen-text"><h4>🟣 İNME ŞÜPHESİ — FAST Testi & Bekleme</h4><p>İnme belirtileri, pozisyon, ambulans gelene kadar yapılacaklar</p></div>
-    </div>
-    <div class="citizen-card" onclick="showKKM('citizenNöbet')">
-      <div class="citizen-icon">⚡</div>
-      <div class="citizen-text"><h4>🟡 NÖBET — Güvenli Pozisyon & Bekle</h4><p>Nöbet sırasında ne yapmalı, ne yapmamalı</p></div>
-    </div>
-    <div class="citizen-card" onclick="showKKM('citizenAnafilaksi')">
-      <div class="citizen-icon">🆘</div>
-      <div class="citizen-text"><h4>🟢 ANAFİLAKSİ — Epipen & Pozisyon</h4><p>Alerji şoku, otoenjektör kullanımı, pozisyon</p></div>
-    </div>
-    <div class="citizen-card" onclick="showKKM('citizenDoğum')">
-      <div class="citizen-icon">🤰</div>
-      <div class="citizen-text"><h4>🟡 ACİL DOĞUM — Ebeveyn Talimatı</h4><p>Ambulans gelmeden doğum gerçekleşiyorsa ne yapılmalı</p></div>
-    </div>
-    <div class="citizen-card" onclick="showKKM('citizenYanik')">
-      <div class="citizen-icon">🔥</div>
-      <div class="citizen-text"><h4>🟠 YANIK — Soğutma & İlk Yardım</h4><p>Yanık soğutma, giysi çıkarma, su miktarı</p></div>
-    </div>
-    <div class="citizen-card" onclick="showKKM('citizenHipoglisemi')">
-      <div class="citizen-icon">🍬</div>
-      <div class="citizen-text"><h4>🟡 HİPOGLİSEMİ — Şeker Verme Talimatı</h4><p>Şeker düşmesi, bilinç açıkken ne verilmeli</p></div>
-    </div>
+<div class="citizen-card" onclick="showKKM('citizenKPR')">
+  <div class="citizen-icon">💔</div>
+  <div class="citizen-text"><h4>🔴 KARDİYAK ARREST — Vatandaş KPR Talimatı</h4><p>Bilinç kapalı, nefes yok — adım adım kompresyon talimatı</p></div>
+</div>
+<div class="citizen-card" onclick="showKKM('citizenBoğulma')">
+  <div class="citizen-icon">🌊</div>
+  <div class="citizen-text"><h4>🔵 BOĞULMA — Kurtarma & KPR Talimatı</h4><p>Sudan çıkarma, 5 kurtarma solunumu, kompresyon</p></div>
+</div>
+<div class="citizen-card" onclick="showKKM('citizenHeimlick')">
+  <div class="citizen-icon">🍖</div>
+  <div class="citizen-text"><h4>🟠 YABANCI CİSİM TIKANMASI — Heimlich</h4><p>Yetişkin, çocuk, bebek — adım adım Heimlich talimatı</p></div>
+</div>
+<div class="citizen-card" onclick="showKKM('citizenKanama')">
+  <div class="citizen-icon">🩸</div>
+  <div class="citizen-text"><h4>🔴 AĞIR KANAMA — Baskı & Turnike</h4><p>Kanama kontrolü için vatandaş baskı ve turnike talimatı</p></div>
+</div>
+<div class="citizen-card" onclick="showKKM('citizenInme')">
+  <div class="citizen-icon">🧠</div>
+  <div class="citizen-text"><h4>🟣 İNME ŞÜPHESİ — FAST Testi & Bekleme</h4><p>İnme belirtileri, pozisyon, ambulans gelene kadar yapılacaklar</p></div>
+</div>
+<div class="citizen-card" onclick="showKKM('citizenNöbet')">
+  <div class="citizen-icon">⚡</div>
+  <div class="citizen-text"><h4>🟡 NÖBET — Güvenli Pozisyon & Bekle</h4><p>Nöbet sırasında ne yapmalı, ne yapmamalı</p></div>
+</div>
+<div class="citizen-card" onclick="showKKM('citizenAnafilaksi')">
+  <div class="citizen-icon">🆘</div>
+  <div class="citizen-text"><h4>🟢 ANAFİLAKSİ — Epipen & Pozisyon</h4><p>Alerji şoku, otoenjektör kullanımı, pozisyon</p></div>
+</div>
+<div class="citizen-card" onclick="showKKM('citizenDoğum')">
+  <div class="citizen-icon">🤰</div>
+  <div class="citizen-text"><h4>🟡 ACİL DOĞUM — Ebeveyn Talimatı</h4><p>Ambulans gelmeden doğum gerçekleşiyorsa ne yapılmalı</p></div>
+</div>
+<div class="citizen-card" onclick="showKKM('citizenYanik')">
+  <div class="citizen-icon">🔥</div>
+  <div class="citizen-text"><h4>🟠 YANIK — Soğutma & İlk Yardım</h4><p>Yanık soğutma, giysi çıkarma, su miktarı</p></div>
+</div>
+<div class="citizen-card" onclick="showKKM('citizenHipoglisemi')">
+  <div class="citizen-icon">🍬</div>
+  <div class="citizen-text"><h4>🟡 HİPOGLİSEMİ — Şeker Verme Talimatı</h4><p>Şeker düşmesi, bilinç açıkken ne verilmeli</p></div>
+</div>
 
-    <!-- TRİYAJ -->
-    <div class="sec"><i class="fas fa-chart-simple"></i> TRİYAJ KODLARI</div>
-    <div class="triyaj-bar">
-      <div class="triyaj-item t-red" onclick="showKKM('triyajKirmizi')"><span class="t-icon">🔴</span><div class="t-label">KIRMIZI</div><div class="t-name">1. Öncelik</div></div>
-      <div class="triyaj-item t-yellow" onclick="showKKM('triyajSari')"><span class="t-icon">🟡</span><div class="t-label">SARI</div><div class="t-name">2. Öncelik</div></div>
-      <div class="triyaj-item t-green" onclick="showKKM('triyajYesil')"><span class="t-icon">🟢</span><div class="t-label">YEŞİL</div><div class="t-name">3. Öncelik</div></div>
-      <div class="triyaj-item t-black" onclick="showKKM('triyajSiyah')"><span class="t-icon">⚫</span><div class="t-label">SİYAH</div><div class="t-name">Eksitus</div></div>
-    </div>
+<!-- TRİYAJ -->
+<div class="sec"><i class="fas fa-chart-simple"></i> TRİYAJ KODLARI</div>
+<div class="triyaj-bar">
+  <div class="triyaj-item t-red" onclick="showKKM('triyajKirmizi')"><span class="t-icon">🔴</span><div class="t-label">KIRMIZI</div><div class="t-name">1. Öncelik</div></div>
+  <div class="triyaj-item t-yellow" onclick="showKKM('triyajSari')"><span class="t-icon">🟡</span><div class="t-label">SARI</div><div class="t-name">2. Öncelik</div></div>
+  <div class="triyaj-item t-green" onclick="showKKM('triyajYesil')"><span class="t-icon">🟢</span><div class="t-label">YEŞİL</div><div class="t-name">3. Öncelik</div></div>
+  <div class="triyaj-item t-black" onclick="showKKM('triyajSiyah')"><span class="t-icon">⚫</span><div class="t-label">SİYAH</div><div class="t-name">Eksitus</div></div>
+</div>
 
-    <!-- KKM PROTOKOLLER -->
-    <div class="sec"><i class="fas fa-book"></i> KKM PROTOKOLLER</div>
-    <div class="proto-card" onclick="showKKM('telefonProto')">
-      <div class="proto-icon" style="background:rgba(37,99,235,0.2);color:var(--blue);"><i class="fas fa-headset"></i></div>
-      <div class="proto-text"><h4>📞 Telefon Görüşme Protokolü</h4><p>Adım adım çağrı karşılama & yönlendirme</p></div>
-      <i class="fas fa-chevron-right proto-arrow"></i>
-    </div>
-    <div class="proto-card" onclick="showKKM('sakoma')">
-      <div class="proto-icon" style="background:rgba(234,179,8,0.2);color:var(--yellow);"><i class="fas fa-file-alt"></i></div>
-      <div class="proto-text"><h4>📄 SAKOMA & Bilgi Notu</h4><p>Hangi durumda bilgi notu düzenlenir?</p></div>
-      <i class="fas fa-chevron-right proto-arrow"></i>
-    </div>
-    <div class="proto-card" onclick="showKKM('kurumKoord')">
-      <div class="proto-icon" style="background:rgba(22,163,74,0.2);color:var(--green);"><i class="fas fa-handshake"></i></div>
-      <div class="proto-text"><h4>🤝 Kurum Koordinasyonu</h4><p>Jandarma, Emniyet, AFAD, UMKE, İtfaiye</p></div>
-      <i class="fas fa-chevron-right proto-arrow"></i>
-    </div>
-    <div class="proto-card" onclick="showKKM('kbrn')">
-      <div class="proto-icon" style="background:rgba(220,38,38,0.2);color:var(--red);"><i class="fas fa-radiation"></i></div>
-      <div class="proto-text"><h4>☢️ KBRN Olayına Yaklaşım</h4><p>Kimyasal, Biyolojik, Radyolojik, Nükleer</p></div>
-      <i class="fas fa-chevron-right proto-arrow"></i>
-    </div>
-    <div class="proto-card" onclick="showKKM('kitlesel')">
-      <div class="proto-icon" style="background:rgba(234,88,12,0.2);color:var(--orange);"><i class="fas fa-people-group"></i></div>
-      <div class="proto-text"><h4>🚨 Kitlesel Kaza Yönetimi</h4><p>≥5 yaralı, MCI protokolü, START triyajı</p></div>
-      <i class="fas fa-chevron-right proto-arrow"></i>
-    </div>
-    <div class="proto-card" onclick="showKKM('telefonTYD')">
-      <div class="proto-icon" style="background:rgba(220,38,38,0.2);color:var(--red);"><i class="fas fa-heart"></i></div>
-      <div class="proto-text"><h4>❤️ Telefonla TYD Talimatı (Dispatcher CPR)</h4><p>KPR öncesi telefon yönlendirmesi — operatör scripti</p></div>
-      <i class="fas fa-chevron-right proto-arrow"></i>
-    </div>
-    <div class="proto-card" onclick="showKKM('redyoloji')">
-      <div class="proto-icon" style="background:rgba(139,92,246,0.2);color:var(--purple);"><i class="fas fa-walkie-talkie"></i></div>
-      <div class="proto-text"><h4>📻 Telsiz & Haberleşme Protokolü</h4><p>Saha-KKM haberleşme standartları</p></div>
-      <i class="fas fa-chevron-right proto-arrow"></i>
-    </div>
+<!-- KKM PROTOKOLLER -->
+<div class="sec"><i class="fas fa-book"></i> KKM PROTOKOLLER</div>
+<div class="proto-card" onclick="showKKM('telefonProto')">
+  <div class="proto-icon" style="background:rgba(37,99,235,0.2);color:var(--blue);"><i class="fas fa-headset"></i></div>
+  <div class="proto-text"><h4>📞 Telefon Görüşme Protokolü</h4><p>Adım adım çağrı karşılama & yönlendirme</p></div>
+  <i class="fas fa-chevron-right proto-arrow"></i>
+</div>
+<div class="proto-card" onclick="showKKM('sakoma')">
+  <div class="proto-icon" style="background:rgba(234,179,8,0.2);color:var(--yellow);"><i class="fas fa-file-alt"></i></div>
+  <div class="proto-text"><h4>📄 SAKOMA & Bilgi Notu</h4><p>Hangi durumda bilgi notu düzenlenir?</p></div>
+  <i class="fas fa-chevron-right proto-arrow"></i>
+</div>
+<div class="proto-card" onclick="showKKM('kurumKoord')">
+  <div class="proto-icon" style="background:rgba(22,163,74,0.2);color:var(--green);"><i class="fas fa-handshake"></i></div>
+  <div class="proto-text"><h4>🤝 Kurum Koordinasyonu</h4><p>Jandarma, Emniyet, AFAD, UMKE, İtfaiye</p></div>
+  <i class="fas fa-chevron-right proto-arrow"></i>
+</div>
+<div class="proto-card" onclick="showKKM('kbrn')">
+  <div class="proto-icon" style="background:rgba(220,38,38,0.2);color:var(--red);"><i class="fas fa-radiation"></i></div>
+  <div class="proto-text"><h4>☢️ KBRN Olayına Yaklaşım</h4><p>Kimyasal, Biyolojik, Radyolojik, Nükleer</p></div>
+  <i class="fas fa-chevron-right proto-arrow"></i>
+</div>
+<div class="proto-card" onclick="showKKM('kitlesel')">
+  <div class="proto-icon" style="background:rgba(234,88,12,0.2);color:var(--orange);"><i class="fas fa-people-group"></i></div>
+  <div class="proto-text"><h4>🚨 Kitlesel Kaza Yönetimi</h4><p>≥5 yaralı, MCI protokolü, START triyajı</p></div>
+  <i class="fas fa-chevron-right proto-arrow"></i>
+</div>
+<div class="proto-card" onclick="showKKM('telefonTYD')">
+  <div class="proto-icon" style="background:rgba(220,38,38,0.2);color:var(--red);"><i class="fas fa-heart"></i></div>
+  <div class="proto-text"><h4>❤️ Telefonla TYD Talimatı (Dispatcher CPR)</h4><p>KPR öncesi telefon yönlendirmesi — operatör scripti</p></div>
+  <i class="fas fa-chevron-right proto-arrow"></i>
+</div>
+<div class="proto-card" onclick="showKKM('redyoloji')">
+  <div class="proto-icon" style="background:rgba(139,92,246,0.2);color:var(--purple);"><i class="fas fa-walkie-talkie"></i></div>
+  <div class="proto-text"><h4>📻 Telsiz & Haberleşme Protokolü</h4><p>Saha-KKM haberleşme standartları</p></div>
+  <i class="fas fa-chevron-right proto-arrow"></i>
+</div>
 
-    <!-- Ekipler -->
-    <div class="sec"><i class="fas fa-truck"></i> SAHA EKİPLERİ</div>
-    <div id="kkmTeams"></div>
-    <div class="sec"><i class="fas fa-location-dot"></i> KIRKLARELİ İSTASYONLARI</div>
-    <div id="kkmStations"></div>
+<!-- Ekipler -->
+<div class="sec"><i class="fas fa-truck"></i> SAHA EKİPLERİ</div>
+<div id="kkmTeams"></div>
+<div class="sec"><i class="fas fa-location-dot"></i> KIRKLARELİ İSTASYONLARI</div>
+<div id="kkmStations"></div>
+
+<!-- HARİTA BÖLÜMÜ (KKM) -->
+<div class="sec" id="secHarita"><i class="fas fa-map"></i> İSTASYON HARİTASI (OFFLİNE)</div>
+<div id="haritaSection">
+  <div class="harita-card">
+    <div class="harita-legend">
+      <span class="h-leg h-leg-hazir">● Hazır</span>
+      <span class="h-leg h-leg-yolda">● Yolda</span>
+      <span class="h-leg h-leg-mesgul">● Meşgul</span>
+    </div>
+    <div class="harita-wrap">
+      <svg id="kklSvgMap" viewBox="0 0 340 280" width="100%" style="display:block;border-radius:10px;background:#0a1628;">
+        <!-- Kırklareli ili sınır hatları (basitleştirilmiş) -->
+        <defs>
+          <filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <!-- İl sınırı -->
+        <polygon points="30,20 310,15 325,60 290,120 300,180 240,260 150,270 80,240 40,200 20,140 15,80" fill="rgba(37,99,235,0.04)" stroke="rgba(37,99,235,0.3)" stroke-width="1.5"/>
+        <!-- İlçe sınırları (yaklaşık) -->
+        <line x1="170" y1="15" x2="165" y2="270" stroke="rgba(100,116,139,0.2)" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <line x1="30" y1="140" x2="325" y2="135" stroke="rgba(100,116,139,0.2)" stroke-width="0.8" stroke-dasharray="4,3"/>
+        <!-- Yollar -->
+        <path d="M 15,140 Q 80,138 170,136 Q 250,134 325,130" stroke="rgba(234,179,8,0.25)" stroke-width="1.5" fill="none"/>
+        <path d="M 170,15 Q 168,80 165,136 Q 162,200 160,270" stroke="rgba(234,179,8,0.2)" stroke-width="1" fill="none"/>
+        <!-- İstasyon noktaları — JS ile dolacak -->
+        <g id="svgStations"></g>
+        <!-- İlçe etiketleri -->
+        <text x="85" y="100" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Babaeski</text>
+        <text x="85" y="185" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Pehlivanköy</text>
+        <text x="175" y="75" fill="rgba(100,116,139,0.5)" font-size="8" text-anchor="middle" font-weight="bold">Kırklareli</text>
+        <text x="165" y="195" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Lüleburgaz</text>
+        <text x="260" y="80" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Demirköy</text>
+        <text x="265" y="150" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Vize</text>
+        <text x="270" y="230" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Kıyıköy</text>
+      </svg>
+    </div>
+    <div class="harita-list" id="haritaList"></div>
+  </div>
+</div>
+
+<!-- VAKA KAYIT (KKM) -->
+<div class="sec" id="secVaka"><i class="fas fa-clipboard-list"></i> VAKA KAYIT & İSTATİSTİK</div>
+<div id="vakaSection">
+  <div class="vaka-stats-row" id="vakaStats"></div>
+  <div class="vaka-form-card">
+    <div style="font-size:0.68rem;font-weight:700;color:var(--blue);margin-bottom:10px;">➕ Yeni Vaka Ekle</div>
+    <select id="vTip" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:7px 10px;border-radius:10px;font-size:0.62rem;margin-bottom:6px;">
+      <option value="">— Vaka Tipi Seç —</option>
+      <option>Kardiyak Arrest</option><option>AKS/STEMI</option><option>İnme/Stroke</option>
+      <option>Travma</option><option>Solunum Sıkıntısı</option><option>Nöbet</option>
+      <option>Anafilaksi</option><option>Hipoglisemi</option><option>Zehirlenme</option>
+      <option>Obstetrik</option><option>Pediatrik</option><option>Diğer</option>
+    </select>
+    <select id="vSonuc" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:7px 10px;border-radius:10px;font-size:0.62rem;margin-bottom:6px;">
+      <option value="">— Sonuç —</option>
+      <option>ROSC Sağlandı</option><option>Exitus</option><option>Hastaneye Nakil</option>
+      <option>Sahada Tedavi</option><option>Ret/İmtina</option>
+    </select>
+    <div style="display:flex;gap:6px;margin-bottom:6px;">
+      <input id="vEkip" placeholder="Ekip (örn: KKL-1)" style="flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:7px 10px;border-radius:10px;font-size:0.62rem;">
+      <input id="vYas" type="number" placeholder="Yaş" min="0" max="120" style="width:70px;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:7px 8px;border-radius:10px;font-size:0.62rem;">
+    </div>
+    <textarea id="vNot" placeholder="Notlar (opsiyonel)..." rows="2" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:7px 10px;border-radius:10px;font-size:0.62rem;resize:none;margin-bottom:6px;"></textarea>
+    <button onclick="vakaKaydet()" style="background:linear-gradient(135deg,var(--green),#15803d);border:none;padding:10px;width:100%;border-radius:30px;color:white;font-weight:700;cursor:pointer;font-size:0.7rem;">💾 KAYDET (OFFLİNE)</button>
+  </div>
+  <div id="vakaListesi" style="margin-top:8px;"></div>
+</div>
+```
+
   </div>
   <div class="bottom-nav">
     <div class="nav-item active-kkm" onclick="navKKM('cagri',this)"><i class="fas fa-phone-alt"></i><span>Çağrı</span></div>
     <div class="nav-item" onclick="navKKM('vatandas',this)"><i class="fas fa-person"></i><span>Vatandaş</span></div>
-    <div class="nav-item" onclick="navKKM('protokol',this)"><i class="fas fa-book"></i><span>Protokol</span></div>
-    <div class="nav-item" onclick="navKKM('ekip',this)"><i class="fas fa-truck"></i><span>Ekipler</span></div>
+    <div class="nav-item" onclick="navKKM('harita',this)"><i class="fas fa-map"></i><span>Harita</span></div>
+    <div class="nav-item" onclick="navKKM('vaka',this)"><i class="fas fa-clipboard-list"></i><span>Vaka</span></div>
     <div class="nav-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Çıkış</span></div>
   </div>
 </div>
 
 <!-- ============ SAHA ARAYÜZÜ ============ -->
+
 <div class="app" id="appSaha">
   <div class="app-header header-saha">
     <div class="header-inner">
       <div class="header-icon"><i class="fas fa-truck-medical"></i></div>
       <div><div class="header-title">SAHA EKİBİ | KIRKLARELİ</div><div class="header-badge">⚡ Detaylı Algoritmalar | AHA/ERC 2025</div></div>
-      <div class="header-lights"><div class="hlv r"></div><div class="hlv w"></div><div class="hlv b"></div></div>
+      <div class="header-lights">
+        <button class="lang-btn" id="langBtnSaha" onclick="toggleLang()">EN</button>
+        <div class="hlv r"></div><div class="hlv w"></div><div class="hlv b"></div>
+      </div>
     </div>
   </div>
   <div class="search-bar">
@@ -488,121 +672,376 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
   <div class="container" id="sahaContainer">
 
-    <!-- CPR SAYACI -->
-    <div class="cpr-card">
-      <div class="cpr-timer" id="cprTimer">02:00</div>
-      <div class="cpr-phase" id="cprPhase">⬇️ KOMPRESYON — 30 BASI | 100-120/dk</div>
-      <div class="cpr-buttons">
-        <button class="cpr-btn cpr-start" id="cprStartBtn">▶ BAŞLAT</button>
-        <button class="cpr-btn cpr-stop" id="cprStopBtn">⏸ DUR</button>
-        <button class="cpr-btn cpr-reset" id="cprResetBtn">↺ SIFIRLA</button>
-      </div>
-      <div class="cpr-stats">
-        <span>🔄 Döngü: <strong id="cprCycle">0</strong></span>
-        <span>⏱️ Toplam: <strong id="cprTotal">0:00</strong></span>
-        <span id="cprAdrEl">💊 Adrenalin: <strong>3 dk</strong></span>
-      </div>
-    </div>
+```
+<!-- CPR SAYACI -->
+<div class="cpr-card">
+  <div class="cpr-timer" id="cprTimer">02:00</div>
+  <div class="cpr-phase" id="cprPhase">⬇️ KOMPRESYON — 30 BASI | 100-120/dk</div>
+  <div class="cpr-buttons">
+    <button class="cpr-btn cpr-start" id="cprStartBtn">▶ BAŞLAT</button>
+    <button class="cpr-btn cpr-stop" id="cprStopBtn">⏸ DUR</button>
+    <button class="cpr-btn cpr-reset" id="cprResetBtn">↺ SIFIRLA</button>
+  </div>
+  <div class="cpr-stats">
+    <span>🔄 Döngü: <strong id="cprCycle">0</strong></span>
+    <span>⏱️ Toplam: <strong id="cprTotal">0:00</strong></span>
+    <span id="cprAdrEl">💊 Adrenalin: <strong>3 dk</strong></span>
+  </div>
+</div>
 
-    <!-- KARDİYAK ALGORİTMALAR -->
-    <div class="sec"><i class="fas fa-heart-circle-bolt"></i> KARDİYAK ACİLLER</div>
-    <div class="card-grid">
-      <div class="algo-card c-red" onclick="showAlgo('arrest')"><div class="card-badge" style="background:var(--red);">ARREST</div><div class="card-icon">💔</div><h3>KARDİYAK ARREST</h3><p>VF/VT/Asistoli/PEA — AHA 2025</p></div>
-      <div class="algo-card c-orange" onclick="showAlgo('aks')"><div class="card-badge" style="background:var(--orange);">STEMI</div><div class="card-icon">🫀</div><h3>AKS / STEMI</h3><p>Aspirin, Nitrat, Morfin, PCI</p></div>
-      <div class="algo-card c-blue" onclick="showAlgo('bradikardi')"><div class="card-badge" style="background:var(--blue);">BRADY</div><div class="card-icon">📉</div><h3>BRADİKARDİ</h3><p>Atropin, Pacing, Dopamin</p></div>
-      <div class="algo-card c-yellow" onclick="showAlgo('tasikardiDar')"><div class="card-badge" style="background:var(--yellow);color:black;">SVT</div><div class="card-icon">📈</div><h3>TAŞİKARDİ (DAR)</h3><p>Vagal, Adenozin, SVT protokolü</p></div>
-      <div class="algo-card c-red" onclick="showAlgo('tasikardiGenis')"><div class="card-badge" style="background:var(--red);">VT</div><div class="card-icon">⚡</div><h3>TAŞİKARDİ (GENİŞ)</h3><p>VT, Amiodaron, Kardiyoversiyon</p></div>
-      <div class="algo-card c-gray" onclick="showAlgo('kardiyojenik')"><div class="card-badge" style="background:#475569;">ŞOK</div><div class="card-icon">💧</div><h3>KARDİYOJENİK ŞOK</h3><p>Dopamin, Dobutamin, Destek</p></div>
-    </div>
+<!-- KARDİYAK ALGORİTMALAR -->
+<div class="sec"><i class="fas fa-heart-circle-bolt"></i> KARDİYAK ACİLLER</div>
+<div class="card-grid">
+  <div class="algo-card c-red" onclick="showAlgo('arrest')"><div class="card-badge" style="background:var(--red);">ARREST</div><div class="card-icon">💔</div><h3>KARDİYAK ARREST</h3><p>VF/VT/Asistoli/PEA — AHA 2025</p></div>
+  <div class="algo-card c-orange" onclick="showAlgo('aks')"><div class="card-badge" style="background:var(--orange);">STEMI</div><div class="card-icon">🫀</div><h3>AKS / STEMI</h3><p>Aspirin, Nitrat, Morfin, PCI</p></div>
+  <div class="algo-card c-blue" onclick="showAlgo('bradikardi')"><div class="card-badge" style="background:var(--blue);">BRADY</div><div class="card-icon">📉</div><h3>BRADİKARDİ</h3><p>Atropin, Pacing, Dopamin</p></div>
+  <div class="algo-card c-yellow" onclick="showAlgo('tasikardiDar')"><div class="card-badge" style="background:var(--yellow);color:black;">SVT</div><div class="card-icon">📈</div><h3>TAŞİKARDİ (DAR)</h3><p>Vagal, Adenozin, SVT protokolü</p></div>
+  <div class="algo-card c-red" onclick="showAlgo('tasikardiGenis')"><div class="card-badge" style="background:var(--red);">VT</div><div class="card-icon">⚡</div><h3>TAŞİKARDİ (GENİŞ)</h3><p>VT, Amiodaron, Kardiyoversiyon</p></div>
+  <div class="algo-card c-gray" onclick="showAlgo('kardiyojenik')"><div class="card-badge" style="background:#475569;">ŞOK</div><div class="card-icon">💧</div><h3>KARDİYOJENİK ŞOK</h3><p>Dopamin, Dobutamin, Destek</p></div>
+</div>
 
-    <!-- KARDİYAK RİTİMLER -->
-    <div class="sec"><i class="fas fa-wave-square"></i> KARDİYAK RİTİMLER — EKG (Gerçek Zamanlı)</div>
-    <div class="rhythm-section" id="rhythmSection">
-      <!-- Canvas tabanlı EKG'ler JS ile doldurulacak -->
-    </div>
+<!-- KARDİYAK RİTİMLER -->
+<div class="sec"><i class="fas fa-wave-square"></i> KARDİYAK RİTİMLER — EKG (Gerçek Zamanlı)</div>
+<div class="rhythm-section" id="rhythmSection">
+  <!-- Canvas tabanlı EKG'ler JS ile doldurulacak -->
+</div>
 
-    <!-- SOLUNUM ACİLLERİ -->
-    <div class="sec"><i class="fas fa-lungs"></i> SOLUNUM ACİLLERİ</div>
-    <div class="card-grid">
-      <div class="algo-card c-cyan" onclick="showAlgo('pnomtoraks')"><div class="card-badge" style="background:var(--cyan);">PNÖMO</div><div class="card-icon">🫁</div><h3>PNÖMOTORAKS</h3><p>İğne dekompresyon, tüp indikasyon</p></div>
-      <div class="algo-card c-blue" onclick="showAlgo('koah')"><div class="card-badge" style="background:var(--blue);">KOAH</div><div class="card-icon">💨</div><h3>KOAH / ASTIM</h3><p>Salbutamol, İpratropium, NIMV</p></div>
-      <div class="algo-card c-purple" onclick="showAlgo('epiglotit')"><div class="card-badge" style="background:var(--purple);">HAVA</div><div class="card-icon">🫂</div><h3>HAV. YOLU TIKANMA</h3><p>Heimlich, Entübasyon kriterleri</p></div>
-      <div class="algo-card c-teal" onclick="showAlgo('sepsis')"><div class="card-badge" style="background:#14b8a6;">SEPSIS</div><div class="card-icon">🦠</div><h3>SEPTİK ŞOK</h3><p>qSOFA, Kristaloid bolus, Vazopresör</p></div>
-      <div class="algo-card c-orange" onclick="showAlgo('pulmOdem')"><div class="card-badge" style="background:var(--orange);">ÖD</div><div class="card-icon">🫁</div><h3>PULMONER ÖDEM</h3><p>CPAP, NTG, Furosemid, NIMV</p></div>
-      <div class="algo-card c-red" onclick="showAlgo('pe')"><div class="card-badge" style="background:var(--red);">PE</div><div class="card-icon">🩸</div><h3>PULMONER EMBOLİ</h3><p>Masif PE, trombolitik, heparin</p></div>
-    </div>
+<!-- SOLUNUM ACİLLERİ -->
+<div class="sec"><i class="fas fa-lungs"></i> SOLUNUM ACİLLERİ</div>
+<div class="card-grid">
+  <div class="algo-card c-cyan" onclick="showAlgo('pnomtoraks')"><div class="card-badge" style="background:var(--cyan);">PNÖMO</div><div class="card-icon">🫁</div><h3>PNÖMOTORAKS</h3><p>İğne dekompresyon, tüp indikasyon</p></div>
+  <div class="algo-card c-blue" onclick="showAlgo('koah')"><div class="card-badge" style="background:var(--blue);">KOAH</div><div class="card-icon">💨</div><h3>KOAH / ASTIM</h3><p>Salbutamol, İpratropium, NIMV</p></div>
+  <div class="algo-card c-purple" onclick="showAlgo('epiglotit')"><div class="card-badge" style="background:var(--purple);">HAVA</div><div class="card-icon">🫂</div><h3>HAV. YOLU TIKANMA</h3><p>Heimlich, Entübasyon kriterleri</p></div>
+  <div class="algo-card c-teal" onclick="showAlgo('sepsis')"><div class="card-badge" style="background:#14b8a6;">SEPSIS</div><div class="card-icon">🦠</div><h3>SEPTİK ŞOK</h3><p>qSOFA, Kristaloid bolus, Vazopresör</p></div>
+  <div class="algo-card c-orange" onclick="showAlgo('pulmOdem')"><div class="card-badge" style="background:var(--orange);">ÖD</div><div class="card-icon">🫁</div><h3>PULMONER ÖDEM</h3><p>CPAP, NTG, Furosemid, NIMV</p></div>
+  <div class="algo-card c-red" onclick="showAlgo('pe')"><div class="card-badge" style="background:var(--red);">PE</div><div class="card-icon">🩸</div><h3>PULMONER EMBOLİ</h3><p>Masif PE, trombolitik, heparin</p></div>
+</div>
 
-    <!-- NÖROLOJİK ACİLLER -->
-    <div class="sec"><i class="fas fa-brain"></i> NÖROLOJİK ACİLLER</div>
-    <div class="card-grid">
-      <div class="algo-card c-purple" onclick="showAlgo('inme')"><div class="card-badge" style="background:var(--purple);">FAST</div><div class="card-icon">🧠</div><h3>İNME (STROKE)</h3><p>FAST, altın pencere, LVO, tPA</p></div>
-      <div class="algo-card c-blue" onclick="showAlgo('nobet')"><div class="card-badge" style="background:var(--blue);">NÖBET</div><div class="card-icon">⚡</div><h3>NÖBET / STATUS</h3><p>Midazolam, Diazepam, Status EP</p></div>
-      <div class="algo-card c-orange" onclick="showAlgo('kafaTravma')"><div class="card-badge" style="background:var(--orange);">GKS</div><div class="card-icon">🪖</div><h3>KAFA TRAVMASI</h3><p>GKS, Pupil, ICP yönetimi</p></div>
-      <div class="algo-card c-gray" onclick="showAlgo('senkop')"><div class="card-badge" style="background:#475569;">SENKOP</div><div class="card-icon">😵</div><h3>SENKOP / BAYGINLIK</h3><p>Neden araştır, EKG, KŞ ölç</p></div>
-    </div>
+<!-- NÖROLOJİK ACİLLER -->
+<div class="sec"><i class="fas fa-brain"></i> NÖROLOJİK ACİLLER</div>
+<div class="card-grid">
+  <div class="algo-card c-purple" onclick="showAlgo('inme')"><div class="card-badge" style="background:var(--purple);">FAST</div><div class="card-icon">🧠</div><h3>İNME (STROKE)</h3><p>FAST, altın pencere, LVO, tPA</p></div>
+  <div class="algo-card c-blue" onclick="showAlgo('nobet')"><div class="card-badge" style="background:var(--blue);">NÖBET</div><div class="card-icon">⚡</div><h3>NÖBET / STATUS</h3><p>Midazolam, Diazepam, Status EP</p></div>
+  <div class="algo-card c-orange" onclick="showAlgo('kafaTravma')"><div class="card-badge" style="background:var(--orange);">GKS</div><div class="card-icon">🪖</div><h3>KAFA TRAVMASI</h3><p>GKS, Pupil, ICP yönetimi</p></div>
+  <div class="algo-card c-gray" onclick="showAlgo('senkop')"><div class="card-badge" style="background:#475569;">SENKOP</div><div class="card-icon">😵</div><h3>SENKOP / BAYGINLIK</h3><p>Neden araştır, EKG, KŞ ölç</p></div>
+</div>
 
-    <!-- DİĞER ACİLLER -->
-    <div class="sec"><i class="fas fa-kit-medical"></i> DİĞER ACİLLER</div>
-    <div class="card-grid">
-      <div class="algo-card c-red" onclick="showAlgo('travma')"><div class="card-badge" style="background:var(--red);">XABCDE</div><div class="card-icon">🚗</div><h3>MAJOR TRAVMA</h3><p>XABCDE, Turnike, Kristaloid</p></div>
-      <div class="algo-card c-green" onclick="showAlgo('anafilaksi')"><div class="card-badge" style="background:var(--green);">ADRENALİN</div><div class="card-icon">🆘</div><h3>ANAFİLAKSİ</h3><p>Adrenalin IM, O2, Sıvı, Pozisyon</p></div>
-      <div class="algo-card c-yellow" onclick="showAlgo('hipoglisemi')"><div class="card-badge" style="background:var(--yellow);color:black;">KŞ</div><div class="card-icon">🍬</div><h3>HİPOGLİSEMİ</h3><p>Dekstroz, Glukagon, Tiamin uyarı</p></div>
-      <div class="algo-card c-orange" onclick="showAlgo('yanik')"><div class="card-badge" style="background:var(--orange);">YANIK</div><div class="card-icon">🔥</div><h3>YANIK</h3><p>TBSA, Parkland, Hava yolu yanığı</p></div>
-      <div class="algo-card c-pink" onclick="showAlgo('obstetrik')"><div class="card-badge" style="background:#ec4899;">OBSTETRİK</div><div class="card-icon">🤰</div><h3>OBSTETRİK ACİL</h3><p>Eklampsi, Acil doğum, Apgar</p></div>
-      <div class="algo-card c-teal" onclick="showAlgo('zehirlenme')"><div class="card-badge" style="background:#14b8a6;">ZEHİR</div><div class="card-icon">☠️</div><h3>ZEHİRLENME</h3><p>OP, CO, Alkol, Antidotlar</p></div>
-      <div class="algo-card c-cyan" onclick="showAlgo('hipotermia')"><div class="card-badge" style="background:var(--cyan);">HİPO</div><div class="card-icon">🥶</div><h3>HİPOTERMİ</h3><p>Isınma, Arrest yönetimi</p></div>
-      <div class="algo-card c-gray" onclick="showAlgo('crush')"><div class="card-badge" style="background:#475569;">CRUSH</div><div class="card-icon">🏗️</div><h3>CRUSH SENDROMU</h3><p>Sıvı, Sodyum bikarbonat, Furosemid</p></div>
-    </div>
+<!-- DİĞER ACİLLER -->
+<div class="sec"><i class="fas fa-kit-medical"></i> DİĞER ACİLLER</div>
+<div class="card-grid">
+  <div class="algo-card c-red" onclick="showAlgo('travma')"><div class="card-badge" style="background:var(--red);">XABCDE</div><div class="card-icon">🚗</div><h3>MAJOR TRAVMA</h3><p>XABCDE, Turnike, Kristaloid</p></div>
+  <div class="algo-card c-green" onclick="showAlgo('anafilaksi')"><div class="card-badge" style="background:var(--green);">ADRENALİN</div><div class="card-icon">🆘</div><h3>ANAFİLAKSİ</h3><p>Adrenalin IM, O2, Sıvı, Pozisyon</p></div>
+  <div class="algo-card c-yellow" onclick="showAlgo('hipoglisemi')"><div class="card-badge" style="background:var(--yellow);color:black;">KŞ</div><div class="card-icon">🍬</div><h3>HİPOGLİSEMİ</h3><p>Dekstroz, Glukagon, Tiamin uyarı</p></div>
+  <div class="algo-card c-orange" onclick="showAlgo('yanik')"><div class="card-badge" style="background:var(--orange);">YANIK</div><div class="card-icon">🔥</div><h3>YANIK</h3><p>TBSA, Parkland, Hava yolu yanığı</p></div>
+  <div class="algo-card c-pink" onclick="showAlgo('obstetrik')"><div class="card-badge" style="background:#ec4899;">OBSTETRİK</div><div class="card-icon">🤰</div><h3>OBSTETRİK ACİL</h3><p>Eklampsi, Acil doğum, Apgar</p></div>
+  <div class="algo-card c-teal" onclick="showAlgo('zehirlenme')"><div class="card-badge" style="background:#14b8a6;">ZEHİR</div><div class="card-icon">☠️</div><h3>ZEHİRLENME</h3><p>OP, CO, Alkol, Antidotlar</p></div>
+  <div class="algo-card c-cyan" onclick="showAlgo('hipotermia')"><div class="card-badge" style="background:var(--cyan);">HİPO</div><div class="card-icon">🥶</div><h3>HİPOTERMİ</h3><p>Isınma, Arrest yönetimi</p></div>
+  <div class="algo-card c-gray" onclick="showAlgo('crush')"><div class="card-badge" style="background:#475569;">CRUSH</div><div class="card-icon">🏗️</div><h3>CRUSH SENDROMU</h3><p>Sıvı, Sodyum bikarbonat, Furosemid</p></div>
+</div>
 
-    <!-- POST-ARREST & DOLAŞIM -->
-    <div class="sec"><i class="fas fa-heart-pulse"></i> POST-ARREST & DOLAŞIM</div>
-    <div class="card-grid">
-      <div class="algo-card c-green" onclick="showAlgo('rosc')"><div class="card-badge" style="background:var(--green);">ROSC</div><div class="card-icon">💚</div><h3>ROSC SONRASI BAKIM</h3><p>TTM, O2 hedefi, STEMI, vazopresör</p></div>
-      <div class="algo-card c-purple" onclick="showAlgo('tamponad')"><div class="card-badge" style="background:var(--purple);">TAMPONAD</div><div class="card-icon">💊</div><h3>KARDİYAK TAMPONAD</h3><p>Beck triadı, PEA, perikardiyo</p></div>
-      <div class="algo-card c-orange" onclick="showAlgo('aortDiseksiyon')"><div class="card-badge" style="background:var(--orange);">AORT</div><div class="card-icon">🩺</div><h3>AORT DİSEKSİYONU</h3><p>Yırtıcı ağrı, KB kontrolü, cerrahi</p></div>
-      <div class="algo-card c-red" onclick="showAlgo('hiypertansifAcil')"><div class="card-badge" style="background:var(--red);">HT ACİL</div><div class="card-icon">🔺</div><h3>HİPERTANSİF ACİL</h3><p>Hedef organ hasarı, Labetalol, NTG</p></div>
-    </div>
+<!-- POST-ARREST & DOLAŞIM -->
+<div class="sec"><i class="fas fa-heart-pulse"></i> POST-ARREST & DOLAŞIM</div>
+<div class="card-grid">
+  <div class="algo-card c-green" onclick="showAlgo('rosc')"><div class="card-badge" style="background:var(--green);">ROSC</div><div class="card-icon">💚</div><h3>ROSC SONRASI BAKIM</h3><p>TTM, O2 hedefi, STEMI, vazopresör</p></div>
+  <div class="algo-card c-purple" onclick="showAlgo('tamponad')"><div class="card-badge" style="background:var(--purple);">TAMPONAD</div><div class="card-icon">💊</div><h3>KARDİYAK TAMPONAD</h3><p>Beck triadı, PEA, perikardiyo</p></div>
+  <div class="algo-card c-orange" onclick="showAlgo('aortDiseksiyon')"><div class="card-badge" style="background:var(--orange);">AORT</div><div class="card-icon">🩺</div><h3>AORT DİSEKSİYONU</h3><p>Yırtıcı ağrı, KB kontrolü, cerrahi</p></div>
+  <div class="algo-card c-red" onclick="showAlgo('hiypertansifAcil')"><div class="card-badge" style="background:var(--red);">HT ACİL</div><div class="card-icon">🔺</div><h3>HİPERTANSİF ACİL</h3><p>Hedef organ hasarı, Labetalol, NTG</p></div>
+</div>
 
-    <!-- PEDİATRİK -->
-    <div class="sec"><i class="fas fa-baby"></i> PEDİATRİK ACİLLER</div>
-    <div class="card-grid">
-      <div class="algo-card c-red" onclick="showAlgo('pediatrikArrest')"><div class="card-badge" style="background:var(--red);">ÇOCUK</div><div class="card-icon">👶</div><h3>PED. ARREST</h3><p>15:2 KPR, J/kg dozlar</p></div>
-      <div class="algo-card c-orange" onclick="showAlgo('krup')"><div class="card-badge" style="background:var(--orange);">KRUP</div><div class="card-icon">🦆</div><h3>KRUP / EPİGLOTİT</h3><p>Deksametazon, Nebül adrenalin</p></div>
-      <div class="algo-card c-pink" onclick="showAlgo('yenidogan')"><div class="card-badge" style="background:#ec4899;">NLS</div><div class="card-icon">👼</div><h3>YENİDOĞAN RESÜS.</h3><p>NLS — ERC 2021, oda havası, 3:1</p></div>
-      <div class="algo-card c-purple" onclick="showAlgo('pediatrikNobet')"><div class="card-badge" style="background:var(--purple);">FEBRİL</div><div class="card-icon">🌡️</div><h3>PED. NÖBET / FEBRİL</h3><p>Febril nöbet, doz, pozisyon</p></div>
-    </div>
+<!-- PEDİATRİK -->
+<div class="sec"><i class="fas fa-baby"></i> PEDİATRİK ACİLLER</div>
+<div class="card-grid">
+  <div class="algo-card c-red" onclick="showAlgo('pediatrikArrest')"><div class="card-badge" style="background:var(--red);">ÇOCUK</div><div class="card-icon">👶</div><h3>PED. ARREST</h3><p>15:2 KPR, J/kg dozlar</p></div>
+  <div class="algo-card c-orange" onclick="showAlgo('krup')"><div class="card-badge" style="background:var(--orange);">KRUP</div><div class="card-icon">🦆</div><h3>KRUP / EPİGLOTİT</h3><p>Deksametazon, Nebül adrenalin</p></div>
+  <div class="algo-card c-pink" onclick="showAlgo('yenidogan')"><div class="card-badge" style="background:#ec4899;">NLS</div><div class="card-icon">👼</div><h3>YENİDOĞAN RESÜS.</h3><p>NLS — ERC 2021, oda havası, 3:1</p></div>
+  <div class="algo-card c-purple" onclick="showAlgo('pediatrikNobet')"><div class="card-badge" style="background:var(--purple);">FEBRİL</div><div class="card-icon">🌡️</div><h3>PED. NÖBET / FEBRİL</h3><p>Febril nöbet, doz, pozisyon</p></div>
+</div>
 
-    <!-- METABOLİK -->
-    <div class="sec"><i class="fas fa-user-doctor"></i> METABOLİK & DİĞER ACİLLER</div>
-    <div class="card-grid">
-      <div class="algo-card c-yellow" onclick="showAlgo('dka')"><div class="card-badge" style="background:var(--yellow);color:black;">DKA</div><div class="card-icon">🍬</div><h3>DİYABETİK KETOASİDOZ</h3><p>KŞ yüksek, asidoz, sıvı, K+</p></div>
-      <div class="algo-card c-blue" onclick="showAlgo('bogulma')"><div class="card-badge" style="background:var(--blue);">BOĞULMA</div><div class="card-icon">🌊</div><h3>BOĞULMA / DROWNING</h3><p>5 kurtarma solunumu, hipotermi</p></div>
-      <div class="algo-card c-teal" onclick="showAlgo('spinalTravma')"><div class="card-badge" style="background:#14b8a6;">NEXUS</div><div class="card-icon">🦴</div><h3>SPİNAL TRAVMA</h3><p>NEXUS, C-collar, spinal şok</p></div>
-      <div class="algo-card c-red" onclick="showAlgo('hiper_kali')"><div class="card-badge" style="background:var(--red);">K+</div><div class="card-icon">⚗️</div><h3>HİPERKALEMİ</h3><p>EKG değişiklikleri, Kalsiyum, İnsulin</p></div>
-      <div class="algo-card c-cyan" onclick="showAlgo('hiponatremi')"><div class="card-badge" style="background:var(--cyan);">Na+</div><div class="card-icon">🧂</div><h3>HİPONATREMİ</h3><p>Semptomatik, %3 NaCl, hız</p></div>
-      <div class="algo-card c-gray" onclick="showAlgo('rabdomiyoliz')"><div class="card-badge" style="background:#475569;">RHABDO</div><div class="card-icon">💪</div><h3>RABDOMİYOLİZ</h3><p>Miyoglobinüri, sıvı, idrar alkalizasyon</p></div>
-    </div>
+<!-- METABOLİK -->
+<div class="sec"><i class="fas fa-user-doctor"></i> METABOLİK & DİĞER ACİLLER</div>
+<div class="card-grid">
+  <div class="algo-card c-yellow" onclick="showAlgo('dka')"><div class="card-badge" style="background:var(--yellow);color:black;">DKA</div><div class="card-icon">🍬</div><h3>DİYABETİK KETOASİDOZ</h3><p>KŞ yüksek, asidoz, sıvı, K+</p></div>
+  <div class="algo-card c-blue" onclick="showAlgo('bogulma')"><div class="card-badge" style="background:var(--blue);">BOĞULMA</div><div class="card-icon">🌊</div><h3>BOĞULMA / DROWNING</h3><p>5 kurtarma solunumu, hipotermi</p></div>
+  <div class="algo-card c-teal" onclick="showAlgo('spinalTravma')"><div class="card-badge" style="background:#14b8a6;">NEXUS</div><div class="card-icon">🦴</div><h3>SPİNAL TRAVMA</h3><p>NEXUS, C-collar, spinal şok</p></div>
+  <div class="algo-card c-red" onclick="showAlgo('hiper_kali')"><div class="card-badge" style="background:var(--red);">K+</div><div class="card-icon">⚗️</div><h3>HİPERKALEMİ</h3><p>EKG değişiklikleri, Kalsiyum, İnsulin</p></div>
+  <div class="algo-card c-cyan" onclick="showAlgo('hiponatremi')"><div class="card-badge" style="background:var(--cyan);">Na+</div><div class="card-icon">🧂</div><h3>HİPONATREMİ</h3><p>Semptomatik, %3 NaCl, hız</p></div>
+  <div class="algo-card c-gray" onclick="showAlgo('rabdomiyoliz')"><div class="card-badge" style="background:#475569;">RHABDO</div><div class="card-icon">💪</div><h3>RABDOMİYOLİZ</h3><p>Miyoglobinüri, sıvı, idrar alkalizasyon</p></div>
+</div>
 
-    <!-- İLAÇ DOZLARI -->
-    <div class="sec"><i class="fas fa-syringe"></i> İLAÇ DOZLARI (KİLOYA GÖRE)</div>
-    <div class="info-box">
-      <div class="dose-header">
-        <span>⚖️ Kilo:</span>
-        <input type="number" id="sahaKg" value="70" min="1" max="200">
-        <button class="dose-calc-btn" onclick="calcDoses()">HESAPLA</button>
-      </div>
-      <div id="doseList"></div>
+<!-- İLAÇ DOZLARI -->
+<div class="sec"><i class="fas fa-syringe"></i> İLAÇ DOZLARI (KİLOYA GÖRE)</div>
+<div class="info-box">
+  <div class="dose-header">
+    <span>⚖️ Kilo:</span>
+    <input type="number" id="sahaKg" value="70" min="1" max="200">
+    <button class="dose-calc-btn" onclick="calcDoses()">HESAPLA</button>
+  </div>
+  <div id="doseList"></div>
+</div>
+
+<!-- GELİŞİM KILAVUZU -->
+<div class="sec" id="secGelisim"><i class="fas fa-graduation-cap"></i> <span data-tr="GELİŞİM & ERC KILAVUZU" data-en="DEVELOPMENT & ERC GUIDE">GELİŞİM & ERC KILAVUZU</span></div>
+<div id="gelisimSection">
+  <div class="gelisim-card" onclick="showGelisim('bls')">
+    <div class="gelisim-icon" style="background:rgba(220,38,38,0.15);color:#ef4444;">💓</div>
+    <div class="gelisim-text"><h4 data-tr="Temel Yaşam Desteği (TYD/BLS)" data-en="Basic Life Support (BLS)">Temel Yaşam Desteği (TYD/BLS)</h4><p data-tr="ERC 2021 standartları, sertifikasyon yolları" data-en="ERC 2021 standards, certification paths">ERC 2021 standartları, sertifikasyon yolları</p></div>
+    <i class="fas fa-chevron-right proto-arrow"></i>
+  </div>
+  <div class="gelisim-card" onclick="showGelisim('als')">
+    <div class="gelisim-icon" style="background:rgba(234,88,12,0.15);color:#f97316;">⚡</div>
+    <div class="gelisim-text"><h4 data-tr="İleri Yaşam Desteği (İYD/ALS)" data-en="Advanced Life Support (ALS)">İleri Yaşam Desteği (İYD/ALS)</h4><p data-tr="ALS kursu, simülasyon, pratik beceriler" data-en="ALS course, simulation, practical skills">ALS kursu, simülasyon, pratik beceriler</p></div>
+    <i class="fas fa-chevron-right proto-arrow"></i>
+  </div>
+  <div class="gelisim-card" onclick="showGelisim('erc2021')">
+    <div class="gelisim-icon" style="background:rgba(22,163,74,0.15);color:#22c55e;">📋</div>
+    <div class="gelisim-text"><h4 data-tr="ERC 2021 Yenilikler" data-en="ERC 2021 Updates">ERC 2021 Yenilikler</h4><p data-tr="Neler değişti? Hangi algoritmalar güncellendi?" data-en="What changed? Which algorithms updated?">Neler değişti? Hangi algoritmalar güncellendi?</p></div>
+    <i class="fas fa-chevron-right proto-arrow"></i>
+  </div>
+  <div class="gelisim-card" onclick="showGelisim('teamwork')">
+    <div class="gelisim-icon" style="background:rgba(37,99,235,0.15);color:#60a5fa;">🤝</div>
+    <div class="gelisim-text"><h4 data-tr="Ekip Çalışması & CRM" data-en="Teamwork & CRM">Ekip Çalışması & CRM</h4><p data-tr="Crisis Resource Management, liderlik, iletişim" data-en="Crisis Resource Management, leadership, communication">Crisis Resource Management, liderlik, iletişim</p></div>
+    <i class="fas fa-chevron-right proto-arrow"></i>
+  </div>
+  <div class="gelisim-card" onclick="showGelisim('stres')">
+    <div class="gelisim-icon" style="background:rgba(139,92,246,0.15);color:#a78bfa;">🧠</div>
+    <div class="gelisim-text"><h4 data-tr="Stres Yönetimi & Tükenmişlik" data-en="Stress Management & Burnout">Stres Yönetimi & Tükenmişlik</h4><p data-tr="CISM, debriefing, sağlıklı kalma yolları" data-en="CISM, debriefing, staying healthy">CISM, debriefing, sağlıklı kalma yolları</p></div>
+    <i class="fas fa-chevron-right proto-arrow"></i>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="sec" id="secQuiz"><i class="fas fa-question-circle"></i> <span data-tr="ALGORİTMA QUIZ — KENDİNİ SINA" data-en="ALGORITHM QUIZ — TEST YOURSELF">ALGORİTMA QUIZ — KENDİNİ SINA</span></div>
+<div id="quizSection">
+  <div class="quiz-start-card" id="quizStartCard">
+    <div style="font-size:2rem;margin-bottom:8px;">🧪</div>
+    <div style="font-size:0.75rem;font-weight:700;margin-bottom:4px;" data-tr="Algoritma Bilgini Test Et" data-en="Test Your Algorithm Knowledge">Algoritma Bilgini Test Et</div>
+    <div style="font-size:0.55rem;color:var(--muted);margin-bottom:12px;" data-tr="ERC/AHA protokolleri, ritim tanıma, ilaç dozları" data-en="ERC/AHA protocols, rhythm recognition, drug doses">ERC/AHA protokolleri, ritim tanıma, ilaç dozları</div>
+    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:12px;">
+      <button class="quiz-cat-btn active-cat" onclick="setQuizCat('all',this)" data-tr="Tümü" data-en="All">Tümü</button>
+      <button class="quiz-cat-btn" onclick="setQuizCat('arrest',this)" data-tr="Arrest" data-en="Arrest">Arrest</button>
+      <button class="quiz-cat-btn" onclick="setQuizCat('ritim',this)" data-tr="Ritim" data-en="Rhythm">Ritim</button>
+      <button class="quiz-cat-btn" onclick="setQuizCat('ilac',this)" data-tr="İlaç" data-en="Drugs">İlaç</button>
+      <button class="quiz-cat-btn" onclick="setQuizCat('travma',this)" data-tr="Travma" data-en="Trauma">Travma</button>
+    </div>
+    <button class="quiz-launch-btn" onclick="startQuiz()" data-tr="🚀 QUIZ BAŞLAT" data-en="🚀 START QUIZ">🚀 QUIZ BAŞLAT</button>
+    <div class="quiz-score-row" id="quizScoreRow" style="display:none;margin-top:8px;font-size:0.55rem;color:var(--muted);">
+      <span data-tr="Son skor:" data-en="Last score:">Son skor:</span> <span id="quizLastScore" style="color:#4ade80;font-weight:700;"></span>
     </div>
   </div>
+  <div id="quizActiveArea" style="display:none;">
+    <div class="quiz-q-card">
+      <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+      <div class="quiz-meta"><span id="quizNum"></span><span id="quizCatLabel"></span></div>
+      <div class="quiz-question" id="quizQuestion"></div>
+      <div id="quizOptions"></div>
+      <div id="quizFeedback" style="display:none;"></div>
+      <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuestion()" style="display:none;" data-tr="Sonraki →" data-en="Next →">Sonraki →</button>
+    </div>
+  </div>
+  <div id="quizResultArea" style="display:none;">
+    <div class="quiz-result-card">
+      <div id="quizResultEmoji" style="font-size:2.5rem;margin-bottom:8px;"></div>
+      <div class="quiz-result-score" id="quizResultScore"></div>
+      <div class="quiz-result-msg" id="quizResultMsg"></div>
+      <div id="quizWrongList" style="margin-top:10px;"></div>
+      <button class="quiz-launch-btn" onclick="retryQuiz()" style="margin-top:10px;" data-tr="🔁 Tekrar Dene" data-en="🔁 Try Again">🔁 Tekrar Dene</button>
+    </div>
+  </div>
+</div>
+
+<!-- HASTA DEĞERLENDİRME FORMU -->
+<div class="sec" id="secHasta"><i class="fas fa-stethoscope"></i> <span data-tr="HASTA DEĞERLENDİRME (ABCDE)" data-en="PATIENT ASSESSMENT (ABCDE)">HASTA DEĞERLENDİRME (ABCDE)</span></div>
+<div id="hastaSection">
+  <div class="hasta-form-card">
+    <div class="hasta-tabs">
+      <button class="hasta-tab active-tab" onclick="setHastaTab('abcde',this)">ABCDE</button>
+      <button class="hasta-tab" onclick="setHastaTab('vital',this)">Vital</button>
+      <button class="hasta-tab" onclick="setHastaTab('gks',this)">GKS</button>
+      <button class="hasta-tab" onclick="setHastaTab('opqrst',this)">OPQRST</button>
+    </div>
+
+    <!-- ABCDE -->
+    <div id="htab-abcde" class="hasta-tab-content">
+      <div class="abcde-row"><span class="abcde-lbl abcde-a">A</span><span class="abcde-title">Airway (Hava Yolu)</span>
+        <div class="abcde-opts">
+          <label><input type="radio" name="hA" value="açık"> Açık</label>
+          <label><input type="radio" name="hA" value="riskli"> Riskli</label>
+          <label><input type="radio" name="hA" value="kapalı"> Kapalı</label>
+        </div>
+      </div>
+      <div class="abcde-row"><span class="abcde-lbl abcde-b">B</span><span class="abcde-title">Breathing (Solunum)</span>
+        <div class="abcde-opts">
+          <label><input type="radio" name="hB" value="normal"> Normal</label>
+          <label><input type="radio" name="hB" value="anormal"> Anormal</label>
+          <label><input type="radio" name="hB" value="yok"> Yok</label>
+        </div>
+      </div>
+      <div class="abcde-row"><span class="abcde-lbl abcde-c">C</span><span class="abcde-title">Circulation (Dolaşım)</span>
+        <div class="abcde-opts">
+          <label><input type="radio" name="hC" value="iyi"> İyi</label>
+          <label><input type="radio" name="hC" value="zayıf"> Zayıf</label>
+          <label><input type="radio" name="hC" value="nabızsız"> Nabızsız</label>
+        </div>
+      </div>
+      <div class="abcde-row"><span class="abcde-lbl abcde-d">D</span><span class="abcde-title">Disability (Bilinç — AVPU)</span>
+        <div class="abcde-opts">
+          <label><input type="radio" name="hD" value="A"> A</label>
+          <label><input type="radio" name="hD" value="V"> V</label>
+          <label><input type="radio" name="hD" value="P"> P</label>
+          <label><input type="radio" name="hD" value="U"> U</label>
+        </div>
+      </div>
+      <div class="abcde-row"><span class="abcde-lbl abcde-e">E</span><span class="abcde-title">Exposure (Maruziyet)</span>
+        <textarea id="hE" placeholder="Yaralanma, döküntü, şişlik..." rows="2" class="hasta-input" style="margin-top:4px;"></textarea>
+      </div>
+      <button onclick="generateAbcdeReport()" class="hasta-rapor-btn">📋 ABCDE Raporu Oluştur</button>
+    </div>
+
+    <!-- VİTAL BULGULAR -->
+    <div id="htab-vital" class="hasta-tab-content" style="display:none;">
+      <div class="vital-grid">
+        <div class="vital-item">
+          <div class="vital-icon" style="color:#ef4444;">❤️</div>
+          <input type="number" id="vKH" placeholder="Nabız/dk" class="vital-input" min="0" max="300">
+          <div class="vital-label">Nabız</div>
+        </div>
+        <div class="vital-item">
+          <div class="vital-icon" style="color:#60a5fa;">🩺</div>
+          <input type="text" id="vKB" placeholder="120/80" class="vital-input">
+          <div class="vital-label">KB (mmHg)</div>
+        </div>
+        <div class="vital-item">
+          <div class="vital-icon" style="color:#34d399;">💨</div>
+          <input type="number" id="vSS" placeholder="Solunum/dk" class="vital-input" min="0" max="60">
+          <div class="vital-label">Solunum</div>
+        </div>
+        <div class="vital-item">
+          <div class="vital-icon" style="color:#a78bfa;">🌡️</div>
+          <input type="number" id="vAtes" placeholder="36.8" step="0.1" class="vital-input" min="30" max="44">
+          <div class="vital-label">Ateş (°C)</div>
+        </div>
+        <div class="vital-item">
+          <div class="vital-icon" style="color:#fbbf24;">🩸</div>
+          <input type="number" id="vSpO2" placeholder="99" class="vital-input" min="50" max="100">
+          <div class="vital-label">SpO2 (%)</div>
+        </div>
+        <div class="vital-item">
+          <div class="vital-icon" style="color:#f97316;">🍬</div>
+          <input type="number" id="vKS" placeholder="90" class="vital-input" min="20" max="600">
+          <div class="vital-label">KŞ (mg/dL)</div>
+        </div>
+      </div>
+      <div id="vitalAlerts" style="margin-top:8px;"></div>
+      <button onclick="evalVitals()" class="hasta-rapor-btn">⚡ Vital Değerlendir</button>
+    </div>
+
+    <!-- GKS -->
+    <div id="htab-gks" class="hasta-tab-content" style="display:none;">
+      <div class="gks-section">
+        <div class="gks-title">👁️ Göz Açma (E)</div>
+        <div class="gks-opts">
+          <label class="gks-opt"><input type="radio" name="gE" value="4" onchange="calcGKS()"> <span>4</span> Spontan</label>
+          <label class="gks-opt"><input type="radio" name="gE" value="3" onchange="calcGKS()"> <span>3</span> Sese</label>
+          <label class="gks-opt"><input type="radio" name="gE" value="2" onchange="calcGKS()"> <span>2</span> Ağrıya</label>
+          <label class="gks-opt"><input type="radio" name="gE" value="1" onchange="calcGKS()"> <span>1</span> Yok</label>
+        </div>
+      </div>
+      <div class="gks-section">
+        <div class="gks-title">🗣️ Verbal (V)</div>
+        <div class="gks-opts">
+          <label class="gks-opt"><input type="radio" name="gV" value="5" onchange="calcGKS()"> <span>5</span> Oryante</label>
+          <label class="gks-opt"><input type="radio" name="gV" value="4" onchange="calcGKS()"> <span>4</span> Konfüze</label>
+          <label class="gks-opt"><input type="radio" name="gV" value="3" onchange="calcGKS()"> <span>3</span> Anlamsız</label>
+          <label class="gks-opt"><input type="radio" name="gV" value="2" onchange="calcGKS()"> <span>2</span> Ses</label>
+          <label class="gks-opt"><input type="radio" name="gV" value="1" onchange="calcGKS()"> <span>1</span> Yok</label>
+        </div>
+      </div>
+      <div class="gks-section">
+        <div class="gks-title">💪 Motor (M)</div>
+        <div class="gks-opts">
+          <label class="gks-opt"><input type="radio" name="gM" value="6" onchange="calcGKS()"> <span>6</span> Emirlere uyar</label>
+          <label class="gks-opt"><input type="radio" name="gM" value="5" onchange="calcGKS()"> <span>5</span> Ağrıyı lokalize</label>
+          <label class="gks-opt"><input type="radio" name="gM" value="4" onchange="calcGKS()"> <span>4</span> Çeker</label>
+          <label class="gks-opt"><input type="radio" name="gM" value="3" onchange="calcGKS()"> <span>3</span> Fleksiyon</label>
+          <label class="gks-opt"><input type="radio" name="gM" value="2" onchange="calcGKS()"> <span>2</span> Ekstansiyon</label>
+          <label class="gks-opt"><input type="radio" name="gM" value="1" onchange="calcGKS()"> <span>1</span> Yok</label>
+        </div>
+      </div>
+      <div class="gks-result" id="gksResult">GKS: — / 15</div>
+      <div class="gks-interpret" id="gksInterpret"></div>
+    </div>
+
+    <!-- OPQRST -->
+    <div id="htab-opqrst" class="hasta-tab-content" style="display:none;">
+      <div class="opq-row"><span class="opq-lbl">O</span><span class="opq-title">Onset — Başlangıç</span><input class="hasta-input" id="opO" placeholder="Ne zaman, nasıl başladı?"></div>
+      <div class="opq-row"><span class="opq-lbl">P</span><span class="opq-title">Provoke/Palliate — Artıran/Azaltan</span><input class="hasta-input" id="opP" placeholder="Ne artırıyor, ne azaltıyor?"></div>
+      <div class="opq-row"><span class="opq-lbl">Q</span><span class="opq-title">Quality — Kalite</span><input class="hasta-input" id="opQ" placeholder="Nasıl bir ağrı? (baskı, bıçak, yanma...)"></div>
+      <div class="opq-row"><span class="opq-lbl">R</span><span class="opq-title">Radiation — Yayılım</span><input class="hasta-input" id="opR" placeholder="Yayılıyor mu? Nereye?"></div>
+      <div class="opq-row"><span class="opq-lbl">S</span><span class="opq-title">Severity — Şiddet (0-10)</span>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:4px;">
+          <input type="range" id="opS" min="0" max="10" value="5" oninput="document.getElementById('opSVal').textContent=this.value" style="flex:1;">
+          <span id="opSVal" style="font-size:0.8rem;font-weight:700;color:#ef4444;min-width:20px;">5</span>
+        </div>
+      </div>
+      <div class="opq-row"><span class="opq-lbl">T</span><span class="opq-title">Time — Süre</span><input class="hasta-input" id="opT" placeholder="Ne kadar süredir? (örn: 20 dk)"></div>
+      <button onclick="generateOpqReport()" class="hasta-rapor-btn">📋 OPQRST Özeti</button>
+    </div>
+  </div>
+</div>
+
+<!-- SESLİ UYARI -->
+<div class="sec" id="secSesli"><i class="fas fa-volume-high"></i> <span data-tr="SESLİ UYARI & TİMER SİSTEMİ" data-en="AUDIO ALERTS & TIMER">SESLİ UYARI & TİMER SİSTEMİ</span></div>
+<div id="sesliSection">
+  <div class="sesli-card">
+    <div class="sesli-title">🔊 Acil Uyarılar</div>
+    <div class="sesli-grid">
+      <button class="sesli-btn sesli-red" onclick="playAlert('arrest')">💔 ARREST</button>
+      <button class="sesli-btn sesli-orange" onclick="playAlert('adrenalin')">💉 ADRENALİN</button>
+      <button class="sesli-btn sesli-yellow" onclick="playAlert('ritim')">🔀 RİTİM DEĞ.</button>
+      <button class="sesli-btn sesli-blue" onclick="playAlert('nabiz')">📡 NABIZ KON.</button>
+      <button class="sesli-btn sesli-green" onclick="playAlert('rosc')">💚 ROSC!</button>
+      <button class="sesli-btn sesli-purple" onclick="playAlert('defib')">⚡ ŞOK VER</button>
+    </div>
+    <div class="sesli-title" style="margin-top:10px;">⏱️ Aralıklı Uyarı Timerları</div>
+    <div id="sesliTimerList">
+      <div class="stimer-row">
+        <div class="stimer-info"><div class="stimer-name">💊 Adrenalin (3 dk)</div><div class="stimer-desc">Her 3-5 dk'da bir hatırlatma</div></div>
+        <div class="stimer-ctrl">
+          <div class="stimer-display" id="stimerAdr">03:00</div>
+          <button class="stimer-btn-s" onclick="toggleSTimer('adr',180)">▶</button>
+        </div>
+      </div>
+      <div class="stimer-row">
+        <div class="stimer-info"><div class="stimer-name">🔄 CPR Döngü (2 dk)</div><div class="stimer-desc">Ritim kontrolü zamanı</div></div>
+        <div class="stimer-ctrl">
+          <div class="stimer-display" id="stimerCpr">02:00</div>
+          <button class="stimer-btn-s" onclick="toggleSTimer('cpr',120)">▶</button>
+        </div>
+      </div>
+      <div class="stimer-row">
+        <div class="stimer-info"><div class="stimer-name">🌡️ TTM Sıcaklık (30 dk)</div><div class="stimer-desc">Post-arrest sıcaklık kontrolü</div></div>
+        <div class="stimer-ctrl">
+          <div class="stimer-display" id="stimerTtm">30:00</div>
+          <button class="stimer-btn-s" onclick="toggleSTimer('ttm',1800)">▶</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
   <div class="bottom-nav">
-    <div class="nav-item active-saha" onclick="navSaha('aciller',this)"><i class="fas fa-truck-medical"></i><span>Aciller</span></div>
-    <div class="nav-item" onclick="navSaha('ritim',this)"><i class="fas fa-heart"></i><span>Ritimler</span></div>
-    <div class="nav-item" onclick="navSaha('doz',this)"><i class="fas fa-syringe"></i><span>Dozlar</span></div>
-    <div class="nav-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Çıkış</span></div>
+    <div class="nav-item active-saha" onclick="navSaha('aciller',this)"><i class="fas fa-truck-medical"></i><span data-tr="Aciller" data-en="Emergencies">Aciller</span></div>
+    <div class="nav-item" onclick="navSaha('ritim',this)"><i class="fas fa-heart"></i><span data-tr="Ritim" data-en="Rhythm">Ritim</span></div>
+    <div class="nav-item" onclick="navSaha('hasta',this)"><i class="fas fa-stethoscope"></i><span data-tr="Hasta" data-en="Patient">Hasta</span></div>
+    <div class="nav-item" onclick="navSaha('sesli',this)"><i class="fas fa-bell"></i><span data-tr="Uyarı" data-en="Alert">Uyarı</span></div>
+    <div class="nav-item" onclick="navSaha('quiz',this)"><i class="fas fa-graduation-cap"></i><span data-tr="Quiz" data-en="Quiz">Quiz</span></div>
   </div>
 </div>
 
 <!-- ============ MODAL ============ -->
+
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
   <div class="modal-sheet fade-in">
     <div class="modal-handle"></div>
@@ -738,17 +1177,18 @@ const ecgRhythms = [
   },
   {
     id:'svt', name:'📈 SUPRAVENTRİKÜLER TAŞİKARDİ (SVT)', label:'💊 Adenozin', labelClass:'lbl-meds',
-    color:'#eab308', hr:180,
+    color:'#eab308', hr:155,
     desc:'Dar QRS, düzenli, 150-250/dk. P dalgası görünmez. Vagal → Adenozin 6mg→12mg',
     algo:'svt',
     beat: [
-      [0,0],[0.05,0],
-      // Dar hızlı QRS (P dalgası gizli)
-      [0.07,-0.05],[0.10,0.9],[0.13,-0.08],[0.16,0],
-      // T dalgası
-      [0.20,0.1],[0.28,0.18],[0.35,0.08],[0.42,0],
+      [0,0],[0.06,0],
+      // Dar QRS — düzenli tek düze hareket
+      [0.09,-0.04],[0.13,0.88],[0.17,-0.09],[0.21,0],
+      // T dalgası — belirgin, düzenli
+      [0.26,0.08],[0.34,0.17],[0.42,0.08],[0.50,0],
       [1.0,0]
-    ]
+    ],
+    speed: 0.9
   },
   {
     id:'af', name:'🔀 ATRİYAL FİBRİLASYON (AF)', label:'⚠️ Hız Kont.', labelClass:'lbl-unstable',
@@ -789,7 +1229,7 @@ class ECGRenderer {
     this.offset = 0; // px kaydırma
     this.buffer = null; // pre-rendered beat buffer
     this.animId = null;
-    this.speed = 1.5; // px/frame — gerçekçi yavaş hız
+    this.speed = rhythm.speed !== undefined ? rhythm.speed : 1.5; // px/frame — ritme özgü hız
     this.init();
   }
 
@@ -1090,6 +1530,9 @@ function initKKM(){
   document.getElementById('kkmStations').innerHTML=stations.map(s=>
     `<div class="station-item"><div><div class="station-name">🏥 ${s.name}</div><div class="station-addr">${s.adres}</div></div><button class="nav-btn" onclick="navTo(${s.lat},${s.lng})">🗺️ Git</button></div>`
   ).join('');
+  initHarita();
+  renderVakaStats();
+  renderVakaList();
 }
 function dispatch(n){alert(`🚑 ${n} ekibine çağrı gönderildi! KKM takip aktif.`);}
 function navTo(lat,lng){window.open(`https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=driving`,'_blank');}
@@ -1112,7 +1555,8 @@ function navKKM(tab,el){
   const c=document.getElementById('kkmContainer');
   if(tab==='cagri') c.scrollTop=0;
   else if(tab==='vatandas') document.querySelector('.citizen-card').scrollIntoView({behavior:'smooth'});
-  else if(tab==='protokol') document.querySelector('.proto-card').scrollIntoView({behavior:'smooth'});
+  else if(tab==='harita') document.getElementById('secHarita').scrollIntoView({behavior:'smooth'});
+  else if(tab==='vaka') document.getElementById('secVaka').scrollIntoView({behavior:'smooth'});
   else if(tab==='ekip') document.getElementById('kkmTeams').scrollIntoView({behavior:'smooth'});
 }
 function navSaha(tab,el){
@@ -1122,6 +1566,9 @@ function navSaha(tab,el){
   if(tab==='aciller') c.scrollTop=0;
   else if(tab==='ritim') document.getElementById('rhythmSection').scrollIntoView({behavior:'smooth'});
   else if(tab==='doz') document.getElementById('doseList').scrollIntoView({behavior:'smooth'});
+  else if(tab==='quiz') document.getElementById('secQuiz').scrollIntoView({behavior:'smooth'});
+  else if(tab==='hasta') document.getElementById('secHasta').scrollIntoView({behavior:'smooth'});
+  else if(tab==='sesli') document.getElementById('secSesli').scrollIntoView({behavior:'smooth'});
 }
 
 // ======= SEARCH =======
@@ -1944,13 +2391,602 @@ function doLogin(){
   }
 }
 
-// Window resize → ECG yeniden init
+
+// ======= HARİTA (OFFLİNE SVG) =======
+// İstasyonları lat/lng → SVG koordinat dönüştür
+// Kırklareli bbox: lat 41.30-41.95, lng 26.85-28.15
+const mapBounds = {latMin:41.30,latMax:41.96,lngMin:26.82,lngMax:28.20};
+const svgW=340, svgH=280;
+function latLngToSvg(lat,lng){
+  const x = ((lng - mapBounds.lngMin)/(mapBounds.lngMax-mapBounds.lngMin)) * (svgW-40) + 20;
+  const y = ((mapBounds.latMax - lat)/(mapBounds.latMax-mapBounds.latMin)) * (svgH-40) + 15;
+  return {x:Math.round(x), y:Math.round(y)};
+}
+
+const stationStatuses = ['hazir','hazir','hazir','hazir','yolda','hazir','hazir','mesgul','hazir','hazir','hazir','hazir','hazir','hazir','hazir'];
+const statusColors = {hazir:'#22c55e', yolda:'#eab308', mesgul:'#ef4444'};
+
+function initHarita(){
+  const svgG = document.getElementById('svgStations');
+  if(!svgG) return;
+  svgG.innerHTML='';
+  stations.forEach((s,i) => {
+    const {x,y} = latLngToSvg(s.lat, s.lng);
+    const color = statusColors[stationStatuses[i]] || '#22c55e';
+    const shortName = s.name.replace(/\d+ Nolu ASHİ/,'').trim().substring(0,6);
+    svgG.innerHTML += `
+      <g onclick="svgStationClick(${i})" style="cursor:pointer;">
+        <circle cx="${x}" cy="${y}" r="7" fill="${color}" opacity="0.25"/>
+        <circle cx="${x}" cy="${y}" r="4" fill="${color}" filter="url(#glow)"/>
+        <circle cx="${x}" cy="${y}" r="4" fill="${color}" opacity="0.6">
+          <animate attributeName="r" values="4;7;4" dur="2s" repeatCount="indefinite" begin="${i*0.3}s"/>
+          <animate attributeName="opacity" values="0.6;0.1;0.6" dur="2s" repeatCount="indefinite" begin="${i*0.3}s"/>
+        </circle>
+        <text x="${x}" y="${y+14}" text-anchor="middle" fill="rgba(241,245,249,0.6)" font-size="5.5">${shortName}</text>
+      </g>`;
+  });
+
+  // Liste
+  const list = document.getElementById('haritaList');
+  if(list){
+    list.innerHTML = stations.map((s,i) => {
+      const color = statusColors[stationStatuses[i]] || '#22c55e';
+      const statusTr = {hazir:'Hazır', yolda:'Yolda', mesgul:'Meşgul'}[stationStatuses[i]];
+      return `<div class="h-station-row">
+        <div class="h-dot" style="background:${color};box-shadow:0 0 6px ${color};"></div>
+        <div style="flex:1;"><div class="h-name">${s.name}</div><div class="h-adres">${s.adres} · ${statusTr}</div></div>
+        <button class="h-nav-btn" onclick="navTo(${s.lat},${s.lng})">🗺️ Git</button>
+      </div>`;
+    }).join('');
+  }
+}
+
+function svgStationClick(i){
+  const s = stations[i];
+  const statusTr = {hazir:'Hazır', yolda:'Yolda', mesgul:'Meşgul'}[stationStatuses[i]];
+  openModal(`🏥 ${s.name}`, `
+    <div class="m-box info"><strong>📍 Adres:</strong> ${s.adres}</div>
+    <div class="m-box info"><strong>📡 Durum:</strong> ${statusTr}</div>
+    <div class="m-box info"><strong>🌐 Koordinat:</strong> ${s.lat.toFixed(4)}, ${s.lng.toFixed(4)}</div>
+    <button onclick="navTo(${s.lat},${s.lng});closeModal();" style="background:var(--blue);border:none;padding:10px;width:100%;border-radius:20px;color:white;font-weight:700;cursor:pointer;font-size:0.7rem;margin-top:8px;">🗺️ Google Maps'te Aç</button>
+    <button onclick="dispatch('${s.name}');closeModal();" style="background:var(--green);border:none;padding:10px;width:100%;border-radius:20px;color:white;font-weight:700;cursor:pointer;font-size:0.7rem;margin-top:6px;">📞 Çağrı Gönder</button>
+  `);
+}
+
+// ======= VAKA KAYIT (localStorage — OFFLİNE) =======
+function getVakalar(){ try{return JSON.parse(localStorage.getItem('kkl112_vakalar')||'[]');}catch{return[];} }
+function saveVakalar(arr){ try{localStorage.setItem('kkl112_vakalar',JSON.stringify(arr));}catch{} }
+
+function vakaKaydet(){
+  const tip = document.getElementById('vTip').value;
+  const sonuc = document.getElementById('vSonuc').value;
+  const ekip = document.getElementById('vEkip').value.trim();
+  const yas = document.getElementById('vYas').value;
+  const not = document.getElementById('vNot').value.trim();
+  if(!tip){alert('Vaka tipi seçin!');return;}
+  const vakalar = getVakalar();
+  const yeni = {
+    id: Date.now(),
+    tip, sonuc, ekip, yas: yas||'?',
+    not, zaman: new Date().toLocaleString('tr-TR',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'})
+  };
+  vakalar.unshift(yeni);
+  saveVakalar(vakalar);
+  document.getElementById('vTip').value='';
+  document.getElementById('vSonuc').value='';
+  document.getElementById('vEkip').value='';
+  document.getElementById('vYas').value='';
+  document.getElementById('vNot').value='';
+  renderVakaStats();
+  renderVakaList();
+}
+
+function vakaSil(id){
+  if(!confirm('Bu vakayı silmek istiyor musun?')) return;
+  saveVakalar(getVakalar().filter(v=>v.id!==id));
+  renderVakaStats();
+  renderVakaList();
+}
+
+function renderVakaStats(){
+  const vakalar = getVakalar();
+  const today = new Date().toLocaleDateString('tr-TR');
+  const bugun = vakalar.filter(v=>v.zaman.includes(new Date().toLocaleDateString('tr-TR',{day:'2-digit',month:'2-digit'}))).length;
+  const arrests = vakalar.filter(v=>v.tip==='Kardiyak Arrest').length;
+  const rosc = vakalar.filter(v=>v.sonuc==='ROSC Sağlandı').length;
+  const el = document.getElementById('vakaStats');
+  if(!el) return;
+  el.innerHTML = `
+    <div class="vaka-stat"><div class="vaka-stat-num" style="color:#60a5fa;">${vakalar.length}</div><div class="vaka-stat-lbl">Toplam Vaka</div></div>
+    <div class="vaka-stat"><div class="vaka-stat-num" style="color:#4ade80;">${bugun}</div><div class="vaka-stat-lbl">Bugün</div></div>
+    <div class="vaka-stat"><div class="vaka-stat-num" style="color:#ef4444;">${arrests}</div><div class="vaka-stat-lbl">Arrest</div></div>
+  `;
+}
+
+function renderVakaList(){
+  const vakalar = getVakalar().slice(0,20);
+  const el = document.getElementById('vakaListesi');
+  if(!el) return;
+  if(vakalar.length===0){el.innerHTML='<div style="text-align:center;color:var(--muted);font-size:0.6rem;padding:16px;">Henüz vaka kaydı yok.</div>';return;}
+  const sonucColors = {'ROSC Sağlandı':'#22c55e','Exitus':'#ef4444','Hastaneye Nakil':'#60a5fa','Sahada Tedavi':'#a78bfa','Ret/İmtina':'#eab308'};
+  el.innerHTML = vakalar.map(v=>`
+    <div class="vaka-item" style="border-color:${sonucColors[v.sonuc]||'var(--blue)'}">
+      <div class="vaka-item-head">
+        <span class="vaka-tip">${v.tip||'?'}</span>
+        <span class="vaka-time">${v.zaman}</span>
+        <button class="vaka-del" onclick="vakaSil(${v.id})">🗑</button>
+      </div>
+      <div class="vaka-detail">${v.ekip?'🚑 '+v.ekip+' · ':''} Yaş: ${v.yas} · ${v.sonuc||'—'}${v.not?' · '+v.not:''}</div>
+    </div>`).join('');
+}
+
+// ======= HASTA DEĞERLENDİRME =======
+function setHastaTab(tab, btn){
+  document.querySelectorAll('.hasta-tab').forEach(b=>b.classList.remove('active-tab'));
+  btn.classList.add('active-tab');
+  document.querySelectorAll('.hasta-tab-content').forEach(c=>c.style.display='none');
+  document.getElementById('htab-'+tab).style.display='block';
+}
+
+function calcGKS(){
+  const E = parseInt(document.querySelector('input[name="gE"]:checked')?.value||0);
+  const V = parseInt(document.querySelector('input[name="gV"]:checked')?.value||0);
+  const M = parseInt(document.querySelector('input[name="gM"]:checked')?.value||0);
+  const total = E+V+M;
+  if(!E&&!V&&!M){document.getElementById('gksResult').textContent='GKS: — / 15';document.getElementById('gksInterpret').textContent='';return;}
+  document.getElementById('gksResult').textContent=`GKS: ${total} / 15  (E${E}+V${V}+M${M})`;
+  const interp = document.getElementById('gksInterpret');
+  if(total>=13){interp.textContent='✅ Hafif kafa travması (13-15)';interp.style.background='rgba(22,163,74,0.1)';interp.style.color='#4ade80';}
+  else if(total>=9){interp.textContent='⚠️ Orta kafa travması (9-12)';interp.style.background='rgba(234,179,8,0.1)';interp.style.color='#fde68a';}
+  else{interp.textContent='🔴 Ağır kafa travması (≤8) — Entübasyon düşün!';interp.style.background='rgba(220,38,38,0.1)';interp.style.color='#fca5a5';}
+}
+
+function evalVitals(){
+  const kh=parseInt(document.getElementById('vKH').value)||0;
+  const ss=parseInt(document.getElementById('vSS').value)||0;
+  const spo2=parseInt(document.getElementById('vSpO2').value)||0;
+  const ates=parseFloat(document.getElementById('vAtes').value)||0;
+  const ks=parseInt(document.getElementById('vKS').value)||0;
+  const alerts=[];
+  if(kh>0){
+    if(kh<50) alerts.push({cls:'crit',msg:`❤️ Nabız ${kh}/dk → Ağır bradikardi! Atropin/Pacing düşün`});
+    else if(kh<60) alerts.push({cls:'warn',msg:`❤️ Nabız ${kh}/dk → Bradikardi`});
+    else if(kh>150) alerts.push({cls:'crit',msg:`❤️ Nabız ${kh}/dk → Taşikardi! Ritim değerlendirme`});
+    else if(kh>100) alerts.push({cls:'warn',msg:`❤️ Nabız ${kh}/dk → Taşikardi`});
+    else alerts.push({cls:'ok',msg:`❤️ Nabız ${kh}/dk → Normal`});
+  }
+  if(ss>0){
+    if(ss<8) alerts.push({cls:'crit',msg:`💨 Solunum ${ss}/dk → Ağır bradipne! Hava yolu/ventilasyon`});
+    else if(ss>30) alerts.push({cls:'crit',msg:`💨 Solunum ${ss}/dk → Ağır taşipne!`});
+    else if(ss>20) alerts.push({cls:'warn',msg:`💨 Solunum ${ss}/dk → Taşipne`});
+    else alerts.push({cls:'ok',msg:`💨 Solunum ${ss}/dk → Normal`});
+  }
+  if(spo2>0){
+    if(spo2<90) alerts.push({cls:'crit',msg:`🩸 SpO2 %${spo2} → Ağır hipoksi! O2 hemen ver`});
+    else if(spo2<94) alerts.push({cls:'warn',msg:`🩸 SpO2 %${spo2} → Hipoksi — O2 uygula`});
+    else alerts.push({cls:'ok',msg:`🩸 SpO2 %${spo2} → Normal`});
+  }
+  if(ates>0){
+    if(ates>=40) alerts.push({cls:'crit',msg:`🌡️ Ateş ${ates}°C → Hipertermi! Soğut, sepsis?`});
+    else if(ates>=38.5) alerts.push({cls:'warn',msg:`🌡️ Ateş ${ates}°C → Yüksek ateş`});
+    else if(ates<35) alerts.push({cls:'crit',msg:`🌡️ Ateş ${ates}°C → Hipotermi! Isıt`});
+    else if(ates<36) alerts.push({cls:'warn',msg:`🌡️ Ateş ${ates}°C → Subfebril`});
+    else alerts.push({cls:'ok',msg:`🌡️ Ateş ${ates}°C → Normal`});
+  }
+  if(ks>0){
+    if(ks<70) alerts.push({cls:'crit',msg:`🍬 KŞ ${ks} mg/dL → Ağır hipoglisemi! Dekstroz hemen`});
+    else if(ks<80) alerts.push({cls:'warn',msg:`🍬 KŞ ${ks} mg/dL → Hipoglisemi`});
+    else if(ks>400) alerts.push({cls:'crit',msg:`🍬 KŞ ${ks} mg/dL → Ağır hiperglisemi`});
+    else if(ks>200) alerts.push({cls:'warn',msg:`🍬 KŞ ${ks} mg/dL → Hiperglisemi`});
+    else alerts.push({cls:'ok',msg:`🍬 KŞ ${ks} mg/dL → Normal`});
+  }
+  document.getElementById('vitalAlerts').innerHTML = alerts.map(a=>`<div class="vital-alert ${a.cls}">${a.msg}</div>`).join('');
+}
+
+function generateAbcdeReport(){
+  const A=document.querySelector('input[name="hA"]:checked')?.value||'değerlendirilmedi';
+  const B=document.querySelector('input[name="hB"]:checked')?.value||'değerlendirilmedi';
+  const C=document.querySelector('input[name="hC"]:checked')?.value||'değerlendirilmedi';
+  const D=document.querySelector('input[name="hD"]:checked')?.value||'değerlendirilmedi';
+  const E=document.getElementById('hE')?.value||'—';
+  openModal('📋 ABCDE DEĞERLENDİRME RAPORU',`
+    <div class="m-box info"><strong>A — Hava Yolu:</strong> ${A.charAt(0).toUpperCase()+A.slice(1)}</div>
+    <div class="m-box info"><strong>B — Solunum:</strong> ${B.charAt(0).toUpperCase()+B.slice(1)}</div>
+    <div class="m-box info"><strong>C — Dolaşım:</strong> ${C.charAt(0).toUpperCase()+C.slice(1)}</div>
+    <div class="m-box info"><strong>D — Bilinç (AVPU):</strong> ${D}</div>
+    <div class="m-box info"><strong>E — Maruziyet:</strong> ${E||'—'}</div>
+    <div class="m-box ${C==='nabızsız'||B==='yok'?'warning':'success'}">
+      ${C==='nabızsız'||B==='yok'?'🔴 KRİTİK HASTA — Arrest protokolü başlat!':D==='U'||D==='P'?'🟠 Ağır hasta — Hızlı müdahale gerekli':'✅ Değerlendirme tamamlandı'}
+    </div>
+    <div style="font-size:0.55rem;color:var(--muted);margin-top:8px;">⏰ ${new Date().toLocaleTimeString('tr-TR')}</div>
+  `);
+}
+
+function generateOpqReport(){
+  const vals = {
+    O:document.getElementById('opO')?.value||'—',
+    P:document.getElementById('opP')?.value||'—',
+    Q:document.getElementById('opQ')?.value||'—',
+    R:document.getElementById('opR')?.value||'—',
+    S:document.getElementById('opS')?.value||'5',
+    T:document.getElementById('opT')?.value||'—'
+  };
+  openModal('📋 OPQRST ŞİKÂYET ÖZETİ',`
+    <div class="m-box info"><strong>O — Başlangıç:</strong> ${vals.O}</div>
+    <div class="m-box info"><strong>P — Artıran/Azaltan:</strong> ${vals.P}</div>
+    <div class="m-box info"><strong>Q — Ağrı Kalitesi:</strong> ${vals.Q}</div>
+    <div class="m-box info"><strong>R — Yayılım:</strong> ${vals.R}</div>
+    <div class="m-box ${parseInt(vals.S)>=8?'warning':parseInt(vals.S)>=5?'diagnosis':'success'}"><strong>S — Şiddet:</strong> ${vals.S}/10 ${parseInt(vals.S)>=8?'🔴 Ağır':parseInt(vals.S)>=5?'🟡 Orta':'🟢 Hafif'}</div>
+    <div class="m-box info"><strong>T — Süre:</strong> ${vals.T}</div>
+  `);
+}
+
+// ======= SESLİ UYARI SİSTEMİ (Web Audio API) =======
+let audioCtx = null;
+function getAudioCtx(){
+  if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==='suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+function playTone(freq, duration, type='sine', gain=0.4){
+  const ctx = getAudioCtx();
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.connect(g); g.connect(ctx.destination);
+  osc.type=type; osc.frequency.setValueAtTime(freq, ctx.currentTime);
+  g.gain.setValueAtTime(gain, ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+duration);
+  osc.start(ctx.currentTime); osc.stop(ctx.currentTime+duration);
+}
+
+function playAlert(type){
+  const ctx = getAudioCtx();
+  if(type==='arrest'){
+    // Yüksek acil bip bip
+    [0,0.3,0.6,0.9].forEach(t=>{ playTone(880,0.2,'square',0.5); setTimeout(()=>playTone(1100,0.15,'square',0.45),t*1000); });
+    playTone(880,0.2,'square',0.5);
+    setTimeout(()=>playTone(1100,0.15,'square',0.45),300);
+    setTimeout(()=>playTone(880,0.2,'square',0.5),600);
+    setTimeout(()=>playTone(1100,0.15,'square',0.45),900);
+  } else if(type==='adrenalin'){
+    // 3 çift bip
+    [0,0.4,0.8].forEach(t=>{
+      setTimeout(()=>{playTone(660,0.12,'sine',0.5);setTimeout(()=>playTone(880,0.12,'sine',0.45),150);},t*1000);
+    });
+  } else if(type==='ritim'){
+    // Süzülen uyarı
+    playTone(550,0.08,'sine',0.5);setTimeout(()=>playTone(660,0.08,'sine',0.5),100);
+    setTimeout(()=>playTone(770,0.08,'sine',0.5),200);setTimeout(()=>playTone(880,0.3,'sine',0.4),300);
+  } else if(type==='nabiz'){
+    // Nabız sesi simülasyonu
+    [0,0.6].forEach(t=>{setTimeout(()=>{playTone(80,0.06,'sine',0.6);setTimeout(()=>playTone(60,0.05,'sine',0.4),80);},t*1000);});
+  } else if(type==='rosc'){
+    // Pozitif melodik
+    [440,554,659,880].forEach((f,i)=>setTimeout(()=>playTone(f,0.25,'sine',0.4),i*200));
+  } else if(type==='defib'){
+    // Şok sesi — güçlü düşük
+    playTone(200,0.05,'sawtooth',0.8);setTimeout(()=>playTone(150,0.1,'sawtooth',0.7),50);
+    setTimeout(()=>playTone(100,0.3,'sawtooth',0.5),150);
+  }
+  // Haptic feedback deneme (mobil)
+  if(navigator.vibrate){ const patterns={arrest:[200,100,200,100,200],adrenalin:[150,100,150],ritim:[100,50,100,50,100],rosc:[50,50,50,50,200],defib:[300],nabiz:[80,80,80]}; navigator.vibrate(patterns[type]||[100]); }
+}
+
+// ======= ARALIKH TİMER SİSTEMİ =======
+const sTimers={};
+function toggleSTimer(key, seconds){
+  const dispId = 'stimerAdr'; // mapped below
+  const displays = {adr:'stimerAdr', cpr:'stimerCpr', ttm:'stimerTtm'};
+  const dispEl = document.getElementById(displays[key]);
+  const btn = dispEl?.parentElement?.querySelector('.stimer-btn-s');
+  if(sTimers[key]){
+    clearInterval(sTimers[key].int);
+    delete sTimers[key];
+    if(btn) btn.textContent='▶';
+    return;
+  }
+  let remaining = sTimers[key+'_rem'] || seconds;
+  sTimers[key] = { int: setInterval(()=>{
+    remaining--;
+    sTimers[key+'_rem'] = remaining;
+    const m=Math.floor(remaining/60), s=remaining%60;
+    if(dispEl) dispEl.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if(remaining<=0){
+      // Alarm çal
+      const alarmTypes={adr:'adrenalin',cpr:'ritim',ttm:'nabiz'};
+      playAlert(alarmTypes[key]||'ritim');
+      remaining = seconds;
+      sTimers[key+'_rem'] = seconds;
+    }
+  }, 1000)};
+  if(btn) btn.textContent='⏸';
+}
+
+// ======= WINDOW RESIZE =======
 window.addEventListener('resize', () => {
   if(document.getElementById('appSaha').style.display === 'flex') {
     stopAllECG();
     setTimeout(initECG, 200);
   }
 });
+
+// ======= DİL DESTEĞİ =======
+let currentLang = 'tr';
+function toggleLang(){
+  currentLang = currentLang === 'tr' ? 'en' : 'tr';
+  const btn = document.getElementById('langBtnSaha');
+  if(btn) btn.textContent = currentLang === 'tr' ? 'EN' : 'TR';
+  document.querySelectorAll('[data-tr]').forEach(el => {
+    el.textContent = currentLang === 'tr' ? el.getAttribute('data-tr') : (el.getAttribute('data-en') || el.getAttribute('data-tr'));
+  });
+  const si = document.getElementById('sahaSearch');
+  if(si) si.placeholder = currentLang === 'tr' ? 'Ara: arrest, inme, travma, anafilaksi, doz...' : 'Search: arrest, stroke, trauma, anaphylaxis...';
+}
+
+// ======= GELİŞİM MODAL =======
+const gelisimData = {
+  bls:{
+    title:'💓 Temel Yaşam Desteği (TYD/BLS)',
+    html:`
+      <div class="m-box info"><strong>🎯 Hedef:</strong> Her sağlık personeli BLS sertifikası almalı. ERC 2021 standardı 2 yılda bir yenileme gerektirir.</div>
+      <div class="m-section"><div class="m-section-title">📚 Öğrenme Yolları</div>
+      <ul class="step-list">
+        <li>ERC BLS Kursu — 8 saatlik pratik ağırlıklı eğitim (www.erc.edu)</li>
+        <li>AHA Heartsaver CPR/AED — online + yüz yüze (ekqr, manikin ile)</li>
+        <li>Manneken simülasyonu: Geri bildirimli cihazlarla kalite metrikleri</li>
+        <li>Video izleme: Resuscitation dergisi ERC kanalı</li>
+      </ul></div>
+      <div class="m-section"><div class="m-section-title">⭐ Pratik İpuçları</div>
+      <ul class="step-list">
+        <li>Kompresyon derinliği: 5–6 cm — ölçüm cihazıyla pratik yapın</li>
+        <li>Hız: 100–120/dk — metronom uygulaması kullanın</li>
+        <li>Tam geri dönüş: Her basıdan sonra elleri kaldırmadan baskıyı sıfırlayın</li>
+        <li>Ventilasyon oranı: 30:2 — oran sapmalarını kaydedin</li>
+      </ul></div>
+      <div class="m-box success">✅ Önerilен kaynak: ERC BLS Algoritma Kartı 2021 (ücretsiz PDF: erc.edu/guidelines)</div>
+    `
+  },
+  als:{
+    title:'⚡ İleri Yaşam Desteği (İYD/ALS)',
+    html:`
+      <div class="m-box info"><strong>🎯 Hedef:</strong> Saha ekip lideri düzeyinde arrest yönetimi, ritim tanıma, ilaç uygulaması.</div>
+      <div class="m-section"><div class="m-section-title">📚 Kurs Seçenekleri</div>
+      <ul class="step-list">
+        <li>ERC ALS Kursu — 3 günlük simülasyon ağırlıklı (erc.edu)</li>
+        <li>AHA ACLS — Kapsamlı kardiyovasküler acil yönetimi</li>
+        <li>PHTLS (Prehospital Trauma Life Support) — Travma odaklı</li>
+        <li>ITLS (International Trauma Life Support) — Saha travma</li>
+      </ul></div>
+      <div class="m-section"><div class="m-section-title">🔬 Beceri Alanları</div>
+      <ul class="step-list">
+        <li>EKG ritim tanıma — 12 derivasyon okuma pratiği</li>
+        <li>İleri hava yolu: LMA, entübasyon, krikotiroidotomi</li>
+        <li>IO erişim: EZ-IO cihazı ile hızlı kemik içi erişim</li>
+        <li>Elektrik tedavisi: Defibrilasyon, kardiyoversiyon, pacing</li>
+        <li>Arrest ilaçları: Doz, zamanlama, endikasyon</li>
+      </ul></div>
+      <div class="m-box warning">⚠️ ALS sertifikası 4 yılda bir yenilenmeli (ERC standardı). Simülasyon kurslarını takip edin!</div>
+    `
+  },
+  erc2021:{
+    title:'📋 ERC 2021 Kılavuz Yenilikleri',
+    html:`
+      <div class="m-box diagnosis"><strong>Büyük değişiklikler:</strong> ERC 2021 ile birçok kritik güncelleme yapıldı.</div>
+      <div class="m-section"><div class="m-section-title">💓 KPR Değişiklikleri</div>
+      <ul class="step-list">
+        <li>Resüsitasyon sırasında rutin O2 titrasyon: SpO2 %94–98 hedef</li>
+        <li>KPR'de rutin NGT/OGT artık önerilmiyor</li>
+        <li>Kapnografi: ROSC sonrası sürekli izlem zorunlu</li>
+        <li>Mekanik CPR cihazları: Taşıma sırasında tercih edilebilir</li>
+      </ul></div>
+      <div class="m-section"><div class="m-section-title">🌡️ Post-Resüsitasyon (ROSC)</div>
+      <ul class="step-list">
+        <li>Hedefli Sıcaklık Yönetimi (TTM): 32–36°C arası (strict 33°C önerilmiyor)</li>
+        <li>Nörolojik prognostikasyon: En erken 72 saat</li>
+        <li>STEMI + arrest: Acil koroner anjiografi</li>
+      </ul></div>
+      <div class="m-section"><div class="m-section-title">👼 Pediatri (NLS)</div>
+      <ul class="step-list">
+        <li>Yenidoğan resüsitasyon: Oda havası ile başla (%21 O2)</li>
+        <li>Adrenalin dozu ve zamanlama aynı kaldı</li>
+      </ul></div>
+      <div class="m-box info">📖 Tam kılavuz: resuscitation-guidelines.articleintelligence.com (ücretsiz erişim)</div>
+    `
+  },
+  teamwork:{
+    title:'🤝 Ekip Çalışması & CRM',
+    html:`
+      <div class="m-box info"><strong>CRM (Crisis Resource Management):</strong> Havacılık endüstrisinden tıp/acile uyarlanmış ekip yönetim modeli.</div>
+      <div class="m-section"><div class="m-section-title">🎯 Temel Prensipler</div>
+      <ul class="step-list">
+        <li><strong>Liderliği aç, tanımla:</strong> "Ben ekip lideri alıyorum" — her arrest başında</li>
+        <li><strong>Kapalı döngü iletişim:</strong> "Adrenalin 1mg IV" → "Anlaşıldı, adrenalin 1mg IV verildi"</li>
+        <li><strong>Yük dağılımı:</strong> Görev atamasını net yap, herkese rol ver</li>
+        <li><strong>Durumu sesli paylaş:</strong> 2 dk sonunda "ritim değerlendirmesi" sesli söyle</li>
+        <li><strong>Çapraz kontrol:</strong> Kritik kararları ekiple teyit et</li>
+      </ul></div>
+      <div class="m-section"><div class="m-section-title">📢 İletişim Hataları (Kaçın)</div>
+      <ul class="step-list">
+        <li>Varsayım: "Zaten biliyor" — hayır, söyle!</li>
+        <li>Otorite gradyanı: Kıdemli yanlış yapıyorsa, sesini çıkar</li>
+        <li>Durumsal farkındalık kaybı: Tek işe odaklanıp büyük resmi kaçırma</li>
+      </ul></div>
+      <div class="m-box success">✅ Simülasyon sonrası 5 dk'lık debriefing, öğrenme kalitesini %40 artırır (ACEP verisi)</div>
+    `
+  },
+  stres:{
+    title:'🧠 Stres Yönetimi & Tükenmişlik',
+    html:`
+      <div class="m-box warning"><strong>⚠️ 112 personelinde tükenmişlik oranı genel sağlık personelinin 2 katı!</strong> (EJE 2022 verisi)</div>
+      <div class="m-section"><div class="m-section-title">🔵 CISM (Kritik Olay Stres Yönetimi)</div>
+      <ul class="step-list">
+        <li>Defusing: Zor olay sonrası 8 saat içinde 30-45 dk'lık ekip görüşmesi</li>
+        <li>Debriefing: 24-72 saat sonra yapılandırılmış değerlendirme</li>
+        <li>Peer support: Eğitimli meslektaş destek ağı kurun</li>
+      </ul></div>
+      <div class="m-section"><div class="m-section-title">💪 Kişisel Başa Çıkma</div>
+      <ul class="step-list">
+        <li>Fiziksel aktivite: Haftada 150 dk orta yoğunluklu egzersiz (DSÖ standardı)</li>
+        <li>Uyku hijyeni: 7–9 saat, vardiya sonrası karanlık oda, telefon kapalı</li>
+        <li>Mindfulness: Günlük 5-10 dk nefes egzersizi (4-7-8 tekniği)</li>
+        <li>Sosyal destek: Olayları güvenilir kişiyle paylaş — içinde tutma!</li>
+      </ul></div>
+      <div class="m-section"><div class="m-section-title">🚨 Başvurulabilecek Kaynaklar</div>
+      <ul class="step-list">
+        <li>Türkiye'de 182 — Psikolojik destek hattı</li>
+        <li>İşyeri sağlık birimi: Yıllık psikolojik değerlendirme hakkın var</li>
+        <li>ERC CISM modülü: erc.edu/courses</li>
+      </ul></div>
+      <div class="m-box info">💡 Yardım istemek zayıflık değil, mesleki sorumluluktur. En iyi hasta bakımı, sağlıklı sağlık personelinden gelir.</div>
+    `
+  }
+};
+
+function showGelisim(key){
+  const d = gelisimData[key];
+  if(d) openModal(d.title, d.html);
+}
+
+// ======= QUIZ SİSTEMİ =======
+const allQuestions = [
+  // ARREST
+  {cat:'arrest', q:'VF arrest durumunda ilk yapılacak işlem nedir?', opts:['Adrenalin 1mg IV ver','Hemen defibrilasyon uygula (360J)','Airway açıklığını sağla','Nabız kontrol et'], ans:1, exp:'VF şoklanabilir ritimdir. Ritmi tanır tanımaz defibrilasyon uygulanmalı, sonra CPR devam eder.'},
+  {cat:'arrest', q:'Asistoli arrest tedavisinde hangi ilaç ilk verilir?', opts:['Amiodaron 300mg IV','Atropin 1mg IV','Adrenalin 1mg IV/IO','Adenozin 6mg IV'], ans:2, exp:'Asistoli non-şoklanabilir ritimdir. Yüksek kaliteli CPR + Adrenalin 1mg IV/IO her 3-5 dk. ŞOK VERİLMEZ!'},
+  {cat:'arrest', q:'ERC 2021\'e göre CPR kalitesinde kompresyon derinliği hedefi nedir?', opts:['3-4 cm','5-6 cm','6-7 cm','4-5 cm'], ans:1, exp:'ERC 2021: 5–6 cm derinlik, 100–120/dk hız, tam geri dönüş. 6 cm\'den fazlası rib fraktürü riski arttırır.'},
+  {cat:'arrest', q:'PEA (nabızsız elektriksel aktivite) tedavisinde öncelik nedir?', opts:['Hemen defibrilasyon','5H 5T nedenlerini ara + CPR + Adrenalin','Sadece CPR devam et','Kardiyoversiyon uygula'], ans:1, exp:'PEA non-şoklanabilir. 5H: Hipoksi, Hipovolemi, Hipo/Hiperkalemi, Hipotermi, Hidrojen iyonu. 5T: Tansiyon pnömo, Tamponad, Tromboz, Toksinler, Tromboembolizm.'},
+  {cat:'arrest', q:'KPR sırasında adrenalin ne sıklıkla verilir?', opts:['Her 2 dakikada bir','Her 3-5 dakikada bir','Her 10 dakikada bir','Sadece bir kez verilir'], ans:1, exp:'ERC 2021: Şoklanabilir ritimde üçüncü şoktan sonra ilk adrenalin, sonra her 3-5 dk tekrar. Şoklanamaz ritimde mümkün olan en kısa sürede.'},
+
+  // RİTİM
+  {cat:'ritim', q:'SVT (supraventriküler taşikardi) için ilk farmakolojik tedavi nedir?', opts:['Amiodaron 300mg IV','Lidokain 100mg IV','Adenozin 6mg IV hızlı puşe','Atropin 0.5mg IV'], ans:2, exp:'SVT: Önce vagal manevralar (Valsalva). Başarısızsa Adenozin 6mg IV hızlı puşe + flush. 2. doz 12mg. Geniş damar erişiminden verilmeli!'},
+  {cat:'ritim', q:'Hangi ritim için AED/defibrilatör ile ŞOK VERİLMEZ?', opts:['VF (Ventriküler Fibrilasyon)','VT (Nabızsız Ventriküler Taşikardi)','Asistoli','Torsades de Pointes'], ans:2, exp:'Asistoli ve PEA NON-ŞOKLANABİLİR ritimlerdir. Şok vermek asistoliye iyi gelmiyor. CPR + Adrenalin!'},
+  {cat:'ritim', q:'Tam AV blok (3. derece) tedavisinde atropin neden etkisizdir?', opts:['Dozun yanlış olması','Ventriküler kaçış ritminde vagal etkisi yok','Atropin yanlış verilmiş','SA düğümünü bloke eder'], ans:1, exp:'3. derece AV blok\'ta AV iletim tamamen kesilmiş. Atropin SA düğümünü hızlandırır ama His-Purkinje seviyesindeki bloka etki etmez. Acil TCP pacing gereklidir!'},
+  {cat:'ritim', q:'Atriyal fibrilasyon ilk tedavisinde hız kontrolü için hangi hedef kalp hızı beklenir?', opts:['<60/dk','<80/dk','<100/dk','<120/dk'], ans:2, exp:'AF\'de akut hız kontrolü hedefi istirahatte <110/dk (RACE II çalışması). Stabil hastalarda <100/dk tercih edilir. Beta-bloker, kalsiyum kanal blokeri.'},
+  {cat:'ritim', q:'Torsades de Pointes için spesifik tedavi nedir?', opts:['Amiodaron 300mg IV bolus','MgSO4 2g IV bolus','Adenozin 6mg IV','Atropin 0.5mg IV'], ans:1, exp:'Torsades: Uzun QT zemininde dönen ventriküler taşikardi. IV MgSO4 2g! Kararsız → Defibrilasyon 360J. Tetikleyen ilaçları kes.'},
+
+  // İLAÇ
+  {cat:'ilac', q:'70 kg hasta için KPR\'de standart adrenalin dozu nedir?', opts:['0.5 mg IV/IO','1 mg IV/IO','2 mg IV/IO','0.1 mg/kg IV/IO'], ans:1, exp:'Erişkin KPR: Adrenalin 1mg IV/IO her 3-5 dk. Anafilakside IM: 0.5mg. Pediatri: 0.01 mg/kg IV/IO.'},
+  {cat:'ilac', q:'SVT\'de Adenozin hangi yoldan ve nasıl verilmelidir?', opts:['Yavaş IV infüzyon','Hızlı IV puşe + hemen flush','IM enjeksiyon','Subkutan enjeksiyon'], ans:1, exp:'Adenozin yarı ömrü çok kısa (<10 sn). Geniş damar erişiminden HIZLI puşe yapılmalı, hemen arkasından 20mL SF flush uygulanmalı. Aksi halde ritme ulaşmadan parçalanır.'},
+  {cat:'ilac', q:'Eklampsi tedavisinde hangi ilaç kullanılır?', opts:['Diazepam 10mg IV','Fenitoin 1g IV','Magnezyum Sülfat 4-6g IV 15-20 dk','Midazolam 5mg IM'], ans:2, exp:'Eklampsi: MgSO4 4-6g IV 15-20 dk yükleme, sonra 1-2g/saat idame. Hem nöbet önleme hem tedavi. Fenitoin eklampside MgSO4 kadar etkili değil.'},
+  {cat:'ilac', q:'Anafilakside adrenalin nereye uygulanır?', opts:['Deltoid bölgesine IM','Lateral uyluk kasına IM','IV yavaş bolus','Subkutan (SC) deri altına'], ans:1, exp:'Anafilaksi: Adrenalin 0.3-0.5mg (erişkin) LATERAL UYLUK KASINA IM (vastus lateralis). En hızlı emilim sağlar. Deltoid veya SC tercih edilmez — emilim daha yavaş!'},
+  {cat:'ilac', q:'Hipoglisemi tedavisinde IV yoldan verilecek glukoz dozu (erişkin) nedir?', opts:['Dekstroz %5 100mL IV','Dekstroz %10 150-200mL IV bolus','Dekstroz %50 50mL IV','Ringer Laktat 500mL IV'], ans:1, exp:'Hipoglisemi: Bilinci kapalı veya IV yol gerekiyorsa Dekstroz %10 150-200mL IV bolus (70 kg için). Dekstroz %50 kullanılıyorsa 25-50mL. Tiamin eksikliği varsa önce Tiamin!'},
+
+  // TRAVMA
+  {cat:'travma', q:'XABCDE travma yaklaşımında "X" neyi temsil eder?', opts:['X-ray (görüntüleme)','Exsanguination (masif dış kanama kontrolü)','Extra airway (ek hava yolu)','Extreme monitoring'], ans:1, exp:'XABCDE: X = Exsanguination — hayatı tehdit eden dış kanamayı önce durdur! Turnike, direkt bası, hemostatic ajan. Sonra A: Airway.'},
+  {cat:'travma', q:'Tansiyon pnömotoraksta acil tedavi nedir?', opts:['Göğüs tüpü hemen tak','2. kot ön aksiller hatta iğne dekompresyon','Bekleme ve SpO2 izle','Lateral dekübit pozisyon ver'], ans:1, exp:'Tansiyon pnömo: 2. interkostal aralık, midklavikular hat veya 4-5. interkostal aralık, ön aksiller hat — iğne torakostomi. Ardından göğüs tüpü!'},
+  {cat:'travma', q:'Glasgow Koma Skalası (GKS) en düşük kaç puan alabilir?', opts:['0','1','3','5'], ans:2, exp:'GKS minimum 3 puan (Göz 1 + Motor 1 + Verbal 1 = 3). Maksimum 15 puan. GKS ≤8 = ciddi kafa travması = entübasyon düşün.'},
+  {cat:'travma', q:'Crush sendromunda acil sıvı tedavisinin amacı nedir?', opts:['KB\'yi yükseltmek','Miyoglobini böbrekten temizlemek için yüksek idrar çıkışı sağlamak','Serum K+ düşürmek','Hipotansiyon tedavisi'], ans:1, exp:'Crush: Miyoglobin tübüler hasara yol açar. Agresif sıvı (1-1.5L/saat) ile idrar çıkışı >200-300mL/saat hedeflenir. Sıvıya NaHCO3 ekle (idrar pH>6.5). Kurtarma öncesi başla!'}
+];
+
+let quizCat = 'all';
+let quizPool = [];
+let quizIndex = 0;
+let quizScore = 0;
+let quizWrong = [];
+let quizAnswered = false;
+
+function setQuizCat(cat, btn){
+  quizCat = cat;
+  document.querySelectorAll('.quiz-cat-btn').forEach(b => b.classList.remove('active-cat'));
+  btn.classList.add('active-cat');
+}
+
+function startQuiz(){
+  const pool = quizCat === 'all' ? allQuestions : allQuestions.filter(q => q.cat === quizCat);
+  quizPool = [...pool].sort(() => Math.random() - 0.5).slice(0, Math.min(10, pool.length));
+  quizIndex = 0;
+  quizScore = 0;
+  quizWrong = [];
+  document.getElementById('quizStartCard').style.display = 'none';
+  document.getElementById('quizActiveArea').style.display = 'block';
+  document.getElementById('quizResultArea').style.display = 'none';
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = quizPool[quizIndex];
+  const total = quizPool.length;
+  document.getElementById('quizNum').textContent = `Soru ${quizIndex+1}/${total}`;
+  const cats = {arrest:'🫀 Arrest',ritim:'💓 Ritim',ilac:'💊 İlaç',travma:'🚑 Travma'};
+  document.getElementById('quizCatLabel').textContent = cats[q.cat] || q.cat;
+  document.getElementById('quizQuestion').textContent = q.q;
+  document.getElementById('quizProgressFill').style.width = ((quizIndex/total)*100)+'%';
+  document.getElementById('quizFeedback').style.display = 'none';
+  document.getElementById('quizNextBtn').style.display = 'none';
+  quizAnswered = false;
+
+  const opts = document.getElementById('quizOptions');
+  opts.innerHTML = q.opts.map((o,i) =>
+    `<button class="quiz-opt" onclick="answerQuiz(${i})">${String.fromCharCode(65+i)}) ${o}</button>`
+  ).join('');
+}
+
+function answerQuiz(idx){
+  if(quizAnswered) return;
+  quizAnswered = true;
+  const q = quizPool[quizIndex];
+  const btns = document.querySelectorAll('.quiz-opt');
+  btns.forEach((b,i) => {
+    b.classList.add('disabled');
+    if(i === q.ans) b.classList.add('correct');
+    else if(i === idx && idx !== q.ans) b.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('quizFeedback');
+  fb.style.display = 'block';
+  if(idx === q.ans){
+    quizScore++;
+    fb.className = 'quiz-feedback ok';
+    fb.innerHTML = `✅ <strong>Doğru!</strong> ${q.exp}`;
+  } else {
+    quizWrong.push({q:q.q, correct:q.opts[q.ans], exp:q.exp});
+    fb.className = 'quiz-feedback fail';
+    fb.innerHTML = `❌ <strong>Yanlış.</strong> Doğru cevap: <strong>${q.opts[q.ans]}</strong><br>${q.exp}`;
+  }
+  document.getElementById('quizNextBtn').style.display = 'block';
+}
+
+function nextQuestion(){
+  quizIndex++;
+  if(quizIndex >= quizPool.length){
+    showQuizResult();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showQuizResult(){
+  document.getElementById('quizActiveArea').style.display = 'none';
+  document.getElementById('quizResultArea').style.display = 'block';
+  const total = quizPool.length;
+  const pct = Math.round((quizScore/total)*100);
+  const emojis = pct>=90?'🏆':pct>=70?'✅':pct>=50?'📚':'💪';
+  const msgs = pct>=90?'Mükemmel! ERC/AHA uzmanısın!':pct>=70?'Çok iyi! Birkaç konuyu tekrar et.':pct>=50?'İyi başlangıç! Algoritmaları gözden geçir.':'Pratik yapman gerekiyor. Vazgeçme!';
+  document.getElementById('quizResultEmoji').textContent = emojis;
+  document.getElementById('quizResultScore').textContent = `${quizScore}/${total} (${pct}%)`;
+  document.getElementById('quizResultMsg').textContent = msgs;
+
+  // Son skoru kaydet
+  document.getElementById('quizLastScore').textContent = `${quizScore}/${total} (${pct}%)`;
+  document.getElementById('quizScoreRow').style.display = 'block';
+
+  // Yanlış soruları listele
+  const wl = document.getElementById('quizWrongList');
+  if(quizWrong.length > 0){
+    wl.innerHTML = `<div style="font-size:0.6rem;font-weight:700;color:#fca5a5;margin-bottom:6px;">❌ Tekrar bakman gereken konular:</div>` +
+      quizWrong.map(w => `<div class="quiz-wrong-item"><strong>S:</strong> ${w.q}<br><strong>D.Cevap:</strong> ${w.correct}</div>`).join('');
+  } else {
+    wl.innerHTML = `<div style="font-size:0.6rem;color:#4ade80;padding:8px;">🎯 Tüm soruları doğru yanıtladın!</div>`;
+  }
+}
+
+function retryQuiz(){
+  document.getElementById('quizResultArea').style.display = 'none';
+  document.getElementById('quizActiveArea').style.display = 'none';
+  document.getElementById('quizStartCard').style.display = 'block';
+}
+
 </script>
+
 </body>
 </html>

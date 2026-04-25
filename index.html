@@ -60,10 +60,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .login-sub{font-size:0.55rem;color:var(–muted);text-align:center;margin-bottom:8px;}
 .login-input-wrap{position:relative;}
 .login-input-wrap i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(–muted);font-size:0.75rem;}
-.login-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid var(–border);border-radius:14px;padding:11px 12px 11px 34px;color:var(–text);font-size:0.7rem;outline:none;transition:border 0.2s;}
-.login-input:focus{border-color:var(–accent);}
-.login-input::placeholder{color:var(–muted);}
-.login-btn{background:linear-gradient(135deg,var(–red),var(–red2));border:none;padding:13px;width:100%;border-radius:30px;color:white;font-weight:800;cursor:pointer;font-size:0.78rem;letter-spacing:1px;margin-top:4px;}
+.login-input{width:100%;background:rgba(255,255,255,0.10);border:1.5px solid rgba(59,130,246,0.5);border-radius:14px;padding:12px 12px 12px 36px;color:#f1f5f9 !important;-webkit-text-fill-color:#f1f5f9 !important;font-size:0.75rem;outline:none;transition:border 0.2s;}
+.login-input:focus{border-color:#3b82f6;background:rgba(255,255,255,0.14);}
+.login-input::placeholder{color:#64748b;-webkit-text-fill-color:#64748b !important;}
+.login-input-wrap i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#60a5fa;font-size:0.8rem;}
+.login-btn{background:linear-gradient(135deg,#dc2626,#7f1d1d);border:none;padding:14px;width:100%;border-radius:30px;color:white;font-weight:800;cursor:pointer;font-size:0.8rem;letter-spacing:1px;margin-top:4px;box-shadow:0 4px 20px rgba(220,38,38,0.45);}
 .login-btn:active{transform:scale(0.97);}
 .login-err{color:#f87171;font-size:0.6rem;text-align:center;display:none;}
 .login-err.show{display:block;}
@@ -114,19 +115,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .algo-card{border-radius:14px;padding:12px;cursor:pointer;border:1px solid transparent;transition:transform 0.15s,opacity 0.15s;position:relative;overflow:hidden;}
 .algo-card:active{transform:scale(0.97);opacity:0.85;}
 .algo-card .card-icon{font-size:1.5rem;margin-bottom:6px;}
-.algo-card h3{font-size:0.72rem;font-weight:700;margin-bottom:3px;}
-.algo-card p{font-size:0.5rem;opacity:0.75;line-height:1.4;}
+.algo-card h3{font-size:0.72rem;font-weight:700;margin-bottom:3px;color:#f1f5f9;}
+.algo-card p{font-size:0.5rem;opacity:0.85;line-height:1.4;color:#cbd5e1;}
 .algo-card .card-badge{position:absolute;top:8px;right:8px;font-size:0.42rem;padding:2px 6px;border-radius:20px;font-weight:700;}
-.c-red{background:linear-gradient(135deg,#7f1d1d,#450a0a);border-color:#dc2626;}
-.c-orange{background:linear-gradient(135deg,#9a3412,#431407);border-color:#ea580c;}
-.c-blue{background:linear-gradient(135deg,#1e3a8a,#0f172a);border-color:#3b82f6;}
-.c-purple{background:linear-gradient(135deg,#4c1d95,#1e0a3c);border-color:#8b5cf6;}
-.c-green{background:linear-gradient(135deg,#14532d,#052e16);border-color:#22c55e;}
-.c-cyan{background:linear-gradient(135deg,#164e63,#082f49);border-color:#06b6d4;}
-.c-yellow{background:linear-gradient(135deg,#713f12,#2d1b00);border-color:#eab308;}
-.c-pink{background:linear-gradient(135deg,#831843,#3d0a21);border-color:#ec4899;}
-.c-gray{background:linear-gradient(135deg,#1e293b,#0f172a);border-color:#475569;}
-.c-teal{background:linear-gradient(135deg,#134e4a,#042f2e);border-color:#14b8a6;}
+.c-red{background:linear-gradient(135deg,#7f1d1d,#450a0a);border-color:#ef4444;box-shadow:0 2px 14px rgba(239,68,68,0.3);}
+.c-orange{background:linear-gradient(135deg,#9a3412,#431407);border-color:#f97316;box-shadow:0 2px 14px rgba(249,115,22,0.3);}
+.c-blue{background:linear-gradient(135deg,#1e3a8a,#0f172a);border-color:#60a5fa;box-shadow:0 2px 14px rgba(96,165,250,0.25);}
+.c-purple{background:linear-gradient(135deg,#4c1d95,#1e0a3c);border-color:#a78bfa;box-shadow:0 2px 14px rgba(167,139,250,0.25);}
+.c-green{background:linear-gradient(135deg,#14532d,#052e16);border-color:#4ade80;box-shadow:0 2px 14px rgba(74,222,128,0.25);}
+.c-cyan{background:linear-gradient(135deg,#164e63,#082f49);border-color:#22d3ee;box-shadow:0 2px 14px rgba(34,211,238,0.25);}
+.c-yellow{background:linear-gradient(135deg,#713f12,#2d1b00);border-color:#fbbf24;box-shadow:0 2px 14px rgba(251,191,36,0.25);}
+.c-pink{background:linear-gradient(135deg,#831843,#3d0a21);border-color:#f472b6;box-shadow:0 2px 14px rgba(244,114,182,0.25);}
+.c-gray{background:linear-gradient(135deg,#1e293b,#0f172a);border-color:#64748b;box-shadow:0 2px 8px rgba(0,0,0,0.3);}
+.c-teal{background:linear-gradient(135deg,#134e4a,#042f2e);border-color:#2dd4bf;box-shadow:0 2px 14px rgba(45,212,191,0.25);}
+.c-indigo{background:linear-gradient(135deg,#1e1b4b,#0a0820);border-color:#818cf8;box-shadow:0 2px 14px rgba(129,140,248,0.25);}
+.c-rose{background:linear-gradient(135deg,#881337,#3b0718);border-color:#fb7185;box-shadow:0 2px 14px rgba(251,113,133,0.25);}
 
 /* ===== GERÇEKÇI EKG CANVAS SISTEMI ===== */
 .rhythm-section{margin-bottom:4px;}
@@ -218,6 +221,102 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .quiz-result-score{font-size:2rem;font-weight:900;color:#4ade80;letter-spacing:2px;}
 .quiz-result-msg{font-size:0.65rem;color:var(–muted);margin-top:4px;}
 .quiz-wrong-item{background:rgba(220,38,38,0.08);border-left:3px solid #ef4444;border-radius:8px;padding:7px 10px;margin-bottom:5px;text-align:left;font-size:0.55rem;color:var(–text);}
+
+/* ===== SAHA ÇIKIŞ BUTONU ===== */
+.saha-exit-btn{background:rgba(220,38,38,0.15);border:1.5px solid rgba(220,38,38,0.4);color:#ef4444;border-radius:10px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.8rem;transition:all 0.2s;margin-left:4px;}
+.saha-exit-btn:active{transform:scale(0.9);background:rgba(220,38,38,0.3);}
+
+/* ===== EKİP DURUM BİLDİRİMİ ===== */
+.ekip-self-card{background:linear-gradient(135deg,#0a1f3d,#060c1a);border:1px solid var(–blue);border-radius:14px;padding:12px;margin-bottom:8px;}
+.ekip-self-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+.ekip-self-name{font-size:0.72rem;font-weight:800;color:#f1f5f9;}
+.ekip-self-sub{font-size:0.5rem;color:var(–muted);margin-top:2px;}
+.ekip-self-status{font-size:1.4rem;}
+.ekip-status-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;}
+.ekip-status-btn{border:1.5px solid var(–border);border-radius:10px;padding:8px 6px;font-size:0.55rem;font-weight:700;cursor:pointer;background:rgba(255,255,255,0.04);color:#94a3b8;transition:all 0.15s;text-align:center;}
+.ekip-status-btn:active{transform:scale(0.94);}
+.ekip-status-btn.active-status{border-width:2px;}
+.es-hazir.active-status{background:rgba(74,222,128,0.15);border-color:#4ade80;color:#4ade80;}
+.es-yolda.active-status{background:rgba(251,191,36,0.15);border-color:#fbbf24;color:#fde68a;}
+.es-sahada.active-status{background:rgba(96,165,250,0.15);border-color:#60a5fa;color:#93c5fd;}
+.es-hastane.active-status{background:rgba(167,139,250,0.15);border-color:#a78bfa;color:#c4b5fd;}
+.es-mesgul.active-status{background:rgba(239,68,68,0.15);border-color:#ef4444;color:#fca5a5;}
+.es-ooc.active-status{background:rgba(100,116,139,0.15);border-color:#64748b;color:#94a3b8;}
+.ekip-not-wrap{display:flex;gap:6px;}
+.ekip-not-input{flex:1;background:rgba(255,255,255,0.06);border:1px solid var(–border);color:#f1f5f9;padding:8px 10px;border-radius:10px;font-size:0.6rem;outline:none;}
+.ekip-not-input::placeholder{color:#64748b;}
+.ekip-bildir-btn{background:linear-gradient(135deg,var(–blue),#1d4ed8);border:none;padding:8px 14px;border-radius:10px;color:white;font-weight:700;font-size:0.58rem;cursor:pointer;white-space:nowrap;box-shadow:0 2px 8px rgba(37,99,235,0.35);}
+.ekip-bildir-btn:active{transform:scale(0.95);}
+.ekip-list-title{font-size:0.6rem;font-weight:700;color:var(–muted);margin:10px 0 6px;letter-spacing:0.5px;}
+.ekip-card{background:var(–card);border-radius:12px;padding:9px 12px;margin-bottom:6px;border:1px solid var(–border);display:flex;align-items:center;gap:10px;}
+.ekip-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.ekip-info{flex:1;}
+.ekip-name{font-size:0.62rem;font-weight:700;color:#f1f5f9;}
+.ekip-status-txt{font-size:0.52rem;font-weight:600;margin-top:1px;}
+.ekip-not-txt{font-size:0.48rem;color:var(–muted);margin-top:2px;}
+.ekip-time{font-size:0.45rem;color:var(–muted);text-align:right;white-space:nowrap;}
+.ekip-mesaj-card{background:var(–card);border-radius:14px;padding:12px;border:1px solid var(–border);margin-top:8px;}
+.ekip-mesaj-title{font-size:0.65rem;font-weight:700;color:var(–blue);margin-bottom:8px;}
+.ekip-quick-msgs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;}
+.ekip-quick-btn{background:rgba(255,255,255,0.04);border:1px solid var(–border);color:#94a3b8;border-radius:10px;padding:7px 6px;font-size:0.52rem;cursor:pointer;font-weight:600;text-align:center;transition:all 0.15s;line-height:1.4;}
+.ekip-quick-btn:active{background:rgba(37,99,235,0.15);border-color:var(–blue);color:#93c5fd;transform:scale(0.95);}
+.ekip-mesaj-input-wrap{display:flex;gap:6px;margin-bottom:8px;}
+.ekip-mesaj-log{max-height:160px;overflow-y:auto;display:flex;flex-direction:column;gap:5px;}
+.ekip-mesaj-log::-webkit-scrollbar{width:3px;}
+.ekip-mesaj-log::-webkit-scrollbar-thumb{background:var(–border);}
+.mesaj-item{border-radius:10px;padding:7px 10px;font-size:0.55rem;line-height:1.5;}
+.mesaj-benim{background:rgba(37,99,235,0.15);border-left:3px solid var(–blue);color:#cbd5e1;}
+.mesaj-sistem{background:rgba(234,179,8,0.10);border-left:3px solid #fbbf24;color:#fde68a;}
+.mesaj-time{font-size:0.45rem;color:var(–muted);margin-top:2px;}
+
+/* ===== AKCİĞER SESLERİ ===== */
+.ak-map{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;}
+.ak-col{display:flex;flex-direction:column;gap:7px;flex:1;}
+.ak-center-col{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 4px;}
+.ak-zone-btn{background:rgba(34,211,238,0.07);border:1.5px solid rgba(34,211,238,0.2);border-radius:12px;padding:9px 6px;text-align:center;cursor:pointer;font-size:0.52rem;font-weight:700;color:#94a3b8;transition:all 0.2s;min-height:58px;line-height:1.4;position:relative;}
+.ak-zone-btn:active{transform:scale(0.93);}
+.ak-zone-btn.ak-active{border-color:#22d3ee;background:rgba(34,211,238,0.18);color:#22d3ee;}
+.ak-zone-btn[data-s=“normal”]{background:rgba(74,222,128,0.14);border-color:#4ade80;color:#4ade80;}
+.ak-zone-btn[data-s=“azalmis”]{background:rgba(251,191,36,0.14);border-color:#fbbf24;color:#fde68a;}
+.ak-zone-btn[data-s=“yok”]{background:rgba(239,68,68,0.2);border-color:#ef4444;color:#fca5a5;}
+.ak-zone-btn[data-s=“ronkus”]{background:rgba(251,146,60,0.14);border-color:#fb923c;color:#fdba74;}
+.ak-zone-btn[data-s=“raller”]{background:rgba(96,165,250,0.14);border-color:#60a5fa;color:#93c5fd;}
+.ak-zone-btn[data-s=“wheeze”]{background:rgba(244,114,182,0.14);border-color:#f472b6;color:#f9a8d4;}
+.ak-zone-btn[data-s=“krepitan”]{background:rgba(167,139,250,0.14);border-color:#a78bfa;color:#c4b5fd;}
+.ak-zone-btn[data-s=“plevral”]{background:rgba(251,191,36,0.14);border-color:#fbbf24;color:#fde68a;}
+.ak-tag{display:block;font-size:0.42rem;margin-top:2px;font-weight:400;}
+.ak-panel-title{font-size:0.62rem;font-weight:700;color:#22d3ee;padding:5px 8px;background:rgba(34,211,238,0.08);border-left:3px solid #22d3ee;border-radius:0 8px 8px 0;margin-bottom:8px;}
+.ak-sound-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;}
+.ak-sb{border:1px solid;border-radius:10px;padding:9px 6px;font-size:0.55rem;font-weight:700;cursor:pointer;transition:transform 0.1s;color:white;}
+.ak-sb:active{transform:scale(0.94);}
+.ak-sb-normal{background:rgba(74,222,128,0.2);border-color:#4ade80;color:#4ade80;}
+.ak-sb-azalmis{background:rgba(251,191,36,0.2);border-color:#fbbf24;color:#fde68a;}
+.ak-sb-yok{background:rgba(239,68,68,0.25);border-color:#ef4444;color:#fca5a5;}
+.ak-sb-ronkus{background:rgba(251,146,60,0.2);border-color:#fb923c;color:#fdba74;}
+.ak-sb-raller{background:rgba(96,165,250,0.2);border-color:#60a5fa;color:#93c5fd;}
+.ak-sb-wheeze{background:rgba(244,114,182,0.2);border-color:#f472b6;color:#f9a8d4;}
+.ak-sb-krepitan{background:rgba(167,139,250,0.2);border-color:#a78bfa;color:#c4b5fd;}
+.ak-sb-plevral{background:rgba(251,191,36,0.2);border-color:#fbbf24;color:#fde68a;}
+.ak-close-btn{background:rgba(255,255,255,0.06);border:1px solid var(–border);color:var(–muted);padding:5px 14px;border-radius:20px;font-size:0.55rem;cursor:pointer;margin-top:4px;}
+.ak-guide{background:rgba(255,255,255,0.02);border:1px solid var(–border);border-radius:12px;padding:10px;margin-top:10px;}
+.ak-guide-title{font-size:0.58rem;font-weight:700;color:var(–yellow);margin-bottom:7px;}
+.ak-gi{font-size:0.52rem;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);line-height:1.5;}
+.ak-gi:last-child{border-bottom:none;}
+.gi-normal b{color:#4ade80;}.gi-azalmis b{color:#fde68a;}.gi-yok b{color:#fca5a5;}
+.gi-ronkus b{color:#fdba74;}.gi-raller b{color:#93c5fd;}.gi-wheeze b{color:#f9a8d4;}
+.gi-krepitan b{color:#c4b5fd;}.gi-plevral b{color:#fde68a;}
+.ak-result-title{font-size:0.6rem;font-weight:700;color:var(–muted);margin-bottom:6px;}
+.ak-result-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.55rem;}
+
+/* ===== BUTON & BADGE RENK GELİŞTİRME ===== */
+.dispatch-btn{background:linear-gradient(135deg,#2563eb,#1d4ed8) !important;box-shadow:0 2px 8px rgba(37,99,235,0.4);}
+.call-btn{background:linear-gradient(135deg,#16a34a,#15803d) !important;box-shadow:0 3px 12px rgba(22,163,74,0.4);}
+.nav-btn{background:linear-gradient(135deg,#0891b2,#0e7490) !important;box-shadow:0 2px 8px rgba(8,145,178,0.35);}
+.cpr-start{background:linear-gradient(135deg,#dc2626,#991b1b);box-shadow:0 3px 12px rgba(220,38,38,0.45);}
+.cpr-stop{background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 3px 10px rgba(37,99,235,0.4);}
+.quiz-launch-btn{box-shadow:0 3px 14px rgba(37,99,235,0.4);}
+.hasta-rapor-btn{box-shadow:0 3px 12px rgba(37,99,235,0.35);}
+.stimer-btn-s{background:linear-gradient(135deg,#16a34a,#15803d);box-shadow:0 2px 6px rgba(22,163,74,0.35);}
 
 /* ===== HARİTA ===== */
 .harita-card{background:var(–card);border-radius:14px;border:1px solid var(–border);padding:10px;margin-bottom:8px;}
@@ -660,9 +759,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="header-inner">
       <div class="header-icon"><i class="fas fa-truck-medical"></i></div>
       <div><div class="header-title">SAHA EKİBİ | KIRKLARELİ</div><div class="header-badge">⚡ Detaylı Algoritmalar | AHA/ERC 2025</div></div>
-      <div class="header-lights">
+      <div class="header-lights" style="gap:8px;">
         <button class="lang-btn" id="langBtnSaha" onclick="toggleLang()">EN</button>
         <div class="hlv r"></div><div class="hlv w"></div><div class="hlv b"></div>
+        <button class="saha-exit-btn" onclick="sahaLogout()" title="Çıkış">
+          <i class="fas fa-right-from-bracket"></i>
+        </button>
       </div>
     </div>
   </div>
@@ -779,6 +881,53 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div id="doseList"></div>
 </div>
 
+<!-- EKİP DURUM BİLDİRİMİ -->
+<div class="sec" id="secEkipDurum"><i class="fas fa-satellite-dish"></i> <span data-tr="EKİP DURUM BİLDİRİMİ" data-en="TEAM STATUS REPORT">EKİP DURUM BİLDİRİMİ</span></div>
+<div id="ekipDurumSection">
+  <!-- Kendi Durum Kartı -->
+  <div class="ekip-self-card">
+    <div class="ekip-self-header">
+      <div>
+        <div class="ekip-self-name" id="ekipSelfName">👤 Ekip Adı Yükleniyor...</div>
+        <div class="ekip-self-sub">Durumunuzu güncelleyin — KKM görecek</div>
+      </div>
+      <div class="ekip-self-status" id="ekipSelfDot">🟢</div>
+    </div>
+    <div class="ekip-status-grid">
+      <button class="ekip-status-btn es-hazir active-status" onclick="setEkipStatus('hazir',this)">🟢 Hazır</button>
+      <button class="ekip-status-btn es-yolda" onclick="setEkipStatus('yolda',this)">🟡 Vakaya Gidiyorum</button>
+      <button class="ekip-status-btn es-sahada" onclick="setEkipStatus('sahada',this)">🔵 Sahada</button>
+      <button class="ekip-status-btn es-hastane" onclick="setEkipStatus('hastane',this)">🟣 Hastaneye Transfer</button>
+      <button class="ekip-status-btn es-mesgul" onclick="setEkipStatus('mesgul',this)">🔴 Meşgul</button>
+      <button class="ekip-status-btn es-ooc" onclick="setEkipStatus('ooc',this)">⚫ Devre Dışı</button>
+    </div>
+    <div class="ekip-not-wrap">
+      <input id="ekipSelfNot" class="ekip-not-input" placeholder="📝 Kısa not ekle (opsiyonel)..." maxlength="60">
+      <button onclick="ekipBildir()" class="ekip-bildir-btn">📡 Bildir</button>
+    </div>
+  </div>
+
+  <!-- Diğer Ekipler -->
+  <div class="ekip-list-title">📋 Saha Ekiplerinin Durumu</div>
+  <div id="ekipListesi"></div>
+
+  <!-- Mesaj Gönder -->
+  <div class="ekip-mesaj-card">
+    <div class="ekip-mesaj-title">📢 Tüm Ekiplere Mesaj</div>
+    <div class="ekip-quick-msgs">
+      <button class="ekip-quick-btn" onclick="ekipMesajGonder('🆘 Yardım gerekiyor — Pozisyon paylaş!')">🆘 Yardım İste</button>
+      <button class="ekip-quick-btn" onclick="ekipMesajGonder('✅ Vaka teslim edildi, müsaitim')">✅ Müsaitim</button>
+      <button class="ekip-quick-btn" onclick="ekipMesajGonder('🏥 Hastaneye gidiyorum, takip edin')">🏥 Hastaneye</button>
+      <button class="ekip-quick-btn" onclick="ekipMesajGonder('⚡ ACİL DESTEK — Konum paylaşılıyor')">⚡ ACİL DESTEK</button>
+    </div>
+    <div class="ekip-mesaj-input-wrap">
+      <input id="ekipMesajInput" class="ekip-not-input" placeholder="Özel mesaj yaz..." maxlength="100">
+      <button onclick="ekipOzelMesaj()" class="ekip-bildir-btn">Gönder</button>
+    </div>
+    <div id="ekipMesajLog" class="ekip-mesaj-log"></div>
+  </div>
+</div>
+
 <!-- GELİŞİM KILAVUZU -->
 <div class="sec" id="secGelisim"><i class="fas fa-graduation-cap"></i> <span data-tr="GELİŞİM & ERC KILAVUZU" data-en="DEVELOPMENT & ERC GUIDE">GELİŞİM & ERC KILAVUZU</span></div>
 <div id="gelisimSection">
@@ -858,6 +1007,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <button class="hasta-tab" onclick="setHastaTab('vital',this)">Vital</button>
       <button class="hasta-tab" onclick="setHastaTab('gks',this)">GKS</button>
       <button class="hasta-tab" onclick="setHastaTab('opqrst',this)">OPQRST</button>
+      <button class="hasta-tab" onclick="setHastaTab('akciger',this)">🫁 Akciğer</button>
     </div>
 
     <!-- ABCDE -->
@@ -986,6 +1136,62 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="opq-row"><span class="opq-lbl">T</span><span class="opq-title">Time — Süre</span><input class="hasta-input" id="opT" placeholder="Ne kadar süredir? (örn: 20 dk)"></div>
       <button onclick="generateOpqReport()" class="hasta-rapor-btn">📋 OPQRST Özeti</button>
     </div>
+
+    <!-- AKCİĞER SESLERİ -->
+    <div id="htab-akciger" class="hasta-tab-content" style="display:none;">
+      <div style="font-size:0.62rem;font-weight:700;color:#22d3ee;margin-bottom:10px;">🫁 Akciğer Alanı Oskültasyonu</div>
+      <div style="font-size:0.52rem;color:var(--muted);text-align:center;margin-bottom:8px;">Alana dokun → Ses seç</div>
+      <div class="ak-map">
+        <div class="ak-col">
+          <div class="ak-zone-btn" id="akz-sol-ust" onclick="akSelectZone('sol-ust')">Sol<br>Üst<br><span class="ak-tag" id="akt-sol-ust"></span></div>
+          <div class="ak-zone-btn" id="akz-sol-orta" onclick="akSelectZone('sol-orta')">Sol<br>Orta<br><span class="ak-tag" id="akt-sol-orta"></span></div>
+          <div class="ak-zone-btn" id="akz-sol-alt" onclick="akSelectZone('sol-alt')">Sol<br>Alt<br><span class="ak-tag" id="akt-sol-alt"></span></div>
+        </div>
+        <div class="ak-center-col">
+          <div style="font-size:2rem;opacity:0.3;">🫁</div>
+          <div style="font-size:0.45rem;color:var(--muted);margin-top:6px;text-align:center;">ÖN<br>GÖRÜNÜM</div>
+        </div>
+        <div class="ak-col">
+          <div class="ak-zone-btn" id="akz-sag-ust" onclick="akSelectZone('sag-ust')">Sağ<br>Üst<br><span class="ak-tag" id="akt-sag-ust"></span></div>
+          <div class="ak-zone-btn" id="akz-sag-orta" onclick="akSelectZone('sag-orta')">Sağ<br>Orta<br><span class="ak-tag" id="akt-sag-orta"></span></div>
+          <div class="ak-zone-btn" id="akz-sag-alt" onclick="akSelectZone('sag-alt')">Sağ<br>Alt<br><span class="ak-tag" id="akt-sag-alt"></span></div>
+        </div>
+      </div>
+
+      <div id="akSoundPanel" style="display:none;margin-top:10px;">
+        <div class="ak-panel-title" id="akPanelTitle"></div>
+        <div class="ak-sound-grid">
+          <button class="ak-sb ak-sb-normal" onclick="akAssign('normal')">✅ Normal</button>
+          <button class="ak-sb ak-sb-azalmis" onclick="akAssign('azalmis')">📉 Azalmış</button>
+          <button class="ak-sb ak-sb-yok" onclick="akAssign('yok')">🚫 Yok</button>
+          <button class="ak-sb ak-sb-ronkus" onclick="akAssign('ronkus')">🔊 Ronküs</button>
+          <button class="ak-sb ak-sb-raller" onclick="akAssign('raller')">💧 Raller</button>
+          <button class="ak-sb ak-sb-wheeze" onclick="akAssign('wheeze')">🌬️ Wheeze</button>
+          <button class="ak-sb ak-sb-krepitan" onclick="akAssign('krepitan')">⚡ Krepitan</button>
+          <button class="ak-sb ak-sb-plevral" onclick="akAssign('plevral')" style="grid-column:span 2;">🔶 Plevral Sürtünme</button>
+        </div>
+        <button onclick="akClosePanel()" class="ak-close-btn">✕ Kapat</button>
+      </div>
+
+      <div class="ak-guide">
+        <div class="ak-guide-title">📖 Klinik Rehber (BTS/ERC)</div>
+        <div class="ak-gi gi-normal"><b>✅ Normal</b> — Bilateral simetrik veziküler solunum</div>
+        <div class="ak-gi gi-azalmis"><b>📉 Azalmış</b> — Pnömotoraks, efüzyon, atelektazi, obezite</div>
+        <div class="ak-gi gi-yok"><b>🚫 Yok</b> — Tansiyon pnömotoraks / masif efüzyon → ACİL!</div>
+        <div class="ak-gi gi-ronkus"><b>🔊 Ronküs</b> — Büyük hava yolu mukus/sekresyon birikimi</div>
+        <div class="ak-gi gi-raller"><b>💧 Raller</b> — Pulmoner ödem, pnömoni, KKY</div>
+        <div class="ak-gi gi-wheeze"><b>🌬️ Wheeze</b> — Bronkospazm → Astım / KOAH / Anafilaksi</div>
+        <div class="ak-gi gi-krepitan"><b>⚡ Krepitan</b> — İnce raller, erken pnömoni, fibrozis</div>
+        <div class="ak-gi gi-plevral"><b>🔶 Plevral</b> — İnsp+eksp sürtünme → Plörit</div>
+      </div>
+
+      <div id="akResultWrap" style="display:none;margin-top:10px;">
+        <div class="ak-result-title">📋 Oskültasyon Özeti</div>
+        <div id="akResultRows"></div>
+        <div id="akResultAlert" style="margin-top:6px;border-radius:10px;padding:8px 12px;font-size:0.58rem;line-height:1.6;"></div>
+      </div>
+      <button onclick="akReport()" class="hasta-rapor-btn" style="margin-top:10px;">📋 Rapor Oluştur</button>
+    </div>
   </div>
 </div>
 
@@ -1035,6 +1241,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="nav-item active-saha" onclick="navSaha('aciller',this)"><i class="fas fa-truck-medical"></i><span data-tr="Aciller" data-en="Emergencies">Aciller</span></div>
     <div class="nav-item" onclick="navSaha('ritim',this)"><i class="fas fa-heart"></i><span data-tr="Ritim" data-en="Rhythm">Ritim</span></div>
     <div class="nav-item" onclick="navSaha('hasta',this)"><i class="fas fa-stethoscope"></i><span data-tr="Hasta" data-en="Patient">Hasta</span></div>
+    <div class="nav-item" onclick="navSaha('ekip',this)"><i class="fas fa-satellite-dish"></i><span data-tr="Ekip" data-en="Team">Ekip</span></div>
     <div class="nav-item" onclick="navSaha('sesli',this)"><i class="fas fa-bell"></i><span data-tr="Uyarı" data-en="Alert">Uyarı</span></div>
     <div class="nav-item" onclick="navSaha('quiz',this)"><i class="fas fa-graduation-cap"></i><span data-tr="Quiz" data-en="Quiz">Quiz</span></div>
   </div>
@@ -2984,6 +3191,135 @@ function retryQuiz(){
   document.getElementById('quizResultArea').style.display = 'none';
   document.getElementById('quizActiveArea').style.display = 'none';
   document.getElementById('quizStartCard').style.display = 'block';
+}
+
+// ======= SAHA ÇIKIŞ =======
+function sahaLogout() {
+  if (!confirm('Saha oturumunu kapatmak istiyor musun?')) return;
+  const self = ekipDurumData.find(e => e.self);
+  if (self) { self.status = 'ooc'; self.zaman = simZaman(); saveEkipData(); }
+  document.getElementById('appSaha').style.display = 'none';
+  document.getElementById('splash').style.display = 'flex';
+  document.getElementById('loginBox').classList.remove('show');
+}
+
+// ======= EKİP DURUM BİLDİRİMİ =======
+const EKIP_STATUS_MAP = {
+  hazir:   {emoji:'🟢', txt:'Hazır',              dot:'#4ade80'},
+  yolda:   {emoji:'🟡', txt:'Vakaya Gidiyorum',   dot:'#fbbf24'},
+  sahada:  {emoji:'🔵', txt:'Sahada',             dot:'#60a5fa'},
+  hastane: {emoji:'🟣', txt:'Hastaneye Transfer', dot:'#a78bfa'},
+  mesgul:  {emoji:'🔴', txt:'Meşgul',             dot:'#ef4444'},
+  ooc:     {emoji:'⚫', txt:'Devre Dışı',         dot:'#64748b'},
+};
+let ekipAktifStatus = 'hazir';
+let ekipDurumData = [];
+let ekipMesajlar = [];
+
+const DEMO_EKIPLER = [
+  {id:1, name:'KKL-1 Ekibi',  status:'sahada',  not:'Kazaya müdahale ediyoruz', zaman:'08:42', self:false},
+  {id:2, name:'KKL-2 Ekibi',  status:'hazir',   not:'',                          zaman:'09:01', self:false},
+  {id:3, name:'LBG-1 Ekibi',  status:'hastane', not:'Hasta teslim edildi',       zaman:'09:15', self:false},
+  {id:4, name:'BBK-1 Ekibi',  status:'yolda',   not:'D100 üzerinde',             zaman:'09:18', self:false},
+  {id:5, name:'VZ-1 Ekibi',   status:'mesgul',  not:'',                          zaman:'08:55', self:false},
+];
+
+function simZaman(){ return new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'}); }
+function saveEkipData(){ try{localStorage.setItem('kkl112_ekipler',JSON.stringify(ekipDurumData));}catch{} }
+function saveMesajlar(){ try{localStorage.setItem('kkl112_mesajlar',JSON.stringify(ekipMesajlar.slice(-30)));}catch{} }
+
+function initEkipDurum(){
+  const saved = (() => { try{return JSON.parse(localStorage.getItem('kkl112_ekipler')||'null');}catch{return null;} })();
+  const kullanici = localStorage.getItem('kkl112_user') || 'Benim Ekibim';
+  ekipDurumData = saved || [{id:0,name:kullanici,status:'hazir',not:'',zaman:simZaman(),self:true},...DEMO_EKIPLER];
+  if (!ekipDurumData.find(e=>e.self)) ekipDurumData.unshift({id:0,name:kullanici,status:'hazir',not:'',zaman:simZaman(),self:true});
+  ekipMesajlar = (() => { try{return JSON.parse(localStorage.getItem('kkl112_mesajlar')||'[]');}catch{return[];} })();
+  renderEkipSelf(); renderEkipListesi(); renderEkipMesajlar();
+  // Demo simülasyon
+  setInterval(()=>{
+    ekipDurumData.forEach(e=>{ if(e.self||Math.random()>0.08) return; const s=['hazir','yolda','sahada','hastane','mesgul']; e.status=s[Math.floor(Math.random()*s.length)]; e.zaman=simZaman(); });
+    renderEkipListesi();
+  }, 18000);
+}
+
+function renderEkipSelf(){
+  const self=ekipDurumData.find(e=>e.self); if(!self) return;
+  const n=document.getElementById('ekipSelfName'); if(n) n.textContent='👤 '+self.name;
+  const d=document.getElementById('ekipSelfDot'); if(d) d.textContent=EKIP_STATUS_MAP[self.status]?.emoji||'🟢';
+  ekipAktifStatus=self.status;
+  document.querySelectorAll('.ekip-status-btn').forEach(b=>b.classList.remove('active-status'));
+  const ab=document.querySelector('.es-'+self.status); if(ab) ab.classList.add('active-status');
+}
+
+function renderEkipListesi(){
+  const el=document.getElementById('ekipListesi'); if(!el) return;
+  const diger=ekipDurumData.filter(e=>!e.self);
+  if(!diger.length){el.innerHTML='<div style="text-align:center;color:var(--muted);font-size:0.6rem;padding:10px;">Başka ekip bağlı değil</div>';return;}
+  el.innerHTML=diger.map(e=>{
+    const sm=EKIP_STATUS_MAP[e.status]||EKIP_STATUS_MAP.hazir;
+    return `<div class="ekip-card">
+      <div class="ekip-dot" style="background:${sm.dot};box-shadow:0 0 7px ${sm.dot};"></div>
+      <div class="ekip-info">
+        <div class="ekip-name">${e.name}</div>
+        <div class="ekip-status-txt" style="color:${sm.dot};">${sm.emoji} ${sm.txt}</div>
+        ${e.not?`<div class="ekip-not-txt">${e.not}</div>`:''}
+      </div>
+      <div class="ekip-time">${e.zaman}</div>
+    </div>`;
+  }).join('');
+}
+
+function setEkipStatus(status,btn){
+  ekipAktifStatus=status;
+  document.querySelectorAll('.ekip-status-btn').forEach(b=>b.classList.remove('active-status'));
+  btn.classList.add('active-status');
+  const d=document.getElementById('ekipSelfDot'); if(d) d.textContent=EKIP_STATUS_MAP[status]?.emoji||'🟢';
+}
+
+function ekipBildir(){
+  const not=document.getElementById('ekipSelfNot')?.value?.trim()||'';
+  const self=ekipDurumData.find(e=>e.self);
+  if(self){self.status=ekipAktifStatus;self.not=not;self.zaman=simZaman();}
+  saveEkipData();
+  const sm=EKIP_STATUS_MAP[ekipAktifStatus];
+  ekipMesajEkle(`${sm.emoji} Durum güncellendi: ${sm.txt}${not?' — '+not:''}`, 'sistem');
+  document.getElementById('ekipSelfNot').value='';
+  renderEkipSelf(); renderEkipListesi();
+  if(navigator.vibrate) navigator.vibrate([40,20,40]);
+}
+
+function ekipMesajGonder(mesaj){
+  ekipMesajEkle(mesaj,'benim');
+  if(navigator.vibrate) navigator.vibrate([60]);
+}
+
+function ekipOzelMesaj(){
+  const inp=document.getElementById('ekipMesajInput');
+  const mesaj=inp?.value?.trim(); if(!mesaj) return;
+  ekipMesajEkle(mesaj,'benim'); inp.value='';
+}
+
+function ekipMesajEkle(mesaj,tip){
+  ekipMesajlar.push({mesaj,tip,zaman:simZaman()});
+  saveMesajlar(); renderEkipMesajlar();
+  const log=document.getElementById('ekipMesajLog');
+  if(log) setTimeout(()=>{log.scrollTop=log.scrollHeight;},50);
+}
+
+function renderEkipMesajlar(){
+  const el=document.getElementById('ekipMesajLog'); if(!el) return;
+  if(!ekipMesajlar.length){el.innerHTML='<div style="text-align:center;color:var(--muted);font-size:0.55rem;padding:8px;">Henüz mesaj yok</div>';return;}
+  el.innerHTML=ekipMesajlar.slice(-20).map(m=>
+    `<div class="mesaj-item ${m.tip==='benim'?'mesaj-benim':'mesaj-sistem'}">${m.mesaj}<div class="mesaj-time">${m.zaman}</div></div>`
+  ).join('');
+}
+
+// initSaha'ya ek
+const _origInitSaha = initSaha;
+function initSaha(){
+  const ui=document.getElementById('sahaUser'); if(ui) localStorage.setItem('kkl112_user', ui.value||'Benim Ekibim');
+  _origInitSaha();
+  initEkipDurum();
 }
 
 </script>

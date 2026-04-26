@@ -14,44 +14,54 @@
 :root{
   --red:#dc2626;--red2:#991b1b;--blue:#2563eb;--green:#16a34a;
   --yellow:#eab308;--orange:#ea580c;--purple:#8b5cf6;--cyan:#0891b2;
-  --bg:#060c1a;--card:#111827;--card2:#1e293b;--border:#1e3a5f;
+  --bg:#04091a;--card:#0d1829;--card2:#162035;--border:#1e3a5f;
   --text:#f1f5f9;--muted:#64748b;--accent:#3b82f6;
+  --glow-red:rgba(220,38,38,0.4);--glow-blue:rgba(37,99,235,0.4);
+  --glow-green:rgba(22,163,74,0.4);--glow-yellow:rgba(234,179,8,0.4);
+  --trans:all 0.22s cubic-bezier(0.4,0,0.2,1);
 }
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh;overflow-x:hidden;}
 
 /* ===== SPLASH ===== */
-#splash{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 30%,#0a1628 0%,#060c1a 70%);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;}
+#splash{position:fixed;inset:0;background:radial-gradient(ellipse at 40% 20%,#0d1f42 0%,#04091a 60%);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;}
 .splash-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.nebula{position:absolute;border-radius:50%;filter:blur(60px);animation:nebulaFloat var(–nd,8s) ease-in-out infinite alternate;}
+@keyframes nebulaFloat{0%{transform:translate(0,0) scale(1);}100%{transform:translate(var(–nx,10px),var(–ny,-10px)) scale(1.1);}}
 .star{position:absolute;border-radius:50%;animation:twinkle var(–d,2s) ease-in-out infinite;}
-@keyframes twinkle{0%,100%{opacity:0.2;transform:scale(1);}50%{opacity:1;transform:scale(1.4);}}
-.splash-lights{display:flex;gap:6px;margin-bottom:18px;}
-.light{width:10px;height:10px;border-radius:50%;animation:blink 0.6s ease-in-out infinite;}
-.light.r{background:#dc2626;}
-.light.w{background:#ffffff;animation-delay:0.2s;}
-.light.b{background:#2563eb;animation-delay:0.4s;}
-@keyframes blink{0%,100%{opacity:1;transform:scale(1);box-shadow:0 0 8px currentColor;}50%{opacity:0.3;transform:scale(0.7);box-shadow:none;}}
-.splash-logo{width:90px;height:90px;background:linear-gradient(135deg,var(–red),var(–red2));border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;box-shadow:0 0 40px rgba(220,38,38,0.5);margin-bottom:16px;animation:logoPulse 2s ease-in-out infinite;}
-@keyframes logoPulse{0%,100%{box-shadow:0 0 30px rgba(220,38,38,0.4);}50%{box-shadow:0 0 60px rgba(220,38,38,0.8),0 0 100px rgba(220,38,38,0.3);}}
-.splash-title{font-size:2rem;font-weight:900;letter-spacing:2px;text-align:center;background:linear-gradient(135deg,#fff 30%,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
-.splash-sub{font-size:0.65rem;color:var(–muted);text-align:center;margin-bottom:8px;letter-spacing:1px;}
-.splash-aha{font-size:0.6rem;color:var(–yellow);margin-bottom:36px;background:rgba(234,179,8,0.1);border:1px solid rgba(234,179,8,0.3);padding:4px 12px;border-radius:20px;}
-.role-buttons{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
-.role-btn{background:linear-gradient(135deg,var(–card),var(–card2));border:2px solid var(–border);border-radius:20px;padding:20px 24px;text-align:center;cursor:pointer;transition:all 0.2s;min-width:150px;position:relative;overflow:hidden;}
-.role-btn::before{content:’’;position:absolute;inset:0;opacity:0;transition:opacity 0.2s;}
-.role-btn.kkm{border-color:var(–blue);}
-.role-btn.kkm::before{background:linear-gradient(135deg,rgba(37,99,235,0.15),transparent);}
-.role-btn.saha{border-color:var(–green);}
-.role-btn.saha::before{background:linear-gradient(135deg,rgba(22,163,74,0.15),transparent);}
-.role-btn:active{transform:scale(0.95);opacity:0.9;}
+@keyframes twinkle{0%,100%{opacity:0.15;transform:scale(1);}50%{opacity:1;transform:scale(1.5);}}
+.splash-lights{display:flex;gap:8px;margin-bottom:20px;}
+.light{width:11px;height:11px;border-radius:50%;animation:blink 0.7s ease-in-out infinite;}
+.light.r{background:#ef4444;box-shadow:0 0 10px #ef4444;}
+.light.w{background:#f8fafc;animation-delay:0.23s;}
+.light.b{background:#3b82f6;animation-delay:0.46s;box-shadow:0 0 10px #3b82f6;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.25;transform:scale(0.65);}}
+.splash-logo{width:96px;height:96px;background:linear-gradient(135deg,#ef4444,#991b1b);border-radius:28px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;margin-bottom:18px;animation:logoPulse 2.2s ease-in-out infinite;position:relative;}
+.splash-logo::after{content:’’;position:absolute;inset:-3px;border-radius:31px;background:linear-gradient(135deg,#ef4444,transparent,#3b82f6);opacity:0.5;animation:logoRing 3s linear infinite;z-index:-1;}
+@keyframes logoRing{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 30px rgba(239,68,68,0.5),0 4px 30px rgba(0,0,0,0.5);}50%{box-shadow:0 0 70px rgba(239,68,68,0.9),0 0 120px rgba(239,68,68,0.3),0 4px 30px rgba(0,0,0,0.5);}}
+.splash-title{font-size:2.1rem;font-weight:900;letter-spacing:3px;text-align:center;background:linear-gradient(135deg,#fff 0%,#93c5fd 50%,#f1f5f9 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:5px;}
+.splash-sub{font-size:0.65rem;color:#64748b;text-align:center;margin-bottom:8px;letter-spacing:2px;text-transform:uppercase;}
+.splash-aha{font-size:0.58rem;color:#fbbf24;margin-bottom:36px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.25);padding:5px 14px;border-radius:20px;letter-spacing:0.5px;}
+.role-buttons{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+.role-btn{background:linear-gradient(145deg,#0d1829,#162035);border:1.5px solid var(–border);border-radius:22px;padding:22px 26px;text-align:center;cursor:pointer;transition:var(–trans);min-width:148px;position:relative;overflow:hidden;}
+.role-btn::before{content:’’;position:absolute;inset:0;opacity:0;transition:opacity 0.3s;border-radius:22px;}
+.role-btn::after{content:’’;position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 22px 22px;transition:opacity 0.3s;opacity:0.6;}
+.role-btn.kkm{border-color:rgba(96,165,250,0.4);}
+.role-btn.kkm::before{background:radial-gradient(ellipse at top,rgba(37,99,235,0.2),transparent);}
+.role-btn.kkm::after{background:linear-gradient(90deg,transparent,#60a5fa,transparent);}
+.role-btn.saha{border-color:rgba(74,222,128,0.4);}
+.role-btn.saha::before{background:radial-gradient(ellipse at top,rgba(22,163,74,0.2),transparent);}
+.role-btn.saha::after{background:linear-gradient(90deg,transparent,#4ade80,transparent);}
+.role-btn:active{transform:scale(0.94);}
 .role-btn:hover::before{opacity:1;}
-.role-btn i{font-size:2.2rem;display:block;margin-bottom:10px;}
-.role-btn.kkm i{color:var(–blue);}
-.role-btn.saha i{color:var(–green);}
-.role-btn h3{font-size:1rem;margin-bottom:4px;font-weight:700;}
-.role-btn p{font-size:0.5rem;color:var(–muted);line-height:1.4;}
-.role-glow{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);width:80px;height:40px;border-radius:50%;filter:blur(15px);pointer-events:none;}
-.role-btn.kkm .role-glow{background:var(–blue);}
-.role-btn.saha .role-glow{background:var(–green);}
+.role-btn i{font-size:2.4rem;display:block;margin-bottom:12px;filter:drop-shadow(0 0 8px currentColor);}
+.role-btn.kkm i{color:#60a5fa;}
+.role-btn.saha i{color:#4ade80;}
+.role-btn h3{font-size:1rem;margin-bottom:4px;font-weight:800;color:#f1f5f9;}
+.role-btn p{font-size:0.5rem;color:#64748b;line-height:1.5;}
+.role-glow{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);width:90px;height:40px;border-radius:50%;filter:blur(18px);pointer-events:none;opacity:0.7;}
+.role-btn.kkm .role-glow{background:#2563eb;}
+.role-btn.saha .role-glow{background:#16a34a;}
 
 /* ===== LOGIN ===== */
 #loginBox{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,rgba(6,12,26,0) 0%,rgba(6,12,26,0.98) 18%,#060c1a 100%);padding:32px 28px 40px;display:none;flex-direction:column;gap:10px;}
@@ -73,26 +83,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .app{display:none;height:100vh;overflow:hidden;flex-direction:column;}
 
 /* HEADER */
-.app-header{padding:12px 16px 14px;flex-shrink:0;}
-.header-kkm{background:linear-gradient(135deg,#1a3a6b 0%,#0a1628 100%);border-bottom:1px solid var(–blue);}
-.header-saha{background:linear-gradient(135deg,#1a3a2a 0%,#0a1628 100%);border-bottom:1px solid var(–green);}
+.app-header{padding:12px 16px 14px;flex-shrink:0;position:relative;overflow:hidden;}
+.app-header::before{content:’’;position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);animation:headerShine 4s ease-in-out infinite;}
+@keyframes headerShine{0%,100%{opacity:0.4;}50%{opacity:1;}}
+.header-kkm{background:linear-gradient(135deg,#0f2448 0%,#04091a 100%);border-bottom:1px solid rgba(37,99,235,0.4);}
+.header-saha{background:linear-gradient(135deg,#0c2a18 0%,#04091a 100%);border-bottom:1px solid rgba(22,163,74,0.4);}
 .header-inner{display:flex;align-items:center;gap:10px;}
-.header-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
-.header-kkm .header-icon{background:rgba(37,99,235,0.2);color:var(–blue);}
-.header-saha .header-icon{background:rgba(22,163,74,0.2);color:var(–green);}
-.header-title{font-size:0.95rem;font-weight:800;letter-spacing:0.5px;}
-.header-badge{font-size:0.5rem;color:var(–muted);margin-top:1px;}
-.header-lights{display:flex;gap:4px;margin-left:auto;}
-.hlv{width:7px;height:7px;border-radius:50%;animation:blink 0.7s ease-in-out infinite;}
-.hlv.r{background:#ef4444;}
+.header-icon{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0;animation:iconPulse 3s ease-in-out infinite;}
+@keyframes iconPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
+.header-kkm .header-icon{background:linear-gradient(135deg,rgba(37,99,235,0.3),rgba(37,99,235,0.1));color:#60a5fa;box-shadow:0 0 12px rgba(37,99,235,0.3);}
+.header-saha .header-icon{background:linear-gradient(135deg,rgba(22,163,74,0.3),rgba(22,163,74,0.1));color:#4ade80;box-shadow:0 0 12px rgba(22,163,74,0.3);}
+.header-title{font-size:0.95rem;font-weight:800;letter-spacing:0.5px;background:linear-gradient(90deg,#f1f5f9,#cbd5e1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.header-badge{font-size:0.48rem;color:#64748b;margin-top:2px;letter-spacing:0.5px;}
+.header-lights{display:flex;gap:5px;margin-left:auto;align-items:center;}
+.hlv{width:8px;height:8px;border-radius:50%;animation:blink 0.7s ease-in-out infinite;}
+.hlv.r{background:#ef4444;box-shadow:0 0 6px #ef4444;}
 .hlv.w{background:#f8fafc;animation-delay:0.23s;}
-.hlv.b{background:#3b82f6;animation-delay:0.46s;}
+.hlv.b{background:#3b82f6;animation-delay:0.46s;box-shadow:0 0 6px #3b82f6;}
 
 /* SEARCH */
-.search-bar{margin:8px 12px;background:var(–card);border:1px solid var(–border);border-radius:30px;padding:8px 14px;display:flex;align-items:center;gap:8px;}
-.search-bar i{color:var(–muted);font-size:0.75rem;flex-shrink:0;}
-.search-bar input{background:transparent;border:none;color:var(–text);width:100%;font-size:0.72rem;outline:none;}
-.search-bar input::placeholder{color:var(–muted);}
+.search-bar{margin:8px 12px;background:linear-gradient(135deg,rgba(13,24,41,0.9),rgba(22,32,53,0.9));border:1px solid rgba(30,58,95,0.8);border-radius:30px;padding:9px 16px;display:flex;align-items:center;gap:9px;backdrop-filter:blur(10px);transition:border-color 0.2s;}
+.search-bar:focus-within{border-color:rgba(96,165,250,0.5);box-shadow:0 0 0 2px rgba(37,99,235,0.1);}
+.search-bar i{color:#60a5fa;font-size:0.78rem;flex-shrink:0;}
+.search-bar input{background:transparent;border:none;color:#f1f5f9;width:100%;font-size:0.72rem;outline:none;}
+.search-bar input::placeholder{color:#475569;}
 
 /* CONTAINER */
 .container{flex:1;overflow-y:auto;padding:10px 12px 16px;}
@@ -100,21 +114,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .container::-webkit-scrollbar-thumb{background:var(–border);border-radius:3px;}
 
 /* SECTION TITLE */
-.sec{font-size:0.7rem;font-weight:700;color:var(–muted);letter-spacing:1px;text-transform:uppercase;margin:14px 0 8px;display:flex;align-items:center;gap:6px;}
-.sec::after{content:’’;flex:1;height:1px;background:var(–border);}
+.sec{font-size:0.62rem;font-weight:800;color:#475569;letter-spacing:1.5px;text-transform:uppercase;margin:16px 0 9px;display:flex;align-items:center;gap:7px;}
+.sec i{font-size:0.7rem;color:#60a5fa;}
+.sec::after{content:’’;flex:1;height:1px;background:linear-gradient(90deg,var(–border),transparent);}
 
 /* NAV */
-.bottom-nav{background:rgba(6,12,26,0.97);backdrop-filter:blur(20px);border-top:1px solid var(–border);padding:6px 8px 14px;display:flex;justify-content:space-around;flex-shrink:0;}
-.nav-item{color:var(–muted);display:flex;flex-direction:column;align-items:center;font-size:0.48rem;gap:2px;cursor:pointer;padding:4px 8px;border-radius:10px;transition:all 0.2s;}
-.nav-item i{font-size:1rem;}
-.nav-item.active-kkm{color:var(–blue);background:rgba(37,99,235,0.1);}
-.nav-item.active-saha{color:var(–green);background:rgba(22,163,74,0.1);}
+.bottom-nav{background:rgba(4,9,26,0.96);backdrop-filter:blur(24px);border-top:1px solid rgba(30,58,95,0.6);padding:6px 6px 14px;display:flex;justify-content:space-around;flex-shrink:0;}
+.nav-item{color:#475569;display:flex;flex-direction:column;align-items:center;font-size:0.46rem;gap:2px;cursor:pointer;padding:5px 8px;border-radius:12px;transition:var(–trans);position:relative;}
+.nav-item i{font-size:1.05rem;transition:var(–trans);}
+.nav-item:active{transform:scale(0.9);}
+.nav-item.active-kkm{color:#60a5fa;background:rgba(37,99,235,0.12);box-shadow:0 0 12px rgba(37,99,235,0.15);}
+.nav-item.active-kkm i{filter:drop-shadow(0 0 4px #3b82f6);}
+.nav-item.active-saha{color:#4ade80;background:rgba(22,163,74,0.12);box-shadow:0 0 12px rgba(22,163,74,0.15);}
+.nav-item.active-saha i{filter:drop-shadow(0 0 4px #22c55e);}
 
 /* CARDS */
 .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;}
-.algo-card{border-radius:14px;padding:12px;cursor:pointer;border:1px solid transparent;transition:transform 0.15s,opacity 0.15s;position:relative;overflow:hidden;}
-.algo-card:active{transform:scale(0.97);opacity:0.85;}
-.algo-card .card-icon{font-size:1.5rem;margin-bottom:6px;}
+.algo-card{border-radius:16px;padding:13px;cursor:pointer;border:1px solid transparent;transition:var(–trans);position:relative;overflow:hidden;}
+.algo-card::before{content:’’;position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent);transform:skewX(-20deg);transition:left 0.5s;}
+.algo-card:active{transform:scale(0.95) translateY(1px);}
+.algo-card:active::before{left:150%;}
+.algo-card .card-icon{font-size:1.65rem;margin-bottom:7px;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.6));display:block;}
 .algo-card h3{font-size:0.72rem;font-weight:700;margin-bottom:3px;color:#f1f5f9;}
 .algo-card p{font-size:0.5rem;opacity:0.85;line-height:1.4;color:#cbd5e1;}
 .algo-card .card-badge{position:absolute;top:8px;right:8px;font-size:0.42rem;padding:2px 6px;border-radius:20px;font-weight:700;}
@@ -146,19 +166,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 /* EKG Canvas */
 .ecg-wrap{background:#050e1a;border-radius:8px;padding:4px;margin-bottom:5px;position:relative;overflow:hidden;}
-.ecg-canvas{display:block;width:100%;height:48px;}
+.ecg-canvas{width:100%;height:58px !important;min-height:58px;max-height:58px;display:block;border-radius:6px;flex-shrink:0;}
 .rhythm-desc{font-size:0.52rem;color:var(–muted);}
 
 /* CPR CARD */
-.cpr-card{background:linear-gradient(135deg,#1a0a0a,#2d0808);border:1px solid var(–red);border-radius:14px;padding:12px;margin-bottom:8px;text-align:center;}
-.cpr-timer{font-family:‘Courier New’,monospace;font-size:2.4rem;font-weight:900;color:var(–red);text-shadow:0 0 20px rgba(220,38,38,0.7);letter-spacing:4px;}
-.cpr-phase{font-size:0.6rem;margin:4px 0;color:var(–yellow);}
-.cpr-buttons{display:flex;gap:6px;justify-content:center;margin-top:8px;}
-.cpr-btn{border:none;padding:6px 14px;border-radius:30px;color:white;font-weight:700;cursor:pointer;font-size:0.62rem;}
-.cpr-start{background:var(–red);}
-.cpr-stop{background:var(–blue);}
-.cpr-reset{background:#475569;}
-.cpr-stats{display:flex;justify-content:space-between;margin-top:8px;font-size:0.52rem;color:var(–muted);}
+.cpr-card{background:linear-gradient(145deg,#1a0808,#250a0a,#180606);border:1px solid rgba(220,38,38,0.5);border-radius:16px;padding:14px;margin-bottom:8px;text-align:center;position:relative;overflow:hidden;box-shadow:0 4px 24px rgba(220,38,38,0.15),inset 0 1px 0 rgba(255,255,255,0.05);}
+.cpr-card::before{content:’’;position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(239,68,68,0.6),transparent);}
+.cpr-card::after{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(239,68,68,0.07),transparent 60%);pointer-events:none;}
+.cpr-timer{font-family:‘Courier New’,monospace;font-size:2.6rem;font-weight:900;color:#ef4444;text-shadow:0 0 30px rgba(239,68,68,0.8),0 0 60px rgba(239,68,68,0.3);letter-spacing:5px;animation:timerGlow 1s ease-in-out infinite;}
+@keyframes timerGlow{0%,100%{text-shadow:0 0 20px rgba(239,68,68,0.7);}50%{text-shadow:0 0 40px rgba(239,68,68,1),0 0 80px rgba(239,68,68,0.4);}}
+.cpr-phase{font-size:0.62rem;margin:5px 0;color:#fbbf24;font-weight:600;letter-spacing:0.5px;}
+.cpr-buttons{display:flex;gap:7px;justify-content:center;margin-top:10px;}
+.cpr-btn{border:none;padding:8px 18px;border-radius:30px;color:white;font-weight:800;cursor:pointer;font-size:0.64rem;transition:var(–trans);}
+.cpr-btn:active{transform:scale(0.93);}
+.cpr-start{background:linear-gradient(135deg,#dc2626,#991b1b);box-shadow:0 3px 14px rgba(220,38,38,0.5);}
+.cpr-stop{background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 3px 12px rgba(37,99,235,0.45);}
+.cpr-reset{background:linear-gradient(135deg,#475569,#334155);}
+.cpr-stats{display:flex;justify-content:space-between;margin-top:9px;font-size:0.52rem;color:#64748b;}
 .cpr-adr-alert{color:var(–yellow);font-weight:700;font-size:0.65rem;animation:blink-adr 0.5s ease-in-out infinite;}
 @keyframes blink-adr{0%,100%{opacity:1;}50%{opacity:0.3;}}
 
@@ -458,6 +482,75 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @media(max-width:380px){.algo-card h3{font-size:0.65rem;}.cpr-timer{font-size:2rem;}}
 .fade-in{animation:fadeIn 0.3s ease;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+/* ===== AHA 2025 ŞEMA MODAL ===== */
+.aha-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:9999;overflow-y:auto;padding:10px;-webkit-overflow-scrolling:touch;}
+.aha-modal-overlay.open{display:block;animation:fadeIn 0.2s ease;}
+.aha-modal{background:#07101f;border-radius:18px;border:1px solid #1e40af;padding:14px;max-width:440px;margin:0 auto;box-shadow:0 8px 40px rgba(0,0,0,0.7);}
+.aha-modal-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.08);}
+.aha-modal-title{font-size:0.78rem;font-weight:800;color:#f1f5f9;line-height:1.4;flex:1;padding-right:8px;}
+.aha-modal-close{background:rgba(239,68,68,0.15);border:1.5px solid rgba(239,68,68,0.4);color:#ef4444;width:30px;height:30px;min-width:30px;border-radius:9px;cursor:pointer;font-size:0.85rem;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
+.aha-modal-close:active{background:rgba(239,68,68,0.35);transform:scale(0.9);}
+
+/* Flowchart nodes */
+.flow{display:flex;flex-direction:column;align-items:stretch;gap:0;}
+.flow-node{border-radius:12px;padding:10px 12px;text-align:left;font-size:0.62rem;font-weight:600;line-height:1.6;border:2px solid;margin:0;}
+.flow-node ul{margin:6px 0 2px 0;padding-left:15px;font-weight:400;font-size:0.58rem;line-height:1.5;}
+.flow-node ul li{margin-bottom:2px;}
+.fn-start{background:linear-gradient(135deg,#7f1d1d 0%,#3b0a0a 100%);border-color:#ef4444;color:#fecaca;text-align:center;font-weight:800;font-size:0.68rem;}
+.fn-action{background:linear-gradient(135deg,#1e3a5f 0%,#0c1f38 100%);border-color:#3b82f6;color:#bfdbfe;}
+.fn-decision{background:linear-gradient(135deg,#5c3208 0%,#2d1800 100%);border-color:#f59e0b;color:#fde68a;}
+.fn-shock{background:linear-gradient(135deg,#3b1078 0%,#1a0540 100%);border-color:#a78bfa;color:#ede9fe;font-weight:700;}
+.fn-drug{background:linear-gradient(135deg,#064e2a 0%,#022e18 100%);border-color:#22c55e;color:#bbf7d0;}
+.fn-success{background:linear-gradient(135deg,#064e2a 0%,#022e18 100%);border-color:#4ade80;color:#bbf7d0;text-align:center;font-weight:700;}
+.fn-warning{background:linear-gradient(135deg,#7c2d12 0%,#3a0f04 100%);border-color:#fb923c;color:#fed7aa;}
+.fn-info{background:rgba(30,58,138,0.15);border-color:rgba(59,130,246,0.3);color:#93c5fd;font-size:0.55rem;font-weight:400;}
+
+.flow-arrow{font-size:1.2rem;color:#334155;text-align:center;line-height:1;padding:2px 0;}
+.flow-branch{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:0;}
+.flow-branch-label{font-size:0.52rem;font-weight:800;text-align:center;padding:4px;border-radius:7px;margin-bottom:4px;letter-spacing:0.3px;}
+.fb-yes{background:rgba(34,197,94,0.12);color:#4ade80;border:1px solid rgba(34,197,94,0.3);}
+.fb-no{background:rgba(239,68,68,0.12);color:#fca5a5;border:1px solid rgba(239,68,68,0.3);}
+
+.aha-badge-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;}
+.aha-badge{font-size:0.5rem;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:0.3px;}
+.ab-red{background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid rgba(239,68,68,0.35);}
+.ab-blue{background:rgba(96,165,250,0.2);color:#93c5fd;border:1px solid rgba(96,165,250,0.35);}
+.ab-green{background:rgba(74,222,128,0.2);color:#bbf7d0;border:1px solid rgba(74,222,128,0.35);}
+.ab-yellow{background:rgba(251,191,36,0.2);color:#fde68a;border:1px solid rgba(251,191,36,0.35);}
+.ab-purple{background:rgba(167,139,250,0.2);color:#ede9fe;border:1px solid rgba(167,139,250,0.35);}
+
+.aha-note{background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.25);border-radius:10px;padding:9px 12px;font-size:0.56rem;color:#fde68a;line-height:1.7;margin-top:10px;}
+
+/* ===== UI POLİSH — OKUNAKLILIK ===== */
+/* Tüm bölüm başlıkları daha belirgin */
+.sec{font-size:0.62rem !important;letter-spacing:1.2px;padding:10px 14px;background:linear-gradient(90deg,rgba(30,58,138,0.15),transparent);}
+/* Kart metinleri */
+.algo-card h3{font-size:0.74rem !important;}
+.algo-card p{font-size:0.52rem !important;opacity:0.9 !important;}
+/* Proto-card iyileştirme */
+.proto-card{transition:transform 0.15s,box-shadow 0.15s;}
+.proto-card:active{transform:scale(0.97);}
+/* Scroll düzeltme */
+.saha-container,.kkm-container{scroll-behavior:smooth;}
+/* Badge kontrast */
+.card-badge{font-size:0.44rem !important;padding:3px 7px !important;font-weight:800 !important;}
+/* Nav label okunaklilik */
+.bottom-nav .nav-item span{font-size:0.48rem !important;font-weight:600;}
+.bottom-nav .nav-item i{font-size:1.1rem !important;}
+/* Sec icon */
+.sec i{font-size:0.75rem;margin-right:6px;}
+/* Genel input iyileştirme */
+input,select,textarea{border-radius:10px !important;}
+select{-webkit-appearance:none;appearance:none;background-image:url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘12’ height=‘12’ viewBox=‘0 0 24 24’ fill=’%2394a3b8’%3E%3Cpath d=‘M7 10l5 5 5-5z’/%3E%3C/svg%3E”);background-repeat:no-repeat;background-position:right 10px center;padding-right:28px !important;}
+/* Modal backdrop blur */
+.modal-backdrop,.aha-modal-overlay{backdrop-filter:blur(4px);}
+/* AHA kart hover glow */
+.algo-card:hover{filter:brightness(1.08);}
+
+/* c-indigo c-rose ek renkler */
+.c-indigo{background:linear-gradient(135deg,#1e1b4b,#0a0820);border-color:#818cf8;box-shadow:0 2px 14px rgba(129,140,248,0.22);}
+.c-rose{background:linear-gradient(135deg,#881337,#3b0718);border-color:#fb7185;box-shadow:0 2px 14px rgba(251,113,133,0.22);}
 </style>
 
 </head>
@@ -1328,326 +1421,289 @@ document.getElementById('cprStopBtn').onclick=()=>{if(cprInt){clearInterval(cprI
 document.getElementById('cprResetBtn').onclick=()=>{if(cprInt){clearInterval(cprInt);cprInt=null;}cprSec=120;cprCycle=0;cprTotal=0;cprCompress=true;cprPhaseC=0;cprAdrT=180;cprDisplay();};
 cprDisplay();
 
-// ======= GERÇEKÇİ CANVAS EKG SİSTEMİ =======
-// Her ritim için gerçekçi dalga noktaları tanımları
-// Hızlar: px/saniye cinsinden (gerçekçi EKG kağıt hızı 25 mm/s simüle ediliyor)
+// ======= PROFESYONEL EKG SİSTEMİ v4 — GERÇEK ZAMANLI YAZI KAFASI =======
+// Model: Yazıcı kafası — yeni sinyal sağdan eklenir, eski sinyal sola kayar
+// Buffer scroll yok — canvas yüksekliği asla değişmez
+
+const ECG_FIXED_H = 58;
+const ECG_PX_PER_SEC = 220;
+const ECG_FPS = 60;
 
 const ecgRhythms = [
-  {
-    id:'sinusNormal', name:'✅ NORMAL SİNÜS RİTMİ', label:'✅ Normal', labelClass:'lbl-stable',
-    color:'#22c55e', hr:75, // 75/dk → RR=800ms
-    desc:'P→QRS→T, düzenli, 60-100/dk. Referans ritim.',
-    algo:'sinusNormal',
-    // Tek beat tanımı — normalize x[0..1], y[-1..1]
-    beat: [
-      // İzoelektrik
-      [0,0],[0.12,0],
-      // P dalgası (hafif yuvarlak, 80ms)
-      [0.14,0.08],[0.17,0.15],[0.20,0.08],[0.22,0],
-      // PR izoelektrik
-      [0.28,0],
-      // Q
-      [0.30,-0.08],
-      // R
-      [0.33,1.0],
-      // S
-      [0.36,-0.12],[0.38,0],
-      // ST izoelektrik
-      [0.44,0],
-      // T dalgası
-      [0.48,0.12],[0.55,0.22],[0.62,0.12],[0.68,0],
-      // sonraki atışa kadar
-      [1.0,0]
-    ]
-  },
-  {
-    id:'vf', name:'⚡ VENTRİKÜLER FİBRİLASYON (VF)', label:'⚡ ŞOK!', labelClass:'lbl-shock',
-    color:'#ef4444', hr:300,
-    desc:'Kaotik düzensiz ritim. Hızlı aksiyon: Defibrilatör 360J → 2dk CPR → Tekrar',
-    algo:'vf',
-    beat: null, custom: 'vf'
-  },
-  {
-    id:'vt', name:'⚡ VENTRİKÜLER TAŞİKARDİ (VT)', label:'⚡ KARDİYOVERSİYON', labelClass:'lbl-shock',
-    color:'#f97316', hr:160,
-    desc:'Geniş QRS (>0.12sn), düzenli sinüzoidal dalgalar, 120-200/dk.',
-    algo:'vt',
-    beat: [
-      [0,0],
-      // Geniş yavaş QRS (monofazik)
-      [0.05,0.05],[0.12,0.3],[0.18,0.7],[0.25,1.0],[0.32,0.7],[0.38,0.3],[0.45,0.05],
-      [0.50,0],
-      // ST değişimi
-      [0.55,-0.1],[0.60,-0.2],[0.65,-0.2],[0.70,-0.15],[0.75,-0.05],[0.80,0],
-      [1.0,0]
-    ]
-  },
-  {
-    id:'svt', name:'📈 SUPRAVENTRİKÜLER TAŞİKARDİ (SVT)', label:'💊 Adenozin', labelClass:'lbl-meds',
-    color:'#eab308', hr:155,
-    desc:'Dar QRS, düzenli, 150-250/dk. P dalgası görünmez. Vagal → Adenozin 6mg→12mg',
-    algo:'svt',
-    beat: [
-      [0,0],[0.06,0],
-      // Dar QRS — düzenli tek düze hareket
-      [0.09,-0.04],[0.13,0.88],[0.17,-0.09],[0.21,0],
-      // T dalgası — belirgin, düzenli
-      [0.26,0.08],[0.34,0.17],[0.42,0.08],[0.50,0],
-      [1.0,0]
-    ],
-    speed: 0.9
-  },
-  {
-    id:'af', name:'🔀 ATRİYAL FİBRİLASYON (AF)', label:'⚠️ Hız Kont.', labelClass:'lbl-unstable',
-    color:'#a78bfa', hr:110,
-    desc:'Düzensiz R-R, fibrilasyon dalgaları. Hız kontrolü → Antikoagülasyon planı',
-    algo:'af',
-    beat: null, custom: 'af'
-  },
-  {
-    id:'asistoli', name:'📉 ASİSTOLİ / PEA', label:'CPR + ADRENALİN', labelClass:'lbl-cpr',
-    color:'#ef4444', hr:0,
-    desc:'Düz hat veya ince fibrilasyon. ŞOK VERİLMEZ! Adrenalin 1mg/3-5dk → 5H5T!',
-    algo:'asistoli',
-    beat: null, custom: 'asistoli'
-  },
-  {
-    id:'torsades', name:'🌀 TORSADES DE POINTES', label:'⚡ MgSO4 + ŞOK', labelClass:'lbl-shock',
-    color:'#f43f5e', hr:220,
-    desc:'Dönüp bükülen eksen, geniş QRS, QT uzun. IV MgSO4 2g! Kararsız → Defibrilasyon 360J',
-    algo:'vt',
-    beat: null, custom: 'torsades'
-  },
-  {
-    id:'avblock3', name:'🚫 TAM AV BLOK (3. Derece)', label:'⚡ ACİL PACİNG', labelClass:'lbl-unstable',
-    color:'#60a5fa', hr:35,
-    desc:'P dalgaları (mavi) ve QRS (turuncu) birbirinden bağımsız. Atropin etkisiz! ACİL TCP pacing!',
-    algo:'bradikardi',
-    beat: null, custom: 'avblock3'
-  }
+  // ── NORMAL SİNÜS ──
+  { id:'sinusNormal', name:'✅ NORMAL SİNÜS RİTMİ', label:'✅ Normal', labelClass:'lbl-stable',
+    color:'#22c55e', hr:72, algo:'sinusNormal',
+    desc:'P→QRS→T düzenli, 60-100/dk. Referans ritim.',
+    wave:[[0.00,0.000],[0.10,0.000],[0.13,0.050],[0.17,0.180],[0.21,0.050],[0.24,0.000],[0.28,0.000],[0.30,-0.100],[0.335,1.000],[0.355,-0.150],[0.37,0.000],[0.43,0.000],[0.47,0.080],[0.54,0.260],[0.61,0.080],[0.67,0.000],[1.00,0.000]]},
+  // ── SİNÜS TAŞİKARDİ ──
+  { id:'sinusTak', name:'📈 SİNÜS TAŞİKARDİ', label:'⚠️ Değerlendir', labelClass:'lbl-unstable',
+    color:'#fbbf24', hr:118, algo:'sinusTak',
+    desc:'Düzenli P→QRS→T, 100-150/dk. Neden: ağrı, hipovolemi, sepsis, PE.',
+    wave:[[0.00,0.000],[0.07,0.000],[0.09,0.050],[0.12,0.160],[0.15,0.050],[0.18,0.000],[0.21,0.000],[0.23,-0.090],[0.245,1.000],[0.26,-0.130],[0.275,0.000],[0.32,0.000],[0.35,0.070],[0.41,0.210],[0.47,0.070],[0.52,0.000],[1.00,0.000]]},
+  // ── SİNÜS BRADİKARDİ ──
+  { id:'sinusBrad', name:'📉 SİNÜS BRADİKARDİ', label:'⚠️ Atropin?', labelClass:'lbl-unstable',
+    color:'#38bdf8', hr:42, algo:'bradikardi',
+    desc:'Düzenli <60/dk. Semptomatikse Atropin 0.5mg IV → TCP pacing.',
+    wave:[[0.00,0.000],[0.08,0.000],[0.11,0.070],[0.16,0.200],[0.21,0.070],[0.25,0.000],[0.30,0.000],[0.32,-0.110],[0.340,1.000],[0.36,-0.160],[0.38,0.000],[0.44,0.000],[0.49,0.100],[0.57,0.300],[0.65,0.100],[0.72,0.000],[1.00,0.000]]},
+  // ── VF ──
+  { id:'vf', name:'⚡ VENTRİKÜLER FİBRİLASYON (VF)', label:'⚡ ŞOK!', labelClass:'lbl-shock',
+    color:'#ef4444', hr:300, algo:'vf', custom:'vf',
+    desc:'Kaotik düzensiz. HEMEN defibrilasyon 360J → 2dk KPR → Tekrar.'},
+  // ── NABIPSIZ VT ──
+  { id:'vt', name:'⚡ NABIZSİZ VT', label:'⚡ ŞOK!', labelClass:'lbl-shock',
+    color:'#f97316', hr:170, algo:'vt',
+    desc:'Geniş QRS >120ms, düzenli 120-250/dk. Nabızsız → Defib! Nabızlı → Kardiyoversiyon.',
+    wave:[[0.00,0.000],[0.06,0.100],[0.14,0.500],[0.22,1.000],[0.30,0.500],[0.38,0.100],[0.44,0.000],[0.50,-0.150],[0.58,-0.280],[0.66,-0.200],[0.74,-0.080],[0.82,0.000],[1.00,0.000]]},
+  // ── SVT ──
+  { id:'svt', name:'📈 SUPRAVENTRİKÜLER TAŞİKARDİ (SVT)', label:'💊 Adenozin', labelClass:'lbl-meds',
+    color:'#eab308', hr:210, algo:'svt', speed:2.4,
+    desc:'Dar QRS 150-250/dk, P gizli. Vagal → Adenozin 6mg hızlı IV puşe + flush.',
+    wave:[[0.00,0.000],[0.03,0.000],[0.055,-0.060],[0.075,0.950],[0.095,-0.120],[0.115,0.000],[0.155,0.060],[0.200,0.160],[0.245,0.060],[0.280,0.000],[1.00,0.000]]},
+  // ── AF ──
+  { id:'af', name:'🔀 ATRİYAL FİBRİLASYON (AF)', label:'⚠️ Hız Kont.', labelClass:'lbl-unstable',
+    color:'#a78bfa', hr:110, algo:'af', custom:'af',
+    desc:'Düzensiz R-R, f dalgaları. Hız kontrolü + antikoagülasyon.'},
+  // ── FLUTTER ──
+  { id:'flutter', name:'🔀 ATRİYAL FLUTTER', label:'⚠️ Kardiyoversiyon', labelClass:'lbl-unstable',
+    color:'#c084fc', hr:150, algo:'af', custom:'flutter',
+    desc:'Testere dişi F dalgaları 300/dk, 2:1 ileti → ventriküler 150/dk.'},
+  // ── ASİSTOLİ ──
+  { id:'asistoli', name:'📉 ASİSTOLİ / PEA', label:'KPR + ADRENALİN', labelClass:'lbl-cpr',
+    color:'#6b7280', hr:0, algo:'asistoli', custom:'asistoli',
+    desc:'Düz hat. KPR + Adrenalin 1mg/3-5dk. ŞOK VERİLMEZ! 5H5T ara!'},
+  // ── TORSADES ──
+  { id:'torsades', name:'🌀 TORSADES DE POINTES', label:'⚡ MgSO4 + ŞOK', labelClass:'lbl-shock',
+    color:'#f43f5e', hr:220, algo:'vt', custom:'torsades',
+    desc:'Dönen eksen, geniş QRS, uzun QT. IV MgSO4 2g! Kararsız → Defib 360J.'},
+  // ── 1. DERECE AV BLOK ──
+  { id:'avblock1', name:'⏱️ 1. DERECE AV BLOK', label:'👀 İzle', labelClass:'lbl-stable',
+    color:'#34d399', hr:65, algo:'bradikardi',
+    desc:'PR >200ms sabit, düzenli iletim. Genellikle tedavi gerekmez.',
+    wave:[[0.00,0.000],[0.06,0.000],[0.09,0.060],[0.13,0.180],[0.17,0.060],[0.20,0.000],[0.38,0.000],[0.40,-0.100],[0.420,1.000],[0.44,-0.140],[0.46,0.000],[0.52,0.000],[0.56,0.080],[0.63,0.240],[0.70,0.080],[0.76,0.000],[1.00,0.000]]},
+  // ── MOBITZ 2 ──
+  { id:'avblock2', name:'⚠️ 2. DERECE AV BLOK (Mobitz 2)', label:'⚡ Pacing Hazır', labelClass:'lbl-unstable',
+    color:'#fb923c', hr:50, algo:'bradikardi', custom:'mobitz2',
+    desc:'PR sabit ama bazı P dalgaları iletilmez (dropped beat). TCP pacing hazırlığı!'},
+  // ── TAM AV BLOK ──
+  { id:'avblock3', name:'🚫 TAM AV BLOK (3. Derece)', label:'⚡ ACİL PACİNG', labelClass:'lbl-unstable',
+    color:'#60a5fa', hr:35, algo:'bradikardi', custom:'avblock3',
+    desc:'P ve QRS tamamen bağımsız. Atropin etkisiz! ACİL TCP pacing + dopamin.'},
+  // ── AKUT İNFERİOR MI ──
+  { id:'stemiInf', name:'🔴 AKUT İNFERİOR MI (II,III,aVF)', label:'🏥 ACİL PCI', labelClass:'lbl-shock',
+    color:'#ef4444', hr:68, algo:'stemi',
+    desc:'ST elev ≥1mm II,III,aVF. RV tutulum %40. Sağ derivasyon çek. NİTRAT DİKKAT!',
+    wave:[[0.00,0.000],[0.10,0.000],[0.12,0.060],[0.16,0.180],[0.20,0.060],[0.23,0.000],[0.27,0.000],[0.29,-0.080],[0.310,1.000],[0.33,-0.100],[0.35,0.000],[0.38,0.220],[0.44,0.200],[0.50,0.350],[0.58,0.420],[0.66,0.300],[0.74,0.100],[0.82,0.000],[1.00,0.000]]},
+  // ── AKUT ANTERİOR MI ──
+  { id:'stemiAnt', name:'🔴 AKUT ANTERİOR MI (V1-V4)', label:'🏥 ACİL PCI', labelClass:'lbl-shock',
+    color:'#dc2626', hr:88, algo:'stemi',
+    desc:'V1-V4 ST elevasyonu. Tombstone T dalgası. LV disfonksiyon riski yüksek. ACİL PCI!',
+    wave:[[0.00,0.000],[0.09,0.000],[0.11,0.050],[0.15,0.160],[0.19,0.050],[0.22,0.000],[0.26,0.000],[0.28,-0.180],[0.305,0.700],[0.33,-0.050],[0.35,0.000],[0.37,0.320],[0.43,0.450],[0.52,0.580],[0.61,0.420],[0.70,0.200],[0.78,0.080],[0.85,0.000],[1.00,0.000]]},
+  // ── AKUT LATERAL MI ──
+  { id:'stemiLat', name:'🔴 AKUT LATERAL MI (I,aVL,V5-V6)', label:'🏥 ACİL PCI', labelClass:'lbl-shock',
+    color:'#b91c1c', hr:76, algo:'stemi',
+    desc:'I,aVL,V5-V6 ST elevasyonu. Karşılıklı II,III,aVF depresyonu. LCX oklüzyonu.',
+    wave:[[0.00,0.000],[0.10,0.000],[0.12,0.060],[0.16,0.180],[0.20,0.060],[0.23,0.000],[0.27,0.000],[0.29,-0.070],[0.315,0.900],[0.34,-0.110],[0.36,0.000],[0.39,0.180],[0.46,0.280],[0.54,0.360],[0.62,0.220],[0.70,0.080],[0.78,0.000],[1.00,0.000]]},
+  // ── WPW ──
+  { id:'wpw', name:'⚡ WOLFF-PARKINSON-WHITE (WPW)', label:'⚠️ PROKAİNAMİD', labelClass:'lbl-unstable',
+    color:'#f59e0b', hr:80, algo:'svt',
+    desc:'Delta dalgası + kısa PR + geniş QRS. Adenozin/Digoksin KONTRENDİKE!',
+    wave:[[0.00,0.000],[0.08,0.000],[0.10,0.060],[0.14,0.170],[0.18,0.060],[0.20,0.000],[0.22,0.000],[0.24,0.150],[0.27,0.400],[0.30,1.000],[0.34,-0.100],[0.37,0.000],[0.42,-0.050],[0.48,-0.150],[0.55,-0.100],[0.62,0.000],[1.00,0.000]]},
+  // ── HİPERKALEMİ ──
+  { id:'hiperkali', name:'⚡ HİPERKALEMİ EKG', label:'🧪 Ca + Kayeksal', labelClass:'lbl-shock',
+    color:'#fb7185', hr:55, algo:'bradikardi',
+    desc:'Çadır T dalgaları, geniş QRS, P kaybı. CaCl2 1g IV! + Dekstroz+İnsülin + Kayeksal.',
+    wave:[[0.00,0.000],[0.10,0.000],[0.13,0.020],[0.17,0.040],[0.21,0.020],[0.24,0.000],[0.28,0.000],[0.29,-0.080],[0.32,0.060],[0.345,0.800],[0.37,-0.100],[0.40,0.000],[0.42,0.000],[0.44,0.200],[0.48,0.600],[0.52,0.850],[0.56,0.600],[0.60,0.200],[0.65,0.000],[1.00,0.000]]},
+  // ── PACEMAKERLİ ──
+  { id:'pacemaker', name:'⚡ PACEMAKERLİ RİTİM', label:'🔋 Pace OK', labelClass:'lbl-stable',
+    color:'#22d3ee', hr:70, algo:'bradikardi', custom:'pacemaker',
+    desc:'Pace spike + geniş QRS. Altta yatan ritmi değerlendir. Spike yakalamayı kontrol et.'},
 ];
 
-// Canvas EKG çizici sınıfı
+// ─── GERÇEK ZAMANLI EKG RENDERER ───
 class ECGRenderer {
   constructor(canvas, rhythm) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.rhythm = rhythm;
-    this.offset = 0; // px kaydırma
-    this.buffer = null; // pre-rendered beat buffer
     this.animId = null;
-    this.speed = rhythm.speed !== undefined ? rhythm.speed : 1.5; // px/frame — ritme özgü hız
+    this.t = 0;
+    this.lastFrame = null;
+    this.speed = rhythm.speed || 1.0;
+    this.sig = null;
+    this.W = 0;
+    this.H = ECG_FIXED_H;
+    this.mid = 0;
+    this.amp = 0;
     this.init();
   }
 
   init() {
     const dpr = window.devicePixelRatio || 1;
-    const rect = this.canvas.getBoundingClientRect();
-    const w = rect.width || this.canvas.offsetWidth || 320;
-    const h = 48;
-    this.canvas.width = w * dpr;
-    this.canvas.height = h * dpr;
+    const H = ECG_FIXED_H;
+    // CSS yüksekliği zorla
+    this.canvas.style.height = H + 'px';
+    this.canvas.style.minHeight = H + 'px';
+    this.canvas.style.maxHeight = H + 'px';
+    this.canvas.style.display = 'block';
+    // Genişlik
+    const parent = this.canvas.parentElement;
+    const W = Math.max(parent ? parent.offsetWidth - 4 : 300, 100);
+    this.canvas.width  = W * dpr;
+    this.canvas.height = H * dpr;
     this.ctx.scale(dpr, dpr);
-    this.w = w;
-    this.h = h;
-    this.buildBuffer();
+    this.W = W;
+    this.H = H;
+    this.mid = H / 2;
+    this.amp = H * 0.40;
+    // Sinyal tamponu — her piksel için bir değer
+    this.sig = new Float32Array(W).fill(0);
     this.animate();
   }
 
-  buildBuffer() {
+  // Anlık voltaj değeri — t saniye
+  getSample(t) {
     const r = this.rhythm;
-    const h = this.h;
-    const mid = h / 2;
-    const amp = h * 0.42;
-
-    // Her ritim için beat genişliği (px)
-    // 25mm/s = 250px/s → 1 beat = 60/HR * 250 px
-    let beatW;
-    if(r.hr === 0) beatW = this.w * 2;
-    else beatW = Math.max(30, (60 / r.hr) * 200); // px
-
-    // Buffer canvas oluştur (2 beat genişliği)
-    const bufW = Math.ceil(beatW * 3);
-    const buf = document.createElement('canvas');
-    buf.width = bufW;
-    buf.height = h;
-    const bctx = buf.getContext('2d');
-
-    // EKG kağıt grid
-    bctx.strokeStyle = 'rgba(34,197,94,0.05)';
-    bctx.lineWidth = 0.5;
-    for(let x=0;x<bufW;x+=10){bctx.beginPath();bctx.moveTo(x,0);bctx.lineTo(x,h);bctx.stroke();}
-    for(let y=0;y<h;y+=8){bctx.beginPath();bctx.moveTo(0,y);bctx.lineTo(bufW,y);bctx.stroke();}
-
-    bctx.strokeStyle = r.color;
-    bctx.lineWidth = 1.5;
-    bctx.shadowColor = r.color;
-    bctx.shadowBlur = 3;
-    bctx.lineCap = 'round';
-    bctx.lineJoin = 'round';
-
-    // Custom ritimler
-    if(r.custom) {
-      this._drawCustom(bctx, r.custom, bufW, h, mid, amp, beatW);
-    } else {
-      // Beat noktalarını tekrarla
-      for(let rep=0; rep<3; rep++) {
-        const startX = rep * beatW;
-        bctx.beginPath();
-        r.beat.forEach(([t,v],i) => {
-          const x = startX + t * beatW;
-          const y = mid - v * amp;
-          if(i===0) bctx.moveTo(x,y); else bctx.lineTo(x,y);
-        });
-        bctx.stroke();
-      }
+    if (!r.hr || r.hr === 0) {
+      return (Math.sin(t*0.3)*0.012 + (Math.random()-0.5)*0.018);
     }
-
-    this.buffer = buf;
-    this.bufW = bufW;
-    this.beatW = beatW;
+    const rr = 60 / r.hr;
+    const phase = (t % rr) / rr;
+    if (r.custom) return this._customSample(r.custom, t, phase, rr);
+    if (r.wave)   return this._waveSample(r.wave, phase);
+    return 0;
   }
 
-  _drawCustom(bctx, type, bufW, h, mid, amp, beatW) {
-    if(type === 'vf') {
-      // VF: yüksek frekanslı kaotik dalgalar — ama her dalga kendine özgü
-      bctx.beginPath();
-      let x = 0;
-      let seed = 0;
-      const lcg = () => { seed = (seed * 1664525 + 1013904223) & 0xffffffff; return (seed >>> 0) / 4294967296; };
-      while(x < bufW) {
-        const waveW = 6 + lcg() * 8;
-        const waveH = (lcg() * 0.7 + 0.2) * amp * (lcg() > 0.5 ? 1 : -1);
-        const ctrlX = x + waveW * 0.5;
-        const nextY = mid + waveH;
-        if(x === 0) bctx.moveTo(x, mid);
-        bctx.quadraticCurveTo(ctrlX, mid + waveH * 1.4, x + waveW, nextY * 0.3 + mid * 0.7);
-        x += waveW;
+  _waveSample(wave, phase) {
+    for (let i = 0; i < wave.length - 1; i++) {
+      const t0 = wave[i][0], v0 = wave[i][1];
+      const t1 = wave[i+1][0], v1 = wave[i+1][1];
+      if (phase >= t0 && phase <= t1) {
+        const a = (t1 - t0) < 0.0001 ? 0 : (phase - t0) / (t1 - t0);
+        return v0 + (v1 - v0) * a;
       }
-      bctx.stroke();
     }
-    else if(type === 'af') {
-      // AF: düzensiz QRS + fibrilasyon temeli
-      bctx.beginPath();
-      // Fibrilasyon baseline
-      let x = 0;
-      while(x < bufW) {
-        const y = mid + (Math.sin(x * 0.4) * 1.5 + Math.sin(x * 0.7 + 1) * 1.2 + Math.sin(x * 1.2 + 2) * 0.8);
-        if(x === 0) bctx.moveTo(x, y); else bctx.lineTo(x, y);
-        x += 1;
-      }
-      bctx.stroke();
+    return 0;
+  }
 
-      // Düzensiz QRS'ler
-      const rrIntervals = [60, 52, 75, 48, 65, 55, 80, 58, 70, 50, 68];
-      let pos = 15;
-      rrIntervals.forEach(rr => {
-        const scale = rr / 60;
-        const qrsW = 8 * scale;
-        bctx.beginPath();
-        bctx.moveTo(pos, mid);
-        bctx.lineTo(pos + qrsW * 0.15, mid + amp * 0.08);
-        bctx.lineTo(pos + qrsW * 0.3, mid - amp * 0.85);
-        bctx.lineTo(pos + qrsW * 0.5, mid + amp * 0.12);
-        bctx.lineTo(pos + qrsW * 0.65, mid);
-        // T dalgası
-        bctx.quadraticCurveTo(pos + qrsW * 1.5, mid - amp * 0.15, pos + qrsW * 2.5, mid);
-        bctx.stroke();
-        pos += rr * scale * 2;
-        if(pos > bufW) return;
-      });
+  _customSample(type, t, phase, rr) {
+    if (type === 'vf') {
+      return (Math.sin(t*37.3)*0.50 + Math.sin(t*61.7)*0.35 +
+              Math.sin(t*89.1)*0.25 + Math.sin(t*113.3)*0.15 +
+              Math.sin(t*157.9)*0.10) * 0.85;
     }
-    else if(type === 'asistoli') {
-      // Asistoli: neredeyse düz hat, çok ufak titreme
-      bctx.beginPath();
-      for(let x=0; x<bufW; x++) {
-        const noise = (Math.random() - 0.5) * 1.5;
-        const y = mid + noise;
-        if(x === 0) bctx.moveTo(x, y); else bctx.lineTo(x, y);
-      }
-      bctx.stroke();
+    if (type === 'af') {
+      const f = Math.sin(t*18.8)*0.04 + Math.sin(t*28.3)*0.03;
+      const rrV = [0.52,0.38,0.62,0.44,0.58,0.36,0.48,0.66,0.40,0.54];
+      const cycleT = t % 5.6;
+      let acc = 0, idx2 = 0;
+      while (acc < cycleT && idx2 < 50) { acc += rrV[idx2 % rrV.length] * 0.56; idx2++; }
+      const qp = ((t * 1.85) % 1);
+      const qrs = qp < 0.18 ? this._waveSample([[0,0],[0.05,-0.08],[0.10,0.90],[0.16,-0.10],[0.22,0],[0.35,0.07],[0.55,0.16],[0.75,0.07],[0.90,0],[1,0]], qp/0.18) : 0;
+      return f + qrs;
     }
-    else if(type === 'torsades') {
-      // Torsades: eksen dönen geniş QRS grupları
-      bctx.beginPath();
-      let x = 0;
-      let phase = 0;
-      while(x < bufW) {
-        const groupLen = 40;
-        const envelop = Math.sin(phase * Math.PI / groupLen);
-        const beatAmp = envelop * amp;
-        // Sinüzoidal geniş QRS
-        const beatProgress = (phase % groupLen) / groupLen;
-        const y = mid - Math.sin(beatProgress * Math.PI * 2) * beatAmp;
-        if(x === 0) bctx.moveTo(x, y); else bctx.lineTo(x, y);
-        x += 1;
-        phase += 1;
-      }
-      bctx.stroke();
+    if (type === 'flutter') {
+      const fp = (t * 5.0) % 1;
+      const saw = fp < 0.5 ? -0.25 + fp*0.80 : 0.15 - (fp-0.5)*0.80;
+      const qp2 = (t * 2.5) % 1;
+      const qrs2 = qp2 < 0.12 ? this._waveSample([[0,0],[0.2,-0.08],[0.4,0.90],[0.6,-0.10],[0.8,0],[1,0]], qp2/0.12) : 0;
+      return saw * 0.55 + qrs2;
     }
-    else if(type === 'avblock3') {
-      // 3. Derece AV Blok: P dalgaları hızlı (mavi), QRS yavaş (turuncu)
-      const pRate = 75; // P dalgası hızı
-      const qrsRate = 35; // QRS hızı (escape ritim)
-      const pW = (60 / pRate) * 200;
-      const qrsW = (60 / qrsRate) * 200;
-
-      // P dalgaları (mavi)
-      bctx.strokeStyle = '#60a5fa';
-      bctx.shadowColor = '#60a5fa';
-      bctx.beginPath();
-      let px = 5;
-      while(px < bufW) {
-        bctx.moveTo(px, mid);
-        bctx.quadraticCurveTo(px + pW * 0.15, mid - amp * 0.15, px + pW * 0.3, mid);
-        bctx.lineTo(px + pW, mid);
-        px += pW;
-      }
-      bctx.stroke();
-
-      // QRS (turuncu, bağımsız)
-      bctx.strokeStyle = '#f97316';
-      bctx.shadowColor = '#f97316';
-      bctx.lineWidth = 2;
-      let qx = 20;
-      while(qx < bufW) {
-        bctx.beginPath();
-        bctx.moveTo(qx, mid);
-        bctx.lineTo(qx + 4, mid - amp * 0.08);
-        bctx.lineTo(qx + 8, mid - amp * 0.95);
-        bctx.lineTo(qx + 12, mid + amp * 0.15);
-        bctx.lineTo(qx + 16, mid);
-        bctx.quadraticCurveTo(qx + 35, mid - amp * 0.2, qx + 50, mid);
-        bctx.stroke();
-        qx += qrsW;
-      }
+    if (type === 'asistoli') {
+      return (Math.sin(t*0.3)*0.012 + (Math.random()-0.5)*0.018);
     }
+    if (type === 'torsades') {
+      const env = Math.sin(t * 1.75) * 0.92;
+      return Math.sin(t * 22.5) * env;
+    }
+    if (type === 'mobitz2') {
+      const blockCycle = t % (3 * 0.90);
+      const beatIdx = Math.floor(blockCycle / 0.90);
+      const bp = (blockCycle % 0.90) / 0.90;
+      if (beatIdx < 2) {
+        return this._waveSample([[0,0],[0.08,0],[0.10,0.06],[0.14,0.18],[0.18,0.06],[0.21,0],[0.26,0],[0.28,-0.10],[0.30,1.00],[0.32,-0.14],[0.34,0],[0.40,0],[0.44,0.08],[0.51,0.24],[0.58,0.08],[0.64,0],[1.0,0]], bp);
+      }
+      return this._waveSample([[0,0],[0.08,0],[0.10,0.06],[0.14,0.18],[0.18,0.06],[0.21,0],[1.0,0]], bp);
+    }
+    if (type === 'avblock3') {
+      const pP = (t * 1.25) % 1;
+      const qP = (t * 0.583) % 1;
+      const pV = this._waveSample([[0,0],[0.1,0],[0.13,0.15],[0.20,0],[1.0,0]], pP) * 0.8;
+      const qV = qP < 0.35 ? this._waveSample([[0,0],[0.05,-0.09],[0.10,0.90],[0.15,-0.12],[0.20,0],[0.30,0],[0.33,0.10],[0.50,0.28],[0.67,0.10],[0.80,0],[1.0,0]], qP/0.35) : 0;
+      return pV + qV;
+    }
+    if (type === 'pacemaker') {
+      const pp = (t * (70/60)) % 1;
+      if (pp < 0.008) return 1.3;
+      if (pp < 0.016) return -0.4;
+      return this._waveSample([[0,0],[0.02,0],[0.04,-0.05],[0.10,0.80],[0.18,0.60],[0.26,0.20],[0.34,0],[0.40,-0.12],[0.48,-0.20],[0.56,-0.14],[0.64,0],[0.68,0.06],[0.76,0.18],[0.84,0.06],[0.90,0],[1.0,0]], pp);
+    }
+    return 0;
   }
 
   animate() {
-    const draw = () => {
-      this.ctx.clearRect(0, 0, this.w, this.h);
+    const draw = (timestamp) => {
+      if (!this.lastFrame) this.lastFrame = timestamp;
+      const dt = Math.min((timestamp - this.lastFrame) / 1000, 0.05);
+      this.lastFrame = timestamp;
+
+      // Kaç adım ilerleyeceğiz — hız * dt * px/sn
+      const pxPerSec = ECG_PX_PER_SEC * this.speed;
+      const steps = Math.max(1, Math.round(pxPerSec * dt));
+      const dtStep = dt / steps;
+
+      for (let s = 0; s < steps; s++) {
+        this.t += dtStep;
+        const v = this.getSample(this.t);
+        // Tamponu bir adım sola kaydır
+        this.sig.copyWithin(0, 1);
+        this.sig[this.W - 1] = v;
+      }
+
+      const ctx = this.ctx;
+      ctx.clearRect(0, 0, this.W, this.H);
+
       // EKG grid
-      this.ctx.strokeStyle = 'rgba(34,197,94,0.04)';
-      this.ctx.lineWidth = 0.5;
-      for(let x=0;x<this.w;x+=10){this.ctx.beginPath();this.ctx.moveTo(x,0);this.ctx.lineTo(x,this.h);this.ctx.stroke();}
-      for(let y=0;y<this.h;y+=8){this.ctx.beginPath();this.ctx.moveTo(0,y);this.ctx.lineTo(this.w,y);this.ctx.stroke();}
+      ctx.strokeStyle = 'rgba(34,197,94,0.055)';
+      ctx.lineWidth = 0.5;
+      for (let x = 0; x < this.W; x += 12) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, this.H); ctx.stroke();
+      }
+      for (let y = 0; y < this.H; y += 8) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(this.W, y); ctx.stroke();
+      }
 
-      // Buffer'ı kaydırarak çiz
-      const src = this.offset % this.bufW;
-      // İki parça halinde çiz (seamless loop)
-      const part1W = this.bufW - src;
-      if(part1W > 0) this.ctx.drawImage(this.buffer, src, 0, Math.min(part1W, this.w), this.h, 0, 0, Math.min(part1W, this.w), this.h);
-      if(part1W < this.w) this.ctx.drawImage(this.buffer, 0, 0, this.w - part1W, this.h, part1W, 0, this.w - part1W, this.h);
+      // Sinyal
+      ctx.beginPath();
+      ctx.strokeStyle = this.rhythm.color;
+      ctx.lineWidth = 1.7;
+      ctx.shadowColor = this.rhythm.color;
+      ctx.shadowBlur = 5;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      for (let x = 0; x < this.W; x++) {
+        const y = this.mid - this.sig[x] * this.amp;
+        if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
 
-      this.offset = (this.offset + this.speed) % this.bufW;
+      // Yazıcı kafası nokta (en sağda parlayan nokta)
+      ctx.shadowBlur = 0;
+      const lastY = this.mid - this.sig[this.W - 1] * this.amp;
+      ctx.beginPath();
+      ctx.arc(this.W - 2, lastY, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = this.rhythm.color;
+      ctx.shadowColor = this.rhythm.color;
+      ctx.shadowBlur = 10;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
       this.animId = requestAnimationFrame(draw);
     };
     this.animId = requestAnimationFrame(draw);
   }
 
   stop() {
-    if(this.animId) cancelAnimationFrame(this.animId);
+    if (this.animId) { cancelAnimationFrame(this.animId); this.animId = null; }
   }
 }
 
@@ -2918,18 +2974,7 @@ window.addEventListener('resize', () => {
   }
 });
 
-// ======= DİL DESTEĞİ =======
-let currentLang = 'tr';
-function toggleLang(){
-  currentLang = currentLang === 'tr' ? 'en' : 'tr';
-  const btn = document.getElementById('langBtnSaha');
-  if(btn) btn.textContent = currentLang === 'tr' ? 'EN' : 'TR';
-  document.querySelectorAll('[data-tr]').forEach(el => {
-    el.textContent = currentLang === 'tr' ? el.getAttribute('data-tr') : (el.getAttribute('data-en') || el.getAttribute('data-tr'));
-  });
-  const si = document.getElementById('sahaSearch');
-  if(si) si.placeholder = currentLang === 'tr' ? 'Ara: arrest, inme, travma, anafilaksi, doz...' : 'Search: arrest, stroke, trauma, anaphylaxis...';
-}
+// Dil desteği aşağıda tanımlı — toggleLang()
 
 // ======= GELİŞİM MODAL =======
 const gelisimData = {
@@ -3322,7 +3367,207 @@ function initSaha(){
   initEkipDurum();
 }
 
+// ======= AKCİĞER SESLERİ — TAM SİSTEM =======
+const akZoneLabels={'sol-ust':'Sol Üst','sag-ust':'Sağ Üst','sol-orta':'Sol Orta','sag-orta':'Sağ Orta','sol-alt':'Sol Alt','sag-alt':'Sağ Alt'};
+const akSoundNames={normal:'Normal',azalmis:'Azalmış',yok:'Yok',ronkus:'Ronküs',raller:'Raller',wheeze:'Wheeze',krepitan:'Krepitan',plevral:'Plevral'};
+const akSoundColors={normal:'#4ade80',azalmis:'#fde68a',yok:'#fca5a5',ronkus:'#fdba74',raller:'#93c5fd',wheeze:'#f9a8d4',krepitan:'#c4b5fd',plevral:'#fde68a'};
+let akData={},akActiveZone=null,akAudioCtx=null,akPlayingNode=null;
+
+function getAkCtx(){if(!akAudioCtx)akAudioCtx=new(window.AudioContext||window.webkitAudioContext)();if(akAudioCtx.state==='suspended')akAudioCtx.resume();return akAudioCtx;}
+
+function playAkSound(type){
+  try{
+    const ctx=getAkCtx();
+    if(akPlayingNode){try{akPlayingNode.stop();}catch(e){}akPlayingNode=null;}
+    const master=ctx.createGain();
+    master.gain.setValueAtTime(0,ctx.currentTime);
+    master.gain.linearRampToValueAtTime(0.55,ctx.currentTime+0.05);
+    master.connect(ctx.destination);
+    const now=ctx.currentTime;
+
+    if(type==='normal'){
+      const buf=ctx.createBuffer(1,ctx.sampleRate*1.6,ctx.sampleRate);const d=buf.getChannelData(0);
+      for(let i=0;i<d.length;i++){const t=i/ctx.sampleRate;const env=Math.sin(Math.PI*t/1.6);d[i]=(Math.random()*2-1)*0.28*env*(0.6+0.4*Math.sin(2*Math.PI*180*t));}
+      const src=ctx.createBufferSource();src.buffer=buf;
+      const f=ctx.createBiquadFilter();f.type='bandpass';f.frequency.value=220;f.Q.value=0.9;
+      src.connect(f);f.connect(master);src.start(now);src.stop(now+1.6);akPlayingNode=src;
+
+    }else if(type==='azalmis'){
+      const buf=ctx.createBuffer(1,ctx.sampleRate*1.6,ctx.sampleRate);const d=buf.getChannelData(0);
+      for(let i=0;i<d.length;i++){const t=i/ctx.sampleRate;const env=Math.sin(Math.PI*t/1.6);d[i]=(Math.random()*2-1)*0.10*env;}
+      const src=ctx.createBufferSource();src.buffer=buf;
+      const f=ctx.createBiquadFilter();f.type='bandpass';f.frequency.value=150;f.Q.value=1.5;
+      src.connect(f);f.connect(master);src.start(now);src.stop(now+1.6);akPlayingNode=src;
+
+    }else if(type==='yok'){
+      // Uyarı tonu — ses yok
+      [0,0.35].forEach((delay,i)=>{
+        const o=ctx.createOscillator();o.frequency.value=i===0?523:784;o.type='sine';
+        const g=ctx.createGain();g.gain.setValueAtTime(0.45,now+delay);g.gain.exponentialRampToValueAtTime(0.001,now+delay+0.25);
+        o.connect(g);g.connect(master);o.start(now+delay);o.stop(now+delay+0.25);
+      });
+
+    }else if(type==='ronkus'){
+      const o=ctx.createOscillator();o.type='sawtooth';o.frequency.setValueAtTime(110,now);o.frequency.linearRampToValueAtTime(85,now+0.9);
+      const g=ctx.createGain();g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(0.5,now+0.12);g.gain.linearRampToValueAtTime(0.35,now+0.7);g.gain.linearRampToValueAtTime(0,now+1.0);
+      const f=ctx.createBiquadFilter();f.type='lowpass';f.frequency.value=280;
+      o.connect(f);f.connect(g);g.connect(master);o.start(now);o.stop(now+1.0);akPlayingNode=o;
+
+    }else if(type==='raller'){
+      for(let i=0;i<10;i++){
+        const t=now+i*0.075+Math.random()*0.025;
+        const buf=ctx.createBuffer(1,Math.floor(ctx.sampleRate*0.045),ctx.sampleRate);
+        const d=buf.getChannelData(0);
+        for(let j=0;j<d.length;j++)d[j]=(Math.random()*2-1)*Math.exp(-j/(d.length*0.3));
+        const src=ctx.createBufferSource();src.buffer=buf;
+        const g=ctx.createGain();g.gain.value=0.45+Math.random()*0.3;
+        src.connect(g);g.connect(master);src.start(t);
+      }
+
+    }else if(type==='wheeze'){
+      const o1=ctx.createOscillator();o1.type='sine';o1.frequency.setValueAtTime(780,now);o1.frequency.linearRampToValueAtTime(580,now+0.6);o1.frequency.linearRampToValueAtTime(730,now+1.1);
+      const o2=ctx.createOscillator();o2.type='sine';o2.frequency.setValueAtTime(820,now);o2.frequency.linearRampToValueAtTime(620,now+0.6);
+      const g=ctx.createGain();g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(0.32,now+0.15);g.gain.linearRampToValueAtTime(0.28,now+0.85);g.gain.linearRampToValueAtTime(0,now+1.1);
+      o1.connect(g);o2.connect(g);g.connect(master);
+      o1.start(now);o1.stop(now+1.1);o2.start(now);o2.stop(now+1.1);akPlayingNode=o1;
+
+    }else if(type==='krepitan'){
+      for(let i=0;i<14;i++){
+        const t=now+i*0.045+Math.random()*0.015;
+        const buf=ctx.createBuffer(1,Math.floor(ctx.sampleRate*0.02),ctx.sampleRate);
+        const d=buf.getChannelData(0);
+        for(let j=0;j<d.length;j++)d[j]=(Math.random()*2-1)*Math.exp(-j/(d.length*0.2));
+        const src=ctx.createBufferSource();src.buffer=buf;
+        const f=ctx.createBiquadFilter();f.type='highpass';f.frequency.value=900;
+        const g=ctx.createGain();g.gain.value=0.4;
+        src.connect(f);f.connect(g);g.connect(master);src.start(t);
+      }
+
+    }else if(type==='plevral'){
+      const buf=ctx.createBuffer(1,ctx.sampleRate*0.9,ctx.sampleRate);const d=buf.getChannelData(0);
+      for(let i=0;i<d.length;i++){const t=i/ctx.sampleRate;const env=Math.sin(Math.PI*t/0.9);d[i]=(Math.random()*2-1)*0.55*env*(0.5+0.5*Math.sin(2*Math.PI*55*t));}
+      const src=ctx.createBufferSource();src.buffer=buf;
+      const f=ctx.createBiquadFilter();f.type='bandpass';f.frequency.value=380;f.Q.value=0.6;
+      src.connect(f);f.connect(master);src.start(now);src.stop(now+0.9);akPlayingNode=src;
+    }
+    if(navigator.vibrate)navigator.vibrate([25]);
+  }catch(err){console.warn('AK Audio:',err);}
+}
+
+function akSelectZone(zone){
+  akActiveZone=zone;
+  document.querySelectorAll('.ak-zone-btn').forEach(b=>b.classList.remove('ak-active'));
+  const el=document.getElementById('akz-'+zone);if(el)el.classList.add('ak-active');
+  const panel=document.getElementById('akSoundPanel');
+  if(panel){panel.style.display='block';const t=document.getElementById('akPanelTitle');if(t)t.textContent='📍 '+akZoneLabels[zone]+' — Ses seç:';}
+}
+
+function akClosePanel(){
+  document.getElementById('akSoundPanel').style.display='none';
+  document.querySelectorAll('.ak-zone-btn').forEach(b=>b.classList.remove('ak-active'));
+  akActiveZone=null;
+}
+
+function akAssign(sound){
+  if(!akActiveZone)return;
+  playAkSound(sound);
+  akData[akActiveZone]=sound;
+  const zoneEl=document.getElementById('akz-'+akActiveZone);
+  if(zoneEl){zoneEl.setAttribute('data-s',sound);const tag=document.getElementById('akt-'+akActiveZone);if(tag){tag.textContent=akSoundNames[sound];tag.style.color=akSoundColors[sound];}}
+  akUpdateResult();akClosePanel();
+}
+
+function akUpdateResult(){
+  const wrap=document.getElementById('akResultWrap');
+  if(Object.keys(akData).length===0){if(wrap)wrap.style.display='none';return;}
+  if(wrap)wrap.style.display='block';
+  const rows=document.getElementById('akResultRows');
+  if(rows)rows.innerHTML=Object.entries(akData).map(([z,s])=>`<div class="ak-result-row"><span>${akZoneLabels[z]}</span><span style="color:${akSoundColors[s]};font-weight:700;">${akSoundNames[s]}</span></div>`).join('');
+  const sounds=Object.values(akData);
+  const alerts=[];
+  if(sounds.includes('yok'))alerts.push('🔴 KRİTİK: Ses kaybı → Tansiyon pnömotoraks veya masif efüzyon ekarte et!');
+  if(sounds.includes('wheeze'))alerts.push('🟡 Wheeze → Bronkospazm. Bronkodilatör endikasyonu değerlendir');
+  if(sounds.some(s=>['raller','krepitan'].includes(s)))alerts.push('🔵 Raller/Krepitan → Pulmoner ödem? Pnömoni?');
+  if(sounds.includes('ronkus'))alerts.push('🟠 Ronküs → Sekresyon. Pozisyon, aspirasyon?');
+  if(sounds.includes('plevral'))alerts.push('🟡 Plevral Sürtünme → Plörit düşün');
+  if(sounds.filter(s=>s==='normal').length===Object.keys(akData).length)alerts.push('✅ Tüm alanlarda normal solunum sesi');
+  const alertEl=document.getElementById('akResultAlert');
+  if(alertEl){
+    alertEl.innerHTML=alerts.map(a=>`<div style="padding:3px 0;">${a}</div>`).join('');
+    const isCrit=sounds.includes('yok');const isWarn=sounds.some(s=>['wheeze','raller','krepitan'].includes(s));
+    alertEl.style.cssText=`background:${isCrit?'rgba(239,68,68,0.12)':isWarn?'rgba(251,191,36,0.10)':'rgba(74,222,128,0.10)'};border-left:3px solid ${isCrit?'#ef4444':isWarn?'#fbbf24':'#4ade80'};border-radius:0 8px 8px 0;padding:8px 10px;margin-top:6px;font-size:0.56rem;`;
+  }
+}
+
+function akReport(){
+  if(Object.keys(akData).length===0){alert('Önce akciğer alanlarına ses atayın!');return;}
+  const rows=Object.entries(akData).map(([z,s])=>`<div class="m-box info"><strong>${akZoneLabels[z]}:</strong> <span style="color:${akSoundColors[s]};font-weight:700;">${akSoundNames[s]}</span></div>`).join('');
+  const sounds=Object.values(akData);
+  let yorum=sounds.includes('yok')?'<div class="m-box warning">🔴 ACİL: Ses kaybı → İğne torakostomi hazırlığı!</div>':sounds.includes('wheeze')?'<div class="m-box warning">🟡 Wheeze → Bronkodilatör değerlendirmesi</div>':sounds.some(s=>['raller','krepitan'].includes(s))?'<div class="m-box diagnosis">🔵 Raller/Krepitan → Pulmoner ödem/Pnömoni?</div>':'<div class="m-box success">✅ Oskültasyon normal sınırlarda</div>';
+  openModal('🫁 OSKÜLTASYON RAPORU',rows+yorum+`<div style="font-size:0.52rem;color:var(--muted);margin-top:8px;">⏰ ${new Date().toLocaleTimeString('tr-TR')}</div>`);
+}
+
+// ======= AHA 2025 ALGORİTMALARI =======
+const AHA_ALGOS = {
+  bls_adult:{title:'💔 Erişkin BLS — AHA 2025',badges:[{t:'100-120/dk',c:'ab-red'},{t:'5-6 cm',c:'ab-blue'},{t:'30:2',c:'ab-green'},{t:'AED hemen',c:'ab-yellow'}],note:'⭐ AHA 2025: Dispatcher KPR talimatı zorunlu. SpO2 ile O2 titrasyonu. Kapnografi ile KPR kalite kontrolü.',flow:[{t:'fn-start',txt:'🚨 YANIT YOK & NORMAL NEFES YOK'},{arrow:true},{t:'fn-action',txt:'📞 112\u2019yi Ara / AED Getirt',bullets:['Çevreyi güvenli hale getir','Başka kurtarıcı varsa CPR başlatsın']},{arrow:true},{t:'fn-action',txt:'💓 GÖĞÜS KOMPRESYONU',bullets:['Hız: 100–120/dk','Derinlik: 5–6 cm','Tam geri dönüş','Aralık <10 sn']},{arrow:true},{t:'fn-shock',txt:'⚡ AED BAĞLA — Analiz Et\nŞok endikasyonunda ŞOK VER\nHemen KPR devam'},{arrow:true},{t:'fn-action',txt:'🔄 Her 2 dk ritim kontrolü\nİleri destek gelene kadar devam'}]},
+  als_vfvt:{title:'⚡ VF / Nabızsız VT — AHA 2025',badges:[{t:'Şoklanabilir',c:'ab-purple'},{t:'Adrenalin 1mg/3-5dk',c:'ab-red'},{t:'Amiodaron 300mg',c:'ab-blue'},{t:'3.şoktan sonra ilaç',c:'ab-yellow'}],note:'⭐ AHA 2025: Defibrilasyon mümkün en kısa sürede. Adrenalin 3.şoktan sonra başlanır.',flow:[{t:'fn-start',txt:'🔴 VF / NABIPSIZ VT'},{arrow:true},{t:'fn-shock',txt:'⚡ DEFİBRİLASYON\nBifazik: 120–200J | Monofazik: 360J'},{arrow:true},{t:'fn-action',txt:'🔄 Hemen KPR 2 dk + IV/IO Erişim'},{arrow:true},{t:'fn-decision',txt:'Ritim kontrolü — VF/VT devam ediyor mu?'},{branch:[{label:'✅ 2.ŞOK',cls:'fb-yes',nodes:[{t:'fn-shock',txt:'⚡ 2. ŞOK VER\nKPR 2 dk'}]},{label:'⚡ 3.ŞOK+İLAÇ',cls:'fb-yes',nodes:[{t:'fn-drug',txt:'💉 ADRENALİN 1mg IV (Her 3-5dk)\n💊 AMİODARON 300mg\nveya Lidokain 1-1.5mg/kg'}]}]},{arrow:true},{t:'fn-action',txt:'🔬 5H 5T Nedenlerini Ara',bullets:['Hipoksi, Hipovolemi','Hipo/Hiperkalemi, Hipotermi, H⁺','Tansiyon Pnömotoraks, Tamponad','Tromboz PE/AKS, Toksinler']},{arrow:true},{t:'fn-success',txt:'💚 ROSC → Post-Resüsitasyon'}]},
+  als_pea:{title:'📉 PEA / Asistoli — AHA 2025',badges:[{t:'Non-Şoklanabilir',c:'ab-blue'},{t:'Adrenalin 1mg hemen',c:'ab-red'},{t:'ŞOK VERİLMEZ',c:'ab-yellow'}],note:'⭐ AHA 2025: PEA/Asistolide şok yoktur! ETCO₂ >10 mmHg KPR kalite göstergesi.',flow:[{t:'fn-start',txt:'🔵 PEA / ASİSTOLİ\n(Non-Şoklanabilir)'},{arrow:true},{t:'fn-action',txt:'🔄 KPR 2 dk + IV/IO Erişim'},{arrow:true},{t:'fn-drug',txt:'💉 ADRENALİN 1mg IV/IO\nHemen & Her 3-5 dk'},{arrow:true},{t:'fn-action',txt:'🫁 İleri Hava Yolu',bullets:['ETCO₂ >10 mmHg hedef','10 vent/dk asenkron','Hiperventilasyondan kaçın']},{arrow:true},{t:'fn-decision',txt:'🔬 5H 5T Ara',bullets:['Hipoksi→O2','Hipovolemi→Sıvı','H⁺→NaHCO₃?','Hipo/Hiperkalemi','Hipotermi→Isıt','Tansiyon Pnömo→İğne','Tamponad→Perikardiyosentez','Tromboz PE→TPA','Tromboz AKS→PCI','Toksinler→Antidot']},{arrow:true},{t:'fn-decision',txt:'2dk sonra ritim kontrolü'},{branch:[{label:'⚡ VF/VT',cls:'fb-yes',nodes:[{t:'fn-shock',txt:'VF/VT → ŞOK VER'}]},{label:'📉 PEA/Asist.',cls:'fb-no',nodes:[{t:'fn-action',txt:'KPR devam\nAdrenalin tekrar'}]}]},{arrow:true},{t:'fn-success',txt:'💚 ROSC → Post-Resüsitasyon'}]},
+  rosc:{title:'💚 Post-Resüsitasyon (ROSC) — AHA 2025',badges:[{t:'SpO2 %94-98',c:'ab-green'},{t:'ETCO₂ 35-45',c:'ab-blue'},{t:'TTM 32-36°C',c:'ab-yellow'},{t:'STEMI→PCI',c:'ab-red'}],note:'⭐ AHA 2025: Hiperoksiden kaçın! SpO2 %94-98. Nörolojik prognoz en erken 72 saat sonra.',flow:[{t:'fn-success',txt:'💚 ROSC SAĞLANDI'},{arrow:true},{t:'fn-action',txt:'🫁 OKSİJENASYON',bullets:['SpO2 %94–98 (Hiperoksiden kaçın!)','ETCO₂ 35–45 mmHg','Normokapni hedef']},{arrow:true},{t:'fn-action',txt:'🩺 HEMODİNAMİK DESTEK',bullets:['SKB ≥90 mmHg | MAB ≥65 mmHg','Kristaloid bolus','Vazopresör: Norepinefrin/Dopamin']},{arrow:true},{t:'fn-decision',txt:'12-lead EKG — STEMI?'},{branch:[{label:'✅ STEMI',cls:'fb-yes',nodes:[{t:'fn-warning',txt:'🏥 ACİL PCI\nKateter lab aktivasyonu'}]},{label:'❌ YOK',cls:'fb-no',nodes:[{t:'fn-action',txt:'Koroner anjiyografi\ngörüşmesi yap'}]}]},{arrow:true},{t:'fn-action',txt:'🌡️ TTM',bullets:['32–36°C arası seç','Min 24 saat','Titreme kontrolü','Hipertermi >37.8°C önle']},{arrow:true},{t:'fn-action',txt:'🧠 NÖROLOJİK PROGNOZ',bullets:['En erken 72 saat','EEG, SSEP, BT/MRI','Erken DNR kararından kaçın']}]},
+  ped_bls:{title:'👶 Pediatrik BLS — AHA 2025',badges:[{t:'30:2 (1 kurtarıcı)',c:'ab-blue'},{t:'15:2 (2 kurtarıcı)',c:'ab-green'},{t:'0.01mg/kg Adrenalin',c:'ab-red'},{t:'Solunum öncelikli',c:'ab-yellow'}],note:'⭐ AHA 2025: Çocuk arrestinin ana nedeni solunum yetmezliği! İlk 5 nefes kritik.',flow:[{t:'fn-start',txt:'🚨 YANIT YOK — BEBEK/ÇOCUK'},{arrow:true},{t:'fn-decision',txt:'Normal nefes var mı?'},{branch:[{label:'✅ VAR',cls:'fb-yes',nodes:[{t:'fn-action',txt:'Recovery pozisyon\nİzle & Hastane'}]},{label:'❌ YOK',cls:'fb-no',nodes:[{t:'fn-action',txt:'5 KURTARICI NEFES\n(İlk ventilasyon)'}]}]},{arrow:true},{t:'fn-action',txt:'💓 KPR BAŞLAT',bullets:['1 Kurtarıcı: 30:2','2 Kurtarıcı: 15:2','Bebek: 2 parmak (sternum alt 1/3)','Çocuk: 1-2 el — göğüs 1/3']},{arrow:true},{t:'fn-shock',txt:'⚡ AED — Pediatrik pedler\n>8 yaş veya >25kg → Yetişkin ped'},{arrow:true},{t:'fn-drug',txt:'💉 ADRENALİN: 0.01 mg/kg IV/IO\nMaks: 1 mg/doz | Her 3-5 dk'},{arrow:true},{t:'fn-success',txt:'💚 ROSC → Pediatrik YBÜ'}]},
+  opioid:{title:'💊 Opioid Aşırı Doz — AHA 2025 YENİ',badges:[{t:'YENİ PROTOKOL',c:'ab-purple'},{t:'Nalokson 0.4-2mg',c:'ab-green'},{t:'IM/IN/IV',c:'ab-blue'},{t:'Takip şart',c:'ab-red'}],note:'⭐ AHA 2025 YENİ: Opioid aşırı doz için ayrı algoritma. Toplum bazlı nalokson dağıtımı önerilmekte.',flow:[{t:'fn-start',txt:'🚨 OPİOİD AŞIRI DOZ\n(Miozis, bilinç kaybı, solunum dep.)'},{arrow:true},{t:'fn-decision',txt:'Normal nefes var mı?'},{branch:[{label:'✅ VAR',cls:'fb-yes',nodes:[{t:'fn-action',txt:'Nalokson ver\nİzle — Hastane'}]},{label:'❌ YOK',cls:'fb-no',nodes:[{t:'fn-action',txt:'5 Kurtarıcı nefes ver'}]}]},{arrow:true},{t:'fn-drug',txt:'💉 NALOKSON',bullets:['IM/IN: 0.4–2 mg (erişkin)','IV: 0.04 mg titre et','Tekrar: 2–3 dk sonra','Çocuk: 0.01 mg/kg IM']},{arrow:true},{t:'fn-decision',txt:'2–3 dk içinde yanıt var mı?'},{branch:[{label:'✅ YANIT',cls:'fb-yes',nodes:[{t:'fn-action',txt:'Monitörize — 112\nTekrar baskılanma riski!'}]},{label:'❌ YOK',cls:'fb-no',nodes:[{t:'fn-action',txt:'Nabız kontrol\nKPR protokolüne geç'}]}]},{arrow:true},{t:'fn-warning',txt:'⚠️ Nalokson yarı ömrü 30-90 dk!\nHer hasta hastane takibine'}]}
+};
+
+function buildFlow(flow){
+  let h='<div class="flow">';
+  flow.forEach(item=>{
+    if(item.arrow){h+='<div class="flow-arrow">▼</div>';}
+    else if(item.branch){
+      h+='<div class="flow-branch">';
+      item.branch.forEach(br=>{
+        h+=`<div><div class="flow-branch-label ${br.cls}">${br.label}</div>`;
+        br.nodes.forEach(n=>{let nt=n.txt.replace(/\n/g,'<br>');if(n.bullets)nt+='<ul>'+n.bullets.map(b=>`<li>${b}</li>`).join('')+'</ul>';h+=`<div class="flow-node ${n.t}" style="margin-bottom:5px;">${nt}</div>`;});
+        h+='</div>';
+      });
+      h+='</div>';
+    } else {
+      let nt=item.txt.replace(/\n/g,'<br>');if(item.bullets)nt+='<ul>'+item.bullets.map(b=>`<li>${b}</li>`).join('')+'</ul>';
+      h+=`<div class="flow-node ${item.t}">${nt}</div>`;
+    }
+  });
+  return h+'</div>';
+}
+
+function showAha(key){
+  const algo=AHA_ALGOS[key]; if(!algo) return;
+  document.getElementById('ahaModalTitle').textContent=algo.title;
+  let h='';
+  if(algo.badges){h+='<div class="aha-badge-row">';algo.badges.forEach(b=>{h+=`<span class="aha-badge ${b.c}">${b.t}</span>`;});h+='</div>';}
+  h+=buildFlow(algo.flow);
+  if(algo.note) h+=`<div class="aha-note">${algo.note}</div>`;
+  document.getElementById('ahaModalContent').innerHTML=h;
+  document.getElementById('ahaModalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeAhaModal(e){
+  if(e&&e.target!==document.getElementById('ahaModalOverlay')) return;
+  document.getElementById('ahaModalOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
 </script>
+
+<!-- AHA 2025 ŞEMA MODAL -->
+
+<div class="aha-modal-overlay" id="ahaModalOverlay" onclick="closeAhaModal(event)">
+  <div class="aha-modal" id="ahaModalBox">
+    <div class="aha-modal-header">
+      <div class="aha-modal-title" id="ahaModalTitle"></div>
+      <button class="aha-modal-close" onclick="document.getElementById('ahaModalOverlay').classList.remove('open');document.body.style.overflow='';">✕</button>
+    </div>
+    <div id="ahaModalContent" style="overflow-y:auto;max-height:80vh;-webkit-overflow-scrolling:touch;padding-bottom:20px;"></div>
+  </div>
+</div>
 
 </body>
 </html>

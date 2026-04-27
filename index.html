@@ -170,6 +170,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .ecg-wrap{background:#050e1a;border-radius:8px;padding:4px;margin-bottom:5px;position:relative;overflow:hidden;}
 .ecg-canvas{width:100%;height:58px !important;min-height:58px;max-height:58px;display:block;border-radius:6px;flex-shrink:0;}
 .rhythm-desc{font-size:0.52rem;color:var(–muted);}
+.rhythm-algo-btn{margin-top:6px;background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.35);border-radius:8px;padding:5px 10px;font-size:0.52rem;color:#93c5fd;font-weight:700;text-align:center;}
 
 /* CPR CARD */
 .cpr-card{background:linear-gradient(145deg,#1a0808,#250a0a,#180606);border:1px solid rgba(220,38,38,0.5);border-radius:16px;padding:14px;margin-bottom:8px;text-align:center;position:relative;overflow:hidden;box-shadow:0 4px 24px rgba(220,38,38,0.15),inset 0 1px 0 rgba(255,255,255,0.05);}
@@ -334,7 +335,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .ak-result-title{font-size:0.6rem;font-weight:700;color:var(–muted);margin-bottom:6px;}
 .ak-result-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.55rem;}
 
-/* ===== BUTON & BADGE RENK GELİŞTİRME ===== */
+/* ===== ALGORİTMA HIZLI BULUCU ===== */
+.algo-finder{background:linear-gradient(135deg,rgba(15,31,61,0.95),rgba(6,12,26,0.95));border-bottom:1px solid var(–border);position:sticky;top:52px;z-index:90;}
+.algo-finder-header{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;cursor:pointer;font-size:0.65rem;font-weight:700;color:#93c5fd;}
+.algo-finder-header i{font-size:0.6rem;transition:transform 0.2s;color:var(–muted);}
+.algo-finder-header i.open{transform:rotate(180deg);}
+.algo-finder-body{padding:8px 12px 10px;}
+.af-cats{display:flex;gap:5px;overflow-x:auto;margin-bottom:8px;padding-bottom:2px;}
+.af-cats::-webkit-scrollbar{display:none;}
+.af-cat{background:rgba(255,255,255,0.05);border:1px solid var(–border);color:var(–muted);border-radius:20px;padding:4px 10px;font-size:0.52rem;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.af-cat.active-af-cat{background:rgba(37,99,235,0.2);border-color:var(–blue);color:#93c5fd;}
+.af-chips{display:flex;flex-wrap:wrap;gap:5px;}
+.af-chip{border:1px solid;border-radius:10px;padding:5px 10px;font-size:0.52rem;font-weight:700;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:4px;}
+.af-chip:active{transform:scale(0.94);}
+.af-chip-red{background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.4);color:#fca5a5;}
+.af-chip-orange{background:rgba(249,115,22,0.12);border-color:rgba(249,115,22,0.4);color:#fdba74;}
+.af-chip-blue{background:rgba(96,165,250,0.12);border-color:rgba(96,165,250,0.4);color:#93c5fd;}
+.af-chip-green{background:rgba(74,222,128,0.12);border-color:rgba(74,222,128,0.4);color:#4ade80;}
+.af-chip-purple{background:rgba(167,139,250,0.12);border-color:rgba(167,139,250,0.4);color:#c4b5fd;}
+.af-chip-yellow{background:rgba(251,191,36,0.12);border-color:rgba(251,191,36,0.4);color:#fde68a;}
+.af-chip-cyan{background:rgba(34,211,238,0.12);border-color:rgba(34,211,238,0.4);color:#67e8f9;}
+
 .dispatch-btn{background:linear-gradient(135deg,#2563eb,#1d4ed8) !important;box-shadow:0 2px 8px rgba(37,99,235,0.4);}
 .call-btn{background:linear-gradient(135deg,#16a34a,#15803d) !important;box-shadow:0 3px 12px rgba(22,163,74,0.4);}
 .nav-btn{background:linear-gradient(135deg,#0891b2,#0e7490) !important;box-shadow:0 2px 8px rgba(8,145,178,0.35);}
@@ -867,6 +888,27 @@ select{-webkit-appearance:none;appearance:none;background-image:url(“data:imag
     <i class="fas fa-search"></i>
     <input type="text" id="sahaSearch" placeholder="Ara: arrest, inme, travma, anafilaksi, doz..." oninput="sahaSearchFn(this.value)">
   </div>
+
+  <!-- ALGORİTMA HIZLI BULUCU -->
+
+  <div class="algo-finder" id="algoFinder">
+    <div class="algo-finder-header" onclick="toggleAlgoFinder()">
+      <span>⚡ Hızlı Algoritma Bulucu</span>
+      <i class="fas fa-chevron-down" id="algoFinderChevron"></i>
+    </div>
+    <div class="algo-finder-body" id="algoFinderBody" style="display:none;">
+      <div class="af-cats">
+        <button class="af-cat active-af-cat" onclick="setAfCat('kardiyak',this)">💓 Kardiyak</button>
+        <button class="af-cat" onclick="setAfCat('solunum',this)">🫁 Solunum</button>
+        <button class="af-cat" onclick="setAfCat('noroloji',this)">🧠 Nöroloji</button>
+        <button class="af-cat" onclick="setAfCat('travma',this)">🚑 Travma</button>
+        <button class="af-cat" onclick="setAfCat('metabolik',this)">🧪 Metabolik</button>
+        <button class="af-cat" onclick="setAfCat('pediatri',this)">👶 Pediatri</button>
+      </div>
+      <div class="af-chips" id="afChips"></div>
+    </div>
+  </div>
+
   <div class="container" id="sahaContainer">
 
 ```
@@ -1428,7 +1470,7 @@ cprDisplay();
 // Buffer scroll yok — canvas yüksekliği asla değişmez
 
 const ECG_FIXED_H = 58;
-const ECG_PX_PER_SEC = 220;
+const ECG_PX_PER_SEC = 140;
 const ECG_FPS = 60;
 
 const ecgRhythms = [
@@ -1458,7 +1500,7 @@ const ecgRhythms = [
     wave:[[0.00,0.000],[0.06,0.100],[0.14,0.500],[0.22,1.000],[0.30,0.500],[0.38,0.100],[0.44,0.000],[0.50,-0.150],[0.58,-0.280],[0.66,-0.200],[0.74,-0.080],[0.82,0.000],[1.00,0.000]]},
   // ── SVT ──
   { id:'svt', name:'📈 SUPRAVENTRİKÜLER TAŞİKARDİ (SVT)', label:'💊 Adenozin', labelClass:'lbl-meds',
-    color:'#eab308', hr:210, algo:'svt', speed:2.4,
+    color:'#eab308', hr:210, algo:'svt', speed:1.6,
     desc:'Dar QRS 150-250/dk, P gizli. Vagal → Adenozin 6mg hızlı IV puşe + flush.',
     wave:[[0.00,0.000],[0.03,0.000],[0.055,-0.060],[0.075,0.950],[0.095,-0.120],[0.115,0.000],[0.155,0.060],[0.200,0.160],[0.245,0.060],[0.280,0.000],[1.00,0.000]]},
   // ── AF ──
@@ -1507,17 +1549,17 @@ const ecgRhythms = [
     wave:[[0.00,0.000],[0.10,0.000],[0.12,0.060],[0.16,0.180],[0.20,0.060],[0.23,0.000],[0.27,0.000],[0.29,-0.070],[0.315,0.900],[0.34,-0.110],[0.36,0.000],[0.39,0.180],[0.46,0.280],[0.54,0.360],[0.62,0.220],[0.70,0.080],[0.78,0.000],[1.00,0.000]]},
   // ── WPW ──
   { id:'wpw', name:'⚡ WOLFF-PARKINSON-WHITE (WPW)', label:'⚠️ PROKAİNAMİD', labelClass:'lbl-unstable',
-    color:'#f59e0b', hr:80, algo:'svt',
+    color:'#f59e0b', hr:80, algo:'wpw',
     desc:'Delta dalgası + kısa PR + geniş QRS. Adenozin/Digoksin KONTRENDİKE!',
     wave:[[0.00,0.000],[0.08,0.000],[0.10,0.060],[0.14,0.170],[0.18,0.060],[0.20,0.000],[0.22,0.000],[0.24,0.150],[0.27,0.400],[0.30,1.000],[0.34,-0.100],[0.37,0.000],[0.42,-0.050],[0.48,-0.150],[0.55,-0.100],[0.62,0.000],[1.00,0.000]]},
   // ── HİPERKALEMİ ──
   { id:'hiperkali', name:'⚡ HİPERKALEMİ EKG', label:'🧪 Ca + Kayeksal', labelClass:'lbl-shock',
-    color:'#fb7185', hr:55, algo:'bradikardi',
+    color:'#fb7185', hr:55, algo:'hiperkali',
     desc:'Çadır T dalgaları, geniş QRS, P kaybı. CaCl2 1g IV! + Dekstroz+İnsülin + Kayeksal.',
     wave:[[0.00,0.000],[0.10,0.000],[0.13,0.020],[0.17,0.040],[0.21,0.020],[0.24,0.000],[0.28,0.000],[0.29,-0.080],[0.32,0.060],[0.345,0.800],[0.37,-0.100],[0.40,0.000],[0.42,0.000],[0.44,0.200],[0.48,0.600],[0.52,0.850],[0.56,0.600],[0.60,0.200],[0.65,0.000],[1.00,0.000]]},
   // ── PACEMAKERLİ ──
   { id:'pacemaker', name:'⚡ PACEMAKERLİ RİTİM', label:'🔋 Pace OK', labelClass:'lbl-stable',
-    color:'#22d3ee', hr:70, algo:'bradikardi', custom:'pacemaker',
+    color:'#22d3ee', hr:70, algo:'pacemaker', custom:'pacemaker',
     desc:'Pace spike + geniş QRS. Altta yatan ritmi değerlendir. Spike yakalamayı kontrol et.'},
 ];
 
@@ -1594,14 +1636,26 @@ class ECGRenderer {
               Math.sin(t*157.9)*0.10) * 0.85;
     }
     if (type === 'af') {
-      const f = Math.sin(t*18.8)*0.04 + Math.sin(t*28.3)*0.03;
-      const rrV = [0.52,0.38,0.62,0.44,0.58,0.36,0.48,0.66,0.40,0.54];
-      const cycleT = t % 5.6;
-      let acc = 0, idx2 = 0;
-      while (acc < cycleT && idx2 < 50) { acc += rrV[idx2 % rrV.length] * 0.56; idx2++; }
-      const qp = ((t * 1.85) % 1);
-      const qrs = qp < 0.18 ? this._waveSample([[0,0],[0.05,-0.08],[0.10,0.90],[0.16,-0.10],[0.22,0],[0.35,0.07],[0.55,0.16],[0.75,0.07],[0.90,0],[1,0]], qp/0.18) : 0;
-      return f + qrs;
+      // Fibrillatuar bazal hat (f dalgaları — 350-600/dk kaotik)
+      const fBase = (Math.sin(t*23.1)*0.035 + Math.sin(t*31.7)*0.028 +
+                     Math.sin(t*41.3)*0.020 + Math.sin(t*53.9)*0.015) ;
+      // Düzensiz QRS — deterministik pseudo-random aralıklar
+      // Sabit ama düzensiz görünen aralık dizisi (0.35-0.90 sn arası)
+      const rrSeq = [0.58,0.42,0.74,0.38,0.62,0.51,0.83,0.44,0.67,0.39,0.76,0.48,0.55,0.71,0.40];
+      let tAcc = 0, qi = 0;
+      const tMod = t % 8.2; // 8.2 sn'de bir çevrim tamamlanır
+      while (tAcc < tMod) { tAcc += rrSeq[qi % rrSeq.length]; qi++; }
+      const tSinceQRS = tMod - (tAcc - rrSeq[(qi-1) % rrSeq.length]);
+      // Dar QRS + T dalgası
+      let qrs = 0;
+      if (tSinceQRS < 0.03) {
+        const qp = tSinceQRS / 0.03;
+        qrs = this._waveSample([[0,0],[0.08,-0.09],[0.22,1.00],[0.36,-0.12],[0.50,0],[1,0]], qp);
+      } else if (tSinceQRS < 0.28) {
+        const tp = (tSinceQRS - 0.03) / 0.25;
+        qrs = this._waveSample([[0,0],[0.15,0.05],[0.40,0.18],[0.65,0.05],[1.0,0]], tp) * 0.7;
+      }
+      return fBase + qrs;
     }
     if (type === 'flutter') {
       const fp = (t * 5.0) % 1;
@@ -1723,7 +1777,9 @@ function initECG() {
   ecgRhythms.forEach(rhythm => {
     const card = document.createElement('div');
     card.className = 'rhythm-card';
-    card.onclick = () => showAlgo(rhythm.algo);
+    // algo key: önce ritim id'sine özel, yoksa genel algo key
+    const algoKey = rhythm.id && algoData[rhythm.id] ? rhythm.id : rhythm.algo;
+    card.onclick = () => showAlgo(algoKey);
 
     card.innerHTML = `
       <div class="rhythm-header">
@@ -1734,6 +1790,7 @@ function initECG() {
         <canvas class="ecg-canvas" id="ecg_${rhythm.id}"></canvas>
       </div>
       <div class="rhythm-desc">${rhythm.desc}</div>
+      <div class="rhythm-algo-btn">📋 Algoritmayı Gör →</div>
     `;
     section.appendChild(card);
 
@@ -2283,6 +2340,176 @@ const algoData={
       <li>PCI merkezine ön bildirim!</li>
     </ul>
     <div class="m-box warning">⚠️ RV MI: Nitrat dikkatli! V4R çek!</div>
+  `},
+  wpw:{title:'⚡ Wolff-Parkinson-White (WPW)',html:`
+    <div class="m-box warning"><strong>WPW:</strong> Aksesuar yol (Kent demeti) → Preeksitasyon</div>
+    <div class="m-box diagnosis"><strong>EKG:</strong> Kısa PR (&lt;120ms) + Delta dalgası + Geniş QRS</div>
+    <ul class="step-list">
+      <li>STABİL + dar QRS → Adenozin dene (dikkatli!)</li>
+      <li>STABİL + geniş QRS → Prokainamid 10mg/kg IV</li>
+      <li>AF+WPW → Adenozin/Digoksin/Verapamil KONTRENDİKE!</li>
+      <li>AF+WPW → Prokainamid veya elektriksel kardiyoversiyon</li>
+      <li>KARARSIZ → Senkronize kardiyoversiyon</li>
+      <li>Definitif tedavi: Radyofrekans kateter ablasyonu</li>
+    </ul>
+    <div class="m-box warning">⚠️ AV nodal ilaçlar aksesuar yolda hızlanmaya → VF'ye yol açabilir!</div>
+  `},
+  hiperkali:{title:'⚡ HİPERKALEMİ (K+ >5.5 mEq/L)',html:`
+    <div class="m-box warning"><strong>EKG Evreleri:</strong><br>
+    K+&gt;5.5: Çadır T<br>K+&gt;6.5: PR uzama, P kaybı<br>K+&gt;7.0: Geniş QRS, sinüzoidal<br>K+&gt;8.0: VF/Asistoli riski!</div>
+    <ul class="step-list">
+      <li>KARDİYAK STABİLİZASYON: CaCl2 1g IV 3-5dk (membran stabilize)</li>
+      <li>K+ HÜCRE İÇİNE: Dekstroz %10 500mL + İnsülin 10 ü → 30dk</li>
+      <li>K+ HÜCRE İÇİNE: Salbutamol 10-20mg nebül</li>
+      <li>K+ VÜCUTTAN: Kayeksal (Sodyum polistiren) oral/rektal</li>
+      <li>K+ VÜCUTTAN: Furosemid 40-80mg IV (idrar yoluylu)</li>
+      <li>K+ VÜCUTTAN: Diyaliz (ağır/renal yetmezlikte)</li>
+      <li>NaHCO3: Asidoz eşliğinde 50-100 mEq IV</li>
+    </ul>
+    <div class="m-box diagnosis"><strong>Arrest:</strong> VF/VT → Defib + CaCl2 2g IV! PEA/Asistoli → KPR + Adrenalin</div>
+  `},
+  pacemaker:{title:'🔋 Pacemakerli Ritim',html:`
+    <div class="m-box info"><strong>Pace değerlendirme:</strong></div>
+    <ul class="step-list">
+      <li>Spike görülüyor mu? → Sensing OK</li>
+      <li>Spike sonrası QRS var mı? → Capture OK</li>
+      <li>Hız: Programlanan hıza uygun mu?</li>
+      <li>Altta yatan ritim nedir?</li>
+      <li>Pace failure: Spike var, QRS yok → Magnet test</li>
+      <li>Sensing failure: Kompetitif ritim → Reprogramlama</li>
+    </ul>
+    <div class="m-box warning">⚠️ Manyetik alan, defibrilatör, MRI pacemaker'ı etkiler!</div>
+  `},
+  sinusTak:{title:'📈 Sinüs Taşikardi',html:`
+    <div class="m-box warning"><strong>Sinüs Taşikardi:</strong> Hız 100-150/dk, P→QRS→T korunmuş.</div>
+    <ul class="step-list">
+      <li>Neden ara: ağrı, ateş, hipovolemi, anemi, sepsis, PE, ilaç</li>
+      <li>Tedavi nedene yönelik!</li>
+      <li>Primer taşikardi değil — arka planı araştır</li>
+      <li>EKG çek: SVT/AF ekarte et</li>
+      <li>KŞ, SpO2, KB, ateş ölç</li>
+    </ul>
+    <div class="m-box info">ℹ️ İzole taşikardi tedavisi değil, neden tedavisi yapılır!</div>
+  `},
+  stemiInf:{title:'🔴 AKUT İNFERİOR MI (II,III,aVF)',html:`
+    <div class="m-box warning"><strong>İnferior STEMI:</strong> ST elev ≥1mm → II, III, aVF</div>
+    <ul class="step-list">
+      <li>Sağ göğüs derivasyonları çek: V3R-V4R → RV MI %40!</li>
+      <li>RV MI: Sıvı ver! NİTRAT VERİLMEZ, Diüretik VERİLMEZ</li>
+      <li>Aspirin 300mg çiğnet + Ticagrelor 180mg</li>
+      <li>Tam AV blok: %10 — TCP pacing hazır tut!</li>
+      <li>D2B &lt;90 dk — ACİL PCI aktivasyonu</li>
+      <li>Posterior MI: V7-V9 çek (V1-V3 ST depresyonu = eşdeğer)</li>
+    </ul>
+    <div class="m-box diagnosis">⚠️ İnferior MI'da vagal semptom sık (bulantı, bradikardi, hipotansiyon)</div>
+  `},
+  stemiAnt:{title:'🔴 AKUT ANTERİOR MI (V1-V4)',html:`
+    <div class="m-box warning"><strong>Anterior STEMI:</strong> ST elev ≥2mm → V1-V4. Tombstone T = kritik!</div>
+    <ul class="step-list">
+      <li>En geniş MI alanı — LV disfonksiyon riski yüksek</li>
+      <li>LAD oklüzyonu → Anteroseptal veya anterolateral</li>
+      <li>Aspirin 300mg + Ticagrelor 180mg hemen</li>
+      <li>Kardiojenik şok riski izle: SKB &lt;90, taşikardi</li>
+      <li>D2B &lt;90 dk — ACİL kateter lab aktivasyonu</li>
+      <li>De Winter T: V1-V4 ST depresyonu + sivri T → STEMI eşdeğeri!</li>
+    </ul>
+    <div class="m-box diagnosis">Wellens Sendromu: Bifazik/derin T → LAD kritik darlık uyarısı</div>
+  `},
+  stemiLat:{title:'🔴 AKUT LATERAL MI (I,aVL,V5-V6)',html:`
+    <div class="m-box warning"><strong>Lateral STEMI:</strong> ST elev → I, aVL, V5-V6</div>
+    <ul class="step-list">
+      <li>LCX oklüzyonu — genellikle posterior MI ile birlikte</li>
+      <li>Karşılıklı değişiklik: II,III,aVF'de ST depresyonu</li>
+      <li>Aspirin 300mg + Ticagrelor 180mg</li>
+      <li>D2B &lt;90 dk — ACİL PCI</li>
+      <li>aVR ST elevasyonu: Sol ana koroner/LAD proksimal oklüzyon!</li>
+    </ul>
+    <div class="m-box diagnosis">ℹ️ High lateral MI (I,aVL): Küçük diyagonal dal oklüzyonu — gözden kaçabilir</div>
+  `},
+  sinusBrad:{title:'📉 Sinüs Bradikardi',html:`
+    <div class="m-box info"><strong>Sinüs Bradikardi:</strong> &lt;60/dk, düzenli P→QRS→T</div>
+    <ul class="step-list">
+      <li>Neden: atletler, uyku, vagal, ilaç (beta-bl, diltiazem), inferior MI</li>
+      <li>ASEMPTOMATİK → İzle, tedavi yok</li>
+      <li>SEMPTOMATİK (hipotansiyon, senkop, göğüs ağrısı):</li>
+      <li>Atropin 0.5mg IV — 3mg'a kadar tekrar</li>
+      <li>Yanıt yok → Dopamin 2-10 mcg/kg/dk infüzyon</li>
+      <li>TCP (Transkutanöz Pacing) — Perkütan geçici pacing</li>
+    </ul>
+    <div class="m-box warning">⚠️ Tam AV Blokta Atropin etkisiz — direkt TCP pacing!</div>
+  `},
+  avblock1:{title:'⏱️ 1. Derece AV Blok',html:`
+    <div class="m-box info"><strong>1. Derece AV Blok:</strong> PR &gt;200ms (5 küçük kare), her P iletilir</div>
+    <ul class="step-list">
+      <li>Genellikle benign — tedavi gerekmez</li>
+      <li>Nedenleri: atletler, yaşlılık, inferior MI, ilaç (digoksin, beta-bloker)</li>
+      <li>İzlem EKG ile takip</li>
+      <li>Altta yatan nedeni tedavi et</li>
+    </ul>
+    <div class="m-box success">✅ Stabil — acil tedavi gerektirmez</div>
+  `},
+  avblock2:{title:'⚠️ 2. Derece AV Blok — Mobitz 2',html:`
+    <div class="m-box warning"><strong>Mobitz 2:</strong> PR sabit, bazı P dalgaları iletilmez (dropped beat)</div>
+    <ul class="step-list">
+      <li>Wenckebach (Mobitz 1) değil — PR uzamaz, aniden kesilir</li>
+      <li>His-Purkinje seviyesinde blok → Tam AV bloğa ilerleme riski!</li>
+      <li>ACİL TCP pacing hazırlığı</li>
+      <li>Atropin deneyebilirsin ama etkisiz olabilir</li>
+      <li>Kalıcı pacemaker endikasyonu vardır</li>
+    </ul>
+    <div class="m-box warning">⚠️ Elektrikli kablo kesilmesi gibi — her an tam blok olabilir!</div>
+  `},
+  avblock3:{title:'🚫 Tam AV Blok (3. Derece)',html:`
+    <div class="m-box warning"><strong>Tam AV Blok:</strong> P ve QRS tamamen bağımsız, iletim yok</div>
+    <ul class="step-list">
+      <li>ACİL Transkutanöz Pacing (TCP) — derhal!</li>
+      <li>Atropin ETKİSİZ (His altı blok)</li>
+      <li>Dopamin 2-10 mcg/kg/dk veya Adrenalin inf — köprü tedavi</li>
+      <li>Rate: 60-80/dk pacing hızı hedefle</li>
+      <li>Sedasyon/analjezi: TCP ağrılı</li>
+      <li>Transvenöz geçici pacing → Kalıcı pacemaker</li>
+    </ul>
+    <div class="m-box diagnosis">Neden: İnferior MI (%AV nod arteri), Lyme, ilaç, idiyopatik</div>
+  `},
+  torsades:{title:'🌀 Torsades de Pointes',html:`
+    <div class="m-box warning"><strong>Torsades:</strong> QT &gt;500ms + dönen eksen VT</div>
+    <ul class="step-list">
+      <li>İV MgSO4 2g 15dk'da → sonra 1-2g/saat infüzyon</li>
+      <li>QT uzatan ilaçları KES (antiaritmik, antibiyotik, antipsikotik)</li>
+      <li>K+ &gt;4 mEq/L tut (KCl replasmanı)</li>
+      <li>Hız artırma: Atropin veya geçici pacing (overdrive suppression)</li>
+      <li>KARARSIZ → Defibrilasyon 360J bifazik</li>
+      <li>Konjenital LQTS → Beta-bloker, ICD</li>
+    </ul>
+    <div class="m-box diagnosis">QT uzatan ilaçlar: Amiodaron, Sotalol, Klorokin, Haloperidol, Eritromisin</div>
+  `},
+  flutter:{title:'🔀 Atriyal Flutter',html:`
+    <div class="m-box info"><strong>Flutter:</strong> Testere dişi F dalgaları 300/dk, 2:1 ileti → 150/dk</div>
+    <ul class="step-list">
+      <li>Hız kontrolü: Beta-bloker, Diltiazem IV</li>
+      <li>Ritim kontrolü: Elektriksel kardiyoversiyon 50-100J</li>
+      <li>&gt;48 saat → Önce antikoagülasyon veya TEE</li>
+      <li>Digoksin flutter'da yavaş ve değişken etki</li>
+      <li>Kararsız hemodinami → ACİL senkronize kardiyoversiyon</li>
+    </ul>
+    <div class="m-box diagnosis">ℹ️ 2:1 flutter'da ventriküler hız genellikle 150/dk — SVT ile karışabilir!</div>
+  `},
+  stemi:{title:'🔴 STEMI / AKUT MYOKARDİYAL ENFARKTÜS',html:`
+    <div class="m-box warning"><strong>STEMI Tanı:</strong> ≥2 ardışık derivasyonda ST elev:<br>
+    • V1-V4: ≥2mm (Anterior)<br>• II,III,aVF: ≥1mm (İnferior)<br>• I,aVL,V5-V6: ≥1mm (Lateral)<br>• V7-V9: ≥0.5mm (Posterior)</div>
+    <ul class="step-list">
+      <li>🕐 D2B hedef: &lt;90 dk (kapı-balon)</li>
+      <li>Aspirin 300mg çiğnet</li>
+      <li>Ticagrelor 180mg veya Klopidogrel 600mg</li>
+      <li>O2: SpO2 &lt;90% ise ver, rutin verme!</li>
+      <li>Nitrat: SKB &gt;90 ve İnferior MI değilse</li>
+      <li>Morfin 2-4mg IV (bulantıda Metoklopramid)</li>
+      <li>12-lead EKG + sağ göğüs (V3R-V4R) → RV MI?</li>
+      <li>İnferior MI + hipotansiyon → sıvı dene (RV tutulum?)</li>
+      <li>Reperfüzyon: ACİL PCI tercih — Fibrinoliz 2. seçenek</li>
+    </ul>
+    <div class="m-box diagnosis"><strong>STEMI Eşdeğerleri:</strong> LBBB yeni, De Winter T, Wellens, aVR elevasyon</div>
+    <div class="m-box warning">⚠️ İnferior MI'da NİTRAT dikkatli! RV tutulumu → Hipotansiyon riski!</div>
   `},
   sinusNormal:{title:'✅ Normal Sinüs Ritmi',html:`
     <div class="m-box success"><strong>Normal Sinüs Ritmi:</strong><br>• Hız: 60-100/dk<br>• P dalgası her QRS'den önce<br>• PR: 120-200ms<br>• QRS: &lt;120ms<br>Referans ritim.</div>
@@ -2976,7 +3203,164 @@ window.addEventListener('resize', () => {
   }
 });
 
-// Dil desteği aşağıda tanımlı — toggleLang()
+// ======= DİL DESTEĞİ — TAM =======
+let currentLang = 'tr';
+
+const LANG_TR = {
+  s_ph: 'Ara: arrest, inme, travma, anafilaksi, doz...',
+  ekip_not: '📝 Kısa not ekle...', ekip_msg: 'Özel mesaj yaz...',
+  hE_ph: 'Yaralanma, döküntü, şişlik...',
+  vt0:'— Vaka Tipi Seç —',vt1:'Kardiyak Arrest',vt2:'AKS/STEMI',vt3:'İnme/Stroke',
+  vt4:'Travma',vt5:'Solunum Sıkıntısı',vt6:'Nöbet',vt7:'Anafilaksi',
+  vt8:'Hipoglisemi',vt9:'Zehirlenme',vt10:'Obstetrik',vt11:'Pediatrik',vt12:'Diğer',
+  vs0:'— Sonuç —',vs1:'ROSC Sağlandı',vs2:'Exitus',vs3:'Hastaneye Nakil',
+  vs4:'Sahada Tedavi',vs5:'Ret/İmtina',
+};
+const LANG_EN = {
+  s_ph: 'Search: arrest, stroke, trauma, anaphylaxis...',
+  ekip_not: '📝 Add a short note...', ekip_msg: 'Type custom message...',
+  hE_ph: 'Injury, rash, swelling...',
+  vt0:'— Select Case Type —',vt1:'Cardiac Arrest',vt2:'ACS/STEMI',vt3:'Stroke',
+  vt4:'Trauma',vt5:'Respiratory Distress',vt6:'Seizure',vt7:'Anaphylaxis',
+  vt8:'Hypoglycemia',vt9:'Poisoning',vt10:'Obstetric',vt11:'Pediatric',vt12:'Other',
+  vs0:'— Outcome —',vs1:'ROSC Achieved',vs2:'Deceased',vs3:'Hospital Transfer',
+  vs4:'Treated on Scene',vs5:'Refused',
+};
+
+function toggleLang() {
+  currentLang = currentLang === 'tr' ? 'en' : 'tr';
+  const L = currentLang === 'tr' ? LANG_TR : LANG_EN;
+  const btn = document.getElementById('langBtnSaha');
+  if (btn) btn.textContent = currentLang === 'tr' ? 'EN' : 'TR';
+
+  // 1) data-tr / data-en elementleri
+  document.querySelectorAll('[data-tr]').forEach(el => {
+    const val = currentLang === 'tr' ? el.getAttribute('data-tr') : el.getAttribute('data-en');
+    if (val) el.textContent = val;
+  });
+
+  // 2) Placeholder'lar
+  const elems = {
+    sahaSearch: L.s_ph, ekipSelfNot: L.ekip_not,
+    ekipMesajInput: L.ekip_msg, hE: L.hE_ph,
+    opO: currentLang==='tr'?'Ne zaman, nasıl başladı?':'When and how did it start?',
+    opP: currentLang==='tr'?'Ne artırıyor, ne azaltıyor?':'What makes it better or worse?',
+    opQ: currentLang==='tr'?'Nasıl bir ağrı? (baskı, yanma...)':'Quality of pain? (pressure, burning...)',
+    opR: currentLang==='tr'?'Yayılıyor mu? Nereye?':'Does it radiate? Where?',
+    opT: currentLang==='tr'?'Ne kadar süredir?':'How long has it lasted?',
+    vEkip: currentLang==='tr'?'Ekip (örn: KKL-1)':'Team (e.g. KKL-1)',
+    vNot: currentLang==='tr'?'Notlar (opsiyonel)...':'Notes (optional)...',
+  };
+  Object.entries(elems).forEach(([id,ph]) => {
+    const el = document.getElementById(id); if(el) el.placeholder = ph;
+  });
+
+  // 3) Select options
+  const vTip = document.getElementById('vTip');
+  if (vTip) Array.from(vTip.options).forEach((o,i) => { o.text = L['vt'+i] || o.text; });
+  const vSonuc = document.getElementById('vSonuc');
+  if (vSonuc) Array.from(vSonuc.options).forEach((o,i) => { o.text = L['vs'+i] || o.text; });
+
+  // 4) Algo finder kategorileri
+  const cats = document.querySelectorAll('.af-cat');
+  const catsTR = ['💓 Kardiyak','🫁 Solunum','🧠 Nöroloji','🚑 Travma','🧪 Metabolik','👶 Pediatri'];
+  const catsEN = ['💓 Cardiac','🫁 Respiratory','🧠 Neurology','🚑 Trauma','🧪 Metabolic','👶 Pediatric'];
+  cats.forEach((el,i) => { el.textContent = currentLang==='tr' ? catsTR[i] : catsEN[i]; });
+
+  // 5) Uyarı butonları
+  const alertBtns = {
+    '💔 ARREST':'💔 ARREST', '💉 ADRENALİN':'💉 ADRENALINE',
+    '🔀 RİTİM DEĞ.':'🔀 RHYTHM CHG.', '📡 NABIZ KON.':'📡 PULSE CHK.',
+    '💚 ROSC!':'💚 ROSC!', '⚡ ŞOK VER':'⚡ SHOCK NOW',
+  };
+}
+
+// ======= ALGORİTMA HIZLI BULUCU =======
+const AF_DATA = {
+  kardiyak: [
+    {l:'💔 Kardiyak Arrest',k:'arrest',c:'af-chip-red'},
+    {l:'⚡ VF/VT',k:'vf',c:'af-chip-red'},
+    {l:'📈 SVT',k:'tasikardiDar',c:'af-chip-yellow'},
+    {l:'⚡ Nabızsız VT',k:'tasikardiGenis',c:'af-chip-orange'},
+    {l:'📉 Bradikardi',k:'bradikardi',c:'af-chip-blue'},
+    {l:'🔀 AF/Flutter',k:'af',c:'af-chip-purple'},
+    {l:'🔴 STEMI',k:'stemi',c:'af-chip-red'},
+    {l:'💔 AKS/NSTEMI',k:'aks',c:'af-chip-orange'},
+    {l:'💚 ROSC Bakım',k:'rosc',c:'af-chip-green'},
+    {l:'💧 Kardiyojenik Şok',k:'kardiyojenik',c:'af-chip-blue'},
+    {l:'💊 Tamponad',k:'tamponad',c:'af-chip-purple'},
+    {l:'🩺 Aort Diseksiyonu',k:'aortDiseksiyon',c:'af-chip-orange'},
+    {l:'🌀 Torsades',k:'torsades',c:'af-chip-red'},
+    {l:'⚡ WPW',k:'wpw',c:'af-chip-yellow'},
+    {l:'⚡ Hiperkali EKG',k:'hiperkali',c:'af-chip-red'},
+  ],
+  solunum: [
+    {l:'🫁 Pnömotoraks',k:'pnomtoraks',c:'af-chip-cyan'},
+    {l:'💨 KOAH/Astım',k:'koah',c:'af-chip-blue'},
+    {l:'🫁 Pulmoner Ödem',k:'pulmOdem',c:'af-chip-orange'},
+    {l:'🩸 Pulmoner Emboli',k:'pe',c:'af-chip-red'},
+    {l:'🫂 Hava Yolu Tıkanma',k:'epiglotit',c:'af-chip-orange'},
+    {l:'🦠 Septik Şok',k:'sepsis',c:'af-chip-purple'},
+  ],
+  noroloji: [
+    {l:'🧠 İnme/Stroke',k:'inme',c:'af-chip-purple'},
+    {l:'⚡ Nöbet/Status',k:'nobet',c:'af-chip-blue'},
+    {l:'🪖 Kafa Travması',k:'kafaTravma',c:'af-chip-orange'},
+    {l:'😵 Senkop',k:'senkop',c:'af-chip-cyan'},
+  ],
+  travma: [
+    {l:'🚗 Major Travma',k:'travma',c:'af-chip-red'},
+    {l:'🆘 Anafilaksi',k:'anafilaksi',c:'af-chip-green'},
+    {l:'🔥 Yanık',k:'yanik',c:'af-chip-orange'},
+    {l:'🌊 Boğulma',k:'bogulma',c:'af-chip-blue'},
+    {l:'🦴 Spinal Travma',k:'spinalTravma',c:'af-chip-cyan'},
+    {l:'💪 Crush Sendromu',k:'crush',c:'af-chip-purple'},
+    {l:'🥶 Hipotermi',k:'hipotermia',c:'af-chip-cyan'},
+  ],
+  metabolik: [
+    {l:'🍬 Hipoglisemi',k:'hipoglisemi',c:'af-chip-yellow'},
+    {l:'🍬 DKA',k:'dka',c:'af-chip-orange'},
+    {l:'☠️ Zehirlenme',k:'zehirlenme',c:'af-chip-green'},
+    {l:'⚗️ Hiperkali',k:'hiper_kali',c:'af-chip-red'},
+    {l:'🧂 Hiponatremi',k:'hiponatremi',c:'af-chip-cyan'},
+    {l:'💪 Rabdomiyoliz',k:'rabdomiyoliz',c:'af-chip-purple'},
+    {l:'🔺 HT Acil',k:'hiypertansifAcil',c:'af-chip-red'},
+  ],
+  pediatri: [
+    {l:'👶 Ped. Arrest',k:'pediatrikArrest',c:'af-chip-red'},
+    {l:'🦆 Krup/Epiglotit',k:'krup',c:'af-chip-orange'},
+    {l:'👼 Yenidoğan Resüs.',k:'yenidogan',c:'af-chip-blue'},
+    {l:'🌡️ Ped. Nöbet',k:'pediatrikNobet',c:'af-chip-purple'},
+  ],
+};
+
+let afCurrentCat = 'kardiyak';
+let algoFinderOpen = false;
+
+function toggleAlgoFinder() {
+  algoFinderOpen = !algoFinderOpen;
+  const body = document.getElementById('algoFinderBody');
+  const chevron = document.getElementById('algoFinderChevron');
+  if (body) body.style.display = algoFinderOpen ? 'block' : 'none';
+  if (chevron) chevron.classList.toggle('open', algoFinderOpen);
+  if (algoFinderOpen) renderAfChips();
+}
+
+function setAfCat(cat, btn) {
+  afCurrentCat = cat;
+  document.querySelectorAll('.af-cat').forEach(b => b.classList.remove('active-af-cat'));
+  if (btn) btn.classList.add('active-af-cat');
+  renderAfChips();
+}
+
+function renderAfChips() {
+  const el = document.getElementById('afChips');
+  if (!el) return;
+  const chips = AF_DATA[afCurrentCat] || [];
+  el.innerHTML = chips.map(ch =>
+    `<div class="af-chip ${ch.c}" onclick="showAlgo('${ch.k}');toggleAlgoFinder();">${ch.l}</div>`
+  ).join('');
+}
 
 // ======= GELİŞİM MODAL =======
 const gelisimData = {

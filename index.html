@@ -591,6 +591,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .fn-success{background:linear-gradient(135deg,#064e2a 0%,#022e18 100%);border-color:#4ade80;color:#bbf7d0;text-align:center;font-weight:700;}
 .fn-warning{background:linear-gradient(135deg,#7c2d12 0%,#3a0f04 100%);border-color:#fb923c;color:#fed7aa;}
 .fn-info{background:rgba(30,58,138,0.15);border-color:rgba(59,130,246,0.3);color:#93c5fd;font-size:0.55rem;font-weight:400;}
+.fn-goto{background:linear-gradient(135deg,#1e3a8a 0%,#0c1f38 100%);border-color:#3b82f6;color:#dbeafe;text-align:center;font-weight:800;}
+.fn-question{background:linear-gradient(135deg,#374151 0%,#1f2937 100%);border-color:#6b7280;color:#e5e7eb;text-align:center;font-weight:700;}
 
 .flow-arrow{font-size:1.2rem;color:#334155;text-align:center;line-height:1;padding:2px 0;}
 .flow-branch{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:0;}
@@ -1034,6 +1036,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
       <div class="algo-card c-yellow" onclick="showAlgo('tasikardiDar')"><div class="card-badge" style="background:var(--yellow);color:black;">SVT</div><div class="card-icon">📈</div><h3>TAŞİKARDİ (DAR)</h3><p>Vagal, Adenozin, SVT protokolü</p></div>
       <div class="algo-card c-red" onclick="showAlgo('tasikardiGenis')"><div class="card-badge" style="background:var(--red);">VT</div><div class="card-icon">⚡</div><h3>TAŞİKARDİ (GENİŞ)</h3><p>VT, Amiodaron, Kardiyoversiyon</p></div>
       <div class="algo-card c-gray" onclick="showAlgo('kardiyojenik')"><div class="card-badge" style="background:#475569;">ŞOK</div><div class="card-icon">💧</div><h3>KARDİYOJENİK ŞOK</h3><p>Dopamin, Dobutamin, Destek</p></div>
+      <div class="algo-card c-cyan" onclick="showAlgo('hipovolemikSokYetiskin')"><div class="card-badge" style="background:var(--cyan);">Y-13</div><div class="card-icon">💧</div><h3>HİPOVOLEMİK ŞOK</h3><p>Hemorajik/Non-hemorajik ayrımı</p></div>
     </div>
 
     <!-- KARDİYAK RİTİMLER -->
@@ -1084,6 +1087,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
       <div class="algo-card c-pink" onclick="showAlgo('obstetrik')"><div class="card-badge" style="background:#ec4899;">OBSTETRİK</div><div class="card-icon">🤰</div><h3>OBSTETRİK ACİL</h3><p>Eklampsi, Acil doğum, Apgar</p></div>
       <div class="algo-card c-teal" onclick="showAlgo('zehirlenme')"><div class="card-badge" style="background:#14b8a6;">ZEHİR</div><div class="card-icon">☠️</div><h3>ZEHİRLENME</h3><p>OP, CO, Alkol, Antidotlar</p></div>
       <div class="algo-card c-cyan" onclick="showAlgo('hipotermia')"><div class="card-badge" style="background:var(--cyan);">HİPO</div><div class="card-icon">🥶</div><h3>HİPOTERMİ</h3><p>Isınma, Arrest yönetimi</p></div>
+      <div class="algo-card c-cyan" onclick="showAlgo('hipotermiArrestYetiskin')"><div class="card-badge" style="background:var(--cyan);">Y-25</div><div class="card-icon">🥶</div><h3>HİPOTERMİDE ARREST</h3><p>60sn nabız kontrolü, ECMO düşün</p></div>
       <div class="algo-card c-gray" onclick="showAlgo('crush')"><div class="card-badge" style="background:#475569;">CRUSH</div><div class="card-icon">🏗️</div><h3>CRUSH SENDROMU</h3><p>Sıvı, Sodyum bikarbonat, Furosemid</p></div>
       <div class="algo-card c-indigo" onclick="showAlgo('isirmaSokmaYetiskin')"><div class="card-badge" style="background:#818cf8;">ISIRIK</div><div class="card-icon">🐍</div><h3>ISIRMA VE SOKMALAR</h3><p>Kara/deniz canlısı, temizlik, izlem</p></div>
       <div class="algo-card c-rose" onclick="showAlgo('startTriyajSaha')"><div class="card-badge" style="background:#fb7185;">START</div><div class="card-icon">🏷️</div><h3>START TRİYAJ</h3><p>Saha triyaj akışı — renk kodu</p></div>
@@ -1697,9 +1701,9 @@ const ecgRhythms = [
     desc:'Geniş QRS >120ms, düzenli 120-250/dk. Nabızsız → Defib! Nabızlı → Kardiyoversiyon.',
     wave:[[0.00,0.000],[0.06,0.100],[0.14,0.500],[0.22,1.000],[0.30,0.500],[0.38,0.100],[0.44,0.000],[0.50,-0.150],[0.58,-0.280],[0.66,-0.200],[0.74,-0.080],[0.82,0.000],[1.00,0.000]]},
   { id:'svt', name:'📈 SUPRAVENTRİKÜLER TAŞİKARDİ (SVT)', label:'💊 Adenozin', labelClass:'lbl-meds',
-    color:'#eab308', hr:210, algo:'svt', speed:1.6,
-    desc:'Dar QRS 150-250/dk, P gizli. Vagal → Adenozin 6mg hızlı IV puşe + flush.',
-    wave:[[0.00,0.000],[0.03,0.000],[0.055,-0.060],[0.075,0.950],[0.095,-0.120],[0.115,0.000],[0.155,0.060],[0.200,0.160],[0.245,0.060],[0.280,0.000],[1.00,0.000]]},
+    color:'#eab308', hr:195, algo:'svt', speed:1.35,
+    desc:'Dar QRS, düzenli, 150-250/dk. P dalgası görünmez/gizli, ani başlar-ani biter. Vagal → Adenozin 6mg hızlı IV puşe + flush.',
+    wave:[[0.00,0.000],[0.035,-0.05],[0.065,1.000],[0.095,-0.22],[0.13,-0.04],[0.16,0.000],[0.30,0.10],[0.42,0.20],[0.52,0.10],[0.60,0.02],[0.62,0.000],[1.00,0.000]]},
   { id:'af', name:'🔀 ATRİYAL FİBRİLASYON (AF)', label:'⚠️ Hız Kont.', labelClass:'lbl-unstable',
     color:'#a78bfa', hr:110, algo:'af', custom:'af',
     desc:'Düzensiz R-R, f dalgaları. Hız kontrolü + antikoagülasyon.'},
@@ -2517,6 +2521,18 @@ const algoData={
     </ul>
     <div class="m-box warning">⚠️ VT varsayımıyla tedavi et! Adenozin VT'de tehlikeli!</div>
   `},
+  hipovolemikSokYetiskin:{title:'💧 HİPOVOLEMİK ŞOK (SB-ASH-Y-13)',html:`
+    <div class="m-box diagnosis"><strong>MAP (Ortalama Arter Basıncı) = (SKB + 2×DKB) / 3</strong></div>
+    <ul class="step-list">
+      <li>Hemodinamik monitörizasyon (EKG, tansiyon, pulse oksimetri), yüksek doz O2, geniş damar yolu, şok pozisyonu</li>
+      <li><strong>Hemorajik şok:</strong> Kanama kontrolü (direkt bası, sıkı bandaj, arter bası noktalarına bası, turnike, kanama durdurucu ajan)</li>
+      <li>Hipotansif hastalara 250-500mL %0,9 NaCl veya Ringer Laktat hızlı infüzyon (maks 1000mL) — SKB 80-90mmHg olacak şekilde titre et</li>
+      <li><strong>Non-hemorajik şok:</strong> %0,9 NaCl ya da Ringer Laktat 500-1000mL bolus 5-10dk'da, her bolustan sonra volüm durumunu kontrol et</li>
+      <li>Belirlenebilir şok nedenlerini tanı ve yönet (Tansiyon pnömotoraks, anafilaksi, perikardiyal tamponad...) — MAP 65-70mmHg hedefle</li>
+      <li>MAP &lt;65mmHg ve hipovolemi devam ediyorsa yanıt alınamıyorsa: Adrenalin IV infüzyon 2-10mcg/dk ya da Dopamin IV infüzyon 5-20mcg/kg/dk</li>
+    </ul>
+    <div class="m-box warning">⚠️ Hipovolemi bulguları: Taşikardi, Hipotansiyon, Soğuk ekstremiteler, Zayıf periferik nabızlar, Kapiller geri dolum &gt;2sn, Artan solunum hızı, Cilt renginde değişiklik (soluk/siyanotik)</div>
+  `},
   kardiyojenik:{title:'💧 KARDİYOJENİK ŞOK',html:`
     <div class="m-box diagnosis"><strong>SKB &lt;90 + Hipoperfüzyon + Kardiyak neden</strong></div>
     <ul class="step-list">
@@ -2871,6 +2887,17 @@ const algoData={
     <div class="m-box warning">⚠️ SpO2 yanıltıcı! Pulse-oksimetre CO'yu okuyamaz!</div></div>
     <div class="m-drug"><span>Opioid OD</span><span class="m-drug-dose">Naloksan 0.4-2mg IV/IM/IN</span></div>
     <div class="m-box info">📞 Zehir Danışma: <strong>114</strong></div>
+  `},
+  hipotermiArrestYetiskin:{title:'🥶 HİPOTERMİDE ARREST YÖNETİMİ (SB-ASH-Y-25)',html:`
+    <ul class="step-list">
+      <li>Vücut ısısı &lt;35°C ve bilinç kapalı ise en az 60sn nabız kontrolü yap</li>
+      <li>Nabız var → Hipotermi algoritmasına git</li>
+      <li>Nabız yok → KPR başlama kriterleri var mı değerlendir</li>
+      <li>Kriterler varsa: Standart erişkin ileri yaşam desteği uygulamasına başla, eş zamanlı olarak pasif ve aktif ısıtma yöntemlerini uygula</li>
+      <li>Vücut ısısı ≥35°C olana kadar KPR'yi sonlandırma. Vücut ısısı &gt;35°C olduğunda Arrest Yönetimi algoritmasına git</li>
+      <li>SKKM/ÇM ile görüşerek ECMO merkezine yönlendirmeyi düşün</li>
+    </ul>
+    <div class="m-box warning">⚠️ Hipotermiye bağlı kardiyak arrestte, ilk defibrilasyon girişiminin başarısız olması durumunda vücut sıcaklığı 30°C'ye ulaşıncaya kadar defibrilasyon ertelenmelidir!</div>
   `},
   hipotermia:{title:'🥶 HİPOTERMİ',html:`
     <ul class="step-list">
@@ -3498,10 +3525,1021 @@ const algoData={
   `}
 };
 
+// ======= HTML İÇERİĞİNİ OTOMATİK AKIŞ ŞEMASINA ÇEVİREN SİSTEM =======
+// Mevcut algoData içeriğini (m-box, step-list, m-section, m-drug) koruyarak
+// kutu+ok şeklinde flowchart görünümüne dönüştürür. buildFlow() ile aynı
+// görsel dili (fn-start/fn-action/fn-decision/fn-shock/fn-drug/fn-warning/
+// fn-success + flow-arrow + flow-branch) kullanır.
+function appendListAsFlowNodes(listEl, flow){
+  const items = Array.from(listEl.children).filter(c=>c.tagName==='LI');
+  items.forEach((li,idx)=>{
+    if(idx>0) flow.push({arrow:true});
+    flow.push({t:'fn-action', txt: li.innerHTML});
+  });
+}
+function mBoxFlowClass(el){
+  if(el.classList.contains('warning')) return 'fn-warning';
+  if(el.classList.contains('diagnosis')) return 'fn-decision';
+  if(el.classList.contains('success')) return 'fn-success';
+  if(el.classList.contains('treatment')) return 'fn-drug';
+  if(el.classList.contains('citizen')) return 'fn-info';
+  return 'fn-info';
+}
+function renderAsFlowchart(html){
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = html;
+  const flow = [];
+  const children = Array.from(wrapper.children);
+  const branchColors = ['fb-yes','fb-no','fb-yes','fb-no','fb-yes','fb-no'];
+  let i = 0;
+  while(i < children.length){
+    const el = children[i];
+    if(el.classList && el.classList.contains('m-section')){
+      const group = [];
+      while(i<children.length && children[i].classList && children[i].classList.contains('m-section')){
+        group.push(children[i]); i++;
+      }
+      if(flow.length) flow.push({arrow:true});
+      if(group.length === 1){
+        const sec = group[0];
+        const titleEl = sec.querySelector('.m-section-title');
+        const listEl = sec.querySelector('.step-list');
+        const innerBox = sec.querySelector('.m-box');
+        if(titleEl) flow.push({t:'fn-decision', txt: titleEl.innerHTML});
+        if(listEl){ flow.push({arrow:true}); appendListAsFlowNodes(listEl, flow); }
+        if(innerBox){ flow.push({arrow:true}); flow.push({t:mBoxFlowClass(innerBox), txt: innerBox.innerHTML}); }
+      } else {
+        const branch = group.map((sec, idx)=>{
+          const titleEl = sec.querySelector('.m-section-title');
+          const listEl = sec.querySelector('.step-list');
+          const innerBox = sec.querySelector('.m-box');
+          const nodes = [];
+          if(listEl){
+            Array.from(listEl.children).filter(c=>c.tagName==='LI').forEach(li=>{
+              nodes.push({t:'fn-action', txt: li.innerHTML});
+            });
+          }
+          if(innerBox) nodes.push({t:mBoxFlowClass(innerBox), txt: innerBox.innerHTML});
+          return {label: titleEl?titleEl.innerHTML:'', cls: branchColors[idx%branchColors.length], nodes};
+        });
+        flow.push({branch});
+      }
+      continue;
+    }
+    else if(el.tagName==='UL' && el.classList.contains('step-list')){
+      if(flow.length) flow.push({arrow:true});
+      appendListAsFlowNodes(el, flow);
+    }
+    else if(el.classList && el.classList.contains('m-box')){
+      if(flow.length) flow.push({arrow:true});
+      flow.push({t:mBoxFlowClass(el), txt: el.innerHTML});
+    }
+    else if(el.classList && el.classList.contains('m-drug')){
+      if(flow.length) flow.push({arrow:true});
+      const spans = Array.from(el.children).map(s=>s.innerHTML).join(' — ');
+      flow.push({t:'fn-drug', txt: spans});
+    }
+    else if(el.tagName==='UL' || el.tagName==='OL'){
+      if(flow.length) flow.push({arrow:true});
+      appendListAsFlowNodes(el, flow);
+    }
+    else {
+      if(el.innerHTML && el.innerHTML.trim()){
+        if(flow.length) flow.push({arrow:true});
+        flow.push({t:'fn-info', txt: el.innerHTML});
+      }
+    }
+    i++;
+  }
+  if(flow.length === 0){
+    flow.push({t:'fn-info', txt: html});
+  }
+  return buildFlow(flow);
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// PDF_FLOWS — EK-2 Resmi Belgesindeki gerçek akış şemalarının birebir
+// kodlanmış hali (SB-ASH kodlu sayfalar tek tek görsel olarak incelenip
+// kutu/ok/karar yapısı korunarak aktarılmıştır). showAlgo() bu veriyi
+// bulursa önce bunu kullanır; yoksa genel otomatik dönüştürücüye düşer.
+// ═══════════════════════════════════════════════════════════════════════
+const PDF_FLOWS = {
+
+  pedHavaYoluTikaniklik: [
+    {t:'fn-action', txt:`Bilinci değerlendir`},{arrow:true},
+    {branch:[
+      {label:`Bilinç Açık + Öksürme/Ses Var (Kısmi Tıkanma)`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Öksürmesini teşvik et, tam tıkanma ihtimaline karşı yakın takip et`}]},
+      {label:`Bilinç Açık + Öksürme/Ses Yok (Tam Tıkanma)`, cls:'fb-no', nodes:[
+        {t:'fn-drug', txt:`1 yaş altı: 5 kez sırta vur + 5 kez göğüs basısı uygula<br>1 yaş üstü: 5 kez sırta vur + 5 kez karına bası uygula<br>Cisim çıkana kadar ya da bilinç kapanana kadar devam et`}
+      ]}
+    ]},{arrow:true},
+    {t:'fn-goto', txt:`Bilinç kapanırsa / Bilinç kapalı geldiyse → ARREST YÖNETİMİ ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-warning', txt:`Hava yolu tam tıkanıklık bulguları: Nefes alamaz, evrensel boğulma işareti, konuşamaz, öksüremez, siyanoz varlığı!`}
+  ],
+
+  pedAstim: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula, hava yolu açıklığını sağla`},{arrow:true},
+    {t:'fn-action', txt:`SpO2 %94-98 olacak geri solumasız rezervuarlı maske ile 10L/dk O2, monitörize et, damar yolu aç`},{arrow:true},
+    {branch:[
+      {label:`Hafif/Orta Atak`, cls:'fb-yes', nodes:[
+        {t:'fn-drug', txt:`Salbutamol nebül (1 nebül, inhaler 4-8 puf; 5 yaş altı 2-6 puf)`},
+        {t:'fn-drug', txt:`Yeterli yanıt yoksa ilk 1 saat içinde İpratropiyum Bromür ekle (1 nebül 250mcg)`},
+        {t:'fn-drug', txt:`20dk sonra düzelme yoksa tekrarla (maks 3 kez)`}
+      ]},
+      {label:`Ağır Atak`, cls:'fb-no', nodes:[
+        {t:'fn-drug', txt:`Salbutamol (1-2 nebül/4-8 puf) + İpratropiyum Bromür (1 nebül 250mcg) birlikte`},
+        {t:'fn-drug', txt:`20dk sonra düzelme yoksa tekrarla (maks 3 kez)`}
+      ]}
+    ]},{arrow:true},
+    {t:'fn-drug', txt:`Bir saat içinde yeterince rahatlama olmazsa METİL PREDNİZOLON 1-2mg/kg IV bolus (IV/oral maks 60mg/gün)`},{arrow:true},
+    {t:'fn-warning', txt:`Bilinç düzeyinde azalma, konfüzyon, koma, kas tonusunda azalma ortaya çıkarsa pozitif basınçlı ventilasyon düşün!`}
+  ],
+
+  pedBradikardi: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula, SpO2 %94-98 O2 ver, gerekirse solunumu BVM ile destekle`},{arrow:true},
+    {t:'fn-action', txt:`Monitörize et, damar yolu aç (IV/IO)`},{arrow:true},
+    {t:'fn-question', txt:`Birincil değerlendirme sonunda dolaşım yetmezliği bulguları var mı? (Hipotansiyon, şok bulguları, ani bilinç değişikliği)`},{arrow:true},
+    {branch:[
+      {label:`Hayır`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Oksijen vermeye devam et`}]},
+      {label:`Evet + KH &gt;60/dk`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Hava yolu açıklığını sürdürerek solunum desteğine devam, gerekirse PBV. Dolaşım bozukluğu devam ediyorsa sıvı desteğini düşün`}]},
+      {label:`Evet + KH &lt;60/dk, oksijen/ventilasyona hızlı yanıt yok`, cls:'fb-no', nodes:[
+        {t:'fn-drug', txt:`Derhal göğüs basısına başla + ADRENALİN IV/IO 0,01mg/kg (1/10000, 0,1mL/kg), gerektiğinde 3-5dk'da bir tekrarla. 2dk'da bir ritim ve nabzı değerlendir`},
+        {t:'fn-drug', txt:`Özel durumlarda (primer AV blok, aşırı vagal uyarı): ATROPİN 0,02mg/kg IV (maks tek doz çocuklarda 0,5mg)`},
+        {t:'fn-action', txt:`İnotrop düşün: Adrenalin veya Dopamin infüzyonu`}
+      ]}
+    ]}
+  ],
+
+  pedTasikardiNabizli: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula, SpO2 %94-98 O2 ver, gerekirse BVM ile destekle`},{arrow:true},
+    {t:'fn-action', txt:`Monitörize et, damar yolu aç (IV/IO), ritmi değerlendir`},{arrow:true},
+    {branch:[
+      {label:`Dar QRS (≤0,09sn) — SVT/Sinüs`, cls:'fb-yes', nodes:[
+        {t:'fn-action', txt:`Sinüs taşikardisi ise altta yatan sebebe yönelik tedavi`},
+        {t:'fn-drug', txt:`SVT + dolaşım yeterli: Vagal manevra → düzelmezse ADENOZİN IV hızlı puşe 1.doz 0,1mg/kg (maks 6mg), 2.doz 0,2mg/kg (maks 12mg)`},
+        {t:'fn-drug', txt:`SVT + dolaşım yetersiz: Sedasyon (Midazolam 0,1mg/kg IV) → Kardiyoversiyon 1.doz 1J/kg, 2.doz 2J/kg`}
+      ]},
+      {label:`Geniş QRS (&gt;0,09sn) — VT`, cls:'fb-no', nodes:[
+        {t:'fn-action', txt:`Dolaşım yeterli, ritim düzenli ve QRS monomorfik ise ADENOZİN IV kullanmayı düşün`},
+        {t:'fn-drug', txt:`Dolaşım yetersiz: Sedasyon → Kardiyoversiyon (1J/kg → 2J/kg)`}
+      ]}
+    ]},{arrow:true},
+    {t:'fn-drug', txt:`2 kez kardiyoversiyona rağmen yanıt alınamamış ya da taşikardi tekrarlıyorsa: AMİODARON 5mg/kg, 20-60dk'da IV infüzyon (%5 dekstroz içinde)`},{arrow:true},
+    {t:'fn-warning', txt:`Vagal uyarı, Adenozin uygulamasını geciktirmeyecek şekilde yapılmalıdır!`}
+  ],
+
+  pedSoklanirRitim: [
+    {t:'fn-action', txt:`Defibrilatör hazırlanıncaya kadar KPR uygula`},{arrow:true},
+    {t:'fn-drug', txt:`Defibrilasyon: 2J/kg (ilk şok)`},{arrow:true},
+    {t:'fn-action', txt:`Ara vermeden 2dk boyunca KPR'a devam et, monitörize et, damar yolu aç (IV/IO)`},{arrow:true},
+    {t:'fn-drug', txt:`VF/nVT devam ediyorsa: Defibrilasyon ≥4J/kg, ara vermeden KPR + ileri hava yolu uygulaması. ADRENALİN IV/IO 0,01mg/kg (1/10000, 0,1mL/kg), 3-5dk'da bir tekrarla`},{arrow:true},
+    {t:'fn-drug', txt:`2dk sonra tekrar değerlendir, hâlâ VF/nVT: Defibrilasyon (≥4J/kg). 3. defibrilasyonda: AMİODARON 5mg/kg IV/IO (%5 dekstroz içine bolus). Dirençli VF/VT'de 5. defibrilasyondan sonra 5mg/kg tekrar ver, ya da LİDOKAİN 1mg/kg IV/IO`},{arrow:true},
+    {branch:[
+      {label:`Ritim değişikliği / Nabız Var`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`RESÜSİTASYON SONRASI BAKIM ALGORİTMASINA GİT`}]},
+      {label:`Nabız Yok`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ŞOKLANAMAZ RİTİM ALGORİTMASINA GİT`}]}
+    ]},{arrow:true},
+    {t:'fn-info', txt:`Geri döndürülebilir nedenler (5H5T): Hipovolemi, Hipoksi, Hidrojen iyonu(asidoz), Hiper/Hipokalemi, Hipotermi, Toksinler, Tamponad(kalp), Tansiyon pnömotoraks, Tromboz(koroner/pulmoner)`}
+  ],
+
+  pedSoklanamazRitim: [
+    {t:'fn-action', txt:`ŞOK YOK! Hasta monitörize edilene kadar KPR uygula`},{arrow:true},
+    {t:'fn-drug', txt:`ADRENALİN IV/IO 0,01mg/kg (1/10000, 0,1mL/kg), en erken uygula ve 3-5dk'da bir tekrarla`},{arrow:true},
+    {t:'fn-action', txt:`İleri hava yolu uygulaması yap, KPR devam`},{arrow:true},
+    {t:'fn-action', txt:`2dk'da bir ritim ve nabzı değerlendir`},{arrow:true},
+    {t:'fn-warning', txt:`5H5T'yi araştır ve tedavi et`},{arrow:true},
+    {branch:[
+      {label:`Ritim VF/nVT'ye dönüşürse`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ŞOKLANIR RİTİM ALGORİTMASINA GİT`}]},
+      {label:`Nabız geri dönerse`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`RESÜSİTASYON SONRASI BAKIM ALGORİTMASINA GİT`}]}
+    ]}
+  ],
+
+  pedHipovolemikSok: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula, görünür aktif kanama varsa kontrol altına al`},{arrow:true},
+    {t:'fn-action', txt:`SpO2 %94-98 olacak O2 ver (solunum sıkıntısı artan/bilinci kapanan hastada ileri hava yolu düşün)`},{arrow:true},
+    {t:'fn-action', txt:`Monitörize et, damar yolu aç (IV yol 90sn'de açılamazsa IO yolu aç)`},{arrow:true},
+    {t:'fn-drug', txt:`Ateş ≥38°C ise antipiretik ver (15mg/kg IV Parasetamol)`},{arrow:true},
+    {t:'fn-drug', txt:`Damar yolu açılır açılmaz %0,9 NaCl IV yüklemesine başla: Bebek/çocuklarda 20mL/kg, Yenidoğanlarda 10mL/kg (5-10dk'da)`},{arrow:true},
+    {t:'fn-action', txt:`Pelvis travmasından şüpheleniyorsa pelvisi sabitle, şok pozisyonu ver`},{arrow:true},
+    {t:'fn-drug', txt:`Yeterli yanıt alınamazsa aynı miktarı 2. veya 3. kez tekrarla (toplam 60mL/kg; yenidoğanda en fazla 2 kez, toplam 20mL/kg)`},{arrow:true},
+    {t:'fn-drug', txt:`3 kez sıvı yüklendiği halde şok düzelmezse: ADRENALİN IV infüzyon 0,1-1mcg/kg/dk ya da DOPAMİN IV infüzyon 5-20mcg/kg/dk`},{arrow:true},
+    {t:'fn-warning', txt:`Adrenalin/Dopamin rutin değildir, sadece sıvı tedavisine yanıtsız şokta kullanılır! Hemorajik şokta 3. sıvı yüklemesinden sonra düzelmezse eritrosit süspansiyonu gerekir`}
+  ],
+
+  pedEtiyolojisizSok: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula, hava yolu ve solunumu destekle`},{arrow:true},
+    {t:'fn-action', txt:`Monitörize et, damar yolu aç (IV/IO)`},{arrow:true},
+    {t:'fn-question', txt:`Hızlı odaklı değerlendirme: Kanama var mı? Ateş/enfeksiyon bulgusu var mı? Kalp sesleri/JVD/hepatomegali var mı? Anafilaksi bulgusu var mı?`},{arrow:true},
+    {branch:[
+      {label:`Kanama/Dehidratasyon`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`}]},
+      {label:`Ateş/Enfeksiyon`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`SEPTİK ŞOK ALGORİTMASINA GİT`}]},
+      {label:`Kalp Yetmezliği`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`KARDİYOJENİK ŞOK ALGORİTMASINA GİT`}]},
+      {label:`Alerji/Anjiyoödem/Ürtiker`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`ANAFİLAKSİ ALGORİTMASINA GİT`}]}
+    ]},{arrow:true},
+    {t:'fn-drug', txt:`Neden net değilse: 20mL/kg %0,9 NaCl bolus ile başla, yanıtı izleyerek yeniden değerlendir`}
+  ],
+
+  pedSeptikSok: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula, hava yolu yönetimini sağla`},{arrow:true},
+    {t:'fn-action', txt:`SpO2 %94-98 olacak O2 ver (solunum sıkıntısı artan/bilinci kapanan hastada ileri hava yolu düşün)`},{arrow:true},
+    {t:'fn-action', txt:`Monitörize et, damar yolu aç, kan şekeri ölç — hipoglisemi varsa düzelt, vücut ısısını hipo/hipertermiden koru`},{arrow:true},
+    {t:'fn-drug', txt:`%0,9 NaCl 20mL/kg (Yenidoğanlarda 10mL/kg) IV, 5-10dk'da ver`},{arrow:true},
+    {t:'fn-drug', txt:`İlk sıvı tedavisine yanıt alınamazsa aynı miktarı 2. veya 3. kez tekrarla (toplam 60mL/kg; yenidoğanda toplam 30mL/kg)`},{arrow:true},
+    {t:'fn-drug', txt:`Sıvı tedavisine rağmen şok bulguları düzelmezse: ADRENALİN IV 0,1-0,3mcg/kg/dk ya da DOPAMİN IV 5-20mcg/kg/dk infüzyon başla`},{arrow:true},
+    {t:'fn-warning', txt:`Antibiyotik tedavisine erken başlanabilmesi için hızla nakil sağla. Bolus aralarında yüklenme bulguları (raller/ronküs, taşikardi, hepatomegali) açısından değerlendir!`}
+  ],
+
+  pedHipoglisemi: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula, kan şekerini ölç`},{arrow:true},
+    {t:'fn-question', txt:`Glikoz &lt;60mg/dL (çocuk), &lt;50mg/dL (yenidoğan)`},{arrow:true},
+    {branch:[
+      {label:`Bilinç Açık`, cls:'fb-yes', nodes:[
+        {t:'fn-drug', txt:`Ağızdan şekerli sıvı ver, 15dk sonra kan şekerini tekrar ölç`},
+        {t:'fn-action', txt:`Glikoz &lt;60 ise IV yola geç. Glikoz &gt;60 ise 15dk'da bir izlemeye devam et`}
+      ]},
+      {label:`Bilinç Kapalı`, cls:'fb-no', nodes:[
+        {t:'fn-drug', txt:`%10'luk Dekstroz 5mL/kg IV puşe → kan şekerini tekrar kontrol et`},
+        {t:'fn-drug', txt:`Devam ediyorsa: %10'luk Dekstroz 5mL/kg IV puşe tekrarla`}
+      ]}
+    ]},{arrow:true},
+    {t:'fn-drug', txt:`Sonrasında idame: %5'lik Dekstroz IV 2,5-5mL/kg/saat sıvı başla`}
+  ],
+
+  pedHiperglisemi: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-question', txt:`Kan şekerini ölç — glikoz &gt;300mg/dL ise`},{arrow:true},
+    {t:'fn-action', txt:`Damar yolu aç`},{arrow:true},
+    {t:'fn-drug', txt:`%0,9 NaCl 10mL/kg IV (maksimum 500mL), 1 saatte ver`},{arrow:true},
+    {t:'fn-action', txt:`Aralıklı olarak kan şekeri, bilinç ve vital bulguları kontrol et`},{arrow:true},
+    {t:'fn-goto', txt:`Bilinç değişikliği ve dolaşım bozukluğu eklenmişse → BİLİNÇ DEĞİŞİKLİKLERİ ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-warning', txt:`Sahada insülin başlatılmaz! Hızlı sıvı replasmanı sonrası DKA yönetimi hastanede yapılır.`}
+  ],
+
+  pedAnafilaksi: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula, mümkünse alerjeni uzaklaştır`},{arrow:true},
+    {t:'fn-action', txt:`Hava yolu açıklığını sağla, SpO2 %94-98 O2 vermeye başla`},{arrow:true},
+    {t:'fn-drug', txt:`Solunum sıkıntısı varsa: Salbutamol 0,15mg/kg nebül (20dk arayla, 3 kez)`},{arrow:true},
+    {t:'fn-warning', txt:`Anjiyoödem varsa erken ileri hava yolu uygulaması planla (entübasyon yapılamıyorsa krikotirotomiyi düşün)`},{arrow:true},
+    {t:'fn-drug', txt:`Anafilaksi tanısı konduğu anda: ADRENALİN 1/1000, 0,01mg/kg IM (0,01mL/kg). 12 yaş altı maks 0,3mg, 12 yaş üstü maks 0,5mg — IM uyluk bölgesine. Yeterli cevap alınamazsa 5-15dk arayla toplam 3 doza kadar tekrarla`},{arrow:true},
+    {t:'fn-action', txt:`Monitörize et, damar yolu aç → %0,9 NaCl IV bolus 20mL/kg`},{arrow:true},
+    {t:'fn-drug', txt:`DİFENHİDRAMİN IV 1mg/kg veya FENİRAMİN MALEAT IV 1mg/kg (maks 50mg)`},{arrow:true},
+    {t:'fn-drug', txt:`Geç reaksiyonların önlenmesi için: METİL PREDNİZOLON 1-2mg/kg IV veya IM (maks 125mg)`}
+  ],
+
+  startTriyajSaha: [
+    {t:'fn-action', txt:`Seslen, güvenli alana çağır`},{arrow:true},
+    {branch:[
+      {label:`Yürüyenler`, cls:'fb-yes', nodes:[{t:'fn-success', txt:`YEŞİL KOD`}]},
+      {label:`Yürüyemeyenler`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Solunumu değerlendir`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Solunum Yok`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Başa pozisyon ver`}]},
+      {label:`Solunum Var, SS&lt;10 veya &gt;30/dk`, cls:'fb-no', nodes:[{t:'fn-warning', txt:`KIRMIZI KOD`}]},
+      {label:`Solunum Var, SS 10-30/dk`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Dolaşımı değerlendir`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Solunum hâlâ yok`, cls:'fb-no', nodes:[{t:'fn-info', txt:`SİYAH KOD`}]},
+      {label:`Solunum başladı`, cls:'fb-no', nodes:[{t:'fn-warning', txt:`KIRMIZI KOD`}]},
+      {label:`KGD&gt;2sn veya distal nabız yok`, cls:'fb-no', nodes:[{t:'fn-warning', txt:`KIRMIZI KOD`}]},
+      {label:`KGD&lt;2sn ve distal nabız var → Komutlara uyuyor mu?`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Uyuyorsa SARI KOD, uymuyorsa KIRMIZI KOD`}]}
+    ]},{arrow:true},
+    {t:'fn-info', txt:`30 saniyeden kısa sürede karar verilmeli! START = Simple Triage And Rapid Treatment.`}
+  ],
+
+  jumpStartTriyaj: [
+    {t:'fn-action', txt:`Seslen, güvenli alana çağır`},{arrow:true},
+    {branch:[
+      {label:`Yürüyenler`, cls:'fb-yes', nodes:[{t:'fn-success', txt:`YEŞİL KOD`}]},
+      {label:`Yürüyemeyenler`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Solunumu değerlendir`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Solunum Yok → Nabız Yok`, cls:'fb-no', nodes:[{t:'fn-info', txt:`SİYAH KOD`}]},
+      {label:`Solunum Yok → Nabız Var → 5 soluk ver`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Solunum başlarsa KIRMIZI KOD, başlamazsa SİYAH KOD`}]},
+      {label:`Solunum Var, SS&lt;15 veya &gt;45/dk`, cls:'fb-no', nodes:[{t:'fn-warning', txt:`KIRMIZI KOD`}]},
+      {label:`Solunum Var, SS 15-45/dk`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Dolaşımı değerlendir`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Distal nabız yok`, cls:'fb-no', nodes:[{t:'fn-warning', txt:`KIRMIZI KOD`}]},
+      {label:`Distal nabız var → Bilinci değerlendir`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Uygun yanıt (A-V-P) → SARI KOD. Uygunsuz yanıt (U-P) → KIRMIZI KOD`}]}
+    ]},{arrow:true},
+    {t:'fn-info', txt:`Jump START, START'ın çocuklara özel uyarlamasıdır — solunumsuz çocuğa önce 5 kurtarma solunumu verilmesiyle erişkinden ayrılır.`}
+  ],
+
+  olayYeriYonetimi: [
+    {t:'fn-action', txt:`SKKM/ÇM ile iletişime geç, olay yeri hakkında bilgi al — olayın büyüklüğünü tahmin et`},{arrow:true},
+    {t:'fn-question', txt:`Gerekli kişisel koruyucu malzemelerini kullan. Olay yeri güvenliği var mı?`},{arrow:true},
+    {branch:[
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-warning', txt:`Gerekli ise ilgili kurum desteği iste. Güvenlik sağlanıncaya kadar güvenli noktada bekle`}]},
+      {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-question', txt:`Hasta/Yaralı güvenliği var mı?`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Hasta güvenliğini sağla`}]},
+      {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Olay, yaralanma şeklini, olabilecek vaka sayısını, ek kaynak ihtiyacını değerlendir`}]}
+    ]},{arrow:true},
+    {t:'fn-action', txt:`Hasta/Yaralı birden fazla ise triyaj yap, ek kaynak ihtiyacını belirle`},{arrow:true},
+    {t:'fn-action', txt:`İhtiyaç duyulan ekip ve ekipmanı iste`},{arrow:true},
+    {t:'fn-goto', txt:`ACİL OLGU YÖNETİMİ ALGORİTMASINA GİT`}
+  ],
+
+  koah: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Hastayı rahat ettiği (tercihen oturur) pozisyonda tut`},{arrow:true},
+    {t:'fn-action', txt:`SpO2 %88-92 olacak şekilde titre ederek oksijen ver. Gerekirse solunumu PBV ile destekle`},{arrow:true},
+    {branch:[
+      {label:`Hafif - Orta Atak`, cls:'fb-yes', nodes:[
+        {t:'fn-drug', txt:`Kısa etkili β2 agonist (Salbutamol) + kısa etkili antikolinerjik (İpratropium Bromür)<br>Salbutamol 4-8 puf ya da 2,5-5mg nebülle birlikte İpratropium Bromür 500mcg nebül`},
+        {t:'fn-drug', txt:`20dk sonra: Kısa etkili β2 agonist + antikolinerjik tekrarı<br>Salbutamol 2,5mg + İpratropium Bromür 500mcg (20dk arayla en fazla 3 kez tekrarlanabilir)<br>METİL PREDNİZOLON 40mg IV`}
+      ]},
+      {label:`Ağır Atak`, cls:'fb-no', nodes:[
+        {t:'fn-drug', txt:`Salbutamol 2,5-5mg nebülle birlikte İpratropium Bromür 500mcg nebül uygula`},
+        {t:'fn-drug', txt:`20dk sonra tekrarla: Salbutamol nebül + İpratropium Bromür 500mcg (20dk arayla 3 kez tekrarlanabilir)<br>METİL PREDNİZOLON 40mg IV`},
+        {t:'fn-warning', txt:`Tedaviye yanıt vermeyen hastaya ileri hava yolu için hazırlıklı ol. Tolere eden hastaya non-invaziv mekanik ventilasyon düşün`}
+      ]}
+    ]}
+  ],
+
+  aks: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula. Ağrı sorgulaması yap, hastayı sakinleştirmeye çalış, gereksiz efordan kaçın`},
+    {t:'fn-warning', txt:`AKS'li hastayı kesinlikle yürütme!`},{arrow:true},
+    {t:'fn-action', txt:`En kısa sürede vital bulgulara bak. Monitörize et (12 derivasyonlu EKG)`},{arrow:true},
+    {t:'fn-goto', txt:`Tespit edilen ritmin algoritmasına git`},{arrow:true},
+    {t:'fn-action', txt:`SpO2 &lt;%90 ise O2 ver`},{arrow:true},
+    {t:'fn-drug', txt:`ASETİLSALİSİLİK ASİT 160-325mg çiğnet`},{arrow:true},
+    {t:'fn-drug', txt:`Hipotansiyon ve bradikardi yoksa İSOSORBİD DİNİTRAT 5mg SL tb. Ağrı devam ederse 3-5dk'da bir tekrarla (Toplam 3 doz)`},{arrow:true},
+    {t:'fn-drug', txt:`Göğüs ağrısı devam ediyor ve hasta tarafından tolere edilemiyorsa FENTANİL 1mcg/kg IV`},{arrow:true},
+    {t:'fn-warning', txt:`ST elevasyonlu MI varsa perkütan koroner girişim ya da fibrinolitik tedavi için SKKM/ÇM ile iletişime geçilmelidir`}
+  ],
+
+  bradikardi: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Hasta hipoksemikse (SpO2&lt;94) oksijenizasyon, damar yolu, monitörizasyon ve 12 derivasyon EKG`},{arrow:true},
+    {t:'fn-action', txt:`Altta yatan nedeni tanımla ve müdahale et (hipoksi, toksinler vb.)`},{arrow:true},
+    {t:'fn-question', txt:`Hasta stabil mi? En az biri varsa STABİL DEĞİL:<br>1.Senkop/ani bilinç değişikliği 2.İskemik göğüs ağrısı 3.Şok bulguları 4.Akut kalp yetmezliği 5.Hipotansiyon 6.Nabız&lt;40/dk`},{arrow:true},
+    {branch:[
+      {label:`Stabil Değil`, cls:'fb-no', nodes:[
+        {t:'fn-drug', txt:`ATROPİN 1mg IV, 3-5dk'da bir tekrarlanabilir (yanıta göre maks doz 3mg)`},
+        {t:'fn-question', txt:`Yeterli cevap alındı mı?`},
+        {t:'fn-drug', txt:`Hayır ise: ADRENALİN IV infüzyon 2-10mcg/dk ya da DOPAMİN IV infüzyon 5-20mcg/kg/dk uygula ya da Transkütanöz Pace uygula (QRS&gt;0,12sn ise Pace uygulamasını öncelikli düşün)`}
+      ]},
+      {label:`Stabil`, cls:'fb-yes', nodes:[
+        {t:'fn-question', txt:`Asistoli riski var mı? • Yakın asistoli öyküsü • Mobitz Tip 2 AV blok • AV tam blok • Ventriküler duraklama &gt;3sn`},
+        {t:'fn-action', txt:`Evet ise Atropin/Pace tedavi koluna geç. Hayır ise yakın vital takibi yap`}
+      ]}
+    ]}
+  ],
+
+  tasikardiDar: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula. Hipoksemikse oksijen başla, damar yolu, monitörizasyon ve 12 derivasyon EKG`},{arrow:true},
+    {t:'fn-question', txt:`Hasta stabil mi? (Senkop, ani bilinç değişikliği, iskemik göğüs ağrısı, şok bulguları, akut kalp yetmezliği)`},{arrow:true},
+    {branch:[
+      {label:`Stabil — Dar QRS`, cls:'fb-yes', nodes:[
+        {t:'fn-question', txt:`Ritim düzenli mi, düzensiz mi?`},
+        {t:'fn-drug', txt:`Düzenli: Vagal manevra uygula → ADENOZİN 6mg hızlı puşe + 20mL %0,9 NaCl flush. Başarısız ise 2. doz 12mg IV`},
+        {t:'fn-drug', txt:`Yanıt yoksa / Düzensiz (olası AF): METOPROLOL 5mg IV (3 kez tekrarlanabilir) ya da DİLTİAZEM 0,25mg/kg IV, ikinci doz 0,35mg/kg IV`},
+        {t:'fn-action', txt:`Etkisizse kardiyoversiyon (sedasyon sonrası)`}
+      ]},
+      {label:`Anstabil`, cls:'fb-no', nodes:[
+        {t:'fn-drug', txt:`Kardiyoversiyon öncesi MİDAZOLAM 0,1mg/kg IV ile sedasyon önerilir`},
+        {t:'fn-drug', txt:`Kardiyoversiyon (Senkron şok): Dar-Düzenli QRS 100J | Dar-Düzensiz QRS 200J`},
+        {t:'fn-warning', txt:`Yanıt alınamazsa AMİODARON 300mg IV (10dk'da). Yanıt alınamazsa kardiyoversiyonu tekrarla`}
+      ]}
+    ]}
+  ],
+
+  tasikardiGenis: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula. Hipoksemikse oksijen başla, damar yolu, monitörizasyon ve 12 derivasyon EKG`},{arrow:true},
+    {t:'fn-question', txt:`Hasta stabil mi? (Senkop, ani bilinç değişikliği, iskemik göğüs ağrısı, şok bulguları, akut kalp yetmezliği)`},{arrow:true},
+    {branch:[
+      {label:`Stabil — Geniş QRS`, cls:'fb-yes', nodes:[
+        {t:'fn-question', txt:`Ritim düzenli mi, düzensiz mi?`},
+        {t:'fn-drug', txt:`Düzenli — VT ya da belirsiz ritim: AMİODARON 150mg IV (%5 dekstroz ile 10dk'da). Önceden kesin tanılı dal bloklu SVT ise dar kompleks gibi tedavi et`},
+        {t:'fn-drug', txt:`Düzensiz: Dal bloklu atriyal fibrilasyon — dar kompleks gibi tedavi et. Torsades de Pointes düşünülüyorsa MAGNEZYUM SÜLFAT 2gr/10dk`},
+        {t:'fn-action', txt:`Etkisizse kardiyoversiyon (sedasyon sonrası)`}
+      ]},
+      {label:`Anstabil`, cls:'fb-no', nodes:[
+        {t:'fn-drug', txt:`Kardiyoversiyon öncesi MİDAZOLAM 0,1mg/kg IV ile sedasyon önerilir`},
+        {t:'fn-drug', txt:`Kardiyoversiyon (Senkron şok): Geniş-Düzenli QRS 100J | Geniş-Düzensiz QRS defibrilasyon (senkronize değil) dozu`},
+        {t:'fn-warning', txt:`Yanıt alınamazsa AMİODARON 300mg IV (10dk'da). Yanıt alınamazsa kardiyoversiyonu tekrarla`}
+      ]}
+    ]}
+  ],
+
+  arrest: [
+    {t:'fn-action', txt:`Bilinç kapalı / yanıtsız hasta`},{arrow:true},
+    {t:'fn-action', txt:`Nabız ve solunumu eş zamanlı kontrol et (en fazla 10 saniyede tamamla)`},{arrow:true},
+    {branch:[
+      {label:`Nabız Var`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`5-6 saniyede bir soluk ver. 2 dakikada bir nabız kontrolü yap`}]},
+      {label:`Nabız Yok / Solunum Yok-Gasping`, cls:'fb-no', nodes:[{t:'fn-drug', txt:`30 kalp masajı / 2 solunum (BVM ile) — defibrilatör hazır olana kadar KPR uygula`}]}
+    ]},{arrow:true},
+    {t:'fn-question', txt:`Ritim ve Nabzı Değerlendir`},{arrow:true},
+    {branch:[
+      {label:`Şoklanır`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ŞOKLANIR RİTİM VF/nVT ALGORİTMASINA GİT`}]},
+      {label:`Şoklanamaz`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`ŞOKLANAMAZ RİTİM NEA/ASİSTOLİ ALGORİTMASINA GİT`}]}
+    ]}
+  ],
+
+  vf: [
+    {t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINI UYGULA`},{arrow:true},
+    {t:'fn-action', txt:`Göğüs basısına başla, oksijenizasyonu ve ventilasyonu sağla`},{arrow:true},
+    {t:'fn-action', txt:`Şok hazır olana kadar KPR'ye ara verme`},{arrow:true},
+    {t:'fn-drug', txt:`1. Defibrilasyon (120-360J; firma önerisine göre). Şok sonrası ara vermeden göğüs basısına devam et`},{arrow:true},
+    {t:'fn-action', txt:`2dk arayla ritmi ve nabzı değerlendir. IV veya IO yol aç`},{arrow:true},
+    {t:'fn-drug', txt:`VF/nVT devam ediyorsa → 2. Defibrilasyon, ara vermeden KPR'ye devam et. ADRENALİN 1mg IV/IO (1/10000), 3-5dk'da bir ver`},{arrow:true},
+    {t:'fn-action', txt:`2dk arayla ritmi ve nabzı değerlendir. İleri hava yolu uygulaması yap`},{arrow:true},
+    {t:'fn-drug', txt:`VF/nVT devam ediyorsa → 3. Defibrilasyon, ara vermeden KPR'ye devam et. AMİODARON 300mg IV/IO bolus (20mL %5 dekstroz içinde, 2-3dk) veya %2 LİDOKAİN 1-1,5mg/kg IV/IO bolus. Tekrarlayan/dirençli VF/nVT'de 5. şoktan sonra AMİODARON 150mg IV/IO bolus (10mL %5 dekstroz, 2-3dk) veya %2 LİDOKAİN 0,5-0,75mg/kg tekrar ver`},{arrow:true},
+    {branch:[
+      {label:`Ritim değişikliği / Nabız Var`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`RESÜSİTASYON SONRASI BAKIM ALGORİTMASINA GİT`}]},
+      {label:`Nabız Yok — Ritim Değişikliği Yok`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ŞOKLANAMAZ RİTİM (NEA/ASİSTOLİ) ALGORİTMASINA GİT`}]}
+    ]}
+  ],
+
+  asistoli: [
+    {t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINI UYGULA`},{arrow:true},
+    {t:'fn-action', txt:`Göğüs basısına başla, oksijenizasyonu ve ventilasyonu sağla`},{arrow:true},
+    {t:'fn-drug', txt:`ADRENALİN 1mg IV/IO 3-5dk arayla tekrarla (1/10000'lik)`},{arrow:true},
+    {t:'fn-action', txt:`İleri hava yolu uygulaması yap`},{arrow:true},
+    {t:'fn-action', txt:`2dk arayla ritmi ve nabzı değerlendir`},{arrow:true},
+    {branch:[
+      {label:`Nabız Var`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`RESÜSİTASYON SONRASI BAKIM ALGORİTMASINA GİT`}]},
+      {label:`Nabız Yok — NEA/Asistoli devam`, cls:'fb-no', nodes:[{t:'fn-action', txt:`2dk boyunca KPR'ye devam et, döngüyü tekrarla`}]},
+      {label:`Nabız Yok — Ritim VF/nVT'ye döndü`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ŞOKLANIR RİTİM ALGORİTMASINA GİT`}]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`Geri döndürülebilir nedenler gözden geçirilmeli (5H5T)`}
+  ],
+
+  rosc: [
+    {t:'fn-action', txt:`Yeniden Değerlendirme Yap. Monitörizasyon, 12 derivasyonlu EKG çek. Spontan solunum yoksa oksijenizasyon ve ventilasyonu sürdür (SpO2 %94-98). Ateş 32-37,5°C aralığında tut. 2dk'da bir nabız ve ritim kontrolü, vital bulguları değerlendir`},{arrow:true},
+    {branch:[
+      {label:`Hipotansiyon (SKB&lt;90mmHg)`, cls:'fb-no', nodes:[
+        {t:'fn-action', txt:`Hipotansiyon nedenlerini araştır. Hedef değer MAP≥65mmHg`},
+        {t:'fn-drug', txt:`Hipotansiyon devam ediyorsa %0,9 NaCl infüzyonu ve/veya ADRENALİN 2-10mcg/dk IV infüzyon ya da DOPAMİN 5-20mcg/kg/dk IV infüzyon`},
+        {t:'fn-goto', txt:`Arrest tekrarında ilgili ritmin algoritmasına git`}
+      ]},
+      {label:`Prematür Ventriküler Kontraksiyon`, cls:'fb-yes', nodes:[
+        {t:'fn-action', txt:`Bigemine, coupletler, tripletler, R-on-T fenomeni, sürekli olmayan VT varlığı`},
+        {t:'fn-drug', txt:`%2 LİDOKAİN IV bolus 1-1,5mg/kg veya AMİODARON 150mg IV (%5 dekstroz, 10dk'da)`}
+      ]},
+      {label:`Bradiaritmi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`BRADİKARDİ ALGORİTMASINA GİT`}]},
+      {label:`Hipo/Hiperglisemi`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`DİYABETİK ACİLLER ALGORİTMASINA GİT`}]},
+      {label:`Taşiaritmi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`TAŞİARİTMİ ALGORİTMASINA GİT`}]},
+      {label:`Nöbet`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`}]}
+    ]}
+  ],
+
+  hipovolemikSokYetiskin: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},
+    {t:'fn-info', txt:`MAP (Ortalama Arter Basıncı) = (SKB + 2×DKB) / 3`},{arrow:true},
+    {t:'fn-action', txt:`Hemodinamik monitörizasyon (EKG, tansiyon, pulse oksimetri), yüksek doz O2, geniş damar yolu, şok pozisyonu`},{arrow:true},
+    {branch:[
+      {label:`Hemorajik Şok`, cls:'fb-no', nodes:[
+        {t:'fn-warning', txt:`Kanama kontrolü (direkt bası, sıkı bandaj, arter bası noktalarına bası, turnike, kanama durdurucu ajan)`},
+        {t:'fn-drug', txt:`Hipotansif hastalara 250-500mL %0,9 NaCl veya Ringer Laktat hızlı infüzyon (maks 1000mL) — SKB 80-90mmHg olacak şekilde titre et`},
+        {t:'fn-info', txt:`Hipovolemi bulguları: Taşikardi, Hipotansiyon, Soğuk ekstremiteler, Zayıf periferik nabızlar, Kapiller geri dolum &gt;2sn, Artan solunum hızı, Cilt renginde değişiklik (soluk/siyanotik)`}
+      ]},
+      {label:`Non-Hemorajik Şok`, cls:'fb-yes', nodes:[
+        {t:'fn-drug', txt:`%0,9 NaCl ya da Ringer Laktat 500-1000mL bolus 5-10dk'da. Her bolustan sonra hasta volüm durumunu kontrol et`},
+        {t:'fn-action', txt:`Belirlenebilir şok nedenlerini tanı ve yönet (Tansiyon pnömotoraks, anafilaksi, perikardiyal tamponad...) MAP 65-70mmHg`},
+        {t:'fn-drug', txt:`MAP &lt;65mmHg ve hipovolemi devam ediyorsa yanıt alınamıyorsa: ADRENALİN IV infüzyon 2-10mcg/dk ya da DOPAMİN IV infüzyon 5-20mcg/kg/dk`}
+      ]}
+    ]}
+  ],
+
+  kardiyojenik: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`SpO2 &gt;%94-98 olacak şekilde oksijen ver, gerekirse PBV ile destekle`},{arrow:true},
+    {t:'fn-action', txt:`Kardiyak monitörizasyon ve 12 derivasyonlu EKG. Yeni gelişen kardiyak iskemi ve aritmilere dikkat et`},{arrow:true},
+    {branch:[
+      {label:`Normotansif (SKB&gt;100mmHg) — Dekompanse KY`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`FUROSEMİD 20-40mg IV`}]},
+      {label:`Hipertansif Kalp Yetmezliği`, cls:'fb-no', nodes:[{t:'fn-drug', txt:`İSOSORBİD DİNİTRAT 5mg SL tb (maks 3 doz) + FUROSEMİD 20-40mg IV. Noninvaziv mekanik ventilasyon düşün (CPAP)`}]},
+      {label:`Kardiyojenik Şok`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`Hipotansiyon için 250mL %0,9 NaCl verilebilir. DOPAMİN 2-5mcg/kg/dk IV (20mcg/kg/dk'a kadar çıkılabilir)`}]}
+    ]}
+  ],
+
+  pulmOdem: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`SpO2 &gt;%94-98 olacak şekilde oksijen ver, gerekirse PBV ile destekle`},{arrow:true},
+    {t:'fn-action', txt:`Kardiyak monitörizasyon ve 12 derivasyonlu EKG. Yeni gelişen kardiyak iskemi ve aritmilere dikkat et`},{arrow:true},
+    {branch:[
+      {label:`Normotansif (SKB&gt;100mmHg) — Dekompanse KY`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`FUROSEMİD 20-40mg IV`}]},
+      {label:`Hipertansif Kalp Yetmezliği`, cls:'fb-no', nodes:[{t:'fn-drug', txt:`İSOSORBİD DİNİTRAT 5mg SL tb (maks 3 doz) + FUROSEMİD 20-40mg IV. Noninvaziv mekanik ventilasyon düşün (CPAP)`}]},
+      {label:`Kardiyojenik Şok`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`Hipotansiyon için 250mL %0,9 NaCl verilebilir. DOPAMİN 2-5mcg/kg/dk IV (20mcg/kg/dk'a kadar çıkılabilir)`}]}
+    ]}
+  ],
+
+  travma: [
+    {t:'fn-action', txt:`Olay yeri yönetimini uygula ve güvenliği sağla. Travma mekanizmasının değerlendirilmesi`},
+    {t:'fn-warning', txt:`Kanıt olabilecek materyallerin (giysilerin) korunmasını sağla`},{arrow:true},
+    {t:'fn-action', txt:`Eğer dışa doğru hayatı tehdit eden kanama varsa doğrudan bası uygula`},{arrow:true},
+    {t:'fn-question', txt:`Hava yolu açık ve güvenilir mi? Servikal ve spinal immobilizasyonu sağla`},{arrow:true},
+    {branch:[
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Hava yolunu aç, orofaringeal hava yolunu yerleştir. Ağız içi ve orofarinksi aspire et, ileri hava yolu uygulamalarını düşün`}]},
+      {label:`Evet → Solunumu Değerlendir`, cls:'fb-yes', nodes:[{t:'fn-question', txt:`Solunumu stabil mi? Her iki akciğer eşit havalanıyor mu? SpO2&gt;%94, SS:10-30/dk`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Solunumu destekle, ileri hava yolu uygulamalarını düşün. Tansiyon pnömotoraks varsa iğne dekompresyonu yap. Açık pnömotoraks varsa uygun teknikle kapat. Hemotoraks varsa solunum/dolaşımı destekle`}]},
+      {label:`Evet → Nabız Var mı?`, cls:'fb-yes', nodes:[{t:'fn-question', txt:`Nabız var mı?`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT — mümkünse 2 büyük damar yolu aç, gerekirse kemik içi yol aç`}]},
+      {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`Hızlı %0,9 NaCl IV infüzyonu (20mL/kg) başla`}]}
+    ]},{arrow:true},
+    {t:'fn-question', txt:`Dolaşım stabil mi? (KGD&gt;2sn, Nabız&gt;120/dk, SKB&lt;90mmHg)`},{arrow:true},
+    {branch:[
+      {label:`Hayır — Pelvis travması şüphesi`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Pelvisi sabitle`},{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`}]},
+      {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-question', txt:`Bilinç normal mi? GKS=15, uyanık, basit komutlara uyuyor (Anizokori, midriyazis, pin-point pupil, taraf bulgusuna dikkat et)`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`KAFA TRAVMALI HASTAYA YAKLAŞIM ALGORİTMASINA GİT`}]},
+      {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Tüm giysileri çıkararak vücut kontrolünü tamamla, hipotermiden koru`}]}
+    ]},{arrow:true},
+    {t:'fn-action', txt:`İkincil değerlendirmeyi tamamla (nakil sırasında), immobilizasyonu sürdür ve naklet`}
+  ],
+
+  crush: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Güvenliğin sağlandığından emin ol`},{arrow:true},
+    {t:'fn-question', txt:`IV/IO yolu açıldı mı?`},{arrow:true},
+    {branch:[
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Kurtarma öncesinde damar yolu açılamamışsa damar yolu aç`},{t:'fn-drug', txt:`%0,9 NaCl başla`}]},
+      {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`Damar yolu bulunduğunda %0,9 NaCl başla (1000mL/saat)`}]}
+    ]},{arrow:true},
+    {t:'fn-drug', txt:`Kurtarma işlemi sırasında sıvı verilmişse %0,9 NaCl IV hidrasyona devam et. Kurtarma işlemi 2 saatten uzun sürerse hidrasyon hızını azalt (500mL/saat veya daha az)`},{arrow:true},
+    {t:'fn-action', txt:`TRAVMALI HASTADA ACİL OLGU YÖNETİMİNİ UYGULA. Hiperkalemi açısından EKG çek`},{arrow:true},
+    {t:'fn-drug', txt:`Toplamda 3000-6000mL sıvı ver (çeşitli faktörlere bağlı olarak bu miktar değişebilir). Hiperpotasemi bulguları varsa KALSİYUM GLUKONAT %10'luk solüsyondan 10-30mL IV (2-3dk içinde) verilir`},{arrow:true},
+    {t:'fn-warning', txt:`Hipotermiye karşı dikkatli ol`}
+  ],
+
+  kafaTravma: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-question', txt:`GKS≤8 ya da solunum yetmezliği veya hava yolu tehlikesi varlığında`},{arrow:true},
+    {branch:[
+      {label:`Var`, cls:'fb-no', nodes:[{t:'fn-action', txt:`İleri hava yolu yönetimi uygula`}]},
+      {label:`Yok`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`SpO2&gt;%94-98 olacak şekilde oksijenizasyon ve ventilasyonu sağla. Ventilasyon sayısı yetişkinlerde 10/dk, çocuklarda 20/dk, bebeklerde 25/dk`}]}
+    ]},{arrow:true},
+    {t:'fn-action', txt:`Kan şekerini ölç`},{arrow:true},
+    {branch:[
+      {label:`KŞ&lt;60 veya &gt;300mg/dL`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`DİYABETİK ACİLLER ALGORİTMASINA GİT`}]},
+      {label:`60&lt;KŞ&lt;300mg/dL`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`IV sıvı tedavisine başla, SKB&gt;100mmHg olacak şekilde sıvı tedavisini sürdür`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Nöbet Varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`}]},
+      {label:`KİBAS Varsa`, cls:'fb-yes', nodes:[{t:'fn-warning', txt:`Hafif hiperventilasyon düşün`}]}
+    ]}
+  ],
+
+  inme: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Aspirasyon, üst hava yolu obstrüksiyonu, hipoventilasyon ve travma yönünden değerlendir`},{arrow:true},
+    {t:'fn-action', txt:`SpO2 %94-98 olacak şekilde uygun yöntemle oksijen ver, gerekirse solunumu PBV ile destekle`},{arrow:true},
+    {t:'fn-action', txt:`Damar yolu aç (DAKŞ)`},{arrow:true},
+    {t:'fn-action', txt:`Kan glikoz seviyesini ölç`},{arrow:true},
+    {branch:[
+      {label:`Glikoz&lt;60mg/dL / hipoglisemi bulguları`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`DİYABETİK ACİLLER ALGORİTMASINA GİT`}]},
+      {label:`Normoglisemi`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`BEFAST hastane öncesi inme skalası pozitif mi?`}]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`BEFAST Hastane Öncesi İnme Skalası: B(balance) denge kaybı, E(eyes) bulanık görme, F(face) yüzde asimetri, A(arms) kollardan birinde güç kaybı, S(speech) konuşma bozukluğu, T(time) arama zamanı`},{arrow:true},
+    {t:'fn-action', txt:`Hasta hipoperfüzyon belirtileri göstermiyor ise baş ve gövdeyi 30° yükselt`},{arrow:true},
+    {t:'fn-action', txt:`Kardiyak monitörizasyon, KB takibi`},{arrow:true},
+    {t:'fn-drug', txt:`Hastanın son olarak normal görüldüğü zamandan 4,5 saat içinde trombolitik, 6 saat içinde endovasküler girişim için uygun merkeze nakil`},{arrow:true},
+    {t:'fn-warning', txt:`Kan basıncı takibi sırasında tansiyon değerleri normalin üstünde olsa da tansiyonu düşürme!`}
+  ],
+
+  nobet: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Hava yolu açıklığını sağla. SpO2 %94-98 olacak şekilde oksijen ver, gerekirse PBV ile destekle`},{arrow:true},
+    {t:'fn-action', txt:`Damar yolu aç (DAKŞ)`},{arrow:true},
+    {t:'fn-action', txt:`Kan glikoz seviyesini ölç`},{arrow:true},
+    {branch:[
+      {label:`Glikoz&lt;60mg/dL / hipoglisemi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`DİYABETİK ACİLLER ALGORİTMASINA GİT`}]},
+      {label:`Normoglisemi`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Kardiyak monitörizasyon`}]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`Hastayı engellemeye çalışma. Yaralanmayı önlemek için hastanın başının altına yastık, katlanmış battaniye vb. yerleştir`},{arrow:true},
+    {t:'fn-drug', txt:`Nöbet devam ediyorsa DİAZEPAM 5mg IV yavaş puşe ya da MİDAZOLAM 5mg IV / 10mg IM`},{arrow:true},
+    {t:'fn-drug', txt:`FENİTOİN 20mg/kg IV (infüzyon hızı en fazla 25mg/kg/dk) ya da VALPROİK ASİT 40mg/kg IV infüzyon ya da LEVETİRASETAM 60mg/kg IV infüzyon`},{arrow:true},
+    {t:'fn-drug', txt:`5. dk'da nöbet devam ediyorsa aynı dozdan ilacı 1 kez daha tekrarla`},{arrow:true},
+    {t:'fn-question', txt:`Nöbet devam ediyor mu?`},{arrow:true},
+    {branch:[
+      {label:`Evet`, cls:'fb-no', nodes:[{t:'fn-action', txt:`İleri hava yolu uygulaması için hazırlan`}]},
+      {label:`Hayır`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Postiktal dönemde hastanın hava yolu açıklığına dikkat et`}]}
+    ]}
+  ],
+
+  hipoglisemi: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Kan şekerini ölç`},{arrow:true},
+    {t:'fn-question', txt:`Glikoz &lt;60mg/dL ve/veya klinik hipoglisemiyi düşündürüyorsa`},{arrow:true},
+    {branch:[
+      {label:`Bilinci Açık`, cls:'fb-yes', nodes:[
+        {t:'fn-drug', txt:`Ağızdan şekerli sıvı ver`},
+        {t:'fn-action', txt:`Kan şekerini kontrol et ve kliniği değerlendir. Gerekirse 15dk'da bir tekrarla`}
+      ]},
+      {label:`Bilinci Kapalı`, cls:'fb-no', nodes:[
+        {t:'fn-drug', txt:`%10-%20'lik Dekstroz solüsyonlarından 25gr glikoz IV bolus olarak ver`},
+        {t:'fn-action', txt:`Kan şekerini ölç`},
+        {t:'fn-drug', txt:`Glikoz &lt;60mg/dL ise her 5-10dk'da bir Dekstroz solüsyonlarını tekrarla`}
+      ]}
+    ]}
+  ],
+
+  dka: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Kan şekerini ölç`},{arrow:true},
+    {t:'fn-question', txt:`Glikoz &gt;300mg/dL`},{arrow:true},
+    {t:'fn-drug', txt:`%0,9 NaCl IV infüzyon başla`},{arrow:true},
+    {t:'fn-question', txt:`Şok ve dehidratasyon bulguları var mı?`},{arrow:true},
+    {t:'fn-goto', txt:`Varsa → HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-warning', txt:`SAHADA İNSÜLİN BAŞLANMAZ! Not: Glikoz &lt;60mg/dL saptanırsa Hipoglisemi algoritmasına geçilir.`}
+  ],
+
+  anafilaksi: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-question', txt:`Akut başlangıç, yaşamı tehdit eden bulguları var mı?<br>Hava yolu: Anjiyoödem, stridor, hırıltılı solunum. Solunum: Takipne, wheezing, siyanoz, SpO2&lt;%90, konfüzyon. Dolaşım: Soluk cilt, hipotansiyon, koma`},{arrow:true},
+    {t:'fn-drug', txt:`ADRENALİN 0,3-0,5mg IM`},{arrow:true},
+    {t:'fn-action', txt:`Hava yolu açıklığını sağla. SpO2 %94-98 O2 ver. Damar yolu aç. Anjiyoödem varlığında erken ileri hava yolu hazırlığı. Monitörize et: SpO2, EKG, KB`},{arrow:true},
+    {t:'fn-drug', txt:`Hipoperfüzyon sürüyor ise ADRENALİN 0,3-0,5mg IM 5dk içinde tekrarla. %0,9 NaCl 500mL bolus`},{arrow:true},
+    {t:'fn-drug', txt:`Düzelme olmazsa ADRENALİN 1mcg/dk infüzyon IV yavaş uygula`},{arrow:true},
+    {t:'fn-drug', txt:`%0,9 NaCl 500mL bolus`},{arrow:true},
+    {t:'fn-drug', txt:`DİFENHİDRAMİN 25-50mg veya FENİRAMİN MALEAT 45,5mg IV yavaş uygula. Bronkospazm için SALBUTAMOL 2,5-5mg`},{arrow:true},
+    {t:'fn-drug', txt:`Profilaktik olarak METİL PREDNİZOLON IV 1-2mg/kg (maks 125mg)`}
+  ],
+
+  hipotermia: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Soğuk çevreden uzaklaştır, ıslak veya soğuk kıyafetleri çıkar, ısı kaybını engelle`},{arrow:true},
+    {branch:[
+      {label:`Hafif Hipotermi (32-35°C, bilinç açık, titreme)`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Ortam sıcaklığını artır, sıcak kıyafetler ve battaniye ver, sıcak içecek içir, mümkünse hareket etmesini sağla`}]},
+      {label:`Orta Hipotermi (28-32°C, bilinç bozukluğu)`, cls:'fb-no', nodes:[
+        {t:'fn-action', txt:`Monitörize et`},
+        {t:'fn-action', txt:`Ortam sıcaklığını artır, ılık oksijen ver, baş-boyun-koltuk altı-kasık bölgelerine ılık su paketleri koy, termal battaniye ile sar`},
+        {t:'fn-drug', txt:`Ilık %0,9 NaCl infüzyonu uygula`},
+        {t:'fn-action', txt:`Aritmiden kaçınmak için immobilizasyonu sağla`}
+      ]},
+      {label:`Ağır Hipotermi (&lt;28°C, bilinç kapalı)`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Orta hipotermi tedavisine ek olarak hava yolu güvenliğini sağla`}]},
+      {label:`Hipotermik Kardiyak Arrest (bilinç kapalı, nabız yok)`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOTERMİDE ARREST YÖNETİMİ ALGORİTMASINA GİT`}]}
+    ]}
+  ],
+
+  hipotermiArrestYetiskin: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Vücut ısısı &lt;35°C ve bilinç kapalı ise en az 60sn nabız kontrolü yap`},{arrow:true},
+    {branch:[
+      {label:`Nabız Var`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`HİPOTERMİ ALGORİTMASINA GİT`}]},
+      {label:`Nabız Yok`, cls:'fb-no', nodes:[{t:'fn-question', txt:`KPR başlama kriterleri var mı?`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Evet`, cls:'fb-yes', nodes:[
+        {t:'fn-action', txt:`Standart erişkin ileri yaşam desteği uygulamasına başla. Eş zamanlı olarak pasif ve aktif ısıtma yöntemlerini uygula`},
+        {t:'fn-action', txt:`Vücut ısısı ≥35°C olana kadar KPR'yi sonlandırma. Vücut ısısı &gt;35°C olduğunda`},
+        {t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`}
+      ]},
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-action', txt:`KPR'ye başlama`}]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`Hipotermiye bağlı kardiyak arrestte, ilk defibrilasyon girişiminin başarısız olması durumunda vücut sıcaklığı 30°C'ye ulaşıncaya kadar defibrilasyon ertelenmelidir. SKKM/ÇM ile görüşerek ECMO merkezine yönlendirmeyi düşün`}
+  ],
+
+  bogulma: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-question', txt:`Hava yolu güvenliğini sağla, solunum durumunu kontrol et`},{arrow:true},
+    {branch:[
+      {label:`Spontan solunumu var`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Maske ile oksijen ver`}]},
+      {label:`Spontan solunumu yok`, cls:'fb-no', nodes:[{t:'fn-action', txt:`BVM ile solunumu destekle`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Spontan solunum geldi`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Maske ile oksijen ver`}]},
+      {label:`Solunum yok / Gasping solunum`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`}]}
+    ]}
+  ],
+
+  yanik: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Yanık bölgesindeki giysileri ve takıları çıkart (deri veya doku kaldırılmamalı, soyulmamalı)`},
+    {t:'fn-warning', txt:`Geniş yanıklarda yanık örtüsü kullan`},{arrow:true},
+    {t:'fn-action', txt:`Yanığın alanını ve derinliğini değerlendir. Yanık yüzeyini yanık seti içindeki ekipman ile veya steril pansuman ile ört. Vital bulguları değerlendir`},{arrow:true},
+    {t:'fn-drug', txt:`Ringer Laktat başla`},{arrow:true},
+    {t:'fn-question', txt:`Şok bulguları var mı?`},{arrow:true},
+    {branch:[
+      {label:`Evet`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`}]},
+      {label:`Hayır`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`Ağrı kontrolü için ANALJEZİK/FENTANİL — Fentanil için: 1mcg/kg IV yavaş, IM`}]}
+    ]},{arrow:true},
+    {t:'fn-action', txt:`Sıvı yüklemesi yap! 1 saatten daha kısa nakiller için 500mL Ringer Laktat; daha uzun süreli nakiller için PARKLAND formülü kullanılmalıdır`},{arrow:true},
+    {t:'fn-warning', txt:`Yanık merkezi/ünitesi olan merkeze nakil için SKKM/ÇM ile iletişime geçilmelidir`},{arrow:true},
+    {t:'fn-info', txt:`⚡ <strong>Elektrik Yanığı:</strong> Kaynaktan ayrıldığından emin ol, güç kesilmiş olmalı, en az 10m uzakta dur. Rabdomiyoliz için erken sıvı (Ringer Laktat). Arrest/aritmi varsa ilgili algoritmaya git.<br>🧪 <strong>Kimyasal Yanık:</strong> Olası KBRN durumuna hazırlıklı ol. Maruziyeti kes, görülebilen parçaları temizle, bol su veya %0,9 NaCl ile 20dk boyunca nazikçe yıka → sonra bu Termal Yanık algoritmasını uygula`}
+  ],
+
+  zehirlenme: [
+    {t:'fn-action', txt:`Olay yeri yönetimini uygula. Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Maddeyi tanımla (Ne almış, nasıl almış, ne kadar almış, ne zaman almış, kusmuş mu?)`},{arrow:true},
+    {branch:[
+      {label:`Bilinç Kapalı`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Hava yolu güvenliğini sağla, solunumu ve dolaşımı destekle`}]},
+      {label:`Bilinç Açık`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`SpO2 %94-98 olacak oksijenizasyon ve ventilasyonu sürdür`}]}
+    ]},{arrow:true},
+    {t:'fn-action', txt:`Damar yolu aç (DAKŞ)`},{arrow:true},
+    {t:'fn-drug', txt:`SKKM ile temasa geç, UZEM (Ulusal Zehir Danışma Merkezi — 114) yönergelerine göre hareket et`},{arrow:true},
+    {t:'fn-action', txt:`Sürekli gözlem`},{arrow:true},
+    {t:'fn-info', txt:`<strong>Maddeye özel yaklaşım:</strong><br>
+      💊 <strong>Yüksek Doz İlaç:</strong> Aritmi→Ritim algoritması | Dolaşım bozukluğu→Hipovolemik Şok | Hipo/Hiperglisemi→Diyabetik Aciller | Nöbet→Nöbet algoritması | Koma/bradipne/pinpoint pupil→Narkotik-Opioid | Hipotermi→Hipotermi algoritması<br>
+      ☠️ <strong>Kolinerjik Ajanlar (sinir gazları, tarım ilaçları) — SLUDGE-BBB (Salivasyon,Lakrimasyon,Ürinasyon,Defekasyon,GİS kramplar,Emezis,Bronkore,Bronkospazm):</strong> ATROPİN 1-2mg IV (IV açılamazsa 2-5mg IM), trakeobronşiyal sekresyonlar azalıncaya kadar 5dk'da bir tekrarla<br>
+      💨 <strong>Karbonmonoksit:</strong> 10L/dk üzeri O2 (rezervuarlı maske). Nöbet varsa Nöbet/Konvülziyon algoritması<br>
+      ❤️ <strong>Kalsiyum Kanal / Beta Bloker:</strong> Bradiaritmi→Bradikardi algoritması. Hipotansiyon: SKB&gt;90mmHg olacak şekilde %0,9 NaCl/RL IV hidrasyon. Ciddi bulgu/hipotansiyon varsa 3 ampul KALSİYUM GLUKONAT IV, %0,9 NaCl içinde 10dk'da<br>
+      💊 <strong>Narkotik/Opioid:</strong> Solunum depresyonu varsa NALOKSON 0,4-2mg IM/IV/IO/SC (maks 10mg), düzelme olmazsa 2-3dk'da bir tekrarla<br>
+      💊 <strong>Trisiklik Antidepresan:</strong> Disritmi + QRS≥0,10sn ise NaHCO3 1-2mEq/kg puşe, 3-5dk'da bir tekrarla. Hipertermi→Hipertermi algoritması. Nöbet→Nöbet algoritması`}
+  ],
+
+  // ───────────── DOĞUM / YENİDOĞAN ─────────────
+  obstetrik: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`SpO2 %94-98 olacak şekilde oksijenizasyon ve ventilasyon desteği sağla, maske ile 10L/dk oksijen ver. Damar yolu aç`},{arrow:true},
+    {t:'fn-drug', txt:`Ringer Laktat veya %0,9 NaCl IV 125mL/saat - 40 damla/dk`},{arrow:true},
+    {t:'fn-action', txt:`Annenin dizlerini bükerek karnına doğru çekmesini sağla, kalçasını battaniye/minderle yükselt`},{arrow:true},
+    {t:'fn-action', txt:`Perine etrafında steril alan oluştur. Baş göründüğünde anneyi ıkınması için teşvik et`},{arrow:true},
+    {t:'fn-action', txt:`Baş çıkarken kontrollü çıkmasını sağlamak için parmaklarını kafatasının kemik kısmına yerleştir (Fontanel ve yüzden sakın)`},{arrow:true},
+    {t:'fn-action', txt:`Baş doğduktan sonra başı destekle. Ağız ve burnu temizle. Omuzların ön-arka çapla doğması için başın rotasyonunu bekle`},{arrow:true},
+    {t:'fn-warning', txt:`Göbek kordonunun boynuna dolanıp dolanmadığını kontrol et. Kordon dolanması varsa omuzdan kaydırarak veya klempleyip keserek çöz`},{arrow:true},
+    {t:'fn-action', txt:`Bacaklar gelirken bacakları kavra`},{arrow:true},
+    {t:'fn-action', txt:`Göbek kordonu kesilene kadar mümkünse bebeği anne üzerine yatır`},{arrow:true},
+    {t:'fn-drug', txt:`KARBETOSİN 100mcg/mL (IM veya IV, 1dk'dan kısa olmayacak şekilde yavaş puşe)`},{arrow:true},
+    {t:'fn-action', txt:`30-60sn bekleyip göbek kordonunu klemple (ilk klemp bebekten ~10cm, ikinci klemp ilkinden 10cm uzaklıkta) klempler arasından kordonu kes`},{arrow:true},
+    {t:'fn-goto', txt:`NORMAL YENİDOĞAN BAKIMI ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-action', txt:`En kısa sürede anneyle tensel temas ve emzirmeyi sağla`},{arrow:true},
+    {t:'fn-action', txt:`Perineal bölgeye steril ped koy. Annenin bacaklarını indir bir araya toplanmasına yardımcı ol. Plasenta ayrıldıktan sonra uterusu kontrol et; yumuşak ise uterin masaja başla (fundustan değil pubisin hemen üzerinden masaj yap)`},{arrow:true},
+    {t:'fn-action', txt:`Doğum sonrası plasentanın çıkışını gözle, doğum zamanını kaydet. Anne, bebek ve plasentayı uygun hastaneye naklet`}
+  ],
+
+  yenidoganBakimNormal: [
+    {t:'fn-question', txt:`Bebek zamanında doğdu mu? Kas tonusu iyi mi? Solunumu var mı veya ağlıyor mu?`},{arrow:true},
+    {branch:[
+      {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Anne yanında olağan bakım: Kurula, Isıt ve vücut sıcaklığını koru, gerekirse salgıları temizle (önce ağız sonra burun), değerlendirmeyi sürdür`}]},
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Kurula, Isıt, Uyaran ver, Pozisyon ver, gerekirse salgıları temizle`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Solunum yok, iç çekme tarzında solunum veya KH&lt;100/dk`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`YENİDOĞAN CANLANDIRMASI ALGORİTMASINA GİT`}]},
+      {label:`Solunum güçlüğü veya inatçı siyanoz`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Pozisyon ver ve hava yolunu temizle. SpO2 izle. Gerektikçe oksijen desteği, PBV`}]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`32 hafta öncesi doğan bebeklerde ısı kaybını önlemek için yenidoğan, kurulama yapılmadan polietilen torba içerisine konur`}
+  ],
+
+  yenidogan: [
+    {t:'fn-question', txt:`Solunum yok, iç çekme tarzında solunum veya kalp atım hızı &lt;100/dk`},{arrow:true},
+    {t:'fn-action', txt:`PBV uygula (40-60 soluk/dk). SpO2 izle, EKG izlemini düşün`},
+    {t:'fn-warning', txt:`Eğer umblikal venöz yol açılmışsa IV yol olarak kullanılabilir`},{arrow:true},
+    {branch:[
+      {label:`KAH ≥100/dk`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`NORMAL YENİDOĞAN BAKIMI ALGORİTMASINA GİT`}]},
+      {label:`KAH &lt;100/dk`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Göğüs hareketlerini kontrol et. Gerekirse ventilasyon düzeltici adımlar uygula. Gerekirse ETT veya laringeal maske uygula`}]}
+    ]},{arrow:true},
+    {t:'fn-question', txt:`KAH &lt;60 atım/dk?`},{arrow:true},
+    {t:'fn-action', txt:`Henüz yapılmamışsa ETT veya LMA yerleştir. KPR'yi (%100 O2 ile eşgüdümlü PBV) başlat, EKG izlemini yap. Henüz açılmamışsa IV veya IO yol aç`},{arrow:true},
+    {t:'fn-drug', txt:`KAH &lt;60 atım/dk devam ediyorsa: ADRENALİN 0,02mg/kg (1/10000'lik) IV uygula. KAH halen &lt;60 atım/dk ise hipovolemi ve/veya pnömotoraksı düşün`},{arrow:true},
+    {t:'fn-goto', txt:`KAH &lt;60 atım/dk devam ediyorsa ARREST YÖNETİMİ ALGORİTMASINA GİT`}
+  ],
+
+  // ───────────── PEDİATRİK ─────────────
+  pedEpiglottitKrup: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Çocuğu sakinleştir, uygun ve rahat pozisyon ver (oturur pozisyon)`},{arrow:true},
+    {t:'fn-action', txt:`Hava yolu açıklığını sağla, ağız içi muayenesi yapmaktan kaçın`},{arrow:true},
+    {t:'fn-action', txt:`SpO2 %94-98 aralığında olacak şekilde oksijen vermeye başla`},{arrow:true},
+    {t:'fn-action', txt:`Bilinç kapalı ise BVM ile solutmaya başla (airway uygulamadan)`},{arrow:true},
+    {t:'fn-action', txt:`Hava yolu tıkanmışsa ileri hava yolu uygulaması yap`},{arrow:true},
+    {t:'fn-action', txt:`Monitörize et, gerekirse damar yolu aç`},{arrow:true},
+    {t:'fn-warning', txt:`Düzelme olmazsa → ARREST YÖNETİMİ ALGORİTMASINA GİT`}
+  ],
+
+  krup: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Çocuğu sakinleştir, hava yolu açıklığını sağla`},{arrow:true},
+    {t:'fn-action', txt:`SpO2 %94-98 aralığında olacak şekilde oksijen vermeye başla`},{arrow:true},
+    {t:'fn-action', txt:`Monitörize et, damar yolu aç`},{arrow:true},
+    {t:'fn-drug', txt:`Ateşi yüksek (≥38°C) ise antipiretik ver (PARASETAMOL IV 15mg/kg)`},{arrow:true},
+    {t:'fn-question', txt:`Westley Krup Şiddeti Skorlamasını Değerlendir`},{arrow:true},
+    {branch:[
+      {label:`Hafif Atak`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`DEKSAMETAZON 0,15-0,6mg/kg (maks 16mg) oral/IM/IV uygula`}]},
+      {label:`Orta Atak`, cls:'fb-no', nodes:[{t:'fn-drug', txt:`DEKSAMETAZON 0,6mg/kg (maks 16mg) oral/IM/IV. ADRENALİN nebül (1/1000'lik) 0,5mg/kg (10kg üzerinde maks 5mg)`}]},
+      {label:`Ağır Atak`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`DEKSAMETAZON 0,6mg/kg (maks 16mg) oral/IM/IV. ADRENALİN nebül (1/1000'lik) 0,5mg/kg (10kg üzerinde maks 5mg); düzelme olmazsa tekrarla`}]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`Solunum yetmezliği gelişirse ileri hava yolu uygulaması düşün`}
+  ],
+
+  pedKardiyojenikSok: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Hava yolu yönetimini uygula, bilinci açıksa oturur pozisyonda tut`},{arrow:true},
+    {t:'fn-action', txt:`SpO2 %94-98 aralığında olacak oksijen vermeye başla (solunum sıkıntısı artan, bilinci kapanan hastalarda ileri hava yolu düşün)`},{arrow:true},
+    {t:'fn-action', txt:`Monitörize et, damar yolu aç (IV yol 90sn'de açılamazsa IO yolu aç)`},{arrow:true},
+    {t:'fn-question', txt:`Yüklenme bulguları var mı? (Akciğerde ronküs, Akciğerde raller, Taşikardi, Hepatomegali)`},{arrow:true},
+    {branch:[
+      {label:`Evet`, cls:'fb-no', nodes:[{t:'fn-drug', txt:`1mg/kg FUROSEMİD IV`}]},
+      {label:`Hayır`, cls:'fb-yes', nodes:[
+        {t:'fn-drug', txt:`5-10mL/kg 20-30dk'da gidecek şekilde %0,9 NaCl IV başla`},
+        {t:'fn-question', txt:`Yüklenme bulguları var mı?`},
+        {t:'fn-drug', txt:`Hayır ise: İlk sıvı tedavisine yeterli yanıt alınamazsa aynı miktarı 2. ve 3. kez tekrarla (Maks 20mL/kg geçilmemeli)`}
+      ]}
+    ]},{arrow:true},
+    {t:'fn-drug', txt:`Sıvı tedavisine yanıt alınamadığında veya yüklenme bulguları ortaya çıkarsa ADRENALİN IV infüzyonu planla (0,1-0,3mcg/kg/dk)`}
+  ],
+
+  pedResusSonrasi: [
+    {t:'fn-action', txt:`Yeniden Değerlendirme. Spontan solunumu yoksa SpO2 %94-98 olacak oksijenizasyon ve ventilasyonu sürdür (≤1yaş:30/dk, &gt;1yaş:20/dk). 2dk'da bir nabız ve ritim kontrolü. 12 derivasyonlu EKG. Vital bulguları değerlendir. 37,6°C üzeri ateşi kontrol et`},{arrow:true},
+    {branch:[
+      {label:`Arrest tekrarında`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`}]},
+      {label:`Dolaşım yetmezliği`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`}]},
+      {label:`Hipoglisemi/Hiperglisemi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOGLİSEMİ/HİPERGLİSEMİ ALGORİTMASINA GİT`}]},
+      {label:`Bradikardi`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`BRADİKARDİ ALGORİTMASINA GİT`}]},
+      {label:`Taşikardi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`TAŞİKARDİ ALGORİTMASINA GİT`}]},
+      {label:`Nöbet`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`}]}
+    ]}
+  ],
+
+  pedBilincDegisikligi: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {branch:[{label:`Travma var ya da şüpheli`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Servikal immobilizasyonu sağla`}]}]},{arrow:true},
+    {t:'fn-action', txt:`SpO2 %94-98 aralığında olacak oksijenizasyon ve ventilasyonu sağla (GKS≤8 ise ileri hava yolu girişimi planla)`},{arrow:true},
+    {t:'fn-action', txt:`Damar yolu aç`},{arrow:true},
+    {t:'fn-action', txt:`Kan şekerini ölç`},{arrow:true},
+    {branch:[
+      {label:`&gt;300mg/dL`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPERGLİSEMİ ALGORİTMASINA GİT`}]},
+      {label:`&lt;60mg/dL (yenidoğanda&lt;40)`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOGLİSEMİ ALGORİTMASINA GİT`}]},
+      {label:`Dolaşım bozukluğu varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`}]},
+      {label:`Normoglisemi`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Değerlendirmeye devam et`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Hasta nöbet geçiriyorsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`}]},
+      {label:`Toksik madde alımı şüphesi`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`TOKSİKOLOJİ-ZEHİRLENME/DOZ AŞIMI ALGORİTMASINA GİT`}]},
+      {label:`Ateşi ölç, 38°C üzerindeyse`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ATEŞ YÖNETİMİ ALGORİTMASINA GİT`}]},
+      {label:`Nörolojik değerlendirme`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Pupil, ışık reaksiyonu, taraf bulgusuna dikkat et, GKS takibi yap`}]}
+    ]}
+  ],
+
+  pediatrikNobet: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Hava yolu açıklığını sağla (airway, aspirasyon), SpO2 %94-98 olacak oksijen ver, gerekirse PBV ile destekle. Monitörize et ve damar yolu aç`},{arrow:true},
+    {t:'fn-action', txt:`Kan glikoz seviyesini ölç`},{arrow:true},
+    {branch:[
+      {label:`Glikoz&lt;60mg/dL / hipoglisemi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOGLİSEMİ ALGORİTMASINA GİT`}]},
+      {label:`Normoglisemi`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Ateş &gt;38°C ise eş zamanlı olarak ATEŞ YÖNETİMİ algoritmasını uygula`}]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`Bukkal veya nazal midazolam kullanımı için anahtar noktalara bak`},{arrow:true},
+    {t:'fn-drug', txt:`Nöbet devam ediyorsa DİAZEPAM 0,2mg/kg (maks 10mg) IV veya MİDAZOLAM 0,2mg/kg (maks 10mg) IV/IM`},{arrow:true},
+    {t:'fn-drug', txt:`5. dk'da nöbet devam ediyorsa aynı dozdan ilacı 1 kez daha tekrarla`},{arrow:true},
+    {t:'fn-question', txt:`Nöbet devam ediyor mu?`},{arrow:true},
+    {branch:[
+      {label:`Evet`, cls:'fb-no', nodes:[
+        {t:'fn-action', txt:`İleri hava yolu uygulaması için hazırlan`},
+        {t:'fn-drug', txt:`FENİTOİN 20mg/kg IV (infüzyon hızı en fazla 25mg/kg/dk) ya da VALPROİK ASİT 30mg/kg IV infüzyon ya da LEVETİRASETAM 60mg/kg IV infüzyon`}
+      ]},
+      {label:`Hayır`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Postiktal dönemde hastanın hava yolu açıklığına dikkat et`}]}
+    ]}
+  ],
+
+  pedAtesYonetimi: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Ateş ≥38°C ise`},{arrow:true},
+    {t:'fn-question', txt:`Solunum bozukluğu, dolaşım bozukluğu, bilinç bozukluğu, peteşi varlığı açısından değerlendir`},{arrow:true},
+    {branch:[
+      {label:`Yok`, cls:'fb-yes', nodes:[
+        {t:'fn-action', txt:`Fazla giysileri çıkar`},
+        {t:'fn-drug', txt:`PARASETAMOL 10-15mg/kg oral/IV, İBUPROFEN 5-10mg/kg oral ver`},
+        {t:'fn-action', txt:`Ateş takibi, solunum/dolaşım/bilinç bozukluğu açısından değerlendirmeyi sürdür`},
+        {t:'fn-warning', txt:`Herhangi bir aşamada konvülziyon gelişirse → NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`}
+      ]},
+      {label:`Var — SKB&lt;100mmHg, SS&gt;22, GKS&lt;15`, cls:'fb-no', nodes:[
+        {t:'fn-goto', txt:`SEPTİK ŞOK ALGORİTMASINA GİT`},
+        {t:'fn-warning', txt:`2 ay altında olan bebekleri sepsis ve septik şok açısından yakın takip et`}
+      ]}
+    ]}
+  ],
+
+  pedHipertermi: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Vücut ısısını ölç, vücut ısısı &gt;40°C ise`},{arrow:true},
+    {t:'fn-action', txt:`Vücut ısısı &lt;39°C olacak şekilde hastayı serin ortama al, kıyafetlerini çıkar, ambulans kabinini soğut, termal battaniyeyi sarı kısım içte kalacak şekilde ört`},{arrow:true},
+    {t:'fn-action', txt:`Monitörize et, damar yolu aç`},{arrow:true},
+    {t:'fn-action', txt:`SpO2 %94-98 olacak şekilde O2 vermeye başla`},{arrow:true},
+    {t:'fn-drug', txt:`%0,9 NaCl IV hidrasyon (20mL/kg) başla`},{arrow:true},
+    {branch:[
+      {label:`Bilinç değişikliği ve şok bulguları varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`}]},
+      {label:`Bilinç değişikliği yoksa`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Ağızdan sıvı ver`}]}
+    ]}
+  ],
+
+  pedHipotermi: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Monitörize et`},{arrow:true},
+    {t:'fn-action', txt:`Soğuk çevreden uzaklaştır, ıslak veya soğuk kıyafetleri çıkar, ısı kaybını engelle`},{arrow:true},
+    {branch:[
+      {label:`Nabız Var`, cls:'fb-yes', nodes:[
+        {t:'fn-drug', txt:`Ilık oksijen ver, ılık %0,9 NaCl IV infüzyonu (45°C'yi geçmemeli) başla`},
+        {t:'fn-action', txt:`Baş-boyun-koltukaltı-kasık bölgelerine ılık su paketleri koy, termal battaniye (sarı kısım dışarıda) ile sar, bilinç açıksa ılık içecekler ver`},
+        {t:'fn-warning', txt:`&lt;32°C aktif dış ısıtma uygulamaları yap. &lt;32°C altında sarsıntılar kardiyak aritmileri tetikleyebileceğinden transport sırasında hastayı fazla hareket ettirme`},
+        {t:'fn-action', txt:`Yakın vital bulgu ve kan şekeri takibi yap`}
+      ]},
+      {label:`Nabız Yok`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOTERMİDE ARREST YÖNETİMİ ALGORİTMASINA GİT`}]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`Yeniden ısıtma sırasında huzursuzluk, ağrı ve ajite durum varlığında analjezik düşün`}
+  ],
+
+  pedHipotermiArrest: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Monitörize et, 60sn süre ile solunum ve dolaşımı kontrol et, vücut ısısını ölç`},{arrow:true},
+    {t:'fn-action', txt:`Nabız yoksa KPR uygula`},{arrow:true},
+    {t:'fn-question', txt:`Vücut ısısı &lt;30°C ise ritmi değerlendir`},{arrow:true},
+    {branch:[
+      {label:`Şoklanır ritim ise`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`KPR'yi sürdür. Defibrilasyonu en çok 1 kez dene, vücut ısısı 30°C'ye çıkana kadar ilaç uygulaması yapma`}]},
+      {label:`Ritim NEA/Asistoli ise`, cls:'fb-no', nodes:[{t:'fn-action', txt:`KPR'yi sürdür, vücut ısısı 30°C üstüne çıkana kadar ilaç uygulaması yapma`}]}
+    ]},{arrow:true},
+    {t:'fn-action', txt:`KPR &gt;35°C oluncaya kadar devam ettir. Vücut ısısı &gt;35°C olunca`},{arrow:true},
+    {t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-action', txt:`Arrest yönetimi sırasında pasif ısıtma ve/veya aktif dış ısıtma uygulamaları yap`},{arrow:true},
+    {t:'fn-warning', txt:`Vücut ısısı &gt;35°C olana kadar adrenalin uygulama aralıkları uzatılabilir`}
+  ],
+
+  pedIsirmaSokma: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Isıran veya sokan etkeni belirle`},{arrow:true},
+    {branch:[
+      {label:`Kara Canlıları`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Isırılan bölgeye lokal soğuk uygula`}]},
+      {label:`Deniz Canlıları`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Isırılan bölgeyi lokal %0,9 NaCl ile irrigasyon yap`}]}
+    ]},{arrow:true},
+    {t:'fn-action', txt:`Isırılan yeri tespit et, yara izini değerlendir`},{arrow:true},
+    {t:'fn-action', txt:`Yıka ve sabitle`},{arrow:true},
+    {t:'fn-action', txt:`Her 5dk'da bir ödemin sınırını izle`},{arrow:true},
+    {t:'fn-action', txt:`Hastanın vitallerini takip et, zehirlenme, alerjik reaksiyon ve anafilaksi bulgularını gözlemle`},{arrow:true},
+    {branch:[{label:`Alerjik reaksiyon / anafilaksi varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`İLGİLİ ALGORİTMAYA GİT`}]}]},{arrow:true},
+    {t:'fn-drug', txt:`Hipotansiyon varlığında %0,9 NaCl IV hidrasyon başla`},{arrow:true},
+    {t:'fn-warning', txt:`Arı sokmalarında iğne görülüyorsa çıkarılmalıdır. Solunum yolu/kan yolu/vücut sıvıları ile bulaş olabildiği için koruyucu ekipman kullanımına dikkat edilmeli. Yılan ya da akrep ısırıklarında turnike UYGULANMAMALIDIR — turnike yerine sıkma bantları ya da sıkı bandaj (bir parmağın rahatlıkla girebileceği gevşeklikte) uygulanmalıdır`}
+  ],
+
+  pedSudaBogulma: [
+    {t:'fn-action', txt:`Kendi güvenliğini sağla`},{arrow:true},
+    {t:'fn-question', txt:`Hasta sudan çıkarılmış mı?`},{arrow:true},
+    {branch:[
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-info', txt:`Konu ile ilgili anahtar noktalara bakınız`}]},
+      {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Acil olgu yönetimini uygula`}]}
+    ]},{arrow:true},
+    {t:'fn-action', txt:`Hava yolu güvenliği, oksijenizasyon ve ventilasyonu sağla`},
+    {branch:[{label:`Travma şüphesi varsa`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Spinal stabilizasyon sağla`}]}]},{arrow:true},
+    {t:'fn-action', txt:`Solunum yoksa / gasping solunum ise 5 kurtarıcı soluk ver`},{arrow:true},
+    {t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`},{arrow:true},
+    {branch:[{label:`Vücut ısısı&lt;35°C ise`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOTERMİ ALGORİTMASINA GİT`}]}]}
+  ],
+
+  pedYanik: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Solunum sıkıntısı varsa hava yolunu açık tut, oksijenizasyon ve ventilasyonu destekle. İnhalasyon yanığı veya boyunda sirküler yanık varsa erken ileri hava yolu uygulaması düşün`},{arrow:true},
+    {t:'fn-action', txt:`Yanık bölgesindeki giysileri çıkart (deri ve doku kaldırılmamalı, soyulmamalıdır)`},
+    {t:'fn-warning', txt:`Vücut üzerindeki metal ve takıları çıkar!`},{arrow:true},
+    {t:'fn-action', txt:`Avuç içi kuralını kullanarak yanığın alanını ve derecesini değerlendir`},{arrow:true},
+    {t:'fn-action', txt:`Yanık yüzeyini steril yanık örtüsü veya steril pansuman ile ört`},{arrow:true},
+    {t:'fn-action', txt:`Ağrıyı değerlendir, yakın vital bulgu takibi yap`},{arrow:true},
+    {t:'fn-drug', txt:`Ağrı kontrolü için ANALJEZİK/FENTANİL — Fentanil için: 1mcg/kg IV yavaş infüzyon, IM, SC`},{arrow:true},
+    {t:'fn-question', txt:`Hipovolemik şok bulguları var mı?`},{arrow:true},
+    {branch:[
+      {label:`Evet`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`}]},
+      {label:`Hayır`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`Yanık boyutuna göre sıvı yüklemesi yap: (3mL × yanmış VYA × kg) / 16 saatte Ringer Laktat`}]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`Yanık merkezi/ünitesi olan merkeze nakil için SKKM/ÇM ile iletişime geçilmelidir`}
+  ],
+
+  pedZehirlenmeDozAsimi: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Maddeyi tanımla ve maddenin uzaklaştırıldığından emin ol`},{arrow:true},
+    {t:'fn-action', txt:`SpO2 %94-98 aralığında olacak oksijen vermeye başla, gerekirse solunumu PBV ile destekle`},{arrow:true},
+    {t:'fn-action', txt:`Monitörize et`},
+    {branch:[{label:`Aritmi varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`UYGUN RİTİM BOZUKLUĞU ALGORİTMASINA GİT`}]}]},{arrow:true},
+    {t:'fn-action', txt:`Damar yolu aç`},
+    {branch:[{label:`Dolaşım bozukluğu bulguları varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`}]}]},{arrow:true},
+    {t:'fn-action', txt:`Kan şekerini ölç`},
+    {branch:[{label:`Normal sınırlar dışındaysa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPO/HİPERGLİSEMİ ALGORİTMASINA GİT`}]}]},{arrow:true},
+    {t:'fn-action', txt:`Vücut ısısını ölç`},
+    {branch:[{label:`Anormal bulgu varsa`, cls:'fb-no', nodes:[{t:'fn-warning', txt:`Hipotermi ve hipertermiden koru`}]}]},{arrow:true},
+    {t:'fn-action', txt:`Nörolojik değerlendirme yap (pupil takibi, ışık reaksiyonu), GKS takibi yap`},
+    {branch:[{label:`Nöbet varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`}]}]},{arrow:true},
+    {t:'fn-drug', txt:`Opioid zehirlenmesi şüphesi varsa NALOKSON 0,1mg/kg IV/IM (Maks tek doz: 2mg, maks doz: 10mg) uygulamayı düşün`},{arrow:true},
+    {t:'fn-drug', txt:`SKKM/ÇM ile temasa geç, UZEM yönergelerine göre hareket et`}
+  ],
+
+  pediatrikArrest: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula. Bilinç kapalı/yanıtsız hasta. Hava yolunu aç, solunumu kontrol et`},{arrow:true},
+    {t:'fn-action', txt:`Solunum yok veya iç çekme tarzında solunum varsa BVM ile solunumu destekle, 2-3sn'de bir nefes (20-30 nefes/dk)`},{arrow:true},
+    {t:'fn-action', txt:`Solunumla eş zamanlı olarak dolaşımı değerlendir (en fazla 10sn)`},{arrow:true},
+    {branch:[
+      {label:`Nabız &gt;60/dk`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`PBV'ye devam et, 2dk'da bir tekrar solunum-nabız kontrolü yap (en fazla 10sn)`}]},
+      {label:`Nabız Yok veya &lt;60/dk ve dolaşım yetersiz (KGD&gt;2sn)`, cls:'fb-no', nodes:[{t:'fn-drug', txt:`Hasta monitörize edilene kadar KPR uygula`}]}
+    ]},{arrow:true},
+    {t:'fn-question', txt:`Monitör hazır olur olmaz ritim ve nabzı değerlendir`},{arrow:true},
+    {branch:[
+      {label:`Şoklanır Ritim`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ŞOKLANIR RİTİM VF/NABIZSIZ VT ALGORİTMASINA GİT`}]},
+      {label:`Şoklanamaz Ritim`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`ŞOKLANAMAZ RİTİM ASİSTOLİ/NEA ALGORİTMASINA GİT`}]}
+    ]},{arrow:true},
+    {branch:[{label:`Spontan dolaşım geri döndü`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`RESÜSİTASYON SONRASI BAKIM ALGORİTMASINA GİT`}]}]}
+  ]
+};
+
 function showAlgo(key){
   const d=algoData[key];
-  if(d) openModal(d.title,d.html);
-  else openModal('Algoritma','Bilgi yükleniyor...');
+  if(!d){ openModal('Algoritma','Bilgi yükleniyor...'); return; }
+  if(PDF_FLOWS[key]){
+    openModal(d.title, buildFlow(PDF_FLOWS[key]));
+  } else {
+    openModal(d.title, renderAsFlowchart(d.html));
+  }
 }
 
 // ======= LOGIN =======
@@ -3939,6 +4977,7 @@ const AF_DATA = {
     {l:'💔 AKS/NSTEMI',k:'aks',c:'af-chip-orange'},
     {l:'💚 ROSC Bakım',k:'rosc',c:'af-chip-green'},
     {l:'💧 Kardiyojenik Şok',k:'kardiyojenik',c:'af-chip-blue'},
+    {l:'💧 Hipovolemik Şok (Y-13)',k:'hipovolemikSokYetiskin',c:'af-chip-cyan'},
     {l:'💊 Tamponad',k:'tamponad',c:'af-chip-purple'},
     {l:'🩺 Aort Diseksiyonu',k:'aortDiseksiyon',c:'af-chip-orange'},
     {l:'🌀 Torsades',k:'torsades',c:'af-chip-red'},
@@ -3971,6 +5010,7 @@ const AF_DATA = {
     {l:'🦴 Spinal Travma',k:'spinalTravma',c:'af-chip-cyan'},
     {l:'💪 Crush Sendromu',k:'crush',c:'af-chip-purple'},
     {l:'🥶 Hipotermi',k:'hipotermia',c:'af-chip-cyan'},
+    {l:'🥶 Hipotermi Arrest (Y-25)',k:'hipotermiArrestYetiskin',c:'af-chip-cyan'},
     {l:'🐍 Isırma/Sokma',k:'isirmaSokmaYetiskin',c:'af-chip-green'},
     {l:'🏷️ START Triyaj',k:'startTriyajSaha',c:'af-chip-cyan'},
     {l:'🤱 Doğum Komplik.',k:'dogumKomplikasyonlari',c:'af-chip-purple'},

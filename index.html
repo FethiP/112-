@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="KIRKLARELİ 112">
+    <meta name="apple-mobile-web-app-title" content="ŞANLIURFA 112">
     
     <link rel="apple-touch-icon" href="icon.png">
+    <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22112%20%C5%9Eanl%C4%B1urfa%20-%20KKM%20%2B%20Saha%22%2C%22short_name%22%3A%22112%20%C5%9Eanl%C4%B1urfa%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%2304091a%22%2C%22theme_color%22%3A%22%23dc2626%22%2C%22icons%22%3A%5B%5D%7D">
+    <meta name="theme-color" content="#dc2626">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <title>112 Kırklareli | KKM + Saha | AHA/ERC 2025</title>
+    <title>112 Şanlıurfa | KKM + Saha | AHA/ERC 2025</title>
     <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 :root{
@@ -37,10 +39,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .light.w{background:#f8fafc;animation-delay:0.23s;}
 .light.b{background:#3b82f6;animation-delay:0.46s;box-shadow:0 0 10px #3b82f6;}
 @keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.25;transform:scale(0.65);}}
-.splash-logo{width:96px;height:96px;background:linear-gradient(135deg,#ef4444,#991b1b);border-radius:28px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;margin-bottom:18px;animation:logoPulse 2.2s ease-in-out infinite;position:relative;}
-.splash-logo::after{content:'';position:absolute;inset:-3px;border-radius:31px;background:linear-gradient(135deg,#ef4444,transparent,#3b82f6);opacity:0.5;animation:logoRing 3s linear infinite;z-index:-1;}
-@keyframes logoRing{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-@keyframes logoPulse{0%,100%{box-shadow:0 0 30px rgba(239,68,68,0.5),0 4px 30px rgba(0,0,0,0.5);}50%{box-shadow:0 0 70px rgba(239,68,68,0.9),0 0 120px rgba(239,68,68,0.3),0 4px 30px rgba(0,0,0,0.5);}}
+.splash-logo{width:96px;height:96px;background:#dc2626;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;margin-bottom:18px;box-shadow:0 4px 24px rgba(220,38,38,0.35);}
 .splash-title{font-size:2.1rem;font-weight:900;letter-spacing:3px;text-align:center;background:linear-gradient(135deg,#fff 0%,#93c5fd 50%,#f1f5f9 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:5px;}
 .splash-sub{font-size:0.65rem;color:#64748b;text-align:center;margin-bottom:8px;letter-spacing:2px;text-transform:uppercase;}
 .splash-aha{font-size:0.58rem;color:#fbbf24;margin-bottom:36px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.25);padding:5px 14px;border-radius:20px;letter-spacing:0.5px;}
@@ -61,9 +60,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .role-btn.saha i{color:#4ade80;}
 .role-btn h3{font-size:1rem;margin-bottom:4px;font-weight:800;color:#f1f5f9;}
 .role-btn p{font-size:0.5rem;color:#64748b;line-height:1.5;}
-.role-glow{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);width:90px;height:40px;border-radius:50%;filter:blur(18px);pointer-events:none;opacity:0.7;}
-.role-btn.kkm .role-glow{background:#2563eb;}
-.role-btn.saha .role-glow{background:#16a34a;}
+.role-glow{display:none;}
 
 /* ===== LOGIN ===== */
 #loginBox{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,transparent 0%,rgba(6,12,26,0.96) 10%,#060c1a 100%);padding:18px 22px 32px;display:none;flex-direction:column;gap:8px;}
@@ -90,15 +87,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 /* HEADER */
 .app-header{padding:12px 16px 14px;flex-shrink:0;position:relative;overflow:hidden;}
-.app-header::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);animation:headerShine 4s ease-in-out infinite;}
-@keyframes headerShine{0%,100%{opacity:0.4;}50%{opacity:1;}}
-.header-kkm{background:linear-gradient(135deg,#0f2448 0%,#04091a 100%);border-bottom:1px solid rgba(37,99,235,0.4);}
-.header-saha{background:linear-gradient(135deg,#0c2a18 0%,#04091a 100%);border-bottom:1px solid rgba(22,163,74,0.4);}
+.header-kkm{background:#0f2448;border-bottom:1px solid rgba(37,99,235,0.4);}
+.header-saha{background:#0c2a18;border-bottom:1px solid rgba(22,163,74,0.4);}
 .header-inner{display:flex;align-items:center;gap:10px;}
-.header-icon{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0;animation:iconPulse 3s ease-in-out infinite;}
-@keyframes iconPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.06);}}
-.header-kkm .header-icon{background:linear-gradient(135deg,rgba(37,99,235,0.3),rgba(37,99,235,0.1));color:#60a5fa;box-shadow:0 0 12px rgba(37,99,235,0.3);}
-.header-saha .header-icon{background:linear-gradient(135deg,rgba(22,163,74,0.3),rgba(22,163,74,0.1));color:#4ade80;box-shadow:0 0 12px rgba(22,163,74,0.3);}
+.header-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0;}
+.header-kkm .header-icon{background:rgba(37,99,235,0.18);color:#60a5fa;}
+.header-saha .header-icon{background:rgba(22,163,74,0.18);color:#4ade80;}
 .header-title{font-size:0.95rem;font-weight:800;letter-spacing:0.5px;background:linear-gradient(90deg,#f1f5f9,#cbd5e1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .header-badge{font-size:0.48rem;color:#64748b;margin-top:2px;letter-spacing:0.5px;}
 .header-lights{display:flex;gap:5px;margin-left:auto;align-items:center;}
@@ -136,26 +130,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 /* CARDS */
 .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;}
-.algo-card{border-radius:16px;padding:13px;cursor:pointer;border:1px solid transparent;transition:var(--trans);position:relative;overflow:hidden;}
-.algo-card::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.06),transparent);transform:skewX(-20deg);transition:left 0.5s;}
-.algo-card:active{transform:scale(0.95) translateY(1px);}
-.algo-card:active::before{left:150%;}
-.algo-card .card-icon{font-size:1.65rem;margin-bottom:7px;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.6));display:block;}
+.algo-card{border-radius:10px;padding:13px;cursor:pointer;border:1px solid var(--border);border-left-width:3px;transition:background-color 0.15s,transform 0.1s;position:relative;background:var(--card);}
+.algo-card:active{transform:scale(0.97);background:var(--card2);}
+.algo-card .card-icon{font-size:1.5rem;margin-bottom:7px;display:block;}
 .algo-card h3{font-size:0.72rem;font-weight:700;margin-bottom:3px;color:#f1f5f9;}
 .algo-card p{font-size:0.5rem;opacity:0.85;line-height:1.4;color:#cbd5e1;}
 .algo-card .card-badge{position:absolute;top:8px;right:8px;font-size:0.42rem;padding:2px 6px;border-radius:20px;font-weight:700;}
-.c-red{background:linear-gradient(135deg,#7f1d1d,#450a0a);border-color:#ef4444;box-shadow:0 2px 14px rgba(239,68,68,0.3);}
-.c-orange{background:linear-gradient(135deg,#9a3412,#431407);border-color:#f97316;box-shadow:0 2px 14px rgba(249,115,22,0.3);}
-.c-blue{background:linear-gradient(135deg,#1e3a8a,#0f172a);border-color:#60a5fa;box-shadow:0 2px 14px rgba(96,165,250,0.25);}
-.c-purple{background:linear-gradient(135deg,#4c1d95,#1e0a3c);border-color:#a78bfa;box-shadow:0 2px 14px rgba(167,139,250,0.25);}
-.c-green{background:linear-gradient(135deg,#14532d,#052e16);border-color:#4ade80;box-shadow:0 2px 14px rgba(74,222,128,0.25);}
-.c-cyan{background:linear-gradient(135deg,#164e63,#082f49);border-color:#22d3ee;box-shadow:0 2px 14px rgba(34,211,238,0.25);}
-.c-yellow{background:linear-gradient(135deg,#713f12,#2d1b00);border-color:#fbbf24;box-shadow:0 2px 14px rgba(251,191,36,0.25);}
-.c-pink{background:linear-gradient(135deg,#831843,#3d0a21);border-color:#f472b6;box-shadow:0 2px 14px rgba(244,114,182,0.25);}
-.c-gray{background:linear-gradient(135deg,#1e293b,#0f172a);border-color:#64748b;box-shadow:0 2px 8px rgba(0,0,0,0.3);}
-.c-teal{background:linear-gradient(135deg,#134e4a,#042f2e);border-color:#2dd4bf;box-shadow:0 2px 14px rgba(45,212,191,0.25);}
-.c-indigo{background:linear-gradient(135deg,#1e1b4b,#0a0820);border-color:#818cf8;box-shadow:0 2px 14px rgba(129,140,248,0.25);}
-.c-rose{background:linear-gradient(135deg,#881337,#3b0718);border-color:#fb7185;box-shadow:0 2px 14px rgba(251,113,133,0.25);}
+.c-red{border-left-color:#ef4444;}
+.c-orange{border-left-color:#f97316;}
+.c-blue{border-left-color:#60a5fa;}
+.c-purple{border-left-color:#a78bfa;}
+.c-green{border-left-color:#4ade80;}
+.c-cyan{border-left-color:#22d3ee;}
+.c-yellow{border-left-color:#fbbf24;}
+.c-pink{border-left-color:#f472b6;}
+.c-gray{border-left-color:#64748b;}
+.c-teal{border-left-color:#2dd4bf;}
+.c-indigo{border-left-color:#818cf8;}
+.c-rose{border-left-color:#fb7185;}
 
 /* ===== GERÇEKÇI EKG CANVAS SISTEMI ===== */
 .rhythm-section{margin-bottom:4px;}
@@ -180,7 +172,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .cpr-card{background:linear-gradient(145deg,#1a0808,#250a0a,#180606);border:1px solid rgba(220,38,38,0.5);border-radius:16px;padding:14px;margin-bottom:8px;text-align:center;position:relative;overflow:hidden;box-shadow:0 4px 24px rgba(220,38,38,0.15),inset 0 1px 0 rgba(255,255,255,0.05);}
 .cpr-card::before{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(239,68,68,0.6),transparent);}
 .cpr-card::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(239,68,68,0.07),transparent 60%);pointer-events:none;}
-.cpr-timer{font-family:'Courier New',monospace;font-size:2.6rem;font-weight:900;color:#ef4444;text-shadow:0 0 30px rgba(239,68,68,0.8),0 0 60px rgba(239,68,68,0.3);letter-spacing:5px;animation:timerGlow 1s ease-in-out infinite;}
+.cpr-timer{font-family:'Courier New',monospace;font-size:2.6rem;font-weight:900;color:#ef4444;letter-spacing:5px;}
 @keyframes timerGlow{0%,100%{text-shadow:0 0 20px rgba(239,68,68,0.7);}50%{text-shadow:0 0 40px rgba(239,68,68,1),0 0 80px rgba(239,68,68,0.4);}}
 .cpr-phase{font-size:0.62rem;margin:5px 0;color:#fbbf24;font-weight:600;letter-spacing:0.5px;}
 .cpr-buttons{display:flex;gap:7px;justify-content:center;margin-top:10px;}
@@ -665,6 +657,29 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
 .inj-marker-label{font-size:6px;fill:#93c5fd;pointer-events:none;text-anchor:middle;font-weight:700;}
 .inj-info-box{display:none;margin-top:8px;}
 .inj-info-box.show{display:block;}
+
+/* ===== PUPİL & GKS DEĞERLENDİRME ===== */
+.pupil-row{display:flex;gap:16px;justify-content:center;margin-bottom:12px;}
+.pupil-item{text-align:center;cursor:pointer;}
+.pupil-eye-svg{width:70px;height:70px;transition:transform 0.15s;}
+.pupil-item:active .pupil-eye-svg{transform:scale(0.92);}
+.pupil-lbl{font-size:0.5rem;color:var(--muted);margin-top:4px;font-weight:700;}
+.pupil-item.active .pupil-lbl{color:#a78bfa;}
+.pupil-detail{display:none;margin-top:8px;}
+.pupil-detail.show{display:block;}
+.gks-ref-table{width:100%;border-collapse:collapse;margin-top:6px;}
+.gks-ref-table td{padding:4px 6px;font-size:0.54rem;border-bottom:1px solid rgba(255,255,255,0.06);}
+.gks-ref-table td:first-child{color:#a78bfa;font-weight:800;width:24px;text-align:center;}
+
+/* ===== IO (KEMİK İÇİ) DAMAR YOLU ===== */
+.io-body-svg{background:#050e1a;border-radius:12px;padding:10px;display:block;margin:0 auto 10px;max-width:220px;}
+.io-marker{cursor:pointer;}
+.io-marker circle{fill:rgba(129,140,248,0.25);stroke:#818cf8;stroke-width:1.5;}
+.io-marker:hover circle{fill:rgba(129,140,248,0.5);}
+.io-marker.active circle{fill:rgba(239,68,68,0.5);stroke:#ef4444;}
+.io-marker-label{font-size:6px;fill:#c4b5fd;pointer-events:none;text-anchor:middle;font-weight:700;}
+.io-info-box{display:none;margin-top:8px;}
+.io-info-box.show{display:block;}
 </style>
 
 </head>
@@ -674,30 +689,12 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
 
 <div id="splash">
   <div class="splash-bg" id="splashBg"></div>
-  <div class="splash-lights">
-    <div class="light r"></div><div class="light w"></div><div class="light b"></div>
-    <div class="light r"></div><div class="light w"></div><div class="light b"></div>
-    <div class="light r"></div><div class="light w"></div><div class="light b"></div>
-  </div>
   <div class="splash-logo">🚑</div>
-  <div class="splash-title">112 KIRKLARELİ</div>
+  <div class="splash-title">112 ŞANLIURFA</div>
   <div class="splash-sub">KKM OPERASYON + SAHA EKİBİ</div>
   <div class="splash-aha">⚕️ AHA / ERC 2025 KILAVUZLARI</div>
 
   <div id="loginBox" class="show">
-    <!-- GİRİŞ FORMU -->
-    <div class="login-form-title">🔐 SİSTEM GİRİŞİ</div>
-    <div class="login-input-wrap">
-      <span class="login-icon">👤</span>
-      <input class="login-input" id="loginUser" type="text" placeholder="Kullanıcı adı" autocomplete="off">
-    </div>
-    <div class="login-input-wrap">
-      <span class="login-icon">🔒</span>
-      <input class="login-input" id="loginPass" type="password" placeholder="Şifre" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()">
-    </div>
-    <div class="login-err" id="loginErr">❌ Kullanıcı adı veya şifre hatalı!</div>
-    <button class="login-btn" onclick="doLogin()">🚀 &nbsp;GİRİŞ YAP</button>
-
     <div class="login-tip-box">
       <span class="tip-tag" id="loginTipTag">💊 İlaç</span>
       <span class="tip-text" id="loginTipText">Adrenalin dozu: KPR'de 1mg IV/IO her 3-5 dk.</span>
@@ -709,7 +706,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     </div>
   </div>
 
-  <div class="role-buttons" id="roleBox" style="display:none;">
+  <div class="role-buttons" id="roleBox" style="display:flex;">
     <div class="role-btn kkm" onclick="selectRole('kkm')">
       <div class="role-glow"></div>
       <i class="fas fa-headset"></i>
@@ -731,8 +728,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
   <div class="app-header header-kkm">
     <div class="header-inner">
       <div class="header-icon"><i class="fas fa-headset"></i></div>
-      <div><div class="header-title">KKM | KIRKLARELİ 112</div><div class="header-badge">📡 Komuta Kontrol Merkezi</div></div>
-      <div class="header-lights"><div class="hlv r"></div><div class="hlv w"></div><div class="hlv b"></div></div>
+      <div><div class="header-title">KKM | ŞANLIURFA 112</div><div class="header-badge">📡 Komuta Kontrol Merkezi</div></div>
     </div>
   </div>
   <div class="search-bar">
@@ -770,9 +766,10 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
         </select>
         <input type="text" id="kkmAddr" placeholder="📍 İlçe, Mahalle, Cadde, Bina No">
         <select id="kkmDistrict">
-          <option>Kırklareli Merkez</option><option>Lüleburgaz</option><option>Babaeski</option>
-          <option>Demirköy</option><option>Pınarhisar</option><option>Vize</option>
-          <option>Pehlivanköy</option><option>Kofçaz</option><option>İğneada</option><option>Kıyıköy</option>
+          <option>Haliliye</option><option>Eyyübiye</option><option>Karaköprü</option>
+          <option>Akçakale</option><option>Birecik</option><option>Bozova</option>
+          <option>Ceylanpınar</option><option>Halfeti</option><option>Harran</option>
+          <option>Hilvan</option><option>Siverek</option><option>Suruç</option><option>Viranşehir</option>
         </select>
         <select id="kkmPatients">
           <option value="1">👤 1 hasta</option><option value="2">👥 2 hasta</option>
@@ -894,7 +891,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     <!-- Ekipler -->
     <div class="sec"><i class="fas fa-truck"></i> SAHA EKİPLERİ</div>
     <div id="kkmTeams"></div>
-    <div class="sec"><i class="fas fa-location-dot"></i> KIRKLARELİ İSTASYONLARI</div>
+    <div class="sec"><i class="fas fa-location-dot"></i> ŞANLIURFA İSTASYONLARI</div>
     <div id="kkmStations"></div>
 
     <!-- HARİTA BÖLÜMÜ (KKM) -->
@@ -917,13 +914,14 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
             <path d="M 15,140 Q 80,138 170,136 Q 250,134 325,130" stroke="rgba(234,179,8,0.25)" stroke-width="1.5" fill="none"/>
             <path d="M 170,15 Q 168,80 165,136 Q 162,200 160,270" stroke="rgba(234,179,8,0.2)" stroke-width="1" fill="none"/>
             <g id="svgStations"></g>
-            <text x="85" y="100" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Babaeski</text>
-            <text x="85" y="185" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Pehlivanköy</text>
-            <text x="175" y="75" fill="rgba(100,116,139,0.5)" font-size="8" text-anchor="middle" font-weight="bold">Kırklareli</text>
-            <text x="165" y="195" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Lüleburgaz</text>
-            <text x="260" y="80" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Demirköy</text>
-            <text x="265" y="150" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Vize</text>
-            <text x="270" y="230" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Kıyıköy</text>
+            <text x="175" y="75" fill="rgba(100,116,139,0.5)" font-size="8" text-anchor="middle" font-weight="bold">Şanlıurfa Merkez</text>
+            <text x="85" y="100" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Birecik</text>
+            <text x="85" y="185" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Suruç</text>
+            <text x="165" y="195" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Harran</text>
+            <text x="120" y="230" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Akçakale</text>
+            <text x="260" y="80" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Siverek</text>
+            <text x="265" y="150" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Hilvan</text>
+            <text x="270" y="230" fill="rgba(100,116,139,0.5)" font-size="7" text-anchor="middle">Viranşehir</text>
           </svg>
         </div>
         <div class="harita-list" id="haritaList"></div>
@@ -949,13 +947,14 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
           <option>Sahada Tedavi</option><option>Ret/İmtina</option>
         </select>
         <div style="display:flex;gap:6px;margin-bottom:6px;">
-          <input id="vEkip" placeholder="Ekip (örn: KKL-1)" style="flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:7px 10px;border-radius:10px;font-size:0.62rem;">
+          <input id="vEkip" placeholder="Ekip (örn: HAL-1)" style="flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:7px 10px;border-radius:10px;font-size:0.62rem;">
           <input id="vYas" type="number" placeholder="Yaş" min="0" max="120" style="width:70px;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:7px 8px;border-radius:10px;font-size:0.62rem;">
         </div>
         <textarea id="vNot" placeholder="Notlar (opsiyonel)..." rows="2" style="width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:7px 10px;border-radius:10px;font-size:0.62rem;resize:none;margin-bottom:6px;"></textarea>
         <button onclick="vakaKaydet()" style="background:linear-gradient(135deg,var(--green),#15803d);border:none;padding:10px;width:100%;border-radius:30px;color:white;font-weight:700;cursor:pointer;font-size:0.7rem;">💾 KAYDET (OFFLİNE)</button>
       </div>
       <div id="vakaListesi" style="margin-top:8px;"></div>
+      <button onclick="exportVakaCSV()" style="background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--muted);padding:9px;width:100%;border-radius:30px;font-weight:700;cursor:pointer;font-size:0.62rem;margin-top:8px;">📊 CSV / Excel Olarak Dışa Aktar</button>
     </div>
 
   </div>
@@ -974,10 +973,9 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
   <div class="app-header header-saha">
     <div class="header-inner">
       <div class="header-icon"><i class="fas fa-truck-medical"></i></div>
-      <div><div class="header-title">SAHA EKİBİ | KIRKLARELİ</div><div class="header-badge">⚡ Detaylı Algoritmalar | AHA/ERC 2025</div></div>
+      <div><div class="header-title">SAHA EKİBİ | ŞANLIURFA</div><div class="header-badge">⚡ Detaylı Algoritmalar | AHA/ERC 2025</div></div>
       <div class="header-lights" style="gap:8px;">
         <button class="lang-btn" id="langBtnSaha" onclick="toggleLang()">EN</button>
-        <div class="hlv r"></div><div class="hlv w"></div><div class="hlv b"></div>
         <button class="saha-exit-btn" onclick="sahaLogout()" title="Çıkış">
           <i class="fas fa-right-from-bracket"></i>
         </button>
@@ -1175,6 +1173,9 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     <div class="card-grid">
       <div class="algo-card c-orange" onclick="showYanikCalc()"><div class="card-icon">🔥</div><h3>YANIK % HESAPLAYICI</h3><p>Vücut diyagramı — 9'lar kuralı, tıkla-hesapla</p></div>
       <div class="algo-card c-green" onclick="showInjectionSites()"><div class="card-icon">💉</div><h3>ENJEKSİYON BÖLGELERİ</h3><p>IM bölgeler — Adrenalin, Midazolam vb.</p></div>
+      <div class="algo-card c-purple" onclick="showPupilGuide()"><div class="card-icon">👁️</div><h3>PUPİL DEĞERLENDİRME</h3><p>Normal, anizokori, miyotik, midriyatik</p></div>
+      <div class="algo-card c-cyan" onclick="showIOSites()"><div class="card-icon">🦴</div><h3>İO (KEMİK İÇİ) BÖLGELERİ</h3><p>Proksimal tibia, distal femur, humerus</p></div>
+      <div class="algo-card c-red" onclick="showDefibPads()"><div class="card-icon">⚡</div><h3>DEFİBRİLASYON PED YERLEŞİMİ</h3><p>Anterior-lateral / Anterior-posterior</p></div>
     </div>
     <div class="sec"><i class="fas fa-diagram-project"></i> AKIŞ ŞEMALARI (AHA 2025)</div>
     <div class="card-grid">
@@ -1603,30 +1604,31 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
 <script>
 // ======= DATA =======
 const stations = [
-  {name:"Kırklareli 1 Nolu ASHİ",lat:41.7350,lng:27.2250,adres:"Kırklareli Merkez"},
-  {name:"Kırklareli 2 Nolu ASHİ",lat:41.7400,lng:27.2300,adres:"Fabrikalar Bölgesi"},
-  {name:"Kırklareli 3 Nolu ASHİ",lat:41.7280,lng:27.2180,adres:"Karakaş Mahallesi"},
-  {name:"Lüleburgaz 1 Nolu ASHİ",lat:41.4100,lng:27.3550,adres:"Lüleburgaz Merkez"},
-  {name:"Lüleburgaz 2 Nolu ASHİ",lat:41.4070,lng:27.3500,adres:"D100 Karayolu"},
-  {name:"Lüleburgaz 3 Nolu ASHİ",lat:41.4140,lng:27.3600,adres:"Yeni Sanayi"},
-  {name:"Babaeski 1 Nolu ASHİ",lat:41.4320,lng:27.0920,adres:"Babaeski Merkez"},
-  {name:"Babaeski 2 Nolu ASHİ",lat:41.4380,lng:27.1000,adres:"Alpullu Yolu"},
-  {name:"Demirköy 1 Nolu ASHİ",lat:41.8250,lng:27.7630,adres:"Demirköy Merkez"},
-  {name:"Pınarhisar 1 Nolu ASHİ",lat:41.6250,lng:27.5180,adres:"Pınarhisar Devlet"},
-  {name:"Vize 1 Nolu ASHİ",lat:41.5700,lng:27.7650,adres:"Vize Merkez"},
-  {name:"Pehlivanköy 1 Nolu ASHİ",lat:41.3480,lng:26.9240,adres:"Pehlivanköy"},
-  {name:"İğneada 1 Nolu ASHİ",lat:41.8760,lng:27.9830,adres:"İğneada Sahil"},
-  {name:"Kofçaz 1 Nolu ASHİ",lat:41.9450,lng:27.1580,adres:"Kofçaz Merkez"},
-  {name:"Kıyıköy 1 Nolu ASHİ",lat:41.6350,lng:28.0950,adres:"Kıyıköy Sahil"}
+  {name:"Haliliye 1 Nolu ASHİ",lat:37.1650,lng:38.7850,adres:"Haliliye Merkez"},
+  {name:"Haliliye 2 Nolu ASHİ",lat:37.1720,lng:38.7700,adres:"Yeni Mahalle"},
+  {name:"Eyyübiye 1 Nolu ASHİ",lat:37.1500,lng:38.8050,adres:"Eyyübiye Merkez"},
+  {name:"Eyyübiye 2 Nolu ASHİ",lat:37.1420,lng:38.8200,adres:"Devlet Hastanesi Yanı"},
+  {name:"Karaköprü 1 Nolu ASHİ",lat:37.1900,lng:38.7950,adres:"Karaköprü Merkez"},
+  {name:"Akçakale 1 Nolu ASHİ",lat:36.7167,lng:38.9500,adres:"Akçakale Merkez"},
+  {name:"Birecik 1 Nolu ASHİ",lat:37.0333,lng:37.9833,adres:"Birecik Merkez"},
+  {name:"Bozova 1 Nolu ASHİ",lat:37.3667,lng:38.5167,adres:"Bozova Merkez"},
+  {name:"Ceylanpınar 1 Nolu ASHİ",lat:36.8500,lng:40.0500,adres:"Ceylanpınar Merkez"},
+  {name:"Halfeti 1 Nolu ASHİ",lat:37.2667,lng:37.8667,adres:"Halfeti Merkez"},
+  {name:"Harran 1 Nolu ASHİ",lat:36.8667,lng:39.0333,adres:"Harran Merkez"},
+  {name:"Hilvan 1 Nolu ASHİ",lat:37.5833,lng:38.9500,adres:"Hilvan Merkez"},
+  {name:"Siverek 1 Nolu ASHİ",lat:37.7500,lng:39.3167,adres:"Siverek Merkez"},
+  {name:"Siverek 2 Nolu ASHİ",lat:37.7600,lng:39.3050,adres:"Devlet Hastanesi Yanı"},
+  {name:"Suruç 1 Nolu ASHİ",lat:36.9833,lng:38.4167,adres:"Suruç Merkez"},
+  {name:"Viranşehir 1 Nolu ASHİ",lat:37.2333,lng:39.7667,adres:"Viranşehir Merkez"}
 ];
 
 // ======= STARS =======
 function createStars(){
   const bg=document.getElementById('splashBg');
-  for(let i=0;i<60;i++){
+  for(let i=0;i<18;i++){
     const s=document.createElement('div');s.className='star';
-    const size=Math.random()*3+1;
-    s.style.cssText=`width:${size}px;height:${size}px;background:white;top:${Math.random()*100}%;left:${Math.random()*100}%;opacity:${Math.random()*0.5+0.1};--d:${(Math.random()*3+1).toFixed(1)}s;animation-delay:${(Math.random()*3).toFixed(1)}s;`;
+    const size=Math.random()*2+1;
+    s.style.cssText=`width:${size}px;height:${size}px;background:white;top:${Math.random()*100}%;left:${Math.random()*100}%;opacity:${Math.random()*0.3+0.1};--d:${(Math.random()*3+2).toFixed(1)}s;animation-delay:${(Math.random()*3).toFixed(1)}s;`;
     bg.appendChild(s);
   }
 }
@@ -1640,8 +1642,7 @@ function selectRole(role){
     document.getElementById('appSaha').style.display='flex';
     calcDoses();
     initECG();
-    const loginUserEl=document.getElementById('loginUser');
-    if(loginUserEl) localStorage.setItem('kkl112_user', loginUserEl.value||'Saha Ekibi');
+    if(!localStorage.getItem('urfa112_user')) localStorage.setItem('urfa112_user','Saha Ekibi');
     initEkipDurum();
   }
 }
@@ -1686,8 +1687,8 @@ const ecgRhythms = [
     desc:'P→QRS→T düzenli, 60-100/dk. Referans ritim.',
     wave:[[0.00,0.000],[0.10,0.000],[0.13,0.050],[0.17,0.180],[0.21,0.050],[0.24,0.000],[0.28,0.000],[0.30,-0.100],[0.335,1.000],[0.355,-0.150],[0.37,0.000],[0.43,0.000],[0.47,0.080],[0.54,0.260],[0.61,0.080],[0.67,0.000],[1.00,0.000]]},
   { id:'sinusTak', name:'📈 SİNÜS TAŞİKARDİ', label:'⚠️ Değerlendir', labelClass:'lbl-unstable',
-    color:'#fbbf24', hr:118, algo:'sinusTak',
-    desc:'Düzenli P→QRS→T, 100-150/dk. Neden: ağrı, hipovolemi, sepsis, PE.',
+    color:'#fbbf24', hr:145, algo:'sinusTak',
+    desc:'Düzenli P→QRS→T (normal morfoloji korunur), 100-150/dk — sadece HIZ artmıştır. Neden: ağrı, hipovolemi, sepsis, PE, ateş, anksiyete.',
     wave:[[0.00,0.000],[0.07,0.000],[0.09,0.050],[0.12,0.160],[0.15,0.050],[0.18,0.000],[0.21,0.000],[0.23,-0.090],[0.245,1.000],[0.26,-0.130],[0.275,0.000],[0.32,0.000],[0.35,0.070],[0.41,0.210],[0.47,0.070],[0.52,0.000],[1.00,0.000]]},
   { id:'sinusBrad', name:'📉 SİNÜS BRADİKARDİ', label:'⚠️ Atropin?', labelClass:'lbl-unstable',
     color:'#38bdf8', hr:42, algo:'bradikardi',
@@ -1701,9 +1702,9 @@ const ecgRhythms = [
     desc:'Geniş QRS >120ms, düzenli 120-250/dk. Nabızsız → Defib! Nabızlı → Kardiyoversiyon.',
     wave:[[0.00,0.000],[0.06,0.100],[0.14,0.500],[0.22,1.000],[0.30,0.500],[0.38,0.100],[0.44,0.000],[0.50,-0.150],[0.58,-0.280],[0.66,-0.200],[0.74,-0.080],[0.82,0.000],[1.00,0.000]]},
   { id:'svt', name:'📈 SUPRAVENTRİKÜLER TAŞİKARDİ (SVT)', label:'💊 Adenozin', labelClass:'lbl-meds',
-    color:'#eab308', hr:195, algo:'svt', speed:1.35,
-    desc:'Dar QRS, düzenli, 150-250/dk. P dalgası görünmez/gizli, ani başlar-ani biter. Vagal → Adenozin 6mg hızlı IV puşe + flush.',
-    wave:[[0.00,0.000],[0.035,-0.05],[0.065,1.000],[0.095,-0.22],[0.13,-0.04],[0.16,0.000],[0.30,0.10],[0.42,0.20],[0.52,0.10],[0.60,0.02],[0.62,0.000],[1.00,0.000]]},
+    color:'#eab308', hr:218, algo:'svt', speed:1.3,
+    desc:'Dar QRS (<120ms), tam düzenli, tipik olarak 180-220/dk. P dalgası GÖRÜNMEZ (QRS içine gömülü) — AVNRT\'nin klasik bulgusu. Ani başlar, ani biter. Vagal manevra → Adenozin 6mg hızlı IV puşe + flush.',
+    wave:[[0.00,0.000],[0.045,-0.05],[0.085,1.000],[0.125,-0.20],[0.16,-0.03],[0.20,0.000],[0.45,0.05],[0.60,0.05],[0.75,0.02],[0.80,0.000],[1.00,0.000]]},
   { id:'af', name:'🔀 ATRİYAL FİBRİLASYON (AF)', label:'⚠️ Hız Kont.', labelClass:'lbl-unstable',
     color:'#a78bfa', hr:110, algo:'af', custom:'af',
     desc:'Düzensiz R-R, f dalgaları. Hız kontrolü + antikoagülasyon.'},
@@ -2016,9 +2017,9 @@ function calcDoses(){
 // ======= KKM INIT =======
 function initKKM(){
   const teams=[
-    {name:'Kırklareli 1 Nolu',status:'Hazır',dist:'0.3 km'},
-    {name:'Lüleburgaz 2 Nolu',status:'Hazır',dist:'0.8 km'},
-    {name:'Babaeski 1 Nolu',status:'Yolda',dist:'5.2 km'}
+    {name:'Haliliye 1 Nolu',status:'Hazır',dist:'0.3 km'},
+    {name:'Eyyübiye 2 Nolu',status:'Hazır',dist:'0.8 km'},
+    {name:'Karaköprü 1 Nolu',status:'Yolda',dist:'5.2 km'}
   ];
   document.getElementById('kkmTeams').innerHTML=teams.map(t=>
     `<div class="team-card"><div><div class="team-name"><span class="live-dot"></span>🚑 ${t.name}</div><div class="team-dist">📍 ${t.dist} — ${t.status}</div></div><button class="dispatch-btn" onclick="dispatch('${t.name}')">Çağrı Gönder</button></div>`
@@ -2382,7 +2383,7 @@ const kkmData={
     <strong>I</strong> — İnjury/Yaralanma (bulunan bulgular)<br>
     <strong>S</strong> — Semptom & Vital (KB, nabız, SpO2, GKS)<br>
     <strong>T</strong> — Tedavi (uygulanan müdahaleler)</div>
-    <div class="m-box info"><strong>ÖRNEK:</strong> "KKM, Lüleburgaz 2 arıyor — 45y erkek, trafik kazası, GKS 12, SKB 90, SpO2 94, boyun travması var, C-collar takıldı, 500mL SF verildi — Büyük Çekmece'ye yönlendirme istiyoruz."</div>
+    <div class="m-box info"><strong>ÖRNEK:</strong> "KKM, Siverek 1 arıyor — 45y erkek, trafik kazası, GKS 12, SKB 90, SpO2 94, boyun travması var, C-collar takıldı, 500mL SF verildi — Şanlıurfa Eğitim ve Araştırma Hastanesi'ne yönlendirme istiyoruz."</div>
     <div class="m-box warning">⚠️ Hassas bilgiler (isim, TC) telsizde söyleme! Şifreli iletişim kanalı kullan.</div>
   `},
   triyajKirmizi:{title:'🔴 KIRMIZI KOD — 1. Öncelik',html:`
@@ -3625,6 +3626,117 @@ function renderAsFlowchart(html){
 // ═══════════════════════════════════════════════════════════════════════
 const PDF_FLOWS = {
 
+  senkop: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula, lateral dekübitus pozisyonu ver`},{arrow:true},
+    {t:'fn-action', txt:`Vital bulgular, kan şekeri, SpO2 ölç. 12 derivasyonlu EKG çek`},{arrow:true},
+    {t:'fn-question', txt:`Yüksek riskli bulgular var mı? (Efor sırasında senkop, aile öyküsünde ani ölüm, anormal EKG, göğüs ağrısı, kalp yetmezliği öyküsü)`},{arrow:true},
+    {branch:[
+      {label:`Evet — Yüksek Risk`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`Kardiyak nedene yönelik ilgili ritim algoritmasına git / Kalp merkezine hızlı nakil`}]},
+      {label:`Hayır — Düşük Risk`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Yavaşça oturur/ayakta pozisyona kaldır (postural hipotansiyonu değerlendir), gözlem altında tut`}]}
+    ]}
+  ],
+
+  pnomtoraks: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-question', txt:`Tansiyon pnömotoraks bulguları: Hipotansiyon + Hipoksi + tek taraflı solunum sesi azlığı + Juguler venöz dolgunluk`},{arrow:true},
+    {branch:[
+      {label:`Tansiyon Pnömotoraks Var`, cls:'fb-no', nodes:[
+        {t:'fn-drug', txt:`O2 yüksek akım (15L/dk NRM). İğne dekompresyonu: 2. interkostal aralık, midklaviküler hat, 14-16G kateter (90° açı) — hava çıkışını duy`},
+        {t:'fn-info', txt:`Alternatif giriş yeri: 4-5. interkostal aralık, ön aksiller hat`}
+      ]},
+      {label:`Açık Pnömotoraks`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`3 tarafı yapışkanlı örtü uygula (tek yönlü valf etkisi oluşturmak için)`}]}
+    ]}
+  ],
+
+  sepsis: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-question', txt:`qSOFA ≥2: Solunum sayısı≥22/dk, GKS&lt;15, SKB≤100mmHg`},{arrow:true},
+    {t:'fn-drug', txt:`Kristaloid 30mL/kg IV hızlı bolus`},{arrow:true},
+    {t:'fn-question', txt:`SKB &lt;65mmHg devam ediyor mu?`},{arrow:true},
+    {branch:[
+      {label:`Evet`, cls:'fb-no', nodes:[{t:'fn-drug', txt:`Noradrenalin 0,1-0,3mcg/kg/dk infüzyon`}]},
+      {label:`Hayır`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`SpO2≥%94 hedefle, hastane ön bildirimi yap`}]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`Geniş spektrum antibiyotik ilk saatte başlanmalı — hastane ön bildirimi kritik! Laktik asit &gt;2 mortalite riskini artırır (&gt;%40)`}
+  ],
+
+  pe: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-question', txt:`Ani nefes darlığı + Plöritik ağrı + Taşikardi + Hipoksi`},{arrow:true},
+    {branch:[
+      {label:`Masif PE (Arrest/Şok)`, cls:'fb-no', nodes:[
+        {t:'fn-action', txt:`KPR gerekiyorsa başlat`},
+        {t:'fn-drug', txt:`Trombolitik: Alteplaz 50mg IV bolus`},
+        {t:'fn-warning', txt:`KPR'a 60-90dk devam et (fibrinoliz etki süresi için)`}
+      ]},
+      {label:`Submasif PE`, cls:'fb-yes', nodes:[
+        {t:'fn-action', txt:`O2 ver`},
+        {t:'fn-drug', txt:`Heparin 80IU/kg IV`},
+        {t:'fn-drug', txt:`SKB&lt;90 ise Noradrenalin başla`}
+      ]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`Sıvıyı körce verme! Aşırı sıvı sağ ventrikülü genişletip sol ventrikülü sıkıştırabilir`}
+  ],
+
+  hiypertansifAcil: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-question', txt:`SKB≥180mmHg + Hedef organ hasarı bulguları (nörolojik defisit, göğüs ağrısı, akciğer ödemi)`},{arrow:true},
+    {t:'fn-drug', txt:`Labetalol 20mg IV yavaş`},{arrow:true},
+    {t:'fn-drug', txt:`Göğüs ağrısı ile birlikteyse NTG 0,4mg SL`},{arrow:true},
+    {t:'fn-warning', txt:`İlk 1 saatte %20-25 düşür — çok hızlı düşürme yapma! Çok hızlı düşürme inme, körlük, böbrek yetmezliğine yol açabilir`}
+  ],
+
+  tamponad: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-question', txt:`Beck Triadı: Hipotansiyon + Juguler venöz dolgunluk + Uzak/derinden gelen kalp sesleri`},{arrow:true},
+    {t:'fn-drug', txt:`Dikkatli sıvı: 250-500mL bolus`},{arrow:true},
+    {t:'fn-warning', txt:`Pozitif basınçlı ventilasyondan KAÇIN — venöz dönüşü daha da azaltır! KPR sırasında PEA gelişirse tamponadı düşün (5T'den biri)`}
+  ],
+
+  aortDiseksiyon: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-question', txt:`Ani başlayan yırtıcı tarzda göğüs/sırt ağrısı + Hipertansiyon öyküsü`},{arrow:true},
+    {t:'fn-drug', txt:`Hedef: SKB 100-120mmHg (düşük tut) — Labetalol 10-20mg IV`},{arrow:true},
+    {t:'fn-drug', txt:`Morfin 2-4mg IV ağrı kontrolü için`},{arrow:true},
+    {t:'fn-warning', txt:`Antikoagülan VERME! Tromboliz verilirse ölümcül olabilir — STEMI ile karıştırma! Kardiyovasküler cerrahi merkezine hızlı nakil`}
+  ],
+
+  spinalTravma: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-question', txt:`NEXUS kriterleri: Ense hassasiyeti, Bilinç değişikliği, Nörolojik defisit, Alkol/madde etkisi, Dikkat dağıtıcı yaralanma`},{arrow:true},
+    {t:'fn-action', txt:`Manuel servikal immobilizasyon, C-Collar (nötral pozisyon)`},{arrow:true},
+    {branch:[
+      {label:`GKS≤8`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Dikkatli entübasyon (inline immobilizasyon ile)`}]},
+      {label:`Spinal şok bulguları (Bradikardi+Hipotansiyon)`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`Sıvı + Atropin`}]}
+    ]}
+  ],
+
+  hiper_kali: [
+    {t:'fn-action', txt:`EKG bulguları: Sivri T dalgaları → QRS genişlemesi → Sinüs bradikardisi → VF/Asistoli riski`},{arrow:true},
+    {t:'fn-drug', txt:`Kardiyak stabilizasyon: Kalsiyum Glukonat 1-2g IV yavaş 5-10dk`},{arrow:true},
+    {t:'fn-drug', txt:`K+ hücre içine: İnsülin 10Ü + Dekstroz %50 50mL IV`},{arrow:true},
+    {t:'fn-drug', txt:`Salbutamol nebül 10-20mg (K+ düşürür)`},{arrow:true},
+    {t:'fn-drug', txt:`Furosemid 40-80mg IV (böbrek atılımını artırır)`},{arrow:true},
+    {t:'fn-warning', txt:`K+&gt;7 veya EKG değişikliği varsa acil diyaliz kararı. Arrest: VF/VT→Defib+CaCl2 2g IV! PEA/Asistoli→KPR+Adrenalin`}
+  ],
+
+  hiponatremi: [
+    {t:'fn-action', txt:`Na+ &lt;135mEq/L. Semptomatik eşik genellikle &lt;125mEq/L (nöbet, koma)`},{arrow:true},
+    {branch:[
+      {label:`Semptomsuz / Hafif`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Sıvı kısıtla, gözlem`}]},
+      {label:`Semptomatik (nöbet, bilinç bozukluğu)`, cls:'fb-no', nodes:[{t:'fn-drug', txt:`%3 NaCl 150mL IV 20dk'da. Hedef: Na+ 5mEq/L artış ile semptom düzelmesi`}]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`24 saatte maksimum 10-12mEq/L artış! Çok hızlı düzeltme osmotik demyelinizasyon sendromuna (ODS) yol açabilir!`}
+  ],
+
+  rabdomiyoliz: [
+    {t:'fn-action', txt:`Tanı: Miyalji + Koyu (çay rengi) idrar + CK yüksekliği. Nedenler: Crush, hipotermi, statin, alkol, uzamış nöbet`},{arrow:true},
+    {t:'fn-drug', txt:`Agresif sıvı: NaCl %0,9 veya Ringer Laktat 1-1,5L/saat`},{arrow:true},
+    {t:'fn-action', txt:`Hedef idrar çıkışı: &gt;200-300mL/saat`},{arrow:true},
+    {t:'fn-drug', txt:`İdrar alkalizasyonu: NaHCO3 50mEq/L sıvıya ekle (hedef idrar pH&gt;6,5)`},{arrow:true},
+    {t:'fn-warning', txt:`Hiperkalemi takibi ve tedavisi şart! Furosemid sadece yeterli sıvı verildikten sonra, idrar çıkışı hâlâ yetersizse düşünülür`}
+  ],
+
   pedHavaYoluTikaniklik: [
     {t:'fn-action', txt:`Bilinci değerlendir`},{arrow:true},
     {branch:[
@@ -3838,6 +3950,166 @@ const PDF_FLOWS = {
     {t:'fn-action', txt:`Hasta/Yaralı birden fazla ise triyaj yap, ek kaynak ihtiyacını belirle`},{arrow:true},
     {t:'fn-action', txt:`İhtiyaç duyulan ekip ve ekipmanı iste`},{arrow:true},
     {t:'fn-goto', txt:`ACİL OLGU YÖNETİMİ ALGORİTMASINA GİT`}
+  ],
+
+  vertigo: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula — hastanın rahat ettiği pozisyonda kalmasını sağla`},{arrow:true},
+    {t:'fn-action', txt:`Damar yolu aç`},{arrow:true},
+    {t:'fn-question', txt:`Spontan nistagmus var mı?`},{arrow:true},
+    {branch:[
+      {label:`Var — Yön değiştiren/Vertikal/Pür torsiyonel`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`SANTRAL NEDEN — SVO/İNME ALGORİTMASINA GİT`}]},
+      {label:`Yok / Horizontal nistagmus`, cls:'fb-yes', nodes:[{t:'fn-question', txt:`Bağımsız şekilde ayakta durabiliyor ve yürüyebiliyor mu?`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Hayır — Santral neden şüphesi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`İNME ALGORİTMASINA GİT`}]},
+      {label:`Evet — Periferik neden`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Şok bulguları varsa ilgili algoritmaya git`}]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`Şok için sistemik dolaşım bulgularını (kapiller geri dolum, nabız dolgunluğu ve hızı, cilt dolaşımı, KB, bilinç) ve BEFAST kriterlerini mutlaka değerlendir!`}
+  ],
+
+  alerjikReaksiyon: [
+    {t:'fn-question', txt:`Hayatı tehdit eden bulgular var mı?<br>Hava yolu: Anjiyoödem, stridor, hırıltılı solunum. Solunum: Takipne, wheezing, siyanoz, SpO2&lt;%90, konfüzyon. Dolaşım: Soluk cilt, hipotansiyon, koma`},{arrow:true},
+    {branch:[
+      {label:`Evet`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ANAFİLAKSİ ALGORİTMASINA GİT`}]},
+      {label:`Hayır`, cls:'fb-yes', nodes:[
+        {t:'fn-action', txt:`Hava yolu açıklığını sağla, O2 ver, damar yolu aç`},
+        {t:'fn-action', txt:`Monitörize et: SpO2, EKG, KB takibi`},
+        {t:'fn-drug', txt:`%0,9 NaCl 500mL bolus`},
+        {t:'fn-drug', txt:`FENİRAMİN MALEAT 45,5mg IV veya DİFENHİDRAMİN 25-50mg IV yavaş puşe`},
+        {t:'fn-drug', txt:`Profilaktik olarak METİL PREDNİZOLON IV 1-2mg/kg (maks 125mg)`}
+      ]}
+    ]}
+  ],
+
+  ajiteHasta: [
+    {t:'fn-question', txt:`Olay yeri güvenliği sağlanmış mı? Çevresel önlemler alınmış mı?`},{arrow:true},
+    {branch:[
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Güvenli bölgeye çekil, SKKM/ÇM'yi ara, kolluk kuvveti iste`}]},
+      {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Yatıştırma: Uygun iletişimle kontrolü sağlamaya çalış`}]}
+    ]},{arrow:true},
+    {t:'fn-question', txt:`Kontrol sağlandı mı?`},{arrow:true},
+    {branch:[
+      {label:`Hayır`, cls:'fb-no', nodes:[
+        {t:'fn-action', txt:`Kolluk kuvvetleri ile fiziksel kısıtlama`},
+        {t:'fn-drug', txt:`İlaçla kısıtlama/sedasyon düşün: MİDAZOLAM 5mg IM veya 2,5mg IV ya da DİAZEPAM 5mg IM`},
+        {t:'fn-action', txt:`Halen ajite ise sedasyon dozunu tekrarla`}
+      ]},
+      {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-question', txt:`Nedeni değerlendir: Travmatik mi, non-travmatik mi?`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Travmatik`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`TRAVMALI HASTADA ACİL OLGU YÖNETİMİ ALGORİTMASINA GİT`}]},
+      {label:`Non-Travmatik`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Nedene yönelik tedavi et`}]}
+    ]}
+  ],
+
+  isirmaSokmaYetiskin: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {t:'fn-action', txt:`Isıran veya sokan etkeni belirle`},{arrow:true},
+    {branch:[
+      {label:`Kara Canlıları`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Isırılan bölgeye lokal soğuk uygula`}]},
+      {label:`Deniz Canlıları`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Isırılan bölgeyi lokal %0,9 NaCl ile irrigasyon yap (100-250mL)`}]}
+    ]},{arrow:true},
+    {t:'fn-action', txt:`Isırılan yeri tespit et, yara izini değerlendir`},{arrow:true},
+    {t:'fn-action', txt:`Yıka ve sabitle`},{arrow:true},
+    {t:'fn-action', txt:`Her 5dk'da bir ödemin sınırını izle`},{arrow:true},
+    {t:'fn-action', txt:`Hastanın vitallerini takip et, zehirlenme, alerjik reaksiyon ve anafilaksi bulgularını gözlemle`},{arrow:true},
+    {branch:[{label:`Alerjik reaksiyon / anafilaksi varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`İLGİLİ ALGORİTMAYA GİT`}]}]},{arrow:true},
+    {t:'fn-drug', txt:`Hipotansiyon varlığında %0,9 NaCl IV hidrasyon başla`},{arrow:true},
+    {t:'fn-warning', txt:`Turnike, kesme, emme gibi eski yöntemler UYGULANMAZ! Arı sokmalarında iğne görülüyorsa çıkarılmalıdır. Yılan/akrep ısırıklarında turnike yerine sıkma bantları ya da sıkı bandaj uygulanmalıdır (bir parmağın rahatlıkla girebileceği gevşeklikte)`}
+  ],
+
+  havaYoluTikanikligiYetiskin: [
+    {t:'fn-question', txt:`Bilinç açık mı?`},{arrow:true},
+    {branch:[
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`}]},
+      {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-question', txt:`Hasta ses çıkarıyor mu? (öksürük, inleme, konuşma)`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Kısmi Tıkanma (ses var)`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Öksürmesini teşvik et, takip et. Tam tıkanmaya dönüşürse tam tıkanma protokolüne geç`}]},
+      {label:`Tam Tıkanma (ses yok)`, cls:'fb-no', nodes:[{t:'fn-drug', txt:`5 kez sırta vur + 5 kez karına bası uygula — cisim çıkana kadar devam et`}]}
+    ]},{arrow:true},
+    {t:'fn-goto', txt:`Bilinç kaybı gelişirse → ARREST YÖNETİMİ ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-warning', txt:`Kısmi tıkanıklıkta sırta vurmak tam tıkanıklığa neden olabilir! Tam tıkanmada ileri hava yolu uygulamaları başarısız olursa iğne ile krikotirotomi yap`}
+  ],
+
+  dogumKomplikasyonlari: [
+    {t:'fn-action', txt:`SpO2 %94-98 olacak şekilde oksijenizasyon sağla ve ventilasyonu destekle, maske ile 10L/dk oksijen ver`},
+    {t:'fn-drug', txt:`Damar yolu aç → Ringer Laktat veya %0,9 NaCl IV 125mL/saat (40 damla/dk)`},{arrow:true},
+    {t:'fn-action', txt:`Annenin kalçalarını yükselt — baş gövde aşağı pozisyonda (diz-göğüs pozisyonu) veya Trendelenburg pozisyonu`},{arrow:true},
+    {branch:[
+      {label:`Göbek Kordonu Sarkması`, cls:'fb-no', nodes:[
+        {t:'fn-action', txt:`Açıktaki kordonu ılık nemli bir gazlı bez/pedlerle kapat`},
+        {t:'fn-action', txt:`Anneden kasılmalar sırasında sık nefes almasını ve ıkınmamasını iste`},
+        {t:'fn-warning', txt:`HİÇBİR DURUMDA kordonu geri itme!`}
+      ]},
+      {label:`Ekstremite / Makat Geliş`, cls:'fb-yes', nodes:[
+        {t:'fn-question', txt:`Göbek kordon sarkması eşlik ediyor mu?`},
+        {t:'fn-action', txt:`Evet ise kordon sarkması koluna geç. Hayır ise: Yenidoğanı ASLA bacaklarından çekme, anneye ıkınmamasını söyle, önde gelen kısmı çekme destek ol`}
+      ]}
+    ]},{arrow:true},
+    {t:'fn-goto', txt:`Doğum gerçekleşmişse NORMAL YENİDOĞAN BAKIMI ve/veya YENİDOĞAN CANLANDIRMA ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-warning', txt:`Kanama kontrolü yap, kontraksiyonları takip et sıklığını not et, vital bulguları sık takip et`}
+  ],
+
+  postpartumKanama: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula, hava yolu açıklığını sağla`},{arrow:true},
+    {t:'fn-action', txt:`SpO2 %94-98 olacak geri solumasız maske ile 10L/dk O2 ver, dolaşımı kontrol et, damar yolu aç`},{arrow:true},
+    {t:'fn-drug', txt:`1000mL'den fazla kanama, devam eden aktif kanama veya klinik şok varlığında 2000mL'ye kadar %0,9 NaCl ile sıvı resüsitasyonu uygula`},{arrow:true},
+    {t:'fn-question', txt:`Uterusun tonusunu kontrol et`},{arrow:true},
+    {branch:[
+      {label:`Plasenta çıkmış, uterus yumuşak`, cls:'fb-yes', nodes:[
+        {t:'fn-action', txt:`Uterusa masaj yap`},
+        {t:'fn-drug', txt:`KARBETOSİN 100mcg/mL (IM veya IV, 1dk'dan kısa olmayacak şekilde yavaş puşe)`},
+        {t:'fn-action', txt:`Perinede kanayan yırtık varsa ped ile kompresyon`}
+      ]},
+      {label:`Plasenta çıkmamış`, cls:'fb-no', nodes:[
+        {t:'fn-warning', txt:`Çıkarmaya çalışma!`},
+        {t:'fn-drug', txt:`KARBETOSİN 100mcg/mL uygula`}
+      ]},
+      {label:`Plasenta çıkmış, uterus sert`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Perinede görünen kanayan yırtık varsa ped ile kompresyon yap`}]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`Kanama devam ediyorsa transfer sırasında bimanuel uterus masajı yap. Karbetosin, doğum sırasında verildiyse tekrar verilmesi yeterlidir.`}
+  ],
+
+  gebelikteAkutHT: [
+    {t:'fn-question', txt:`Sistolik ≥160mmHg ve/veya Diyastolik ≥110mmHg`},{arrow:true},
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula, hastayı yarı oturur pozisyona al ya da sol yanına yatır`},{arrow:true},
+    {t:'fn-action', txt:`Hava yolu açıklığı, SpO2 %94-98 olacak şekilde O2 (10L/dk), damar yolu aç`},{arrow:true},
+    {t:'fn-drug', txt:`Yutabiliyorsa: NİFEDİPİN 10mg kapsül yuttur`},{arrow:true},
+    {t:'fn-question', txt:`20dk sonra TA ≥160/110 ise`},{arrow:true},
+    {t:'fn-drug', txt:`NİFEDİPİN 10mg tekrar (2. doz)`},{arrow:true},
+    {t:'fn-question', txt:`20dk sonra hâlâ ≥160/110 ise`},{arrow:true},
+    {t:'fn-drug', txt:`NİFEDİPİN 10mg (3. doz)`},{arrow:true},
+    {t:'fn-drug', txt:`Eklampsi profilaksisi için: MAGNEZYUM SÜLFAT 4g IV bolus, 15-20dk'da (100mL içinde 4g hazır MgSO4 solüsyonu, maksimum doz 6g). İdame: 4g MgSO4, 4 saatte gidecek şekilde`},{arrow:true},
+    {t:'fn-warning', txt:`Hedef basınca ulaşılamadıysa ya da yükselme eğilimindeyse 2. ve 3. dozlarda 20mg Nifedipin verilebilir. Hazır solüsyon yoksa: 100mL %0,9 NaCl içine 3 ampul %15'lik MgSO4, 15-20dk'da (200 damla/dk) gidecek şekilde gönder`}
+  ],
+
+  eklampsiTedavisi: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula. SpO2 %94-98 olacak O2 (10L/dk) + damar yolu aç`},{arrow:true},
+    {t:'fn-warning', txt:`Hastayı engellemeye çalışma, nöbeti seyrine bırak. Yaralanmayı önlemek için başının altına yastık, katlanmış battaniye vb. yerleştir`},{arrow:true},
+    {t:'fn-action', txt:`Mümkün olan en kısa zamanda AVPU, vital bulgular, ÇKS, oksijen satürasyonu, EKG izlenimi, patella refleksi kontrolü yap`},{arrow:true},
+    {t:'fn-question', txt:`Kan şekerine bak`},{arrow:true},
+    {t:'fn-goto', txt:`Glikoz&lt;60mg/dL veya hipoglisemi bulguları varsa → DİYABETİK ACİLLER ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-action', txt:`Hastayı sol yanına yatır`},{arrow:true},
+    {t:'fn-drug', txt:`Nöbeti olan hastaya 4g MAGNEZYUM SÜLFAT IV bolus, 15-20dk'da (100mL içinde 4g hazır MgSO4 solüsyonu, maks 6g)`},{arrow:true},
+    {t:'fn-drug', txt:`İdame: 4g MgSO4, 4 saatte gidecek (1-2g/saat)`},{arrow:true},
+    {t:'fn-drug', txt:`MgSO4 ile nöbet durdurulamazsa: DİAZEPAM 5mg IV`},{arrow:true},
+    {t:'fn-goto', txt:`TA ≥160/110mmHg ise → GEBELİKTE AKUT HİPERTANSİYON YÖNETİMİ ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-warning', txt:`Hazır solüsyon yoksa: 100mL %0,9 NaCl içine 3 ampul %15'lik MgSO4, 15-20dk'da IV bolus (200 damla/dk) gidecek şekilde gönder`}
+  ],
+
+  epiglotit: [
+    {t:'fn-question', txt:`Bilinç açık mı?`},{arrow:true},
+    {branch:[
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`}]},
+      {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-question', txt:`Hasta ses çıkarıyor mu? (öksürük, inleme, konuşma)`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`Kısmi Tıkanma (ses var)`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Öksürmesini teşvik et, takip et. Tam tıkanmaya dönüşürse tam tıkanma protokolüne geç`}]},
+      {label:`Tam Tıkanma (ses yok)`, cls:'fb-no', nodes:[{t:'fn-drug', txt:`5 kez sırta vur + 5 kez karına bası uygula — cisim çıkana kadar devam et`}]}
+    ]},{arrow:true},
+    {t:'fn-goto', txt:`Bilinç kaybı gelişirse → ARREST YÖNETİMİ ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-warning', txt:`Kısmi tıkanıklıkta sırta vurmak tam tıkanıklığa neden olabilir! Tam tıkanmada ileri hava yolu uygulamaları başarısız olursa iğne ile krikotirotomi yap`}
   ],
 
   koah: [
@@ -4547,7 +4819,7 @@ function doLogin(){
   const u=document.getElementById('loginUser').value.trim().toLowerCase();
   const p=document.getElementById('loginPass').value.trim();
   const err=document.getElementById('loginErr');
-  const okUser=['kırklareli','kirklareli','kırklarel̇i','admin'];
+  const okUser=['şanlıurfa','sanliurfa','urfa','admin'];
   if(okUser.includes(u) && p==='112'){
     err.classList.remove('show');
     document.getElementById('loginBox').style.display='none';
@@ -4561,7 +4833,7 @@ function doLogin(){
 
 
 // ======= HARİTA (OFFLİNE SVG) =======
-const mapBounds = {latMin:41.30,latMax:41.96,lngMin:26.82,lngMax:28.20};
+const mapBounds = {latMin:36.65,latMax:37.85,lngMin:37.80,lngMax:40.15};
 const svgW=340, svgH=280;
 function latLngToSvg(lat,lng){
   const x = ((lng - mapBounds.lngMin)/(mapBounds.lngMax-mapBounds.lngMin)) * (svgW-40) + 20;
@@ -4569,7 +4841,7 @@ function latLngToSvg(lat,lng){
   return {x:Math.round(x), y:Math.round(y)};
 }
 
-const stationStatuses = ['hazir','hazir','hazir','hazir','yolda','hazir','hazir','mesgul','hazir','hazir','hazir','hazir','hazir','hazir','hazir'];
+const stationStatuses = ['hazir','hazir','hazir','yolda','hazir','hazir','hazir','hazir','mesgul','hazir','hazir','hazir','hazir','yolda','hazir','hazir'];
 const statusColors = {hazir:'#22c55e', yolda:'#eab308', mesgul:'#ef4444'};
 
 function initHarita(){
@@ -4619,8 +4891,8 @@ function svgStationClick(i){
 }
 
 // ======= VAKA KAYIT (localStorage — OFFLİNE) =======
-function getVakalar(){ try{return JSON.parse(localStorage.getItem('kkl112_vakalar')||'[]');}catch{return[];} }
-function saveVakalar(arr){ try{localStorage.setItem('kkl112_vakalar',JSON.stringify(arr));}catch{} }
+function getVakalar(){ try{return JSON.parse(localStorage.getItem('urfa112_vakalar')||'[]');}catch{return[];} }
+function saveVakalar(arr){ try{localStorage.setItem('urfa112_vakalar',JSON.stringify(arr));}catch{} }
 
 function vakaKaydet(){
   const tip = document.getElementById('vTip').value;
@@ -5368,23 +5640,23 @@ let ekipDurumData = [];
 let ekipMesajlar = [];
 
 const DEMO_EKIPLER = [
-  {id:1, name:'KKL-1 Ekibi',  status:'sahada',  not:'Kazaya müdahale ediyoruz', zaman:'08:42', self:false},
-  {id:2, name:'KKL-2 Ekibi',  status:'hazir',   not:'',                          zaman:'09:01', self:false},
-  {id:3, name:'LBG-1 Ekibi',  status:'hastane', not:'Hasta teslim edildi',       zaman:'09:15', self:false},
-  {id:4, name:'BBK-1 Ekibi',  status:'yolda',   not:'D100 üzerinde',             zaman:'09:18', self:false},
-  {id:5, name:'VZ-1 Ekibi',   status:'mesgul',  not:'',                          zaman:'08:55', self:false},
+  {id:1, name:'HAL-1 Ekibi',  status:'sahada',  not:'Kazaya müdahale ediyoruz', zaman:'08:42', self:false},
+  {id:2, name:'EYY-2 Ekibi',  status:'hazir',   not:'',                          zaman:'09:01', self:false},
+  {id:3, name:'KRK-1 Ekibi',  status:'hastane', not:'Hasta teslim edildi',       zaman:'09:15', self:false},
+  {id:4, name:'SVR-1 Ekibi',  status:'yolda',   not:'D400 üzerinde',             zaman:'09:18', self:false},
+  {id:5, name:'BRC-1 Ekibi',  status:'mesgul',  not:'',                          zaman:'08:55', self:false},
 ];
 
 function simZaman(){ return new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'}); }
-function saveEkipData(){ try{localStorage.setItem('kkl112_ekipler',JSON.stringify(ekipDurumData));}catch{} }
-function saveMesajlar(){ try{localStorage.setItem('kkl112_mesajlar',JSON.stringify(ekipMesajlar.slice(-30)));}catch{} }
+function saveEkipData(){ try{localStorage.setItem('urfa112_ekipler',JSON.stringify(ekipDurumData));}catch{} }
+function saveMesajlar(){ try{localStorage.setItem('urfa112_mesajlar',JSON.stringify(ekipMesajlar.slice(-30)));}catch{} }
 
 function initEkipDurum(){
-  const saved = (() => { try{return JSON.parse(localStorage.getItem('kkl112_ekipler')||'null');}catch{return null;} })();
-  const kullanici = localStorage.getItem('kkl112_user') || 'Benim Ekibim';
+  const saved = (() => { try{return JSON.parse(localStorage.getItem('urfa112_ekipler')||'null');}catch{return null;} })();
+  const kullanici = localStorage.getItem('urfa112_user') || 'Benim Ekibim';
   ekipDurumData = saved || [{id:0,name:kullanici,status:'hazir',not:'',zaman:simZaman(),self:true},...DEMO_EKIPLER];
   if (!ekipDurumData.find(e=>e.self)) ekipDurumData.unshift({id:0,name:kullanici,status:'hazir',not:'',zaman:simZaman(),self:true});
-  ekipMesajlar = (() => { try{return JSON.parse(localStorage.getItem('kkl112_mesajlar')||'[]');}catch{return[];} })();
+  ekipMesajlar = (() => { try{return JSON.parse(localStorage.getItem('urfa112_mesajlar')||'[]');}catch{return[];} })();
   renderEkipSelf(); renderEkipListesi(); renderEkipMesajlar();
   setInterval(()=>{
     ekipDurumData.forEach(e=>{ if(e.self||Math.random()>0.08) return; const s=['hazir','yolda','sahada','hastane','mesgul']; e.status=s[Math.floor(Math.random()*s.length)]; e.zaman=simZaman(); });
@@ -6035,6 +6307,169 @@ function selectInjSite(site){
   injActive = site;
   document.getElementById('modalContent').innerHTML = renderInjSites();
   document.querySelectorAll('.inj-marker').forEach(m=>m.classList.remove('active'));
+}
+
+// ======= PUPİL DEĞERLENDİRME REHBERİ =======
+function showPupilGuide(){
+  const eyeSvg = (leftR, rightR, leftColor, rightColor) => `
+    <svg viewBox="0 0 120 60" style="width:110px;height:55px;">
+      <ellipse cx="30" cy="30" rx="26" ry="16" fill="none" stroke="#93c5fd" stroke-width="1.5"/>
+      <circle cx="30" cy="30" r="12" fill="#1e293b" stroke="#64748b" stroke-width="1"/>
+      <circle cx="30" cy="30" r="${leftR}" fill="${leftColor}"/>
+      <ellipse cx="90" cy="30" rx="26" ry="16" fill="none" stroke="#93c5fd" stroke-width="1.5"/>
+      <circle cx="90" cy="30" r="12" fill="#1e293b" stroke="#64748b" stroke-width="1"/>
+      <circle cx="90" cy="30" r="${rightR}" fill="${rightColor}"/>
+    </svg>`;
+  openModal('👁️ PUPİL DEĞERLENDİRME REHBERİ', `
+    <div class="m-box info" style="text-align:center;">Sol Göz — Sağ Göz (her ikisi de ışığa maruz kalmamış halde gösterilmiştir)</div>
+    <div class="m-section">
+      <div class="m-section-title">✅ Normal</div>
+      <div style="display:flex;align-items:center;gap:12px;background:#0f172a;border-radius:10px;padding:8px;margin-bottom:8px;">
+        ${eyeSvg(5,5,'#4ade80','#4ade80')}
+        <div style="font-size:0.58rem;color:#cbd5e1;">Her iki pupil eşit boyutta (2-4mm), ışığa hızlı ve simetrik yanıt veriyor. Nörolojik açıdan olağan bulgu.</div>
+      </div>
+    </div>
+    <div class="m-section">
+      <div class="m-section-title">⚠️ Anizokori (Asimetrik)</div>
+      <div style="display:flex;align-items:center;gap:12px;background:#0f172a;border-radius:10px;padding:8px;margin-bottom:8px;">
+        ${eyeSvg(9,4,'#fbbf24','#4ade80')}
+        <div style="font-size:0.58rem;color:#cbd5e1;">Pupiller arası &gt;1mm fark. Kafa travmasında aynı taraf (ipsilateral) genişlemiş pupil → <strong>herniasyon işareti</strong> olabilir, acil değerlendirme gerektirir!</div>
+      </div>
+    </div>
+    <div class="m-section">
+      <div class="m-section-title">🔴 Miyotik / Pinpoint (Nokta Pupil)</div>
+      <div style="display:flex;align-items:center;gap:12px;background:#0f172a;border-radius:10px;padding:8px;margin-bottom:8px;">
+        ${eyeSvg(2,2,'#f87171','#f87171')}
+        <div style="font-size:0.58rem;color:#cbd5e1;">Her iki pupil aşırı küçük (&lt;2mm). <strong>Opioid intoksikasyonu</strong>, pons lezyonu veya kolinerjik zehirlenme düşündürür. Solunum depresyonu ile birlikteyse Nalokson düşün.</div>
+      </div>
+    </div>
+    <div class="m-section">
+      <div class="m-section-title">🟣 Midriyatik (Aşırı Geniş)</div>
+      <div style="display:flex;align-items:center;gap:12px;background:#0f172a;border-radius:10px;padding:8px;margin-bottom:8px;">
+        ${eyeSvg(11,11,'#c4b5fd','#c4b5fd')}
+        <div style="font-size:0.58rem;color:#cbd5e1;">Her iki pupil aşırı geniş (&gt;6mm). Ağır hipoksi, derin koma, sempatomimetik/antikolinerjik zehirlenme veya ağır kafa travması (bilateral herniasyon) düşündürür.</div>
+      </div>
+    </div>
+    <div class="m-section">
+      <div class="m-section-title">⚫ Fikse (Işığa Yanıtsız)</div>
+      <div style="display:flex;align-items:center;gap:12px;background:#0f172a;border-radius:10px;padding:8px;">
+        ${eyeSvg(9,9,'#64748b','#64748b')}
+        <div style="font-size:0.58rem;color:#cbd5e1;">Boyut ne olursa olsun ışığa hiç yanıt yok. Ciddi nörolojik hasar veya derin hipoksi/iskemi bulgusu — kötü prognoz göstergesidir.</div>
+      </div>
+    </div>
+    <div class="m-box warning">⚠️ Pupil bulguları GKS ve diğer nörolojik muayene ile birlikte değerlendirilmeli; tek başına tanı koydurucu değildir.</div>
+  `);
+}
+
+// ======= İO (KEMİK İÇİ) ERİŞİM BÖLGELERİ =======
+const ioSites = {
+  tibia:{
+    title:'🦴 Proksimal Tibia (İlk Tercih)',
+    desc:'Diz kapağının (patella) yaklaşık 2cm aşağısı ve 1-2cm iç kısmı — tibial tuberositenin medialinde düz kemik yüzeyi. Erişkin ve pediatride en sık kullanılan, en kolay erişilen bölgedir.',
+    notes:['Tüm yaş gruplarında ilk tercih','Kırık/önceki İO girişimi olan ekstremiteden kaçının','İğne açısı: cilde 90°']
+  },
+  femur:{
+    title:'🦴 Distal Femur',
+    desc:'Patellanın yaklaşık 2-3cm üzeri, orta hatta. Alt ekstremite travması nedeniyle tibiaya erişilemediğinde alternatif bölgedir.',
+    notes:['Tibia bölgesine ulaşılamadığında tercih edilir','Özellikle küçük bebeklerde iyi bir alternatiftir']
+  },
+  humerus:{
+    title:'🦴 Proksimal Humerus',
+    desc:'Omuzun hemen altında, humerus başının büyük tüberkülü üzerinde. Erişkinlerde daha hızlı akış hızı sağlar, KPR sırasında göğüs basısını engellemeden erişilebilir.',
+    notes:['Erişkinde en hızlı infüzyon hızı burada elde edilir','KPR sırasında kola erişim kolaydır','Kolun iç rotasyonda, dirsek göbeğe yakın tutulmalı']
+  }
+};
+let ioActive = null;
+function ioBodySvg(){
+  return `
+  <svg viewBox="0 0 100 180" style="width:180px;display:block;margin:0 auto;">
+    <ellipse cx="50" cy="14" rx="12" ry="13" fill="none" stroke="rgba(148,163,184,0.3)" stroke-width="1"/>
+    <rect x="33" y="28" width="34" height="42" rx="6" fill="none" stroke="rgba(148,163,184,0.3)" stroke-width="1"/>
+    <rect x="12" y="30" width="16" height="46" rx="6" fill="none" stroke="rgba(148,163,184,0.3)" stroke-width="1"/>
+    <rect x="72" y="30" width="16" height="46" rx="6" fill="none" stroke="rgba(148,163,184,0.3)" stroke-width="1"/>
+    <rect x="35" y="70" width="30" height="18" rx="6" fill="none" stroke="rgba(148,163,184,0.3)" stroke-width="1"/>
+    <rect x="34" y="88" width="15" height="88" rx="6" fill="none" stroke="rgba(148,163,184,0.3)" stroke-width="1"/>
+    <rect x="51" y="88" width="15" height="88" rx="6" fill="none" stroke="rgba(148,163,184,0.3)" stroke-width="1"/>
+    <g class="inj-marker" onclick="selectIOSite('humerus')"><circle cx="78" cy="36" r="6"/></g>
+    <text class="inj-marker-label" x="78" y="24">Humerus</text>
+    <g class="inj-marker" onclick="selectIOSite('femur')"><circle cx="41" cy="105" r="6"/></g>
+    <text class="inj-marker-label" x="24" y="108">Femur</text>
+    <g class="inj-marker" onclick="selectIOSite('tibia')"><circle cx="41" cy="130" r="6"/></g>
+    <text class="inj-marker-label" x="24" y="145">Tibia</text>
+  </svg>`;
+}
+function renderIOSites(){
+  const info = ioActive ? ioSites[ioActive] : null;
+  return `
+    <div style="text-align:center;">${ioBodySvg()}</div>
+    <div style="font-size:0.52rem;color:var(--muted);text-align:center;margin-bottom:6px;">Bölgeye dokunun</div>
+    <div class="inj-info-box ${info?'show':''}">
+      ${info?`
+        <div class="m-section-title" style="color:#22d3ee;">${info.title}</div>
+        <div class="m-box info">${info.desc}</div>
+        <div class="m-section-title" style="margin-top:8px;">📋 Notlar</div>
+        ${info.notes.map(n=>`<div class="m-drug"><span>• ${n}</span></div>`).join('')}
+      `:''}
+    </div>
+    <div class="m-box warning" style="margin-top:8px;">⚠️ Kontrendikasyonlar: O ekstremitede kırık, önceki İO girişimi (son 24 saat), enfeksiyon/yanık bölgesi, protez eklem varlığı.</div>
+  `;
+}
+function showIOSites(){
+  ioActive = null;
+  openModal('🦴 İO (KEMİK İÇİ) ERİŞİM BÖLGELERİ', renderIOSites());
+}
+function selectIOSite(site){
+  ioActive = site;
+  document.getElementById('modalContent').innerHTML = renderIOSites();
+}
+
+// ======= DEFİBRİLASYON PED YERLEŞİMİ =======
+function showDefibPads(){
+  openModal('⚡ DEFİBRİLASYON PED YERLEŞİMİ', `
+    <div class="m-section">
+      <div class="m-section-title">🔵 Anterior-Lateral (Standart — İlk Tercih)</div>
+      <svg viewBox="0 0 140 100" style="width:100%;max-width:220px;display:block;margin:0 auto 8px;background:#050e1a;border-radius:10px;">
+        <ellipse cx="70" cy="50" rx="42" ry="46" fill="none" stroke="rgba(148,163,184,0.4)" stroke-width="1.5"/>
+        <line x1="70" y1="10" x2="70" y2="90" stroke="rgba(148,163,184,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
+        <rect x="56" y="22" width="24" height="18" rx="4" fill="rgba(96,165,250,0.35)" stroke="#60a5fa" stroke-width="1.5"/>
+        <text x="68" y="34" font-size="7" fill="#dbeafe" text-anchor="middle">Sternum</text>
+        <rect x="94" y="54" width="26" height="20" rx="4" fill="rgba(239,68,68,0.35)" stroke="#ef4444" stroke-width="1.5"/>
+        <text x="107" y="66" font-size="7" fill="#fecaca" text-anchor="middle">Apeks</text>
+      </svg>
+      <div class="m-box info">Bir ped sağ üst göğse (klavikula altı, sternumun sağı), diğer ped sol alt göğse (meme altı orta koltuk altı hattı — kalp apeksi üzerine) yerleştirilir.</div>
+    </div>
+    <div class="m-section">
+      <div class="m-section-title">🟣 Anterior-Posterior (Alternatif)</div>
+      <svg viewBox="0 0 140 100" style="width:100%;max-width:220px;display:block;margin:0 auto 8px;background:#050e1a;border-radius:10px;">
+        <ellipse cx="70" cy="50" rx="42" ry="46" fill="none" stroke="rgba(148,163,184,0.4)" stroke-width="1.5"/>
+        <rect x="56" y="34" width="26" height="22" rx="4" fill="rgba(167,139,250,0.35)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="69" y="48" font-size="7" fill="#ede9fe" text-anchor="middle">Ön (Kalp üzeri)</text>
+        <text x="70" y="92" font-size="6.5" fill="#94a3b8" text-anchor="middle">İkinci ped sırtta, kalbin arkasında (skapula altı)</text>
+      </svg>
+      <div class="m-box info">Bir ped göğüs ön yüzünde kalbin üzerinde, diğeri sırtta (sol skapula altında) kalbin tam arkasına yerleştirilir. Göğüs anatomisi standart yerleşimi zorlaştırdığında (obezite, çok küçük bebek, implante cihaz) tercih edilir.</div>
+    </div>
+    <div class="m-box warning">⚠️ Pedleri implante kalp pili/defibrilatör üzerine koymayın (en az 8cm uzağa yerleştirin). Islak göğsü kurulayın, aşırı kıllı göğsü hızlıca tıraş edin. Transdermal bant/yama varsa çıkarıp bölgeyi silin.</div>
+  `);
+}
+
+// ======= VAKA KAYIT — CSV DIŞA AKTARMA =======
+function exportVakaCSV(){
+  const vakalar = getVakalar();
+  if(vakalar.length===0){ alert('Dışa aktarılacak vaka kaydı yok!'); return; }
+  const headers = ['Tarih/Saat','Vaka Tipi','Sonuç','Ekip','Yaş','Not'];
+  const rows = vakalar.map(v => [v.zaman, v.tip||'', v.sonuc||'', v.ekip||'', v.yas||'', (v.not||'').replace(/[\r\n,]+/g,' ')]);
+  const csvLines = [headers.join(';'), ...rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(';'))];
+  const csvContent = '\uFEFF' + csvLines.join('\r\n');
+  const blob = new Blob([csvContent], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const tarih = new Date().toISOString().slice(0,10);
+  a.href = url;
+  a.download = `sanliurfa112_vaka_kayitlari_${tarih}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 1000);
 }
 
 // ======= AHA 2025 ALGORİTMALARI (Flowchart Modal) =======

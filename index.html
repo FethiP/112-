@@ -16,18 +16,66 @@
     <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 :root{
-  --red:#dc2626;--red2:#991b1b;--blue:#2563eb;--green:#16a34a;
+  --red:#dc2626;--red2:#991b1b;--blue:#2ecc71;--green:#16a34a;
   --yellow:#eab308;--orange:#ea580c;--purple:#8b5cf6;--cyan:#0891b2;
-  --bg:#04091a;--card:#0d1829;--card2:#162035;--border:#1e3a5f;
-  --text:#f1f5f9;--muted:#64748b;--accent:#3b82f6;
-  --glow-red:rgba(220,38,38,0.4);--glow-blue:rgba(37,99,235,0.4);
+  --bg:#080a09;--card:#0e1210;--card2:#161c19;--border:#243029;
+  --text:#e8ece9;--muted:#6b7a72;--accent:#2ecc71;
+  --hivis:#ffa726;--hivis-dark:#b3730f;
+  --glow-red:rgba(220,38,38,0.4);--glow-blue:rgba(46,204,113,0.35);
   --glow-green:rgba(22,163,74,0.4);--glow-yellow:rgba(234,179,8,0.4);
-  --trans:all 0.22s cubic-bezier(0.4,0,0.2,1);
+  --trans:all 0.18s ease;
+  --font-mono:ui-monospace,'SF Mono','Cascadia Code','Roboto Mono','Courier New',monospace;
 }
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh;overflow-x:hidden;}
+body{background-image:repeating-linear-gradient(0deg,rgba(46,204,113,0.012) 0px,rgba(46,204,113,0.012) 1px,transparent 1px,transparent 3px);}
+/* ===== GÜNDÜZ MODU — güneş altında yüksek kontrast okunabilirlik ===== */
+body.day-mode{
+  --bg:#f1f5f9;--card:#ffffff;--card2:#e8edf3;--border:#c3ccd8;
+  --text:#0b1220;--muted:#475569;
+}
+body.day-mode .app-header,
+body.day-mode .header-kkm,
+body.day-mode .header-saha{background:#ffffff;border-bottom:2px solid var(--border);}
+body.day-mode .header-title{background:none;-webkit-text-fill-color:#0b1220;color:#0b1220;}
+body.day-mode .search-bar{background:#ffffff;border:1.5px solid var(--border);}
+body.day-mode .search-bar input{color:#0b1220;}
+body.day-mode .search-bar input::placeholder{color:#8a94a3;}
+body.day-mode .m-box.info{background:rgba(37,99,235,0.08);color:#0b1220;}
+body.day-mode .m-box.warning{background:rgba(220,38,38,0.08);color:#0b1220;}
+body.day-mode .m-box.diagnosis{background:rgba(234,179,8,0.12);color:#0b1220;}
+body.day-mode .m-box.success{background:rgba(22,163,74,0.10);color:#0b1220;}
+body.day-mode .flow-node{color:#0b1220;}
+body.day-mode .fn-action{background:#dbeafe;border-color:#2563eb;color:#0b1220;}
+body.day-mode .fn-question{background:#e5e7eb;border-color:#6b7280;color:#0b1220;}
+body.day-mode .fn-drug{background:#dcfce7;border-color:#16a34a;color:#0b1220;}
+body.day-mode .fn-warning{background:#fee2e2;border-color:#ea580c;color:#0b1220;}
+body.day-mode .fn-goto{background:#1e3a8a;border-color:#3b82f6;color:#ffffff;}
+body.day-mode .fn-success{background:#dcfce7;border-color:#4ade80;color:#0b1220;}
+body.day-mode .fn-start{background:#fecaca;border-color:#ef4444;color:#0b1220;}
+body.day-mode .fn-info{background:#eff6ff;border-color:#93c5fd;color:#0b1220;}
+body.day-mode .algo-card{background:#ffffff;box-shadow:0 1px 3px rgba(0,0,0,0.1);}
+body.day-mode .algo-card h3{color:#0b1220;}
+body.day-mode .algo-card p{color:#475569;}
+body.day-mode .step-list li{background:#f8fafc;color:#0b1220;}
+body.day-mode .rhythm-card,body.day-mode .proto-card,body.day-mode .gelisim-card,body.day-mode .ekip-card,
+body.day-mode .team-card,body.day-mode .station-item,body.day-mode .vaka-item,body.day-mode .h-station-row,
+body.day-mode .sesli-card,body.day-mode .harita-card,body.day-mode .hasta-form-card,body.day-mode .quiz-q-card{background:#ffffff;box-shadow:0 1px 3px rgba(0,0,0,0.08);}
+body.day-mode .modal-sheet{background:#ffffff;}
+body.day-mode .bottom-nav{background:#ffffff;border-top:1px solid var(--border);}
+body.day-mode .nav-item{color:#64748b;}
+body.day-mode .cpr-card{background:#fef2f2;border-color:#fca5a5;}
+body.day-mode .cpr-phase{color:#92400e;}
+body.day-mode .search-bar i{color:#2563eb;}
+body.day-mode .card-icon,body.day-mode .algo-finder-header{color:#0b1220;}
+body.day-mode .algo-finder{background:#ffffff;border-bottom:1px solid var(--border);}
+body.day-mode .algo-finder-header{color:#1e3a8a;}
+body.day-mode .modal-title{color:#0b1220;}
+body.day-mode .sec{color:#334155;background:rgba(37,99,235,0.06);}
+body.day-mode .day-toggle-btn{background:#fbbf24;color:#78350f;}
+.day-toggle-btn{background:rgba(255,255,255,0.1);border:1px solid var(--border);color:var(--text);border-radius:20px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.85rem;margin-left:4px;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 
 /* ===== SPLASH ===== */
-#splash{position:fixed;inset:0;background:radial-gradient(ellipse at 40% 20%,#0d1f42 0%,#04091a 60%);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;}
+#splash{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;}
 .splash-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
 .nebula{position:absolute;border-radius:50%;filter:blur(60px);animation:nebulaFloat var(--nd,8s) ease-in-out infinite alternate;}
 @keyframes nebulaFloat{0%{transform:translate(0,0) scale(1);}100%{transform:translate(var(--nx,10px),var(--ny,-10px)) scale(1.1);}}
@@ -39,27 +87,35 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .light.w{background:#f8fafc;animation-delay:0.23s;}
 .light.b{background:#3b82f6;animation-delay:0.46s;box-shadow:0 0 10px #3b82f6;}
 @keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.25;transform:scale(0.65);}}
-.splash-logo{width:96px;height:96px;background:#dc2626;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;margin-bottom:18px;box-shadow:0 4px 24px rgba(220,38,38,0.35);}
-.splash-title{font-size:2.1rem;font-weight:900;letter-spacing:3px;text-align:center;background:linear-gradient(135deg,#fff 0%,#93c5fd 50%,#f1f5f9 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:5px;}
-.splash-sub{font-size:0.65rem;color:#64748b;text-align:center;margin-bottom:8px;letter-spacing:2px;text-transform:uppercase;}
-.splash-aha{font-size:0.58rem;color:#fbbf24;margin-bottom:36px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.25);padding:5px 14px;border-radius:20px;letter-spacing:0.5px;}
+.splash-logo{width:88px;height:88px;background:#050605;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;margin-bottom:20px;border:2px solid var(--blue);animation:logoBreathe 2.8s ease-in-out infinite;overflow:hidden;}
+.light-bar{display:flex;gap:6px;margin-bottom:10px;}
+.lb-light{width:14px;height:8px;border-radius:2px;background:#1a1a1a;}
+.lb-red{animation:lbRedFlash 0.9s steps(1) infinite;}
+.lb-blue{animation:lbBlueFlash 0.9s steps(1) infinite;}
+@keyframes lbRedFlash{0%,49%{background:#ef4444;box-shadow:0 0 10px 2px rgba(239,68,68,0.8);}50%,100%{background:#3a0d0d;box-shadow:none;}}
+@keyframes lbBlueFlash{0%,49%{background:#1a2b3a;box-shadow:none;}50%,100%{background:#3b82f6;box-shadow:0 0 10px 2px rgba(59,130,246,0.8);}}
+.splash-logo-emoji{display:inline-block;animation:ambulanceDrive 1.1s ease-in-out infinite;}
+@keyframes ambulanceDrive{0%,100%{transform:translateY(0) translateX(0) rotate(0deg);}25%{transform:translateY(-3px) translateX(2px) rotate(-2deg);}50%{transform:translateY(0) translateX(0) rotate(0deg);}75%{transform:translateY(-1px) translateX(-2px) rotate(2deg);}}
+@keyframes logoBreathe{0%,100%{box-shadow:0 0 16px rgba(46,204,113,0.25),inset 0 0 12px rgba(46,204,113,0.08);}50%{box-shadow:0 0 28px rgba(46,204,113,0.5),inset 0 0 16px rgba(46,204,113,0.15);}}
+.role-emoji-badge{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 12px;position:relative;}
+.role-emoji-kkm{background:radial-gradient(circle,rgba(34,211,238,0.22),rgba(34,211,238,0.05));border:2px solid rgba(34,211,238,0.4);}
+.role-emoji-kkm::before{content:'';position:absolute;inset:-2px;border-radius:50%;border:2px solid transparent;border-top-color:#22d3ee;animation:radarSpin 2.2s linear infinite;}
+@keyframes radarSpin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+.role-emoji-saha{background:radial-gradient(circle,rgba(255,167,38,0.22),rgba(255,167,38,0.05));border:2px solid rgba(255,167,38,0.4);animation:sahaPulse 1.6s ease-in-out infinite;}
+@keyframes sahaPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,167,38,0.4);}50%{box-shadow:0 0 0 8px rgba(255,167,38,0);}}
+.splash-title{font-size:2.1rem;font-weight:900;letter-spacing:3px;text-align:center;background:linear-gradient(90deg,#4ade80 0%,#22d3ee 50%,#4ade80 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% auto;animation:titleShine 4s linear infinite,titlePulse 1.8s ease-in-out infinite;margin-bottom:5px;}
+@keyframes titleShine{0%{background-position:0% center;}100%{background-position:200% center;}}
+@keyframes titlePulse{0%,100%{filter:drop-shadow(0 0 4px rgba(74,222,128,0.3));}50%{filter:drop-shadow(0 0 14px rgba(34,211,238,0.7));}}
+.splash-sub{font-size:0.65rem;color:#8fa89c;text-align:center;margin-bottom:10px;letter-spacing:2px;text-transform:uppercase;}
+.splash-aha{font-size:0.58rem;color:#0a0d12;font-weight:700;margin-bottom:36px;background:var(--hivis);border:none;padding:5px 14px;border-radius:4px;letter-spacing:0.5px;}
 .role-buttons{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
-.role-btn{background:linear-gradient(145deg,#0d1829,#162035);border:1.5px solid var(--border);border-radius:22px;padding:22px 26px;text-align:center;cursor:pointer;transition:var(--trans);min-width:148px;position:relative;overflow:hidden;}
-.role-btn::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity 0.3s;border-radius:22px;}
-.role-btn::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 22px 22px;transition:opacity 0.3s;opacity:0.6;}
-.role-btn.kkm{border-color:rgba(96,165,250,0.4);}
-.role-btn.kkm::before{background:radial-gradient(ellipse at top,rgba(37,99,235,0.2),transparent);}
-.role-btn.kkm::after{background:linear-gradient(90deg,transparent,#60a5fa,transparent);}
-.role-btn.saha{border-color:rgba(74,222,128,0.4);}
-.role-btn.saha::before{background:radial-gradient(ellipse at top,rgba(22,163,74,0.2),transparent);}
-.role-btn.saha::after{background:linear-gradient(90deg,transparent,#4ade80,transparent);}
-.role-btn:active{transform:scale(0.94);}
-.role-btn:hover::before{opacity:1;}
-.role-btn i{font-size:2.4rem;display:block;margin-bottom:12px;filter:drop-shadow(0 0 8px currentColor);}
-.role-btn.kkm i{color:#60a5fa;}
-.role-btn.saha i{color:#4ade80;}
+.role-btn{background:var(--card);border:1.5px solid var(--border);border-top-width:4px;border-radius:10px;padding:22px 26px;text-align:center;cursor:pointer;transition:var(--trans);min-width:148px;position:relative;overflow:hidden;}
+.role-btn.kkm{border-top-color:var(--blue);background:linear-gradient(180deg,rgba(34,211,238,0.10) 0%,var(--card) 45%);}
+.role-btn.saha{border-top-color:var(--hivis);background:linear-gradient(180deg,rgba(255,167,38,0.10) 0%,var(--card) 45%);}
+.role-btn:active{transform:scale(0.96);}
+.role-btn:hover{background:var(--card2);}
 .role-btn h3{font-size:1rem;margin-bottom:4px;font-weight:800;color:#f1f5f9;}
-.role-btn p{font-size:0.5rem;color:#64748b;line-height:1.5;}
+.role-btn p{font-size:0.5rem;color:var(--muted);line-height:1.5;}
 .role-glow{display:none;}
 
 /* ===== LOGIN ===== */
@@ -87,14 +143,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 /* HEADER */
 .app-header{padding:12px 16px 14px;flex-shrink:0;position:relative;overflow:hidden;}
-.header-kkm{background:#0f2448;border-bottom:1px solid rgba(37,99,235,0.4);}
-.header-saha{background:#0c2a18;border-bottom:1px solid rgba(22,163,74,0.4);}
+.header-kkm{background:#0c0f0e;border-bottom:2px solid var(--blue);}
+.header-saha{background:#0c0f0e;border-bottom:2px solid var(--blue);}
 .header-inner{display:flex;align-items:center;gap:10px;}
-.header-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0;}
-.header-kkm .header-icon{background:rgba(37,99,235,0.18);color:#60a5fa;}
-.header-saha .header-icon{background:rgba(22,163,74,0.18);color:#4ade80;}
-.header-title{font-size:0.95rem;font-weight:800;letter-spacing:0.5px;background:linear-gradient(90deg,#f1f5f9,#cbd5e1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.header-badge{font-size:0.48rem;color:#64748b;margin-top:2px;letter-spacing:0.5px;}
+.header-icon{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0;}
+.header-kkm .header-icon{background:rgba(46,204,113,0.15);color:var(--blue);}
+.header-saha .header-icon{background:rgba(46,204,113,0.15);color:var(--blue);}
+.header-title{font-size:0.95rem;font-weight:800;letter-spacing:0.5px;background:linear-gradient(90deg,#4ade80,#67e8f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.header-badge{font-size:0.48rem;color:var(--muted);margin-top:2px;letter-spacing:0.5px;}
 .header-lights{display:flex;gap:5px;margin-left:auto;align-items:center;}
 .hlv{width:8px;height:8px;border-radius:50%;animation:blink 0.7s ease-in-out infinite;}
 .hlv.r{background:#ef4444;box-shadow:0 0 6px #ef4444;}
@@ -102,9 +158,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .hlv.b{background:#3b82f6;animation-delay:0.46s;box-shadow:0 0 6px #3b82f6;}
 
 /* SEARCH */
-.search-bar{margin:8px 12px;background:linear-gradient(135deg,rgba(13,24,41,0.9),rgba(22,32,53,0.9));border:1px solid rgba(30,58,95,0.8);border-radius:30px;padding:9px 16px;display:flex;align-items:center;gap:9px;backdrop-filter:blur(10px);transition:border-color 0.2s;}
-.search-bar:focus-within{border-color:rgba(96,165,250,0.5);box-shadow:0 0 0 2px rgba(37,99,235,0.1);}
-.search-bar i{color:#60a5fa;font-size:0.78rem;flex-shrink:0;}
+.search-bar{margin:8px 12px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:9px 16px;display:flex;align-items:center;gap:9px;transition:border-color 0.2s;}
+.search-bar:focus-within{border-color:var(--blue);}
+.search-bar i{color:var(--blue);font-size:0.78rem;flex-shrink:0;}
 .search-bar input{background:transparent;border:none;color:#f1f5f9;width:100%;font-size:0.72rem;outline:none;}
 .search-bar input::placeholder{color:#475569;}
 
@@ -115,18 +171,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 /* SECTION TITLE */
 .sec{font-size:0.62rem;font-weight:800;color:#475569;letter-spacing:1.5px;text-transform:uppercase;margin:16px 0 9px;display:flex;align-items:center;gap:7px;}
-.sec i{font-size:0.7rem;color:#60a5fa;}
+.sec i{font-size:0.7rem;color:var(--blue);}
 .sec::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
 
 /* NAV */
 .bottom-nav{background:rgba(4,9,26,0.96);backdrop-filter:blur(24px);border-top:1px solid rgba(30,58,95,0.6);padding:6px 6px 14px;display:flex;justify-content:space-around;flex-shrink:0;}
 .nav-item{color:#475569;display:flex;flex-direction:column;align-items:center;font-size:0.46rem;gap:2px;cursor:pointer;padding:5px 8px;border-radius:12px;transition:var(--trans);position:relative;}
 .nav-item i{font-size:1.05rem;transition:var(--trans);}
+.nav-emoji{font-size:1.05rem;line-height:1;}
 .nav-item:active{transform:scale(0.9);}
-.nav-item.active-kkm{color:#60a5fa;background:rgba(37,99,235,0.12);box-shadow:0 0 12px rgba(37,99,235,0.15);}
-.nav-item.active-kkm i{filter:drop-shadow(0 0 4px #3b82f6);}
-.nav-item.active-saha{color:#4ade80;background:rgba(22,163,74,0.12);box-shadow:0 0 12px rgba(22,163,74,0.15);}
-.nav-item.active-saha i{filter:drop-shadow(0 0 4px #22c55e);}
+.nav-item.active-kkm{color:#5ee89a;background:rgba(46,204,113,0.15);}
+.nav-item.active-saha{color:var(--hivis);background:rgba(200,217,0,0.12);}
 
 /* CARDS */
 .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;}
@@ -136,18 +191,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .algo-card h3{font-size:0.72rem;font-weight:700;margin-bottom:3px;color:#f1f5f9;}
 .algo-card p{font-size:0.5rem;opacity:0.85;line-height:1.4;color:#cbd5e1;}
 .algo-card .card-badge{position:absolute;top:8px;right:8px;font-size:0.42rem;padding:2px 6px;border-radius:20px;font-weight:700;}
-.c-red{border-left-color:#ef4444;}
-.c-orange{border-left-color:#f97316;}
-.c-blue{border-left-color:#60a5fa;}
-.c-purple{border-left-color:#a78bfa;}
-.c-green{border-left-color:#4ade80;}
-.c-cyan{border-left-color:#22d3ee;}
-.c-yellow{border-left-color:#fbbf24;}
-.c-pink{border-left-color:#f472b6;}
-.c-gray{border-left-color:#64748b;}
-.c-teal{border-left-color:#2dd4bf;}
-.c-indigo{border-left-color:#818cf8;}
-.c-rose{border-left-color:#fb7185;}
+.c-red{border-left-color:#ef4444;}.c-red h3{color:#f87171;}
+.c-orange{border-left-color:#f97316;}.c-orange h3{color:#fdba74;}
+.c-blue{border-left-color:#60a5fa;}.c-blue h3{color:#93c5fd;}
+.c-purple{border-left-color:#a78bfa;}.c-purple h3{color:#c4b5fd;}
+.c-green{border-left-color:#4ade80;}.c-green h3{color:#86efac;}
+.c-cyan{border-left-color:#22d3ee;}.c-cyan h3{color:#67e8f9;}
+.c-yellow{border-left-color:#fbbf24;}.c-yellow h3{color:#fde68a;}
+.c-pink{border-left-color:#f472b6;}.c-pink h3{color:#f9a8d4;}
+.c-gray{border-left-color:#64748b;}.c-gray h3{color:#cbd5e1;}
+.c-teal{border-left-color:#2dd4bf;}.c-teal h3{color:#5eead4;}
+.c-indigo{border-left-color:#818cf8;}.c-indigo h3{color:#a5b4fc;}
+.c-rose{border-left-color:#fb7185;}.c-rose h3{color:#fda4af;}
 
 /* ===== GERÇEKÇI EKG CANVAS SISTEMI ===== */
 .rhythm-section{margin-bottom:4px;}
@@ -169,16 +224,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .rhythm-algo-btn{margin-top:6px;background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.35);border-radius:8px;padding:5px 10px;font-size:0.52rem;color:#93c5fd;font-weight:700;text-align:center;}
 
 /* CPR CARD */
-.cpr-card{background:linear-gradient(145deg,#1a0808,#250a0a,#180606);border:1px solid rgba(220,38,38,0.5);border-radius:16px;padding:14px;margin-bottom:8px;text-align:center;position:relative;overflow:hidden;box-shadow:0 4px 24px rgba(220,38,38,0.15),inset 0 1px 0 rgba(255,255,255,0.05);}
+.cpr-card{background:#1a0a0a;border:1px solid rgba(220,38,38,0.4);border-radius:12px;padding:14px;margin-bottom:8px;text-align:center;}
 .cpr-card::before{content:'';position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(239,68,68,0.6),transparent);}
 .cpr-card::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(239,68,68,0.07),transparent 60%);pointer-events:none;}
-.cpr-timer{font-family:'Courier New',monospace;font-size:2.6rem;font-weight:900;color:#ef4444;letter-spacing:5px;}
+.cpr-timer{font-family:var(--font-mono);font-size:2.6rem;font-weight:900;color:#ef4444;letter-spacing:5px;}
 @keyframes timerGlow{0%,100%{text-shadow:0 0 20px rgba(239,68,68,0.7);}50%{text-shadow:0 0 40px rgba(239,68,68,1),0 0 80px rgba(239,68,68,0.4);}}
-.cpr-phase{font-size:0.62rem;margin:5px 0;color:#fbbf24;font-weight:600;letter-spacing:0.5px;}
+.cpr-phase{font-size:0.62rem;margin:5px 0;color:#fbbf24;font-weight:600;letter-spacing:0.5px;animation:cprPhaseBlink 1s ease-in-out infinite;}
+@keyframes cprPhaseBlink{0%,100%{opacity:1;}50%{opacity:0.8;}}
 .cpr-buttons{display:flex;gap:7px;justify-content:center;margin-top:10px;}
 .cpr-btn{border:none;padding:8px 18px;border-radius:30px;color:white;font-weight:800;cursor:pointer;font-size:0.64rem;transition:var(--trans);}
 .cpr-btn:active{transform:scale(0.93);}
-.cpr-start{background:linear-gradient(135deg,#dc2626,#991b1b);box-shadow:0 3px 14px rgba(220,38,38,0.5);}
+.cpr-start{background:#dc2626;}
 .cpr-stop{background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 3px 12px rgba(37,99,235,0.45);}
 .cpr-reset{background:linear-gradient(135deg,#475569,#334155);}
 .cpr-stats{display:flex;justify-content:space-between;margin-top:9px;font-size:0.52rem;color:#64748b;}
@@ -186,11 +242,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @keyframes blink-adr{0%,100%{opacity:1;}50%{opacity:0.3;}}
 
 /* KKM CALL FORM */
-.kkm-call-card{background:linear-gradient(135deg,#0a1f3d,#060c1a);border:1px solid var(--blue);border-radius:14px;padding:12px;margin-bottom:10px;}
+.kkm-call-card{background:var(--card);border:1px solid var(--blue);border-radius:12px;padding:12px;margin-bottom:10px;}
 .kkm-call-title{font-size:0.72rem;font-weight:700;margin-bottom:8px;color:var(--blue);display:flex;align-items:center;gap:6px;}
 .call-form select,.call-form input,.call-form textarea{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:10px;font-size:0.65rem;margin-bottom:7px;outline:none;}
 .call-form select option{background:#111827;}
-.call-btn{background:linear-gradient(135deg,var(--green),#15803d);border:none;padding:11px;width:100%;border-radius:30px;color:white;font-weight:700;cursor:pointer;font-size:0.75rem;}
+.call-btn{background:var(--green);border:none;padding:11px;width:100%;border-radius:10px;color:white;font-weight:700;cursor:pointer;font-size:0.75rem;}
 .call-btn:active{transform:scale(0.97);}
 
 /* PROTOCOL CARDS */
@@ -224,7 +280,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .quiz-start-card{background:linear-gradient(135deg,#0f1f3d,#0a1628);border:1px solid var(--blue);border-radius:14px;padding:16px;text-align:center;margin-bottom:8px;}
 .quiz-cat-btn{background:var(--card2);border:1px solid var(--border);color:var(--muted);border-radius:20px;padding:5px 12px;font-size:0.55rem;cursor:pointer;font-weight:600;}
 .quiz-cat-btn.active-cat{background:rgba(37,99,235,0.25);border-color:var(--blue);color:#93c5fd;}
-.quiz-launch-btn{background:linear-gradient(135deg,var(--blue),#1d4ed8);border:none;padding:11px 24px;border-radius:30px;color:white;font-weight:800;cursor:pointer;font-size:0.72rem;letter-spacing:0.5px;}
+.quiz-launch-btn{background:var(--blue);border:none;padding:11px 24px;border-radius:10px;color:white;font-weight:800;cursor:pointer;font-size:0.72rem;letter-spacing:0.5px;}
 .quiz-launch-btn:active{transform:scale(0.97);}
 .quiz-q-card{background:var(--card);border-radius:14px;padding:14px;border:1px solid var(--border);}
 .quiz-progress-bar{height:4px;background:var(--border);border-radius:2px;margin-bottom:10px;}
@@ -241,7 +297,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .quiz-feedback.fail{background:rgba(220,38,38,0.12);border-left:3px solid #ef4444;}
 .quiz-next-btn{background:var(--blue);border:none;padding:9px;width:100%;border-radius:30px;color:white;font-weight:700;cursor:pointer;font-size:0.65rem;margin-top:8px;}
 .quiz-result-card{background:var(--card);border-radius:14px;padding:20px;text-align:center;border:1px solid var(--border);}
-.quiz-result-score{font-size:2rem;font-weight:900;color:#4ade80;letter-spacing:2px;}
+.quiz-result-score{font-family:var(--font-mono);font-size:2rem;font-weight:700;color:#4ade80;letter-spacing:2px;}
 .quiz-result-msg{font-size:0.65rem;color:var(--muted);margin-top:4px;}
 .quiz-wrong-item{background:rgba(220,38,38,0.08);border-left:3px solid #ef4444;border-radius:8px;padding:7px 10px;margin-bottom:5px;text-align:left;font-size:0.55rem;color:var(--text);}
 
@@ -332,14 +388,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .ak-result-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.55rem;}
 
 /* ===== ALGORİTMA HIZLI BULUCU ===== */
-.algo-finder{background:linear-gradient(135deg,rgba(15,31,61,0.95),rgba(6,12,26,0.95));border-bottom:1px solid var(--border);position:sticky;top:52px;z-index:90;}
+.algo-finder{background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:52px;z-index:90;}
 /* GİRİŞ TİP + UYARI → login CSS bloğunda tanımlı */
 
 /* ===== RİTİM KATEGORİLERİ ===== */
 .rhythm-cats{display:flex;gap:5px;overflow-x:auto;padding:4px 0 8px;margin-bottom:4px;}
 .rhythm-cats::-webkit-scrollbar{display:none;}
 .r-cat{background:rgba(255,255,255,0.05);border:1px solid var(--border);color:#64748b;border-radius:20px;padding:5px 12px;font-size:0.52rem;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:all 0.15s;}
-.r-cat.r-cat-active{background:rgba(37,99,235,0.2);border-color:#60a5fa;color:#93c5fd;}
+.r-cat.r-cat-active{background:rgba(46,204,113,0.20);border-color:var(--blue);color:#8fe8ac;}
 .r-cat:active{transform:scale(0.93);}
 .rhythm-card.r-hidden{display:none;}
 
@@ -363,11 +419,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .vsim-info-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(255,255,255,0.02);border-bottom:1px solid var(--border);}
 .vsim-case-type{font-size:0.68rem;font-weight:800;color:#f1f5f9;}
 .vsim-case-sub{font-size:0.52rem;color:var(--muted);margin-top:2px;}
-.vsim-timer-big{font-family:'Courier New',monospace;font-size:1.4rem;font-weight:900;color:#4ade80;}
+.vsim-timer-big{font-family:var(--font-mono);font-size:1.4rem;font-weight:900;color:#4ade80;}
 .vsim-vitals{display:flex;gap:6px;padding:8px 12px;overflow-x:auto;border-bottom:1px solid var(--border);}
 .vsim-vitals::-webkit-scrollbar{display:none;}
 .vsim-vital-item{flex-shrink:0;background:rgba(255,255,255,0.04);border-radius:8px;padding:5px 8px;text-align:center;border:1px solid var(--border);min-width:44px;}
-.vsim-vital-val{font-size:0.75rem;font-weight:900;font-family:'Courier New',monospace;}
+.vsim-vital-val{font-size:0.75rem;font-weight:900;font-family:var(--font-mono);}
 .vsim-vital-lbl{font-size:0.42rem;color:var(--muted);margin-top:1px;}
 .vsim-vital-crit{border-color:#ef4444 !important;background:rgba(239,68,68,0.1) !important;}
 .vsim-vital-warn{border-color:#fbbf24 !important;background:rgba(251,191,36,0.08) !important;}
@@ -376,7 +432,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .vsim-timeline::-webkit-scrollbar-thumb{background:var(--border);}
 .vsim-tl-item{display:flex;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);align-items:flex-start;}
 .vsim-tl-item:last-child{border-bottom:none;}
-.vsim-tl-time{font-size:0.48rem;color:var(--muted);font-family:'Courier New',monospace;white-space:nowrap;padding-top:1px;min-width:36px;}
+.vsim-tl-time{font-size:0.48rem;color:var(--muted);font-family:var(--font-mono);white-space:nowrap;padding-top:1px;min-width:36px;}
 .vsim-tl-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:3px;}
 .vsim-tl-text{font-size:0.55rem;line-height:1.5;flex:1;}
 .vsim-tl-info{color:#93c5fd;}.vsim-tl-warn{color:#fde68a;}.vsim-tl-crit{color:#fca5a5;}.vsim-tl-ok{color:#4ade80;}.vsim-tl-action{color:#fdba74;}
@@ -392,14 +448,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .vsim-ctrl-stop{background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.3);}
 .vsim-ctrl-next{background:linear-gradient(135deg,var(--blue),#1d4ed8);color:white;}
 
-.algo-finder-header{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;cursor:pointer;font-size:0.65rem;font-weight:700;color:#93c5fd;}
+.algo-finder-header{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;cursor:pointer;font-size:0.65rem;font-weight:700;color:#5ee89a;}
+.algo-finder-text{animation:finderBlink 1.6s ease-in-out infinite;}
+@keyframes finderBlink{0%,100%{opacity:1;text-shadow:0 0 2px rgba(94,232,154,0.3);}50%{opacity:0.75;text-shadow:0 0 10px rgba(94,232,154,0.9);}}
 .algo-finder-header i{font-size:0.6rem;transition:transform 0.2s;color:var(--muted);}
 .algo-finder-header i.open{transform:rotate(180deg);}
 .algo-finder-body{padding:8px 12px 10px;}
 .af-cats{display:flex;gap:5px;overflow-x:auto;margin-bottom:8px;padding-bottom:2px;}
 .af-cats::-webkit-scrollbar{display:none;}
 .af-cat{background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--muted);border-radius:20px;padding:4px 10px;font-size:0.52rem;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;}
-.af-cat.active-af-cat{background:rgba(37,99,235,0.2);border-color:var(--blue);color:#93c5fd;}
+.af-cat.active-af-cat{background:rgba(46,204,113,0.20);border-color:var(--blue);color:#8fe8ac;}
 .af-chips{display:flex;flex-wrap:wrap;gap:5px;}
 .af-chip{border:1px solid;border-radius:10px;padding:5px 10px;font-size:0.52rem;font-weight:700;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:4px;}
 .af-chip:active{transform:scale(0.94);}
@@ -411,14 +469,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .af-chip-yellow{background:rgba(251,191,36,0.12);border-color:rgba(251,191,36,0.4);color:#fde68a;}
 .af-chip-cyan{background:rgba(34,211,238,0.12);border-color:rgba(34,211,238,0.4);color:#67e8f9;}
 
-.dispatch-btn{background:linear-gradient(135deg,#2563eb,#1d4ed8) !important;box-shadow:0 2px 8px rgba(37,99,235,0.4);}
-.call-btn{background:linear-gradient(135deg,#16a34a,#15803d) !important;box-shadow:0 3px 12px rgba(22,163,74,0.4);}
-.nav-btn{background:linear-gradient(135deg,#0891b2,#0e7490) !important;box-shadow:0 2px 8px rgba(8,145,178,0.35);}
-.cpr-start{background:linear-gradient(135deg,#dc2626,#991b1b);box-shadow:0 3px 12px rgba(220,38,38,0.45);}
-.cpr-stop{background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 3px 10px rgba(37,99,235,0.4);}
-.quiz-launch-btn{box-shadow:0 3px 14px rgba(37,99,235,0.4);}
-.hasta-rapor-btn{box-shadow:0 3px 12px rgba(37,99,235,0.35);}
-.stimer-btn-s{background:linear-gradient(135deg,#16a34a,#15803d);box-shadow:0 2px 6px rgba(22,163,74,0.35);}
+.dispatch-btn{background:var(--blue);}
+.call-btn{background:var(--green);}
+.nav-btn{background:var(--cyan);}
+.cpr-start{background:#dc2626;}
+.cpr-stop{background:var(--blue);}
+.stimer-btn-s{background:var(--green);}
 
 /* ===== HARİTA ===== */
 .harita-card{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:10px;margin-bottom:8px;}
@@ -437,7 +493,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 /* ===== VAKA KAYIT ===== */
 .vaka-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;}
 .vaka-stat{background:var(--card);border-radius:10px;padding:8px;text-align:center;border:1px solid var(--border);}
-.vaka-stat-num{font-size:1.3rem;font-weight:900;}.vaka-stat-lbl{font-size:0.48rem;color:var(--muted);}
+.vaka-stat-num{font-family:var(--font-mono);font-size:1.3rem;font-weight:700;}.vaka-stat-lbl{font-size:0.48rem;color:var(--muted);}
 .vaka-form-card{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:12px;margin-bottom:8px;}
 .vaka-item{background:var(--card2);border-radius:10px;padding:8px 10px;margin-bottom:5px;border-left:3px solid var(--blue);}
 .vaka-item-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
@@ -457,10 +513,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .abcde-opts label{display:flex;align-items:center;gap:3px;font-size:0.55rem;color:var(--muted);cursor:pointer;}
 .abcde-opts input[type=radio]{accent-color:var(--blue);}
 .hasta-input{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text);padding:7px 10px;border-radius:8px;font-size:0.6rem;outline:none;margin-top:4px;}
-.hasta-rapor-btn{background:linear-gradient(135deg,var(--blue),#1d4ed8);border:none;padding:9px;width:100%;border-radius:30px;color:white;font-weight:700;cursor:pointer;font-size:0.65rem;margin-top:10px;}
+.hasta-rapor-btn{background:var(--blue);border:none;padding:9px;width:100%;border-radius:10px;color:white;font-weight:700;cursor:pointer;font-size:0.65rem;margin-top:10px;}
 .vital-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
 .vital-item{background:rgba(255,255,255,0.03);border-radius:10px;padding:8px 6px;text-align:center;border:1px solid var(--border);}
-.vital-icon{font-size:1.2rem;margin-bottom:4px;}.vital-input{width:100%;background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);text-align:center;font-size:0.65rem;font-weight:700;padding:3px 0;outline:none;}
+.vital-icon{font-size:1.2rem;margin-bottom:4px;}.vital-input{width:100%;background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--text);text-align:center;font-size:0.68rem;font-weight:700;font-family:var(--font-mono);padding:3px 0;outline:none;}
 .vital-label{font-size:0.45rem;color:var(--muted);margin-top:3px;}
 .vital-alert{border-radius:8px;padding:6px 10px;margin-bottom:4px;font-size:0.58rem;}
 .vital-alert.warn{background:rgba(234,179,8,0.12);border-left:3px solid #eab308;}
@@ -471,7 +527,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .gks-opt{display:flex;align-items:center;gap:7px;font-size:0.58rem;background:rgba(255,255,255,0.03);border-radius:8px;padding:5px 8px;cursor:pointer;border:1px solid transparent;}
 .gks-opt:has(input:checked){background:rgba(37,99,235,0.15);border-color:var(--blue);}
 .gks-opt span{background:var(--blue);color:white;width:18px;height:18px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:0.55rem;font-weight:700;flex-shrink:0;}
-.gks-result{background:linear-gradient(135deg,#1e3a5f,#0a1f3d);border-radius:10px;padding:10px;text-align:center;font-size:1.2rem;font-weight:900;color:var(--text);border:1px solid var(--blue);margin-top:8px;}
+.gks-result{background:#0d1712;border-radius:8px;padding:10px;text-align:center;font-size:1.2rem;font-weight:700;font-family:var(--font-mono);color:var(--text);border:1px solid var(--blue);margin-top:8px;}
 .gks-interpret{text-align:center;font-size:0.6rem;margin-top:5px;padding:5px;border-radius:8px;}
 .opq-row{margin-bottom:8px;}
 .opq-lbl{display:inline-block;background:var(--orange);color:white;width:20px;height:20px;border-radius:6px;text-align:center;line-height:20px;font-size:0.6rem;font-weight:900;margin-right:5px;vertical-align:middle;}
@@ -482,21 +538,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .sesli-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
 .sesli-btn{border:none;padding:11px 8px;border-radius:12px;color:white;font-weight:800;font-size:0.6rem;cursor:pointer;letter-spacing:0.3px;transition:transform 0.1s,opacity 0.1s;}
 .sesli-btn:active{transform:scale(0.94);opacity:0.85;}
-.sesli-red{background:linear-gradient(135deg,#991b1b,#7f1d1d);}.sesli-orange{background:linear-gradient(135deg,#9a3412,#7c2d12);}
-.sesli-yellow{background:linear-gradient(135deg,#92400e,#78350f);color:#fde68a;}.sesli-blue{background:linear-gradient(135deg,#1e3a8a,#1e40af);}
-.sesli-green{background:linear-gradient(135deg,#14532d,#166534);}.sesli-purple{background:linear-gradient(135deg,#4c1d95,#5b21b6);}
+.sesli-red{background:#991b1b;}.sesli-orange{background:#9a3412;}
+.sesli-yellow{background:#92400e;color:#fde68a;}.sesli-blue{background:#1e3a8a;}
+.sesli-green{background:#14532d;}.sesli-purple{background:#4c1d95;}
 .stimer-row{background:rgba(255,255,255,0.03);border-radius:10px;padding:8px 10px;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;border:1px solid var(--border);}
 .stimer-name{font-size:0.6rem;font-weight:700;}.stimer-desc{font-size:0.48rem;color:var(--muted);}
 .stimer-ctrl{display:flex;align-items:center;gap:8px;}
-.stimer-display{font-family:'Courier New',monospace;font-size:0.85rem;font-weight:900;color:#4ade80;min-width:42px;text-align:center;}
+.stimer-display{font-family:var(--font-mono);font-size:0.85rem;font-weight:900;color:#4ade80;min-width:42px;text-align:center;}
 .stimer-btn-s{background:var(--green);border:none;width:26px;height:26px;border-radius:50%;color:white;font-size:0.65rem;cursor:pointer;}
 
 .dose-header{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
-.dose-header input{width:70px;padding:5px 8px;border-radius:10px;background:var(--card2);border:1px solid var(--border);color:white;font-size:0.65rem;}
+.dose-header input{width:70px;padding:5px 8px;border-radius:8px;background:var(--card2);border:1px solid var(--border);color:white;font-size:0.7rem;font-family:var(--font-mono);font-weight:700;}
 .dose-calc-btn{background:var(--blue);border:none;padding:5px 12px;border-radius:20px;color:white;font-size:0.6rem;cursor:pointer;}
 .drug-item{background:var(--card);border-radius:8px;padding:7px 10px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;border-left:3px solid var(--blue);}
 .drug-name{font-size:0.6rem;}
-.drug-dose{color:#4ade80;font-weight:700;font-size:0.62rem;}
+.drug-dose{font-family:var(--font-mono);color:#4ade80;font-weight:700;font-size:0.62rem;}
 
 /* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:5000;display:none;align-items:flex-end;justify-content:center;}
@@ -507,6 +563,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);}
 .modal-title{font-size:0.8rem;font-weight:700;}
 .modal-close{width:28px;height:28px;border-radius:50%;background:var(--card2);border:none;color:var(--text);cursor:pointer;font-size:0.8rem;}
+.modal-tts-btn{width:28px;height:28px;border-radius:50%;background:var(--card2);border:none;color:var(--blue);cursor:pointer;font-size:0.8rem;margin-right:6px;flex-shrink:0;}
+.modal-tts-btn.speaking{background:var(--blue);color:white;animation:ttsPulse 1s ease-in-out infinite;}
+@keyframes ttsPulse{0%,100%{opacity:1;}50%{opacity:0.6;}}
+body.day-mode .modal-close,body.day-mode .modal-tts-btn{background:#e5e7eb;}
 
 /* MODAL CONTENT */
 .m-section{margin-bottom:10px;}
@@ -515,14 +575,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .m-box.diagnosis{background:rgba(234,179,8,0.08);border-left:3px solid var(--yellow);}
 .m-box.treatment{background:rgba(22,163,74,0.08);border-left:3px solid var(--green);}
 .m-box.warning{background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.3);}
-.m-box.info{background:rgba(37,99,235,0.08);border-left:3px solid var(--blue);}
+.m-box.info{background:rgba(46,204,113,0.08);border-left:3px solid var(--blue);}
 .m-box.success{background:rgba(22,163,74,0.1);border-left:3px solid var(--green);}
 .m-box.citizen{background:rgba(234,179,8,0.12);border:1px solid rgba(234,179,8,0.4);border-radius:10px;}
 .step-list{list-style:none;counter-reset:s;}
 .step-list li{counter-increment:s;margin-bottom:7px;padding:7px 8px 7px 34px;background:#0f172a;border-radius:8px;border-left:2px solid var(--blue);font-size:0.6rem;position:relative;line-height:1.6;}
 .step-list li::before{content:counter(s);position:absolute;left:8px;top:50%;transform:translateY(-50%);background:var(--blue);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.55rem;font-weight:700;}
 .m-drug{background:#0a1628;border-radius:8px;padding:6px 10px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;font-size:0.6rem;}
-.m-drug-dose{color:#4ade80;font-weight:700;}
+.m-drug-dose{font-family:var(--font-mono);color:#4ade80;font-weight:700;}
 .m-badge{display:inline-block;padding:2px 6px;border-radius:20px;font-size:0.48rem;font-weight:700;margin-right:4px;}
 .mb-red{background:var(--red);color:white;}
 .mb-green{background:var(--green);color:white;}
@@ -571,19 +631,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .aha-modal-close:active{background:rgba(239,68,68,0.35);transform:scale(0.9);}
 
 /* Flowchart nodes */
-.flow{display:flex;flex-direction:column;align-items:stretch;gap:0;}
-.flow-node{border-radius:12px;padding:10px 12px;text-align:left;font-size:0.62rem;font-weight:600;line-height:1.6;border:2px solid;margin:0;}
+.flow{display:flex;flex-direction:column;align-items:stretch;gap:0;counter-reset:flowstep;}
+.flow-node{border-radius:12px;padding:10px 12px 10px 34px;text-align:left;font-size:0.62rem;font-weight:600;line-height:1.6;border:2px solid;margin:0;position:relative;}
+.flow-node.fn-action,.flow-node.fn-drug,.flow-node.fn-warning{counter-increment:flowstep;}
+.flow-node.fn-action::before,.flow-node.fn-drug::before,.flow-node.fn-warning::before{
+  content:counter(flowstep);position:absolute;left:8px;top:10px;width:18px;height:18px;border-radius:50%;
+  background:rgba(255,255,255,0.12);color:inherit;font-size:0.55rem;font-weight:800;font-family:var(--font-mono);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.flow-node.fn-start,.flow-node.fn-goto,.flow-node.fn-question,.flow-node.fn-success,.flow-node.fn-info,.flow-node.fn-shock{padding-left:12px;}
+.flow-branch .flow-node{padding-left:12px;}
+.flow-branch .flow-node.fn-action::before,.flow-branch .flow-node.fn-drug::before,.flow-branch .flow-node.fn-warning::before{content:none;}
+.flow-branch .flow-node{padding-left:12px !important;}
 .flow-node ul{margin:6px 0 2px 0;padding-left:15px;font-weight:400;font-size:0.58rem;line-height:1.5;}
 .flow-node ul li{margin-bottom:2px;}
 .fn-start{background:linear-gradient(135deg,#7f1d1d 0%,#3b0a0a 100%);border-color:#ef4444;color:#fecaca;text-align:center;font-weight:800;font-size:0.68rem;}
-.fn-action{background:linear-gradient(135deg,#1e3a5f 0%,#0c1f38 100%);border-color:#3b82f6;color:#bfdbfe;}
+.fn-action{background:#0a1618;border-color:#22d3ee;color:#a5e8f0;}
 .fn-decision{background:linear-gradient(135deg,#5c3208 0%,#2d1800 100%);border-color:#f59e0b;color:#fde68a;}
 .fn-shock{background:linear-gradient(135deg,#3b1078 0%,#1a0540 100%);border-color:#a78bfa;color:#ede9fe;font-weight:700;}
 .fn-drug{background:linear-gradient(135deg,#064e2a 0%,#022e18 100%);border-color:#22c55e;color:#bbf7d0;}
 .fn-success{background:linear-gradient(135deg,#064e2a 0%,#022e18 100%);border-color:#4ade80;color:#bbf7d0;text-align:center;font-weight:700;}
 .fn-warning{background:linear-gradient(135deg,#7c2d12 0%,#3a0f04 100%);border-color:#fb923c;color:#fed7aa;}
-.fn-info{background:rgba(30,58,138,0.15);border-color:rgba(59,130,246,0.3);color:#93c5fd;font-size:0.55rem;font-weight:400;}
-.fn-goto{background:linear-gradient(135deg,#1e3a8a 0%,#0c1f38 100%);border-color:#3b82f6;color:#dbeafe;text-align:center;font-weight:800;}
+.fn-info{background:rgba(46,204,113,0.10);border-color:rgba(46,204,113,0.3);color:#a8e0bc;font-size:0.55rem;font-weight:400;}
+.fn-goto{background:var(--hivis);border-color:var(--hivis-dark);color:#1a1200;text-align:center;font-weight:800;}
 .fn-question{background:linear-gradient(135deg,#374151 0%,#1f2937 100%);border-color:#6b7280;color:#e5e7eb;text-align:center;font-weight:700;}
 
 .flow-arrow{font-size:1.2rem;color:#334155;text-align:center;line-height:1;padding:2px 0;}
@@ -604,7 +674,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 /* ===== UI POLİSH — OKUNAKLILIK ===== */
 /* Tüm bölüm başlıkları daha belirgin */
-.sec{font-size:0.62rem !important;letter-spacing:1.2px;padding:10px 14px;background:linear-gradient(90deg,rgba(30,58,138,0.15),transparent);}
+.sec{font-size:0.62rem !important;letter-spacing:1.2px;padding:10px 14px;background:linear-gradient(90deg,rgba(46,204,113,0.10),transparent);}
 /* Kart metinleri */
 .algo-card h3{font-size:0.74rem !important;}
 .algo-card p{font-size:0.52rem !important;opacity:0.9 !important;}
@@ -620,6 +690,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .bottom-nav .nav-item i{font-size:1.1rem !important;}
 /* Sec icon */
 .sec i{font-size:0.75rem;margin-right:6px;}
+
+/* ===== KATEGORİ RENKLİ BÖLÜM BAŞLIKLARI ===== */
+.sec{border-left:3px solid transparent;padding-left:10px;}
+.sec-red{border-left-color:#ef4444;background:linear-gradient(90deg,rgba(239,68,68,0.12),transparent) !important;color:#f87171 !important;}
+.sec-red i{color:#ef4444 !important;}
+.sec-cyan{border-left-color:#22d3ee;background:linear-gradient(90deg,rgba(34,211,238,0.12),transparent) !important;color:#67e8f9 !important;}
+.sec-cyan i{color:#22d3ee !important;}
+.sec-purple{border-left-color:#a78bfa;background:linear-gradient(90deg,rgba(167,139,250,0.12),transparent) !important;color:#c4b5fd !important;}
+.sec-purple i{color:#a78bfa !important;}
+.sec-orange{border-left-color:#f97316;background:linear-gradient(90deg,rgba(249,115,22,0.12),transparent) !important;color:#fdba74 !important;}
+.sec-orange i{color:#f97316 !important;}
+.sec-pink{border-left-color:#f472b6;background:linear-gradient(90deg,rgba(244,114,182,0.12),transparent) !important;color:#f9a8d4 !important;}
+.sec-pink i{color:#f472b6 !important;}
+.sec-indigo{border-left-color:#818cf8;background:linear-gradient(90deg,rgba(129,140,248,0.12),transparent) !important;color:#a5b4fc !important;}
+.sec-indigo i{color:#818cf8 !important;}
+.sec-yellow{border-left-color:#fbbf24;background:linear-gradient(90deg,rgba(251,191,36,0.12),transparent) !important;color:#fde68a !important;}
+.sec-yellow i{color:#fbbf24 !important;}
+.sec-teal{border-left-color:#2dd4bf;background:linear-gradient(90deg,rgba(45,212,191,0.12),transparent) !important;color:#5eead4 !important;}
+.sec-teal i{color:#2dd4bf !important;}
+.sec-green2{border-left-color:#4ade80;background:linear-gradient(90deg,rgba(74,222,128,0.12),transparent) !important;color:#86efac !important;}
+.sec-green2 i{color:#4ade80 !important;}
+body.day-mode .sec[class*="sec-"]{background:rgba(0,0,0,0.03) !important;}
+
 /* Genel input iyileştirme */
 input,select,textarea{border-radius:10px !important;}
 select{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%2394a3b8'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px !important;}
@@ -640,7 +733,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
 .yanik-region.sel{fill:rgba(239,68,68,0.55);stroke:#ef4444;}
 .yanik-region-label{font-size:6.5px;fill:#cbd5e1;pointer-events:none;text-anchor:middle;}
 .yanik-total-box{background:linear-gradient(135deg,#1e3a5f,#0a1f3d);border:1px solid var(--orange);border-radius:12px;padding:12px;text-align:center;margin-top:8px;}
-.yanik-total-num{font-size:1.8rem;font-weight:900;color:#fb923c;}
+.yanik-total-num{font-family:var(--font-mono);font-size:1.8rem;font-weight:700;color:#fb923c;}
 .yanik-total-lbl{font-size:0.55rem;color:var(--muted);margin-top:2px;}
 .yanik-list{margin-top:8px;font-size:0.55rem;color:#cbd5e1;line-height:1.8;}
 .yanik-reset-btn{background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--muted);padding:6px 14px;border-radius:20px;font-size:0.55rem;cursor:pointer;margin-top:8px;}
@@ -689,7 +782,13 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
 
 <div id="splash">
   <div class="splash-bg" id="splashBg"></div>
-  <div class="splash-logo">🚑</div>
+  <div class="light-bar">
+    <div class="lb-light lb-red"></div>
+    <div class="lb-light lb-blue"></div>
+    <div class="lb-light lb-red"></div>
+    <div class="lb-light lb-blue"></div>
+  </div>
+  <div class="splash-logo"><span class="splash-logo-emoji">🚑</span></div>
   <div class="splash-title">112 ŞANLIURFA</div>
   <div class="splash-sub">KKM OPERASYON + SAHA EKİBİ</div>
   <div class="splash-aha">⚕️ AHA / ERC 2025 KILAVUZLARI</div>
@@ -709,13 +808,13 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
   <div class="role-buttons" id="roleBox" style="display:flex;">
     <div class="role-btn kkm" onclick="selectRole('kkm')">
       <div class="role-glow"></div>
-      <i class="fas fa-headset"></i>
+      <div class="role-emoji-badge role-emoji-kkm">📡</div>
       <h3>KKM GÖREVLİSİ</h3>
       <p>Komuta Kontrol Merkezi<br>Çağrı Yönetimi & Sevk</p>
     </div>
     <div class="role-btn saha" onclick="selectRole('saha')">
       <div class="role-glow"></div>
-      <i class="fas fa-truck-medical"></i>
+      <div class="role-emoji-badge role-emoji-saha">🚑</div>
       <h3>SAHA EKİBİ</h3>
       <p>Ambulans Personeli<br>Algoritmalar & Dozlar</p>
     </div>
@@ -727,8 +826,10 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
 <div class="app" id="appKKM">
   <div class="app-header header-kkm">
     <div class="header-inner">
-      <div class="header-icon"><i class="fas fa-headset"></i></div>
+      <div class="header-icon">📡</div>
       <div><div class="header-title">KKM | ŞANLIURFA 112</div><div class="header-badge">📡 Komuta Kontrol Merkezi</div></div>
+      <button class="day-toggle-btn" onclick="showHelp('kkm')" title="Yardım" style="margin-left:auto;">❓</button>
+      <button class="day-toggle-btn" id="dayToggleBtnKkm" onclick="toggleDayMode()" title="Gündüz/Gece Modu">🌙</button>
     </div>
   </div>
   <div class="search-bar">
@@ -788,7 +889,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     </div>
 
     <!-- VATANDAŞ TELEFON MÜDAHALELERİ -->
-    <div class="sec"><i class="fas fa-person-circle-exclamation"></i> VATANDAŞA TELEFON MÜDAHALESİ</div>
+    <div class="sec sec-yellow"><i class="fas fa-person-circle-exclamation"></i> VATANDAŞA TELEFON MÜDAHALESİ</div>
     <div style="background:rgba(234,179,8,0.06);border:1px solid rgba(234,179,8,0.2);border-radius:10px;padding:8px 10px;margin-bottom:8px;font-size:0.58rem;color:var(--muted);">
       💡 Ambulans gelene kadar vatandaşa telefon üzerinden verilecek adım adım talimatlar
     </div>
@@ -835,7 +936,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     </div>
 
     <!-- TRİYAJ -->
-    <div class="sec"><i class="fas fa-chart-simple"></i> TRİYAJ KODLARI</div>
+    <div class="sec sec-red"><i class="fas fa-chart-simple"></i> TRİYAJ KODLARI</div>
     <div class="triyaj-bar">
       <div class="triyaj-item t-red" onclick="showKKM('triyajKirmizi')"><span class="t-icon">🔴</span><div class="t-label">KIRMIZI</div><div class="t-name">1. Öncelik</div></div>
       <div class="triyaj-item t-yellow" onclick="showKKM('triyajSari')"><span class="t-icon">🟡</span><div class="t-label">SARI</div><div class="t-name">2. Öncelik</div></div>
@@ -959,11 +1060,11 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
 
   </div>
   <div class="bottom-nav">
-    <div class="nav-item active-kkm" onclick="navKKM('cagri',this)"><i class="fas fa-phone-alt"></i><span>Çağrı</span></div>
-    <div class="nav-item" onclick="navKKM('vatandas',this)"><i class="fas fa-person"></i><span>Vatandaş</span></div>
-    <div class="nav-item" onclick="navKKM('harita',this)"><i class="fas fa-map"></i><span>Harita</span></div>
-    <div class="nav-item" onclick="navKKM('vaka',this)"><i class="fas fa-clipboard-list"></i><span>Vaka</span></div>
-    <div class="nav-item" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Çıkış</span></div>
+    <div class="nav-item active-kkm" onclick="navKKM('cagri',this)"><span class="nav-emoji">📞</span><span>Çağrı</span></div>
+    <div class="nav-item" onclick="navKKM('vatandas',this)"><span class="nav-emoji">🧍</span><span>Vatandaş</span></div>
+    <div class="nav-item" onclick="navKKM('harita',this)"><span class="nav-emoji">🗺️</span><span>Harita</span></div>
+    <div class="nav-item" onclick="navKKM('vaka',this)"><span class="nav-emoji">📋</span><span>Vaka</span></div>
+    <div class="nav-item" onclick="logout()"><span class="nav-emoji">🚪</span><span>Çıkış</span></div>
   </div>
 </div>
 
@@ -972,10 +1073,12 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
 <div class="app" id="appSaha">
   <div class="app-header header-saha">
     <div class="header-inner">
-      <div class="header-icon"><i class="fas fa-truck-medical"></i></div>
+      <div class="header-icon">🚑</div>
       <div><div class="header-title">SAHA EKİBİ | ŞANLIURFA</div><div class="header-badge">⚡ Detaylı Algoritmalar | AHA/ERC 2025</div></div>
       <div class="header-lights" style="gap:8px;">
         <button class="lang-btn" id="langBtnSaha" onclick="toggleLang()">EN</button>
+        <button class="day-toggle-btn" onclick="showHelp('saha')" title="Yardım">❓</button>
+        <button class="day-toggle-btn" id="dayToggleBtn" onclick="toggleDayMode()" title="Gündüz/Gece Modu">🌙</button>
         <button class="saha-exit-btn" onclick="sahaLogout()" title="Çıkış">
           <i class="fas fa-right-from-bracket"></i>
         </button>
@@ -991,7 +1094,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
 
   <div class="algo-finder" id="algoFinder">
     <div class="algo-finder-header" onclick="toggleAlgoFinder()">
-      <span>⚡ Hızlı Algoritma Bulucu</span>
+      <span class="algo-finder-text">⚡ Hızlı Algoritma Bulucu</span>
       <i class="fas fa-chevron-down" id="algoFinderChevron"></i>
     </div>
     <div class="algo-finder-body" id="algoFinderBody" style="display:none;">
@@ -1026,7 +1129,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     </div>
 
     <!-- KARDİYAK ALGORİTMALAR -->
-    <div class="sec"><i class="fas fa-heart-circle-bolt"></i> KARDİYAK ACİLLER</div>
+    <div class="sec sec-red"><i class="fas fa-heart-circle-bolt"></i> KARDİYAK ACİLLER</div>
     <div class="card-grid">
       <div class="algo-card c-red" onclick="showAlgo('arrest')"><div class="card-badge" style="background:var(--red);">ARREST</div><div class="card-icon">💔</div><h3>KARDİYAK ARREST</h3><p>VF/VT/Asistoli/PEA — AHA 2025</p></div>
       <div class="algo-card c-orange" onclick="showAlgo('aks')"><div class="card-badge" style="background:var(--orange);">STEMI</div><div class="card-icon">🫀</div><h3>AKS / STEMI</h3><p>Aspirin, Nitrat, Morfin, PCI</p></div>
@@ -1038,7 +1141,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     </div>
 
     <!-- KARDİYAK RİTİMLER -->
-    <div class="sec"><i class="fas fa-wave-square"></i> KARDİYAK RİTİMLER — EKG (Gerçek Zamanlı)</div>
+    <div class="sec sec-red"><i class="fas fa-wave-square"></i> KARDİYAK RİTİMLER — EKG (Gerçek Zamanlı)</div>
     <div class="rhythm-cats" id="rhythmCats">
       <button class="r-cat r-cat-active" onclick="filterRhythm('all',this)">Tümü</button>
       <button class="r-cat" onclick="filterRhythm('normal',this)">✅ Normal</button>
@@ -1053,7 +1156,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     </div>
 
     <!-- SOLUNUM ACİLLERİ -->
-    <div class="sec"><i class="fas fa-lungs"></i> SOLUNUM ACİLLERİ</div>
+    <div class="sec sec-cyan"><i class="fas fa-lungs"></i> SOLUNUM ACİLLERİ</div>
     <div class="card-grid">
       <div class="algo-card c-cyan" onclick="showAlgo('pnomtoraks')"><div class="card-badge" style="background:var(--cyan);">PNÖMO</div><div class="card-icon">🫁</div><h3>PNÖMOTORAKS</h3><p>İğne dekompresyon, tüp indikasyon</p></div>
       <div class="algo-card c-blue" onclick="showAlgo('koah')"><div class="card-badge" style="background:var(--blue);">KOAH</div><div class="card-icon">💨</div><h3>KOAH / ASTIM</h3><p>Salbutamol, İpratropium, NIMV</p></div>
@@ -1065,7 +1168,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     </div>
 
     <!-- NÖROLOJİK ACİLLER -->
-    <div class="sec"><i class="fas fa-brain"></i> NÖROLOJİK ACİLLER</div>
+    <div class="sec sec-purple"><i class="fas fa-brain"></i> NÖROLOJİK ACİLLER</div>
     <div class="card-grid">
       <div class="algo-card c-purple" onclick="showAlgo('inme')"><div class="card-badge" style="background:var(--purple);">FAST</div><div class="card-icon">🧠</div><h3>İNME (STROKE)</h3><p>FAST, altın pencere, LVO, tPA</p></div>
       <div class="algo-card c-blue" onclick="showAlgo('nobet')"><div class="card-badge" style="background:var(--blue);">NÖBET</div><div class="card-icon">⚡</div><h3>NÖBET / STATUS</h3><p>Midazolam, Diazepam, Status EP</p></div>
@@ -1076,7 +1179,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     </div>
 
     <!-- DİĞER ACİLLER -->
-    <div class="sec"><i class="fas fa-kit-medical"></i> DİĞER ACİLLER</div>
+    <div class="sec sec-orange"><i class="fas fa-kit-medical"></i> DİĞER ACİLLER</div>
     <div class="card-grid">
       <div class="algo-card c-red" onclick="showAlgo('travma')"><div class="card-badge" style="background:var(--red);">XABCDE</div><div class="card-icon">🚗</div><h3>MAJOR TRAVMA</h3><p>XABCDE, Turnike, Kristaloid</p></div>
       <div class="algo-card c-green" onclick="showAlgo('anafilaksi')"><div class="card-badge" style="background:var(--green);">ADRENALİN</div><div class="card-icon">🆘</div><h3>ANAFİLAKSİ</h3><p>Adrenalin IM, O2, Sıvı, Pozisyon</p></div>
@@ -1093,7 +1196,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     </div>
 
     <!-- POST-ARREST & DOLAŞIM -->
-    <div class="sec"><i class="fas fa-heart-pulse"></i> POST-ARREST & DOLAŞIM</div>
+    <div class="sec sec-green2"><i class="fas fa-heart-pulse"></i> POST-ARREST & DOLAŞIM</div>
     <div class="card-grid">
       <div class="algo-card c-green" onclick="showAlgo('rosc')"><div class="card-badge" style="background:var(--green);">ROSC</div><div class="card-icon">💚</div><h3>ROSC SONRASI BAKIM</h3><p>TTM, O2 hedefi, STEMI, vazopresör</p></div>
       <div class="algo-card c-purple" onclick="showAlgo('tamponad')"><div class="card-badge" style="background:var(--purple);">TAMPONAD</div><div class="card-icon">💊</div><h3>KARDİYAK TAMPONAD</h3><p>Beck triadı, PEA, perikardiyo</p></div>
@@ -1102,7 +1205,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     </div>
 
     <!-- OBSTETRİK & YENİDOĞAN -->
-    <div class="sec"><i class="fas fa-baby-carriage"></i> OBSTETRİK & YENİDOĞAN</div>
+    <div class="sec sec-pink"><i class="fas fa-baby-carriage"></i> OBSTETRİK & YENİDOĞAN</div>
     <div class="card-grid">
       <div class="algo-card c-pink" onclick="showAlgo('dogumKomplikasyonlari')"><div class="card-badge" style="background:#ec4899;">DY-02</div><div class="card-icon">🤱</div><h3>DOĞUM KOMPLİKASYONLARI</h3><p>Kordon sarkması, makat/ekstremite geliş</p></div>
       <div class="algo-card c-rose" onclick="showAlgo('postpartumKanama')"><div class="card-badge" style="background:#fb7185;">DY-03</div><div class="card-icon">🩸</div><h3>POSTPARTUM KANAMA</h3><p>Karbetosin, uterus masajı</p></div>
@@ -1113,7 +1216,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     </div>
 
     <!-- PEDİATRİK -->
-    <div class="sec"><i class="fas fa-baby"></i> PEDİATRİK ACİLLER</div>
+    <div class="sec sec-indigo"><i class="fas fa-baby"></i> PEDİATRİK ACİLLER</div>
     <div class="card-grid">
       <div class="algo-card c-red" onclick="showAlgo('pediatrikArrest')"><div class="card-badge" style="background:var(--red);">Ç-12</div><div class="card-icon">👶</div><h3>PED. ARREST YÖNETİMİ</h3><p>5 nefes önce, 15:2 KPR</p></div>
       <div class="algo-card c-red" onclick="showAlgo('pedSoklanirRitim')"><div class="card-badge" style="background:var(--red);">Ç-13</div><div class="card-icon">⚡</div><h3>PED. ŞOKLANIR RİTİM</h3><p>VF/nVT — 2J/kg ilk şok</p></div>
@@ -1147,7 +1250,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     </div>
 
     <!-- METABOLİK -->
-    <div class="sec"><i class="fas fa-user-doctor"></i> METABOLİK & DİĞER ACİLLER</div>
+    <div class="sec sec-yellow"><i class="fas fa-user-doctor"></i> METABOLİK & DİĞER ACİLLER</div>
     <div class="card-grid">
       <div class="algo-card c-yellow" onclick="showAlgo('dka')"><div class="card-badge" style="background:var(--yellow);color:black;">DKA</div><div class="card-icon">🍬</div><h3>DİYABETİK KETOASİDOZ</h3><p>KŞ yüksek, asidoz, sıvı, K+</p></div>
       <div class="algo-card c-blue" onclick="showAlgo('bogulma')"><div class="card-badge" style="background:var(--blue);">BOĞULMA</div><div class="card-icon">🌊</div><h3>BOĞULMA / DROWNING</h3><p>5 kurtarma solunumu, hipotermi</p></div>
@@ -1158,7 +1261,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     </div>
 
     <!-- İLAÇ DOZLARI -->
-    <div class="sec"><i class="fas fa-syringe"></i> İLAÇ DOZLARI (KİLOYA GÖRE)</div>
+    <div class="sec sec-teal"><i class="fas fa-syringe"></i> İLAÇ DOZLARI (KİLOYA GÖRE)</div>
     <div class="info-box">
       <div class="dose-header">
         <span>⚖️ Kilo:</span>
@@ -1169,7 +1272,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     </div>
 
     <!-- GÖRSEL ARAÇLAR -->
-    <div class="sec" id="secGorsel"><i class="fas fa-image"></i> GÖRSEL ARAÇLAR</div>
+    <div class="sec sec-indigo" id="secGorsel"><i class="fas fa-image"></i> GÖRSEL ARAÇLAR</div>
     <div class="card-grid">
       <div class="algo-card c-orange" onclick="showYanikCalc()"><div class="card-icon">🔥</div><h3>YANIK % HESAPLAYICI</h3><p>Vücut diyagramı — 9'lar kuralı, tıkla-hesapla</p></div>
       <div class="algo-card c-green" onclick="showInjectionSites()"><div class="card-icon">💉</div><h3>ENJEKSİYON BÖLGELERİ</h3><p>IM bölgeler — Adrenalin, Midazolam vb.</p></div>
@@ -1578,13 +1681,13 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
 
   </div>
   <div class="bottom-nav">
-    <div class="nav-item active-saha" onclick="navSaha('aciller',this)"><i class="fas fa-truck-medical"></i><span data-tr="Aciller" data-en="Emergencies">Aciller</span></div>
-    <div class="nav-item" onclick="navSaha('ritim',this)"><i class="fas fa-heart"></i><span data-tr="Ritim" data-en="Rhythm">Ritim</span></div>
-    <div class="nav-item" onclick="navSaha('hasta',this)"><i class="fas fa-stethoscope"></i><span data-tr="Hasta" data-en="Patient">Hasta</span></div>
-    <div class="nav-item" onclick="navSaha('vakarim',this)"><i class="fas fa-truck-medical"></i><span data-tr="Vaka" data-en="Case">Vaka</span></div>
-    <div class="nav-item" onclick="navSaha('ekip',this)"><i class="fas fa-satellite-dish"></i><span data-tr="Ekip" data-en="Team">Ekip</span></div>
-    <div class="nav-item" onclick="navSaha('sesli',this)"><i class="fas fa-bell"></i><span data-tr="Uyarı" data-en="Alert">Uyarı</span></div>
-    <div class="nav-item" onclick="navSaha('quiz',this)"><i class="fas fa-graduation-cap"></i><span data-tr="Quiz" data-en="Quiz">Quiz</span></div>
+    <div class="nav-item active-saha" onclick="navSaha('aciller',this)"><span class="nav-emoji">🚑</span><span data-tr="Aciller" data-en="Emergencies">Aciller</span></div>
+    <div class="nav-item" onclick="navSaha('ritim',this)"><span class="nav-emoji">💓</span><span data-tr="Ritim" data-en="Rhythm">Ritim</span></div>
+    <div class="nav-item" onclick="navSaha('hasta',this)"><span class="nav-emoji">🩺</span><span data-tr="Hasta" data-en="Patient">Hasta</span></div>
+    <div class="nav-item" onclick="navSaha('vakarim',this)"><span class="nav-emoji">🚨</span><span data-tr="Vaka" data-en="Case">Vaka</span></div>
+    <div class="nav-item" onclick="navSaha('ekip',this)"><span class="nav-emoji">📡</span><span data-tr="Ekip" data-en="Team">Ekip</span></div>
+    <div class="nav-item" onclick="navSaha('sesli',this)"><span class="nav-emoji">🔔</span><span data-tr="Uyarı" data-en="Alert">Uyarı</span></div>
+    <div class="nav-item" onclick="navSaha('quiz',this)"><span class="nav-emoji">🎓</span><span data-tr="Quiz" data-en="Quiz">Quiz</span></div>
   </div>
 </div>
 
@@ -1595,6 +1698,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     <div class="modal-handle"></div>
     <div class="modal-header">
       <span class="modal-title" id="modalTitle"></span>
+      <button class="modal-tts-btn" id="modalTtsBtn" onclick="toggleModalTTS()" title="Sesli Oku"><i class="fas fa-volume-high"></i></button>
       <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
     </div>
     <div id="modalContent"></div>
@@ -1623,6 +1727,46 @@ const stations = [
 ];
 
 // ======= STARS =======
+// ======= YARDIM EKRANI =======
+function showHelp(mode){
+  if(mode==='kkm'){
+    openModal('❓ NASIL KULLANILIR — KKM', `
+      <div class="m-box info"><strong>📞 Yeni Çağrı:</strong> Üstteki formu doldurup "ÇAĞRIYI İŞLEME AL" ile kayıt altına alın.</div>
+      <div class="m-box info"><strong>👤 Vatandaş Müdahalesi:</strong> Ambulans gelene kadar telefondan vatandaşa okuyabileceğiniz adım adım talimatlar (KPR, Heimlich, kanama kontrolü vb.)</div>
+      <div class="m-box info"><strong>📄 Protokoller:</strong> SAKOMA, KBRN, kitlesel kaza, kurum koordinasyonu gibi KKM'e özel prosedürler.</div>
+      <div class="m-box info"><strong>🗺️ Harita:</strong> İstasyonların offline SVG haritası — dokunarak detay ve yol tarifi alın.</div>
+      <div class="m-box info"><strong>📊 Vaka Kayıt:</strong> Vakaları cihazda kaydedin, CSV/Excel olarak dışa aktarın.</div>
+      <div class="m-box success">🌙 Sağ üstteki ay ikonuyla gündüz/gece modu arasında geçiş yapabilirsiniz.</div>
+    `);
+  } else {
+    openModal('❓ NASIL KULLANILIR — SAHA', `
+      <div class="m-box info"><strong>⚡ Hızlı Algoritma Bulucu:</strong> Kategoriye göre (Kardiyak/Solunum/Pediatri vb.) filtreleyerek algoritmaya tek dokunuşla ulaşın.</div>
+      <div class="m-box info"><strong>📋 Algoritma Kartları:</strong> Herhangi birine dokunun — resmi akış şeması (kutu+ok) olarak açılır. Modalın üstündeki 🔊 ile sesli dinleyebilirsiniz.</div>
+      <div class="m-box info"><strong>💓 CPR Sayacı:</strong> En üstte — başlat/durdur/sıfırla, 2 dakikalık döngüleri ve adrenalin hatırlatmasını takip eder.</div>
+      <div class="m-box info"><strong>📈 Ritimler:</strong> Gerçek zamanlı EKG animasyonları — dokununca ilgili algoritmayı açar.</div>
+      <div class="m-box info"><strong>💊 İlaç Dozları:</strong> Kilo girip HESAPLA'ya basın — tüm dozlar otomatik hesaplanır.</div>
+      <div class="m-box info"><strong>🔥💉👁️🦴⚡ Görsel Araçlar:</strong> Yanık % hesaplayıcı, enjeksiyon/IO bölgeleri, pupil değerlendirme, defibrilasyon ped yerleşimi — dokunarak kullanın.</div>
+      <div class="m-box info"><strong>🧑‍⚕️ Hasta Değerlendirme:</strong> ABCDE, Vital, GKS, OPQRST ve Akciğer sesleri sekmeleri — rapor oluşturabilirsiniz.</div>
+      <div class="m-box info"><strong>📡 Ekip Durum:</strong> Durumunuzu bildirin, diğer ekiplerin durumunu görün, mesajlaşın.</div>
+      <div class="m-box success">🌙 Sağ üstteki ay ikonuyla gündüz/gece modu arasında geçiş yapabilirsiniz — güneş altında okunabilirliği artırır.</div>
+    `);
+  }
+}
+
+function applyDayMode(isDay){
+  document.body.classList.toggle('day-mode', isDay);
+  document.querySelectorAll('#dayToggleBtn, #dayToggleBtnKkm').forEach(b=>{ if(b) b.textContent = isDay ? '☀️' : '🌙'; });
+  try{ localStorage.setItem('urfa112_daymode', isDay ? '1':'0'); }catch(e){}
+}
+function toggleDayMode(){
+  applyDayMode(!document.body.classList.contains('day-mode'));
+}
+(function initDayMode(){
+  let saved = '0';
+  try{ saved = localStorage.getItem('urfa112_daymode') || '0'; }catch(e){}
+  if(saved === '1') applyDayMode(true);
+})();
+
 function createStars(){
   const bg=document.getElementById('splashBg');
   for(let i=0;i<18;i++){
@@ -1953,6 +2097,7 @@ function initECG() {
   ecgRhythms.forEach(rhythm => {
     const card = document.createElement('div');
     card.className = 'rhythm-card';
+    card.setAttribute('data-rid', rhythm.id);
     const algoKey = rhythm.id && algoData[rhythm.id] ? rhythm.id : rhythm.algo;
     card.onclick = () => showAlgo(algoKey);
 
@@ -1975,7 +2120,6 @@ function initECG() {
         const renderer = new ECGRenderer(canvas, rhythm);
         ecgRenderers.push(renderer);
       }
-      if(card) card.setAttribute('data-rid', rhythm.id);
     }, 50 + ecgRhythms.indexOf(rhythm) * 80);
   });
 }
@@ -2122,8 +2266,45 @@ function sahaSearchFn(v){
 
 // ======= MODAL =======
 function openModal(title,html){document.getElementById('modalTitle').innerHTML=title;document.getElementById('modalContent').innerHTML=html;document.getElementById('modalOverlay').style.display='flex';}
-function closeModal(){document.getElementById('modalOverlay').style.display='none';}
+function closeModal(){document.getElementById('modalOverlay').style.display='none';stopModalTTS();}
 function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
+
+// ======= SESLİ OKUMA (TTS) =======
+let ttsUtterance = null;
+function extractSpeakableText(){
+  const title = document.getElementById('modalTitle')?.textContent || '';
+  const content = document.getElementById('modalContent');
+  if(!content) return title;
+  // Klonla ve gereksiz/gürültülü öğeleri (SVG, script, buton) çıkar
+  const clone = content.cloneNode(true);
+  clone.querySelectorAll('svg, script, button, .flow-arrow').forEach(el=>el.remove());
+  let text = clone.innerText || clone.textContent || '';
+  text = text.replace(/\s+/g,' ').trim();
+  return title + '. ' + text;
+}
+function toggleModalTTS(){
+  if(!('speechSynthesis' in window)){ alert('Tarayıcınız sesli okumayı desteklemiyor.'); return; }
+  const btn = document.getElementById('modalTtsBtn');
+  if(window.speechSynthesis.speaking){
+    stopModalTTS();
+    return;
+  }
+  const text = extractSpeakableText();
+  ttsUtterance = new SpeechSynthesisUtterance(text);
+  ttsUtterance.lang = 'tr-TR';
+  ttsUtterance.rate = 0.95;
+  ttsUtterance.pitch = 1.0;
+  ttsUtterance.onend = () => { if(btn) btn.classList.remove('speaking'); };
+  ttsUtterance.onerror = () => { if(btn) btn.classList.remove('speaking'); };
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(ttsUtterance);
+  if(btn) btn.classList.add('speaking');
+}
+function stopModalTTS(){
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+  const btn = document.getElementById('modalTtsBtn');
+  if(btn) btn.classList.remove('speaking');
+}
 
 // ======= KKM MODALS =======
 const kkmData={

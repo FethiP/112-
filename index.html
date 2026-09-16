@@ -516,8 +516,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Ar
 .vital-label{font-size:0.45rem;color:var(--muted);margin-top:3px;}
 .vital-alert{border-radius:8px;padding:6px 10px;margin-bottom:4px;font-size:0.58rem;}
 .vital-alert.warn{background:rgba(234,179,8,0.12);border-left:3px solid #eab308;}
+.vital-alert.warn::before{content:'▲ ';font-weight:800;}
 .vital-alert.crit{background:rgba(220,38,38,0.12);border-left:3px solid #ef4444;}
+.vital-alert.crit::before{content:'■ ';font-weight:800;}
 .vital-alert.ok{background:rgba(22,163,74,0.12);border-left:3px solid #22c55e;}
+.vital-alert.ok::before{content:'● ';font-weight:800;}
 .gks-section{margin-bottom:10px;}.gks-title{font-size:0.6rem;font-weight:700;color:var(--yellow);margin-bottom:6px;}
 .gks-opts{display:flex;flex-direction:column;gap:4px;}
 .gks-opt{display:flex;align-items:center;gap:7px;font-size:0.58rem;background:rgba(255,255,255,0.03);border-radius:8px;padding:5px 8px;cursor:pointer;border:1px solid transparent;}
@@ -650,6 +653,7 @@ body.day-mode .modal-close,body.day-mode .modal-tts-btn{background:#e5e7eb;}
 .fn-warning{background:linear-gradient(135deg,#7c2d12 0%,#3a0f04 100%);border-color:#fb923c;color:#fed7aa;}
 .fn-info{background:rgba(46,204,113,0.10);border-color:rgba(46,204,113,0.3);color:#a8e0bc;font-size:0.55rem;font-weight:400;}
 .fn-goto{background:var(--hivis);border-color:var(--hivis-dark);color:#1a1200;text-align:center;font-weight:800;}
+.fn-goto::before{content:'➜ ';}
 .fn-question{background:linear-gradient(135deg,#374151 0%,#1f2937 100%);border-color:#6b7280;color:#e5e7eb;text-align:center;font-weight:700;}
 
 .flow-arrow{font-size:1.2rem;color:#334155;text-align:center;line-height:1;padding:2px 0;}
@@ -657,6 +661,8 @@ body.day-mode .modal-close,body.day-mode .modal-tts-btn{background:#e5e7eb;}
 .flow-branch-label{font-size:0.52rem;font-weight:800;text-align:center;padding:4px;border-radius:7px;margin-bottom:4px;letter-spacing:0.3px;}
 .fb-yes{background:rgba(34,197,94,0.12);color:#4ade80;border:1px solid rgba(34,197,94,0.3);}
 .fb-no{background:rgba(239,68,68,0.12);color:#fca5a5;border:1px solid rgba(239,68,68,0.3);}
+.fb-yes::before{content:'✓ ';}
+.fb-no::before{content:'✕ ';}
 
 .aha-badge-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;}
 .aha-badge{font-size:0.5rem;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:0.3px;}
@@ -1160,6 +1166,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
     <div class="card-grid">
       <div class="algo-card c-cyan" onclick="showAlgo('pnomtoraks')"><div class="card-badge" style="background:var(--cyan);">PNÖMO</div><div class="card-icon">🫁</div><h3>PNÖMOTORAKS</h3><p>İğne dekompresyon, tüp indikasyon</p></div>
       <div class="algo-card c-blue" onclick="showAlgo('koah')"><div class="card-badge" style="background:var(--blue);">KOAH</div><div class="card-icon">💨</div><h3>KOAH / ASTIM</h3><p>Salbutamol, İpratropium, NIMV</p></div>
+      <div class="algo-card c-cyan" onclick="showAlgo('astimYetiskin')"><div class="card-badge" style="background:var(--cyan);">Y-05</div><div class="card-icon">💨</div><h3>ASTIM</h3><p>Salbutamol+İpratropiyum, MgSO4</p></div>
       <div class="algo-card c-purple" onclick="showAlgo('havaYoluTikanikligiYetiskin')"><div class="card-badge" style="background:var(--purple);">HAVA</div><div class="card-icon">🫂</div><h3>HAV. YOLU TIKANMA</h3><p>Heimlich, Entübasyon kriterleri</p></div>
       <div class="algo-card c-teal" onclick="showAlgo('sepsis')"><div class="card-badge" style="background:#14b8a6;">SEPSIS</div><div class="card-icon">🦠</div><h3>SEPTİK ŞOK</h3><p>qSOFA, Kristaloid bolus, Vazopresör</p></div>
       <div class="algo-card c-orange" onclick="showAlgo('pulmOdem')"><div class="card-badge" style="background:var(--orange);">ÖD</div><div class="card-icon">🫁</div><h3>PULMONER ÖDEM</h3><p>CPAP, NTG, Furosemid, NIMV</p></div>
@@ -1174,6 +1181,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
       <div class="algo-card c-blue" onclick="showAlgo('nobet')"><div class="card-badge" style="background:var(--blue);">NÖBET</div><div class="card-icon">⚡</div><h3>NÖBET / STATUS</h3><p>Midazolam, Diazepam, Status EP</p></div>
       <div class="algo-card c-orange" onclick="showAlgo('kafaTravma')"><div class="card-badge" style="background:var(--orange);">GKS</div><div class="card-icon">🪖</div><h3>KAFA TRAVMASI</h3><p>GKS, Pupil, ICP yönetimi</p></div>
       <div class="algo-card c-gray" onclick="showAlgo('senkop')"><div class="card-badge" style="background:#475569;">SENKOP</div><div class="card-icon">😵</div><h3>SENKOP / BAYGINLIK</h3><p>Neden araştır, EKG, KŞ ölç</p></div>
+      <div class="algo-card c-purple" onclick="showAlgo('bilincDegisikligiYetiskin')"><div class="card-badge" style="background:var(--purple);">Y-16</div><div class="card-icon">🧠</div><h3>BİLİNÇ DEĞİŞİKLİĞİ</h3><p>7 nedene göre yönlendirme</p></div>
       <div class="algo-card c-cyan" onclick="showAlgo('vertigo')"><div class="card-badge" style="background:var(--cyan);">VERTİGO</div><div class="card-icon">😵‍💫</div><h3>VERTİGO</h3><p>Santral/periferik ayrımı, BEFAST</p></div>
       <div class="algo-card c-yellow" onclick="showAlgo('ajiteHasta')"><div class="card-badge" style="background:var(--yellow);color:black;">AJİTE</div><div class="card-icon">😡</div><h3>AJİTE HASTAYA YAKLAŞIM</h3><p>Yatıştırma, sedasyon, güvenlik</p></div>
     </div>
@@ -1188,6 +1196,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
       <div class="algo-card c-pink" onclick="showAlgo('obstetrik')"><div class="card-badge" style="background:#ec4899;">OBSTETRİK</div><div class="card-icon">🤰</div><h3>OBSTETRİK ACİL</h3><p>Eklampsi, Acil doğum, Apgar</p></div>
       <div class="algo-card c-teal" onclick="showAlgo('zehirlenme')"><div class="card-badge" style="background:#14b8a6;">ZEHİR</div><div class="card-icon">☠️</div><h3>ZEHİRLENME</h3><p>OP, CO, Alkol, Antidotlar</p></div>
       <div class="algo-card c-cyan" onclick="showAlgo('hipotermia')"><div class="card-badge" style="background:var(--cyan);">HİPO</div><div class="card-icon">🥶</div><h3>HİPOTERMİ</h3><p>Isınma, Arrest yönetimi</p></div>
+      <div class="algo-card c-orange" onclick="showAlgo('hipertermiYetiskin')"><div class="card-badge" style="background:var(--orange);">Y-23</div><div class="card-icon">🌡️</div><h3>HİPERTERMİ</h3><p>Kramp/Stres/Çarpması ayrımı</p></div>
       <div class="algo-card c-cyan" onclick="showAlgo('hipotermiArrestYetiskin')"><div class="card-badge" style="background:var(--cyan);">Y-25</div><div class="card-icon">🥶</div><h3>HİPOTERMİDE ARREST</h3><p>60sn nabız kontrolü, ECMO düşün</p></div>
       <div class="algo-card c-gray" onclick="showAlgo('crush')"><div class="card-badge" style="background:#475569;">CRUSH</div><div class="card-icon">🏗️</div><h3>CRUSH SENDROMU</h3><p>Sıvı, Sodyum bikarbonat, Furosemid</p></div>
       <div class="algo-card c-indigo" onclick="showAlgo('isirmaSokmaYetiskin')"><div class="card-badge" style="background:#818cf8;">ISIRIK</div><div class="card-icon">🐍</div><h3>ISIRMA VE SOKMALAR</h3><p>Kara/deniz canlısı, temizlik, izlem</p></div>
@@ -2949,6 +2958,20 @@ const algoData={
     </ul>
     <div class="m-box warning">⚠️ Hipotansiyon + Hipoksi sekonder hasarı artırır!</div>
   `},
+  bilincDegisikligiYetiskin:{title:'🧠 BİLİNÇ DEĞİŞİKLİĞİ (SB-ASH-Y-16)',html:`
+    <ul class="step-list">
+      <li>Acil olgu yönetimini uygula, solunumu ve dolaşımı destekle</li>
+      <li>Vital bulguları ve EKG'yi değerlendir. Kan şekerini ölç</li>
+      <li>Nedenleri araştır: Travma, İnme, Nöbet, Zehirlenme, Dolaşımsal Nedenler, Hipoksi, Hipo/Hiperglisemi</li>
+    </ul>
+    <div class="m-box diagnosis"><strong>Travma</strong> → Travmalı Hastada Acil Olgu Yönetimi algoritmasına git</div>
+    <div class="m-box diagnosis"><strong>İnme</strong> → İnme/SVO algoritmasına git</div>
+    <div class="m-box diagnosis"><strong>Nöbet</strong> → Nöbet/Konvülziyon algoritmasına git</div>
+    <div class="m-box diagnosis"><strong>Zehirlenme</strong> → Zehirlenmelere Genel Yaklaşım algoritmasına git</div>
+    <div class="m-box diagnosis"><strong>Dolaşımsal Nedenler</strong> → Ritim analizi yap ve ilgili ritim algoritmasına git</div>
+    <div class="m-box diagnosis"><strong>Hipoksi</strong> → Oksijenizasyon ve ventilasyonu sağla</div>
+    <div class="m-box diagnosis"><strong>Hipo/Hiperglisemi</strong> → Diyabetik Aciller algoritmasına git</div>
+  `},
   senkop:{title:'😵 SENKOP / BAYGINLIK',html:`
     <ul class="step-list">
       <li>Lateral dekübitus</li><li>Vital, KŞ, SpO2</li>
@@ -2965,6 +2988,20 @@ const algoData={
       <li>Alternatif: 4-5. İKA ön aksiller hat</li>
     </ul>
     <div class="m-box info">💡 Açık pnömotoraks: 3 tarafı yapıştırmalı örtü (tek yönlü valf)</div>
+  `},
+  astimYetiskin:{title:'💨 ASTIM (SB-ASH-Y-05)',html:`
+    <div class="m-box diagnosis"><strong>Etiyolojide anafilaksiyi göz önünde bulundur!</strong></div>
+    <ul class="step-list">
+      <li>Acil olgu yönetimini uygula, hastayı rahat ettiği (tercihen oturur) pozisyonda tut</li>
+      <li>SpO2 &gt;%93 olacak şekilde titre ederek oksijen ver, gerekirse solunumu PBV ile destekle</li>
+      <li>Damar yolu aç ve %0,9 NaCl (DAKŞ)</li>
+      <li>Atağın derecesini belirle</li>
+      <li><strong>Hafif-Orta Atak:</strong> Salbutamol 4-8 puf inhaler veya 2,5-5mg nebül uygula</li>
+      <li>20dk sonra düzelme yoksa ikinci Salbutamol uygulamasıyla birlikte İpratropiyum Bromür 500mcg inhaler/nebül kullan (her iki ilaç da 20dk arayla tekrarlanabilir, maks 3 kez). METİL PREDNİZOLON 40mg IV</li>
+      <li><strong>Ağır Atak:</strong> Salbutamol 2,5-5mg nebülle birlikte İpratropiyum Bromür 500mcg nebül uygula</li>
+      <li>20dk sonra düzelme yoksa tekrarla (Düzelme olmazsa her iki ilaç da 20dk arayla tekrarlanabilir, maks 3 kez). METİL PREDNİZOLON 40mg IV</li>
+      <li>Ölümcül astım atağında (bilinç bulanıklığı ve sessiz toraks gelişmişse) erken ileri hava yolu uygulaması için hazırlan, MAGNEZYUM SÜLFAT 1-2g IV %0,9 NaCl içinde 20-30 dakikada uygulanabilir</li>
+    </ul>
   `},
   koah:{title:'💨 KOAH / ASTIM ACİLİ',html:`
     <ul class="step-list">
@@ -3080,6 +3117,27 @@ const algoData={
       <li>SKKM/ÇM ile görüşerek ECMO merkezine yönlendirmeyi düşün</li>
     </ul>
     <div class="m-box warning">⚠️ Hipotermiye bağlı kardiyak arrestte, ilk defibrilasyon girişiminin başarısız olması durumunda vücut sıcaklığı 30°C'ye ulaşıncaya kadar defibrilasyon ertelenmelidir!</div>
+  `},
+  hipertermiYetiskin:{title:'🌡️ HİPERTERMİ (SB-ASH-Y-23)',html:`
+    <div class="m-box diagnosis"><strong>Acil olgu yönetimini uygula, ardından şiddetine göre yönlendir</strong></div>
+    <div class="m-section"><div class="m-section-title">🟢 Isı Kramplı</div>
+    <ul class="step-list">
+      <li>Kas kramplı, normal ya da hafif artmış vücut ısısı, terleme</li>
+      <li>Oral sıvı replasmanı, dinlenme</li>
+    </ul></div>
+    <div class="m-section"><div class="m-section-title">🟡 Isı Stresi</div>
+    <ul class="step-list">
+      <li>Isı kramplarına ek olarak normal ya da artmış vücut ısısı (&lt;40°C), bulantı, kusma, baş ağrısı, halsizlik, ortostatik hipotansiyon</li>
+      <li>Damar yolu aç, ortam ısısını düşür</li>
+      <li>1000-2000mL %0,9 NaCl bolus başla</li>
+    </ul></div>
+    <div class="m-section"><div class="m-section-title">🔴 Isı Çarpması</div>
+    <ul class="step-list">
+      <li>Isı stresine ek olarak &gt;40°C vücut ısısı ve bilinç bulanıklığı</li>
+      <li>Vital bulguları ve kan şekerini değerlendir, damar yolu aç, monitörize et</li>
+      <li>%0,9 NaCl 1000mL bolus başla</li>
+      <li>Vücut ısısı &lt;39°C olacak şekilde hastayı serin ortama al, kıyafetlerini çıkar, ambulans kabinini soğut, pasif eksternal soğutma uygula</li>
+    </ul></div>
   `},
   hipotermia:{title:'🥶 HİPOTERMİ',html:`
     <ul class="step-list">
@@ -3806,6 +3864,61 @@ function renderAsFlowchart(html){
 // bulursa önce bunu kullanır; yoksa genel otomatik dönüştürücüye düşer.
 // ═══════════════════════════════════════════════════════════════════════
 const PDF_FLOWS = {
+
+  astimYetiskin: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},
+    {t:'fn-warning', txt:`Etiyolojide anafilaksiyi göz önünde bulundur`},{arrow:true},
+    {t:'fn-action', txt:`Hastayı rahat ettiği (tercihen oturur) pozisyonda tut`},{arrow:true},
+    {t:'fn-action', txt:`SpO2 &gt;%93 olacak şekilde titre ederek oksijen ver. Gerekirse solunumu PBV ile destekle`},{arrow:true},
+    {t:'fn-drug', txt:`Damar yolu aç ve %0,9 NaCl (DAKŞ)`},{arrow:true},
+    {branch:[
+      {label:`Hafif - Orta Atak`, cls:'fb-yes', nodes:[
+        {t:'fn-drug', txt:`SALBUTAMOL 4-8 puf inhaler veya 2,5-5mg nebül uygula`},
+        {t:'fn-drug', txt:`20dk sonra düzelme yoksa: SALBUTAMOL + İPRATROPİYUM BROMÜR 500mcg (20dk arayla en fazla 3 kez tekrarlanabilir). METİL PREDNİZOLON 40mg IV`}
+      ]},
+      {label:`Ağır Atak`, cls:'fb-no', nodes:[
+        {t:'fn-drug', txt:`SALBUTAMOL 2,5-5mg nebülle birlikte İPRATROPİYUM BROMÜR 500mcg nebül uygula`},
+        {t:'fn-drug', txt:`20dk sonra düzelme yoksa tekrarla (en fazla 3 kez). METİL PREDNİZOLON 40mg IV`}
+      ]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`Ölümcül astım atağında (bilinç bulanıklığı ve sessiz toraks gelişmişse) erken ileri hava yolu uygulaması için hazırlan. MAGNEZYUM SÜLFAT 1-2g IV %0,9 NaCl içinde 20-30dk'da uygulanabilir`}
+  ],
+
+  hipertermiYetiskin: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
+    {branch:[
+      {label:`Isı Kramplı`, cls:'fb-yes', nodes:[
+        {t:'fn-action', txt:`Kas kramplı, normal ya da hafif artmış vücut ısısı, terleme`},
+        {t:'fn-drug', txt:`Oral sıvı replasmanı, dinlenme`}
+      ]},
+      {label:`Isı Stresi`, cls:'fb-no', nodes:[
+        {t:'fn-action', txt:`Isı kramplarına ek olarak normal/artmış vücut ısısı (&lt;40°C), bulantı, kusma, baş ağrısı, halsizlik, ortostatik hipotansiyon`},
+        {t:'fn-action', txt:`Damar yolu aç, ortam ısısını düşür`},
+        {t:'fn-drug', txt:`1000-2000mL %0,9 NaCl bolus başla`}
+      ]},
+      {label:`Isı Çarpması`, cls:'fb-yes', nodes:[
+        {t:'fn-action', txt:`Isı stresine ek olarak &gt;40°C vücut ısısı ve bilinç bulanıklığı`},
+        {t:'fn-action', txt:`Vital bulguları ve kan şekerini değerlendir, damar yolu aç, monitörize et`},
+        {t:'fn-drug', txt:`%0,9 NaCl 1000mL bolus başla`},
+        {t:'fn-action', txt:`Vücut ısısı &lt;39°C olacak şekilde hastayı serin ortama al, kıyafetlerini çıkar, ambulans kabinini soğut, pasif eksternal soğutma uygula`}
+      ]}
+    ]}
+  ],
+
+  bilincDegisikligiYetiskin: [
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula, solunumu ve dolaşımı destekle`},{arrow:true},
+    {t:'fn-action', txt:`Vital bulguları ve EKG'yi değerlendir. Kan şekerini ölç`},{arrow:true},
+    {t:'fn-question', txt:`Nedenleri araştır`},{arrow:true},
+    {branch:[
+      {label:`Travma`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`TRAVMALI HASTADA ACİL OLGU YÖNETİMİ ALGORİTMASINA GİT`}]},
+      {label:`İnme`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`İNME/SVO ALGORİTMASINA GİT`}]},
+      {label:`Nöbet`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`}]},
+      {label:`Zehirlenme`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`ZEHİRLENMELERE GENEL YAKLAŞIM ALGORİTMASINA GİT`}]},
+      {label:`Dolaşımsal Nedenler`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`RİTİM ANALİZİ VE İLGİLİ ALGORİTMAYA GİT`}]},
+      {label:`Hipoksi`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Oksijenizasyon ve ventilasyonu sağla`}]},
+      {label:`Hipo/Hiperglisemi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`DİYABETİK ACİLLER ALGORİTMASINA GİT`}]}
+    ]}
+  ],
 
   senkop: [
     {t:'fn-action', txt:`Acil olgu yönetimini uygula, lateral dekübitus pozisyonu ver`},{arrow:true},
@@ -5441,6 +5554,7 @@ const AF_DATA = {
   solunum: [
     {l:'🫁 Pnömotoraks',k:'pnomtoraks',c:'af-chip-cyan'},
     {l:'💨 KOAH/Astım',k:'koah',c:'af-chip-blue'},
+    {l:'💨 Astım (Y-05)',k:'astimYetiskin',c:'af-chip-cyan'},
     {l:'🫁 Pulmoner Ödem',k:'pulmOdem',c:'af-chip-orange'},
     {l:'🩸 Pulmoner Emboli',k:'pe',c:'af-chip-red'},
     {l:'🫂 Hava Yolu Tıkanma',k:'havaYoluTikanikligiYetiskin',c:'af-chip-orange'},
@@ -5452,6 +5566,7 @@ const AF_DATA = {
     {l:'⚡ Nöbet/Status',k:'nobet',c:'af-chip-blue'},
     {l:'🪖 Kafa Travması',k:'kafaTravma',c:'af-chip-orange'},
     {l:'😵 Senkop',k:'senkop',c:'af-chip-cyan'},
+    {l:'🧠 Bilinç Değişikliği (Y-16)',k:'bilincDegisikligiYetiskin',c:'af-chip-purple'},
     {l:'😵‍💫 Vertigo',k:'vertigo',c:'af-chip-purple'},
     {l:'😡 Ajite Hasta',k:'ajiteHasta',c:'af-chip-yellow'},
   ],
@@ -5463,6 +5578,7 @@ const AF_DATA = {
     {l:'🦴 Spinal Travma',k:'spinalTravma',c:'af-chip-cyan'},
     {l:'💪 Crush Sendromu',k:'crush',c:'af-chip-purple'},
     {l:'🥶 Hipotermi',k:'hipotermia',c:'af-chip-cyan'},
+    {l:'🌡️ Hipertermi (Y-23)',k:'hipertermiYetiskin',c:'af-chip-orange'},
     {l:'🥶 Hipotermi Arrest (Y-25)',k:'hipotermiArrestYetiskin',c:'af-chip-cyan'},
     {l:'🐍 Isırma/Sokma',k:'isirmaSokmaYetiskin',c:'af-chip-green'},
     {l:'🏷️ START Triyaj',k:'startTriyajSaha',c:'af-chip-cyan'},

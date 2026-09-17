@@ -654,6 +654,9 @@ body.day-mode .modal-close,body.day-mode .modal-tts-btn{background:#e5e7eb;}
 .fn-info{background:rgba(46,204,113,0.10);border-color:rgba(46,204,113,0.3);color:#a8e0bc;font-size:0.55rem;font-weight:400;}
 .fn-goto{background:var(--hivis);border-color:var(--hivis-dark);color:#1a1200;text-align:center;font-weight:800;}
 .fn-goto::before{content:'➜ ';}
+.flow-node-clickable{cursor:pointer;transition:transform 0.1s,filter 0.15s;}
+.flow-node-clickable:active{transform:scale(0.97);filter:brightness(1.15);}
+.flow-goto-hint{display:inline-block;margin-left:6px;font-size:0.5rem;font-weight:900;background:rgba(0,0,0,0.25);padding:1px 6px;border-radius:4px;white-space:nowrap;}
 .fn-question{background:linear-gradient(135deg,#374151 0%,#1f2937 100%);border-color:#6b7280;color:#e5e7eb;text-align:center;font-weight:700;}
 
 .flow-arrow{font-size:1.2rem;color:#334155;text-align:center;line-height:1;padding:2px 0;}
@@ -1288,6 +1291,9 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
       <div class="algo-card c-purple" onclick="showPupilGuide()"><div class="card-icon">👁️</div><h3>PUPİL DEĞERLENDİRME</h3><p>Normal, anizokori, miyotik, midriyatik</p></div>
       <div class="algo-card c-cyan" onclick="showIOSites()"><div class="card-icon">🦴</div><h3>İO (KEMİK İÇİ) BÖLGELERİ</h3><p>Proksimal tibia, distal femur, humerus</p></div>
       <div class="algo-card c-red" onclick="showDefibPads()"><div class="card-icon">⚡</div><h3>DEFİBRİLASYON PED YERLEŞİMİ</h3><p>Anterior-lateral / Anterior-posterior</p></div>
+      <div class="algo-card c-red" onclick="showCprDemo()"><div class="card-icon">💓</div><h3>KPR TEKNİĞİ (ANİMASYONLU)</h3><p>El pozisyonu, kompresyon derinliği — offline</p></div>
+      <div class="algo-card c-orange" onclick="showHeimlichDemo()"><div class="card-icon">🫂</div><h3>HEIMLICH MANEVRASI (ANİMASYONLU)</h3><p>Adım adım gösterim — offline</p></div>
+      <div class="algo-card c-blue" onclick="showVideoLinks()"><div class="card-icon">🎥</div><h3>EĞİTİM VİDEOLARI</h3><p>Resmi AHA videoları — internet gerektirir</p></div>
     </div>
     <div class="sec"><i class="fas fa-diagram-project"></i> AKIŞ ŞEMALARI (AHA 2025)</div>
     <div class="card-grid">
@@ -2275,7 +2281,12 @@ function sahaSearchFn(v){
 
 // ======= MODAL =======
 function openModal(title,html){document.getElementById('modalTitle').innerHTML=title;document.getElementById('modalContent').innerHTML=html;document.getElementById('modalOverlay').style.display='flex';}
-function closeModal(){document.getElementById('modalOverlay').style.display='none';stopModalTTS();}
+function closeModal(){
+  document.getElementById('modalOverlay').style.display='none';
+  stopModalTTS();
+  if(typeof cprDemoInterval!=='undefined' && cprDemoInterval){clearInterval(cprDemoInterval);cprDemoInterval=null;}
+  if(typeof heimlichDemoInterval!=='undefined' && heimlichDemoInterval){clearInterval(heimlichDemoInterval);heimlichDemoInterval=null;}
+}
 function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
 
 // ======= SESLİ OKUMA (TTS) =======
@@ -2972,12 +2983,31 @@ const algoData={
     <div class="m-box diagnosis"><strong>Hipoksi</strong> → Oksijenizasyon ve ventilasyonu sağla</div>
     <div class="m-box diagnosis"><strong>Hipo/Hiperglisemi</strong> → Diyabetik Aciller algoritmasına git</div>
   `},
-  senkop:{title:'😵 SENKOP / BAYGINLIK',html:`
+  senkop:{title:'😵 SENKOP / BAYGINLIK (AHA/ESC 2025)',html:`
+    <div class="m-box diagnosis"><strong>Tanım:</strong> Ani başlayan, kendiliğinden ve tam düzelen geçici bilinç kaybı — serebral hipoperfüzyona bağlıdır. Nöbetten ayırt edilmeli (senkopta genelde &lt;20sn, tonik-klonik hareket yok/minimal, hızlı ve tam derlenme).</div>
     <ul class="step-list">
-      <li>Lateral dekübitus</li><li>Vital, KŞ, SpO2</li>
-      <li>EKG 12 derivasyon</li><li>Yavaş kaldır (postural hipotansiyon)</li>
+      <li>Acil olgu yönetimini uygula, lateral dekübitus veya sırtüstü + bacak elevasyonu pozisyonu ver</li>
+      <li>Vital bulgular (her iki kolda KB ölç — fark &gt;20mmHg aort diseksiyonu/subklavyan çalma düşündürür), kan şekeri, SpO2 ölç</li>
+      <li>12 derivasyonlu EKG çek — uzun QT, delta dalgası (WPW), Brugada paterni, iskemi bulgusu ara</li>
     </ul>
-    <div class="m-box warning">⚠️ Efor senkop, aile hikayesi ani ölüm → Kalp merkezi!</div>
+    <div class="m-section"><div class="m-section-title">🔴 YÜKSEK RİSK BULGULARI (ESC 2025 kriterleri)</div>
+    <ul class="step-list">
+      <li>Efor sırasında/hemen sonrasında senkop</li>
+      <li>Yatarken/otururken senkop (pozisyonel olmayan)</li>
+      <li>Ani ölüm aile öyküsü, bilinen yapısal kalp hastalığı/kanalopati</li>
+      <li>Anormal EKG (aritmi, ileti bozukluğu, iskemi, uzun/kısa QT)</li>
+      <li>Göğüs ağrısı, nefes darlığı, çarpıntı eşlik ediyor</li>
+      <li>Ciddi travma ile sonuçlanan senkop, yaşlı hasta + komorbidite</li>
+    </ul></div>
+    <div class="m-box warning">🔴 Yüksek risk varsa → İlgili ritim algoritmasına git / Kardiyak monitörizasyon ile hızlı nakil. Kalp merkezine yönlendirmeyi düşün.</div>
+    <div class="m-section"><div class="m-section-title">🟢 DÜŞÜK RİSK (Vazovagal/Ortostatik)</div>
+    <ul class="step-list">
+      <li>Uyarıcı faktör var (uzun ayakta durma, ağrı, korku, sıcak ortam, kan görme)</li>
+      <li>Prodrom bulguları (bulantı, terleme, görme bulanıklığı) tipik</li>
+      <li>Yavaşça oturur/ayakta pozisyona kaldır, postural hipotansiyonu değerlendir (yatar-ayakta KB farkı)</li>
+      <li>Gözlem altında tut, oral sıvı öner</li>
+    </ul></div>
+    <div class="m-box info">💡 Karotis sinüs masajı ve tilt-table testi saha ortamında yapılmaz — hastanede değerlendirilir. 65 yaş üstünde karotis sinüs hipersensitivitesi sık nedendir.</div>
   `},
   pnomtoraks:{title:'🫁 PNÖMOTORAKS — Tansiyon!',html:`
     <div class="m-box diagnosis"><strong>Tansiyon Pnömo:</strong> Hipotansiyon + Hipoksi + Tek taraf ses azalması + JVD</div>
@@ -3863,9 +3893,7 @@ function renderAsFlowchart(html){
 // kutu/ok/karar yapısı korunarak aktarılmıştır). showAlgo() bu veriyi
 // bulursa önce bunu kullanır; yoksa genel otomatik dönüştürücüye düşer.
 // ═══════════════════════════════════════════════════════════════════════
-const PDF_FLOWS = {
-
-  astimYetiskin: [
+const PDF_FLOWS = {  astimYetiskin: [
     {t:'fn-action', txt:`Acil olgu yönetimini uygula`},
     {t:'fn-warning', txt:`Etiyolojide anafilaksiyi göz önünde bulundur`},{arrow:true},
     {t:'fn-action', txt:`Hastayı rahat ettiği (tercihen oturur) pozisyonda tut`},{arrow:true},
@@ -3910,125 +3938,186 @@ const PDF_FLOWS = {
     {t:'fn-action', txt:`Vital bulguları ve EKG'yi değerlendir. Kan şekerini ölç`},{arrow:true},
     {t:'fn-question', txt:`Nedenleri araştır`},{arrow:true},
     {branch:[
-      {label:`Travma`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`TRAVMALI HASTADA ACİL OLGU YÖNETİMİ ALGORİTMASINA GİT`}]},
-      {label:`İnme`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`İNME/SVO ALGORİTMASINA GİT`}]},
-      {label:`Nöbet`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`}]},
-      {label:`Zehirlenme`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`ZEHİRLENMELERE GENEL YAKLAŞIM ALGORİTMASINA GİT`}]},
+      {label:`Travma`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`TRAVMALI HASTADA ACİL OLGU YÖNETİMİ ALGORİTMASINA GİT`, key:'travma'}]},
+      {label:`İnme`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`İNME/SVO ALGORİTMASINA GİT`, key:'inme'}]},
+      {label:`Nöbet`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`, key:'nobet'}]},
+      {label:`Zehirlenme`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`ZEHİRLENMELERE GENEL YAKLAŞIM ALGORİTMASINA GİT`, key:'zehirlenme'}]},
       {label:`Dolaşımsal Nedenler`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`RİTİM ANALİZİ VE İLGİLİ ALGORİTMAYA GİT`}]},
       {label:`Hipoksi`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Oksijenizasyon ve ventilasyonu sağla`}]},
-      {label:`Hipo/Hiperglisemi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`DİYABETİK ACİLLER ALGORİTMASINA GİT`}]}
+      {label:`Hipo/Hiperglisemi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`DİYABETİK ACİLLER ALGORİTMASINA GİT`, key:'hipoglisemi'}]}
     ]}
   ],
 
   senkop: [
-    {t:'fn-action', txt:`Acil olgu yönetimini uygula, lateral dekübitus pozisyonu ver`},{arrow:true},
-    {t:'fn-action', txt:`Vital bulgular, kan şekeri, SpO2 ölç. 12 derivasyonlu EKG çek`},{arrow:true},
-    {t:'fn-question', txt:`Yüksek riskli bulgular var mı? (Efor sırasında senkop, aile öyküsünde ani ölüm, anormal EKG, göğüs ağrısı, kalp yetmezliği öyküsü)`},{arrow:true},
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula, lateral dekübitus veya sırtüstü + bacak elevasyonu pozisyonu ver`},{arrow:true},
+    {t:'fn-action', txt:`Vital bulgular (her iki kolda KB ölç — fark &gt;20mmHg aort diseksiyonu düşündürür), kan şekeri, SpO2 ölç`},{arrow:true},
+    {t:'fn-action', txt:`12 derivasyonlu EKG çek — uzun/kısa QT, delta dalgası (WPW), Brugada paterni, iskemi ara`},{arrow:true},
+    {t:'fn-question', txt:`Yüksek riskli bulgular var mı? (Efor sırasında/otururken senkop, ani ölüm aile öyküsü, anormal EKG, göğüs ağrısı, kalp yetmezliği öyküsü, ciddi travma)`},{arrow:true},
     {branch:[
-      {label:`Evet — Yüksek Risk`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`Kardiyak nedene yönelik ilgili ritim algoritmasına git / Kalp merkezine hızlı nakil`}]},
-      {label:`Hayır — Düşük Risk`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Yavaşça oturur/ayakta pozisyona kaldır (postural hipotansiyonu değerlendir), gözlem altında tut`}]}
+      {label:`Evet — Yüksek Risk`, cls:'fb-no', nodes:[
+        {t:'fn-action', txt:`Kardiyak monitörizasyon başlat, IV yol aç`},
+        {t:'fn-info', txt:`Kardiyak nedene yönelik ilgili ritim algoritmasına git (saptanan ritme göre)`},
+        {t:'fn-warning', txt:`Kalp merkezine hızlı nakil — hastane ön bildirimi yap`}
+      ]},
+      {label:`Hayır — Düşük Risk (Vazovagal/Ortostatik)`, cls:'fb-yes', nodes:[
+        {t:'fn-action', txt:`Prodrom var mı sorgula (bulantı, terleme, görme bulanıklığı = tipik vazovagal)`},
+        {t:'fn-action', txt:`Yavaşça oturur/ayakta pozisyona kaldır, postural hipotansiyonu değerlendir (yatar-ayakta KB farkı)`},
+        {t:'fn-info', txt:`Gözlem altında tut, oral sıvı öner. Karotis sinüs masajı/tilt-table saha işlemi değildir`}
+      ]}
     ]}
   ],
 
   pnomtoraks: [
     {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
-    {t:'fn-question', txt:`Tansiyon pnömotoraks bulguları: Hipotansiyon + Hipoksi + tek taraflı solunum sesi azlığı + Juguler venöz dolgunluk`},{arrow:true},
+    {t:'fn-action', txt:`Oskültasyon: Tek taraflı solunum sesi azlığı/yokluğu, hiperrezonans, trakea kayması ara`},{arrow:true},
+    {t:'fn-question', txt:`Tansiyon pnömotoraks bulguları: Hipotansiyon + Hipoksi + tek taraflı solunum sesi azlığı + Juguler venöz dolgunluk + trakea kayması`},{arrow:true},
     {branch:[
-      {label:`Tansiyon Pnömotoraks Var`, cls:'fb-no', nodes:[
-        {t:'fn-drug', txt:`O2 yüksek akım (15L/dk NRM). İğne dekompresyonu: 2. interkostal aralık, midklaviküler hat, 14-16G kateter (90° açı) — hava çıkışını duy`},
-        {t:'fn-info', txt:`Alternatif giriş yeri: 4-5. interkostal aralık, ön aksiller hat`}
+      {label:`Tansiyon Pnömotoraks Var — KLİNİK TANI, GÖRÜNTÜLEME BEKLEME`, cls:'fb-no', nodes:[
+        {t:'fn-action', txt:`O2 yüksek akım (15L/dk NRM veya BVM)`},
+        {t:'fn-drug', txt:`İğne dekompresyonu: 2. interkostal aralık, midklaviküler hat, 14-16G kateter (90° açı) — hava çıkışını duy`},
+        {t:'fn-info', txt:`Alternatif/tercih edilen giriş yeri: 4-5. interkostal aralık, ön aksiller hat (göğüs duvarı daha ince, başarı oranı daha yüksek)`},
+        {t:'fn-warning', txt:`İğne dekompresyonu geçici önlemdir! Parmak torakostomi/göğüs tüpü ihtiyacını ortadan kaldırmaz — hastane ön bildirimi yap`}
       ]},
-      {label:`Açık Pnömotoraks`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`3 tarafı yapışkanlı örtü uygula (tek yönlü valf etkisi oluşturmak için)`}]}
+      {label:`Açık (Emici) Pnömotoraks`, cls:'fb-yes', nodes:[
+        {t:'fn-action', txt:`3 tarafı yapışkanlı, 1 tarafı açık örtü uygula (tek yönlü valf etkisi — nefes verirken hava çıkar, alırken girmez)`},
+        {t:'fn-warning', txt:`4 tarafı tam kapatma YAPMA — tansiyon pnömotoraksa dönüşebilir!`}
+      ]},
+      {label:`Basit (Küçük) Pnömotoraks`, cls:'fb-yes', nodes:[
+        {t:'fn-action', txt:`O2 ver, yakın monitörizasyon, pozisyon rahat ettirici (etkilenen taraf üstte)`},
+        {t:'fn-info', txt:`Hemodinamik olarak stabilse saha girişimi gerekmez — hastanede göğüs tüpü kararı verilir`}
+      ]}
     ]}
   ],
 
   sepsis: [
     {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
-    {t:'fn-question', txt:`qSOFA ≥2: Solunum sayısı≥22/dk, GKS&lt;15, SKB≤100mmHg`},{arrow:true},
-    {t:'fn-drug', txt:`Kristaloid 30mL/kg IV hızlı bolus`},{arrow:true},
-    {t:'fn-question', txt:`SKB &lt;65mmHg devam ediyor mu?`},{arrow:true},
+    {t:'fn-action', txt:`Enfeksiyon odağı ara (akciğer, idrar yolu, cilt/yumuşak doku, karın), ateş/hipotermi, mental durum değişikliği sorgula`},{arrow:true},
+    {t:'fn-question', txt:`qSOFA ≥2 (Solunum sayısı≥22/dk, GKS&lt;15, SKB≤100mmHg) VEYA SIRS≥2 (Ateş&gt;38°C/&lt;36°C, KH&gt;90, SS&gt;20, lökosit anormal) + enfeksiyon şüphesi`},{arrow:true},
+    {t:'fn-drug', txt:`Kristaloid (SF veya Ringer Laktat) 30mL/kg IV hızlı bolus (ilk 3 saat içinde) — Surviving Sepsis Campaign hedefi`},{arrow:true},
+    {t:'fn-action', txt:`O2 ver, SpO2≥%94 hedefle. 2 geniş damar yolu aç, kan şekeri ölç`},{arrow:true},
+    {t:'fn-question', txt:`Sıvı sonrası SKB &lt;65mmHg (MAB) devam ediyor mu — septik şok?`},{arrow:true},
     {branch:[
-      {label:`Evet`, cls:'fb-no', nodes:[{t:'fn-drug', txt:`Noradrenalin 0,1-0,3mcg/kg/dk infüzyon`}]},
-      {label:`Hayır`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`SpO2≥%94 hedefle, hastane ön bildirimi yap`}]}
+      {label:`Evet — Septik Şok`, cls:'fb-no', nodes:[
+        {t:'fn-drug', txt:`Noradrenalin 0,1-0,3mcg/kg/dk infüzyon — ilk tercih vazopresör, MAB≥65mmHg hedefle`},
+        {t:'fn-warning', txt:`Ek sıvı yüklenme bulgularını (raller, JVD) izleyerek dikkatli ver`}
+      ]},
+      {label:`Hayır — Yeterli Yanıt`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`SpO2≥%94 sürdür, vital takibe devam et`}]}
     ]},{arrow:true},
-    {t:'fn-warning', txt:`Geniş spektrum antibiyotik ilk saatte başlanmalı — hastane ön bildirimi kritik! Laktik asit &gt;2 mortalite riskini artırır (&gt;%40)`}
+    {t:'fn-warning', txt:`⏱️ Geniş spektrum antibiyotik İLK SAATTE başlanmalı — her saat gecikme mortaliteyi ~%7-8 artırır! Hastane ön bildirimi (SEPSİS ALARM) kritik. Laktik asit &gt;2mmol/L doku hipoperfüzyonunu gösterir, &gt;4 ağır sepsis/septik şok mortalitesi &gt;%40`}
   ],
 
   pe: [
     {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
-    {t:'fn-question', txt:`Ani nefes darlığı + Plöritik ağrı + Taşikardi + Hipoksi`},{arrow:true},
+    {t:'fn-action', txt:`Risk faktörlerini sorgula: Yakın zamanda cerrahi/immobilizasyon, DVT öyküsü, kanser, gebelik, uzun yolculuk`},{arrow:true},
+    {t:'fn-question', txt:`Ani nefes darlığı + Plöritik göğüs ağrısı + Taşikardi + Hipoksi (± hemoptizi, tek taraflı bacak şişliği)`},{arrow:true},
+    {t:'fn-action', txt:`O2 ver (SpO2&lt;90 ise yüksek akım), IV yol aç, kardiyak monitörizasyon, 12-lead EKG (S1Q3T3, sağ kalp gerginliği bulguları ara)`},{arrow:true},
+    {t:'fn-question', txt:`Hemodinamik durumu değerlendir`},{arrow:true},
     {branch:[
-      {label:`Masif PE (Arrest/Şok)`, cls:'fb-no', nodes:[
-        {t:'fn-action', txt:`KPR gerekiyorsa başlat`},
-        {t:'fn-drug', txt:`Trombolitik: Alteplaz 50mg IV bolus`},
-        {t:'fn-warning', txt:`KPR'a 60-90dk devam et (fibrinoliz etki süresi için)`}
+      {label:`Masif PE (Arrest/Şok, SKB&lt;90)`, cls:'fb-no', nodes:[
+        {t:'fn-action', txt:`Arrest varsa standart KPR başlat`},
+        {t:'fn-drug', txt:`Trombolitik düşün: Alteplaz 50mg IV bolus (hastane/tıbbi kontrol onayı ile — protokole göre değişir)`},
+        {t:'fn-warning', txt:`Trombolitik verilirse KPR'a 60-90dk devam et (ilaç etki süresi için erken sonlandırma!)`}
       ]},
-      {label:`Submasif PE`, cls:'fb-yes', nodes:[
-        {t:'fn-action', txt:`O2 ver`},
-        {t:'fn-drug', txt:`Heparin 80IU/kg IV`},
-        {t:'fn-drug', txt:`SKB&lt;90 ise Noradrenalin başla`}
-      ]}
+      {label:`Submasif PE (Stabil ama sağ kalp gerginliği)`, cls:'fb-yes', nodes:[
+        {t:'fn-action', txt:`O2 ver, dikkatli izlem`},
+        {t:'fn-drug', txt:`Antikoagülasyon için Heparin 80IU/kg IV (hastane protokolüne göre — sahada rutin değildir, tıbbi kontrol ile)`},
+        {t:'fn-drug', txt:`SKB&lt;90 gelişirse Noradrenalin başla`}
+      ]},
+      {label:`Düşük Risk PE`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`O2 ve monitörizasyon ile hızlı, sakin nakil — ani hareketten kaçın (pıhtı embolizasyon riski)`}]}
     ]},{arrow:true},
-    {t:'fn-warning', txt:`Sıvıyı körce verme! Aşırı sıvı sağ ventrikülü genişletip sol ventrikülü sıkıştırabilir`}
+    {t:'fn-warning', txt:`⚠️ Sıvıyı körce/agresif verme! Aşırı sıvı sağ ventrikülü daha da genişletip septumu sola iterek sol ventrikül dolumunu bozabilir (ters etki) — 250-500mL'lik dikkatli bolus tercih edilir`}
   ],
 
   hiypertansifAcil: [
     {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
-    {t:'fn-question', txt:`SKB≥180mmHg + Hedef organ hasarı bulguları (nörolojik defisit, göğüs ağrısı, akciğer ödemi)`},{arrow:true},
-    {t:'fn-drug', txt:`Labetalol 20mg IV yavaş`},{arrow:true},
-    {t:'fn-drug', txt:`Göğüs ağrısı ile birlikteyse NTG 0,4mg SL`},{arrow:true},
-    {t:'fn-warning', txt:`İlk 1 saatte %20-25 düşür — çok hızlı düşürme yapma! Çok hızlı düşürme inme, körlük, böbrek yetmezliğine yol açabilir`}
+    {t:'fn-action', txt:`Her iki kolda KB ölç, hedef organ hasarı bulgularını ara: nörolojik defisit, göğüs/sırt ağrısı, nefes darlığı/akciğer ödemi, görme bozukluğu, oligüri`},{arrow:true},
+    {t:'fn-question', txt:`SKB≥180 ve/veya DKB≥110mmHg + AKUT hedef organ hasarı bulgusu var mı? (Bulgu yoksa "hipertansif aciliyet" — bu acil değildir, saatler içinde oral tedavi yeterli)`},{arrow:true},
+    {branch:[
+      {label:`İnme/SVO şüphesi eşlik ediyor`, cls:'fb-no', nodes:[{t:'fn-warning', txt:`KB'yi agresif düşürme! İskemik inmede trombolitik adayı değilse KB genelde düşürülmez (eşik ~220/120). Labetalol tercih edilir düşürülecekse`}]},
+      {label:`Aort diseksiyonu şüphesi eşlik ediyor`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`AORT DİSEKSİYONU ALGORİTMASINA GİT — farklı, daha agresif hedef (SKB 100-120)`, key:'aortDiseksiyon'}]},
+      {label:`Akut Akciğer Ödemi/AKS/Eklampsi eşlik ediyor`, cls:'fb-yes', nodes:[
+        {t:'fn-drug', txt:`Labetalol 20mg IV yavaş (2 dk üzerinde), gerekirse 10dk'da bir 40-80mg tekrar (maks 300mg)`},
+        {t:'fn-drug', txt:`Göğüs ağrısı/akciğer ödemi ile birlikteyse NTG 0,4mg SL veya infüzyon ekle`},
+        {t:'fn-info', txt:`Gebelikte eklampsi şüphesi varsa → Gebelikte Akut HT / Eklampsi algoritmasına yönel (MgSO4 öncelikli)`}
+      ]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`⚠️ Genel kural: İlk 1 saatte ortalama arter basıncını %20-25'ten fazla DÜŞÜRME! Çok hızlı düşürme serebral/koroner/renal hipoperfüzyona, inme, körlük, böbrek yetmezliğine yol açabilir. İstisna: Aort diseksiyonu ve bazı durumlarda daha hızlı/agresif hedef gerekir`}
   ],
 
   tamponad: [
     {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
-    {t:'fn-question', txt:`Beck Triadı: Hipotansiyon + Juguler venöz dolgunluk + Uzak/derinden gelen kalp sesleri`},{arrow:true},
-    {t:'fn-drug', txt:`Dikkatli sıvı: 250-500mL bolus`},{arrow:true},
-    {t:'fn-warning', txt:`Pozitif basınçlı ventilasyondan KAÇIN — venöz dönüşü daha da azaltır! KPR sırasında PEA gelişirse tamponadı düşün (5T'den biri)`}
+    {t:'fn-action', txt:`Nedeni sorgula: Travma (penetran göğüs yaralanması en sık), malignite, üremi, perikardit, aort diseksiyonu`},{arrow:true},
+    {t:'fn-question', txt:`Beck Triadı: Hipotansiyon + Juguler venöz dolgunluk + Uzak/derinden gelen kalp sesleri (klasik triad sadece ~%30 vakada tam görülür)`},{arrow:true},
+    {t:'fn-action', txt:`Ek bulgular: Pulsus paradoksus (inspiryumda SKB&gt;10mmHg düşüş), taşikardi, EKG'de düşük voltaj/elektriksel alternans`},{arrow:true},
+    {t:'fn-drug', txt:`Dikkatli IV sıvı: 250-500mL bolus — venöz dönüşü ve dolum basıncını geçici artırmak için (kesin tedavi değil, köprü tedavi)`},{arrow:true},
+    {t:'fn-warning', txt:`⚠️ Pozitif basınçlı ventilasyondan/entübasyondan KAÇIN — intratorasik basıncı artırıp venöz dönüşü daha da azaltır, ani dekompansasyona yol açabilir! Mümkünse spontan solunumu koru`},{arrow:true},
+    {t:'fn-warning', txt:`KESİN TEDAVİ perikardiyosentez veya cerrahi drenajdır — sahada yapılmaz, en hızlı şekilde bu imkâna sahip merkeze nakil şart. KPR sırasında PEA gelişirse tamponadı düşün (5T'den biri)`}
   ],
 
   aortDiseksiyon: [
     {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
-    {t:'fn-question', txt:`Ani başlayan yırtıcı tarzda göğüs/sırt ağrısı + Hipertansiyon öyküsü`},{arrow:true},
-    {t:'fn-drug', txt:`Hedef: SKB 100-120mmHg (düşük tut) — Labetalol 10-20mg IV`},{arrow:true},
-    {t:'fn-drug', txt:`Morfin 2-4mg IV ağrı kontrolü için`},{arrow:true},
-    {t:'fn-warning', txt:`Antikoagülan VERME! Tromboliz verilirse ölümcül olabilir — STEMI ile karıştırma! Kardiyovasküler cerrahi merkezine hızlı nakil`}
+    {t:'fn-action', txt:`Ani başlayan, en şiddetli anı başlangıçta olan, yırtıcı/bıçak saplanır tarzda göğüs/sırt/karın ağrısı sorgula — genelde göç eden ağrı (ağrı yer değiştirir)`},{arrow:true},
+    {t:'fn-action', txt:`Her iki kolda KB ve nabız karşılaştır — farklılık (SKB farkı &gt;20mmHg veya nabız yokluğu) diseksiyonu düşündürür. Nörolojik defisit (inme benzeri), akut aort yetmezliği üfürümü ara`},{arrow:true},
+    {t:'fn-drug', txt:`Önce KALP HIZINI kontrol et: Beta-bloker (Labetalol 10-20mg IV veya Esmolol infüzyon) ile hedef KH &lt;60/dk — duvar gerilim hızını (dP/dt) azaltır`},{arrow:true},
+    {t:'fn-drug', txt:`Sonra KB: Hedef SKB 100-120mmHg (düşük tut) — Labetalol devam veya Nikardipin/Nitroprusid infüzyon eklenebilir`},{arrow:true},
+    {t:'fn-drug', txt:`Ağrı kontrolü için Morfin/Fentanil IV titre ederek ver — ağrı kendisi de KB/KH'yi yükseltir`},{arrow:true},
+    {t:'fn-warning', txt:`🚫 Antikoagülan/Trombolitik KESİNLİKLE VERME! STEMI ile karıştırılırsa tromboliz verilmesi genellikle ÖLÜMCÜLDÜR (rüptür riski). Ayırıcı tanıda şüphe varsa görüntüleme (BT anjiyo) önceliklidir. Kardiyovasküler cerrahi merkezine EN HIZLI nakil — Stanford A (çıkan aorta) acil cerrahi, Stanford B (inen aorta) genelde medikal tedavi`}
   ],
 
   spinalTravma: [
-    {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
-    {t:'fn-question', txt:`NEXUS kriterleri: Ense hassasiyeti, Bilinç değişikliği, Nörolojik defisit, Alkol/madde etkisi, Dikkat dağıtıcı yaralanma`},{arrow:true},
-    {t:'fn-action', txt:`Manuel servikal immobilizasyon, C-Collar (nötral pozisyon)`},{arrow:true},
+    {t:'fn-action', txt:`Acil olgu yönetimini uygula, olay mekanizmasını değerlendir`},{arrow:true},
+    {t:'fn-question', txt:`NEXUS kriterleri (hepsi YOKSA immobilizasyon gerekmez): Orta hat servikal hassasiyet YOK, Bilinç değişikliği YOK, Nörolojik defisit YOK, İntoksikasyon YOK, Dikkat dağıtıcı ağrılı yaralanma YOK`},{arrow:true},
     {branch:[
-      {label:`GKS≤8`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Dikkatli entübasyon (inline immobilizasyon ile)`}]},
-      {label:`Spinal şok bulguları (Bradikardi+Hipotansiyon)`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`Sıvı + Atropin`}]}
-    ]}
+      {label:`Kriterlerden biri VARSA — İmmobilizasyon Endike`, cls:'fb-no', nodes:[
+        {t:'fn-action', txt:`Manuel servikal stabilizasyon, yumuşak/sert C-Collar (nötral pozisyon)`},
+        {t:'fn-info', txt:`2024 güncel yaklaşım: Rutin sert sedyeye (backboard) tam immobilizasyon artık ÖNERİLMİYOR — sadece taşıma amaçlı kullanılır, hasta üzerinde uzun süre bırakılmaz (basınç yarası riski). "Seçici spinal hareket kısıtlaması" tercih edilir`}
+      ]},
+      {label:`Kriterlerin HİÇBİRİ YOK`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Rutin immobilizasyon gerekmez, konforlu pozisyonda nakil yeterlidir`}]}
+    ]},{arrow:true},
+    {branch:[
+      {label:`GKS≤8`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Dikkatli entübasyon (manuel inline immobilizasyon ile, C-Collar geçici açılabilir)`}]},
+      {label:`Spinal şok bulguları (Bradikardi + Hipotansiyon, sıcak/kuru ekstremiteler)`, cls:'fb-yes', nodes:[
+        {t:'fn-drug', txt:`Dikkatli sıvı (aşırıdan kaçın) + gerekirse Atropin (bradikardi için) — nörojenik şok, hemorajik şoktan ayırt edilmeli (nörojenikte taşikardi YOKTUR)`}
+      ]}
+    ]},{arrow:true},
+    {t:'fn-warning', txt:`Servikal immobilizasyon = havayolu yönetimini asla engellememeli. Hava yolu > Spinal immobilizasyon önceliklidir`}
   ],
 
   hiper_kali: [
-    {t:'fn-action', txt:`EKG bulguları: Sivri T dalgaları → QRS genişlemesi → Sinüs bradikardisi → VF/Asistoli riski`},{arrow:true},
-    {t:'fn-drug', txt:`Kardiyak stabilizasyon: Kalsiyum Glukonat 1-2g IV yavaş 5-10dk`},{arrow:true},
-    {t:'fn-drug', txt:`K+ hücre içine: İnsülin 10Ü + Dekstroz %50 50mL IV`},{arrow:true},
-    {t:'fn-drug', txt:`Salbutamol nebül 10-20mg (K+ düşürür)`},{arrow:true},
-    {t:'fn-drug', txt:`Furosemid 40-80mg IV (böbrek atılımını artırır)`},{arrow:true},
-    {t:'fn-warning', txt:`K+&gt;7 veya EKG değişikliği varsa acil diyaliz kararı. Arrest: VF/VT→Defib+CaCl2 2g IV! PEA/Asistoli→KPR+Adrenalin`}
+    {t:'fn-action', txt:`Nedeni sorgula: Böbrek yetmezliği, Crush sendromu, ACE inhibitör/ARB/K-tutucu diüretik kullanımı, Addison, aşırı K+ alımı, doku yıkımı`},{arrow:true},
+    {t:'fn-action', txt:`EKG bulgu progresyonu: K+&gt;5,5 Çadır (sivri) T dalgaları → K+&gt;6,5 PR uzaması, P dalgası kaybı → K+&gt;7,0 Geniş QRS, sinüzoidal dalga → K+&gt;8,0-9 VF/Asistoli riski`},{arrow:true},
+    {t:'fn-question', txt:`EKG değişikliği VAR MI (geniş QRS, P kaybı, sinüzoidal) — bu tedavi aciliyetini belirler, sadece K+ değeri değil`},{arrow:true},
+    {t:'fn-drug', txt:`1) KARDİYAK STABİLİZASYON (membran koruma) — EKG değişikliği varsa hemen: Kalsiyum Glukonat 1-2g IV yavaş 5-10dk'da (etkisi hızlı ama kısa, 30-60dk, tekrar gerekebilir)`},{arrow:true},
+    {t:'fn-drug', txt:`2) K+'YI HÜCRE İÇİNE İT: İnsülin 10Ü + Dekstroz %50 25-50g IV birlikte (insülin K+ ATPaz pompasını uyarır, dekstroz hipoglisemiyi önler) — etki 15-30dk'da başlar`},{arrow:true},
+    {t:'fn-drug', txt:`Ek olarak: Salbutamol 10-20mg nebül (yüksek doz) — K+'yı ek olarak hücre içine iter, insülin tedavisine katkı sağlar`},{arrow:true},
+    {t:'fn-drug', txt:`3) K+'YI VÜCUTTAN AT: Furosemid 40-80mg IV (böbrek fonksiyonu varsa atılımı artırır). Kayeksal (sodyum polistiren sülfonat) daha yavaş etkilidir, saatler sürer`},{arrow:true},
+    {t:'fn-warning', txt:`K+&gt;7 veya ciddi EKG değişikliği + böbrek yetmezliği varsa ACİL DİYALİZ kesin tedavidir — hastane ön bildirimi yap. Arrest gelişirse: VF/VT→Defibrilasyon + Kalsiyum Klorür 1g IV (glukonattan daha potent)! PEA/Asistoli→Standart KPR + Adrenalin, yüksek doz Kalsiyum + Bikarbonat düşün`}
   ],
 
   hiponatremi: [
-    {t:'fn-action', txt:`Na+ &lt;135mEq/L. Semptomatik eşik genellikle &lt;125mEq/L (nöbet, koma)`},{arrow:true},
+    {t:'fn-action', txt:`Na+ &lt;135mEq/L. Akut (&lt;48 saat) mi kronik mi olduğunu ayırt etmeye çalış — tedavi hızını belirler`},{arrow:true},
+    {t:'fn-action', txt:`Semptomları değerlendir: Hafif (bulantı, halsizlik, baş ağrısı) vs Ciddi (nöbet, bilinç bozukluğu, koma, solunum durması) — semptom şiddeti genelde Na+ düşüş HIZINA bağlıdır, sadece mutlak değere değil`},{arrow:true},
     {branch:[
-      {label:`Semptomsuz / Hafif`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Sıvı kısıtla, gözlem`}]},
-      {label:`Semptomatik (nöbet, bilinç bozukluğu)`, cls:'fb-no', nodes:[{t:'fn-drug', txt:`%3 NaCl 150mL IV 20dk'da. Hedef: Na+ 5mEq/L artış ile semptom düzelmesi`}]}
+      {label:`Semptomsuz / Hafif Semptomatik`, cls:'fb-yes', nodes:[
+        {t:'fn-action', txt:`Sıvı kısıtla, altta yatan nedeni araştır (diüretik, SIADH, kalp/karaciğer/böbrek yetmezliği, adrenal yetmezlik)`},
+        {t:'fn-info', txt:`Agresif düzeltmeye gerek yok — hastanede kademeli tedavi edilir`}
+      ]},
+      {label:`Ciddi Semptomatik (Nöbet, Koma, Solunum Depresyonu)`, cls:'fb-no', nodes:[
+        {t:'fn-drug', txt:`%3 Hipertonik NaCl 150mL IV bolus, 20dk'da — nöbet/koma durumunda hızlı düzeltme HAYAT KURTARICI`},
+        {t:'fn-action', txt:`Semptomlar düzelmezse veya Na+ yeterince artmadıysa 150mL bolus TEKRARLANABİLİR (toplam 2-3 doza kadar)`},
+        {t:'fn-info', txt:`Hedef: Semptomlar düzelene kadar VEYA Na+ 4-6mEq/L artana kadar ver — "tam normale getirmek" hedef değildir, akut tehdidi gidermek yeterlidir`}
+      ]}
     ]},{arrow:true},
-    {t:'fn-warning', txt:`24 saatte maksimum 10-12mEq/L artış! Çok hızlı düzeltme osmotik demyelinizasyon sendromuna (ODS) yol açabilir!`}
+    {t:'fn-warning', txt:`⚠️ KRİTİK SINIR: 24 saatte toplam Na+ artışı 8-10mEq/L'yi (bazı kaynaklarda 10-12) GEÇMEMELİ! Çok hızlı düzeltme Ozmotik Demyelinizasyon Sendromu'na (ODS/santral pontin miyelinoliz) yol açabilir — kalıcı nörolojik hasar! Bu nedenle hastane takibi ve seri Na+ ölçümü şarttır, sahada sadece ciddi semptomatik hastada bolus başlanır`}
   ],
 
   rabdomiyoliz: [
-    {t:'fn-action', txt:`Tanı: Miyalji + Koyu (çay rengi) idrar + CK yüksekliği. Nedenler: Crush, hipotermi, statin, alkol, uzamış nöbet`},{arrow:true},
-    {t:'fn-drug', txt:`Agresif sıvı: NaCl %0,9 veya Ringer Laktat 1-1,5L/saat`},{arrow:true},
-    {t:'fn-action', txt:`Hedef idrar çıkışı: &gt;200-300mL/saat`},{arrow:true},
-    {t:'fn-drug', txt:`İdrar alkalizasyonu: NaHCO3 50mEq/L sıvıya ekle (hedef idrar pH&gt;6,5)`},{arrow:true},
-    {t:'fn-warning', txt:`Hiperkalemi takibi ve tedavisi şart! Furosemid sadece yeterli sıvı verildikten sonra, idrar çıkışı hâlâ yetersizse düşünülür`}
+    {t:'fn-action', txt:`Tanı üçlüsü: Kas ağrısı/hassasiyeti + Koyu (çay/kola rengi) idrar (miyoglobinüri) + CK yüksekliği (genelde &gt;1000, ciddi vakada &gt;10.000 U/L)`},{arrow:true},
+    {t:'fn-action', txt:`Nedeni sorgula: Crush yaralanması, uzun süre hareketsizlik/yerde kalma (özellikle yaşlı düşme sonrası), aşırı egzersiz, hipertermi, statin/ilaç, alkol, uzamış nöbet/ajitasyon, elektrik yaralanması`},{arrow:true},
+    {t:'fn-drug', txt:`Erken ve agresif IV sıvı: NaCl %0,9 veya Ringer Laktat 1-1,5L/saat ile başla (Crush yaralanmasında kurtarma ÖNCESİ başlanmalı)`},{arrow:true},
+    {t:'fn-action', txt:`Hedef idrar çıkışı: &gt;200-300mL/saat (böbrek koruyucu) — miyoglobinin renal tübüler hasarını önlemek/azaltmak için`},{arrow:true},
+    {t:'fn-drug', txt:`İdrar alkalizasyonu (tartışmalı ama sık uygulanan): NaHCO3 sıvıya eklenerek idrar pH&gt;6,5 hedeflenebilir — miyoglobinin tübüler çökelmesini azaltır`},{arrow:true},
+    {t:'fn-warning', txt:`⚠️ HİPERKALEMİ takibi ve tedavisi şart — rabdomiyolizde en sık ölüm nedeni erken hiperkalemik aritmidir! EKG monitörizasyonu sürekli olmalı. Furosemid SADECE yeterli sıvı replasmanı sonrası idrar çıkışı hâlâ yetersizse düşünülür (erken/yetersiz sıvı ile verilirse böbrek hasarını artırır). Akut böbrek hasarı gelişirse diyaliz gerekebilir`}
   ],
 
   pedHavaYoluTikaniklik: [
@@ -4039,7 +4128,7 @@ const PDF_FLOWS = {
         {t:'fn-drug', txt:`1 yaş altı: 5 kez sırta vur + 5 kez göğüs basısı uygula<br>1 yaş üstü: 5 kez sırta vur + 5 kez karına bası uygula<br>Cisim çıkana kadar ya da bilinç kapanana kadar devam et`}
       ]}
     ]},{arrow:true},
-    {t:'fn-goto', txt:`Bilinç kapanırsa / Bilinç kapalı geldiyse → ARREST YÖNETİMİ ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-goto', txt:`Bilinç kapanırsa / Bilinç kapalı geldiyse → ARREST YÖNETİMİ ALGORİTMASINA GİT`, key:'pediatrikArrest'},{arrow:true},
     {t:'fn-warning', txt:`Hava yolu tam tıkanıklık bulguları: Nefes alamaz, evrensel boğulma işareti, konuşamaz, öksüremez, siyanoz varlığı!`}
   ],
 
@@ -4101,7 +4190,7 @@ const PDF_FLOWS = {
     {t:'fn-drug', txt:`VF/nVT devam ediyorsa: Defibrilasyon ≥4J/kg, ara vermeden KPR + ileri hava yolu uygulaması. ADRENALİN IV/IO 0,01mg/kg (1/10000, 0,1mL/kg), 3-5dk'da bir tekrarla`},{arrow:true},
     {t:'fn-drug', txt:`2dk sonra tekrar değerlendir, hâlâ VF/nVT: Defibrilasyon (≥4J/kg). 3. defibrilasyonda: AMİODARON 5mg/kg IV/IO (%5 dekstroz içine bolus). Dirençli VF/VT'de 5. defibrilasyondan sonra 5mg/kg tekrar ver, ya da LİDOKAİN 1mg/kg IV/IO`},{arrow:true},
     {branch:[
-      {label:`Ritim değişikliği / Nabız Var`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`RESÜSİTASYON SONRASI BAKIM ALGORİTMASINA GİT`}]},
+      {label:`Ritim değişikliği / Nabız Var`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`RESÜSİTASYON SONRASI BAKIM ALGORİTMASINA GİT`, key:'pedResusSonrasi'}]},
       {label:`Nabız Yok`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ŞOKLANAMAZ RİTİM ALGORİTMASINA GİT`}]}
     ]},{arrow:true},
     {t:'fn-info', txt:`Geri döndürülebilir nedenler (5H5T): Hipovolemi, Hipoksi, Hidrojen iyonu(asidoz), Hiper/Hipokalemi, Hipotermi, Toksinler, Tamponad(kalp), Tansiyon pnömotoraks, Tromboz(koroner/pulmoner)`}
@@ -4115,7 +4204,7 @@ const PDF_FLOWS = {
     {t:'fn-warning', txt:`5H5T'yi araştır ve tedavi et`},{arrow:true},
     {branch:[
       {label:`Ritim VF/nVT'ye dönüşürse`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ŞOKLANIR RİTİM ALGORİTMASINA GİT`}]},
-      {label:`Nabız geri dönerse`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`RESÜSİTASYON SONRASI BAKIM ALGORİTMASINA GİT`}]}
+      {label:`Nabız geri dönerse`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`RESÜSİTASYON SONRASI BAKIM ALGORİTMASINA GİT`, key:'pedResusSonrasi'}]}
     ]}
   ],
 
@@ -4136,10 +4225,10 @@ const PDF_FLOWS = {
     {t:'fn-action', txt:`Monitörize et, damar yolu aç (IV/IO)`},{arrow:true},
     {t:'fn-question', txt:`Hızlı odaklı değerlendirme: Kanama var mı? Ateş/enfeksiyon bulgusu var mı? Kalp sesleri/JVD/hepatomegali var mı? Anafilaksi bulgusu var mı?`},{arrow:true},
     {branch:[
-      {label:`Kanama/Dehidratasyon`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`}]},
-      {label:`Ateş/Enfeksiyon`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`SEPTİK ŞOK ALGORİTMASINA GİT`}]},
-      {label:`Kalp Yetmezliği`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`KARDİYOJENİK ŞOK ALGORİTMASINA GİT`}]},
-      {label:`Alerji/Anjiyoödem/Ürtiker`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`ANAFİLAKSİ ALGORİTMASINA GİT`}]}
+      {label:`Kanama/Dehidratasyon`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`, key:'pedHipovolemikSok'}]},
+      {label:`Ateş/Enfeksiyon`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`SEPTİK ŞOK ALGORİTMASINA GİT`, key:'pedSeptikSok'}]},
+      {label:`Kalp Yetmezliği`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`KARDİYOJENİK ŞOK ALGORİTMASINA GİT`, key:'pedKardiyojenikSok'}]},
+      {label:`Alerji/Anjiyoödem/Ürtiker`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`ANAFİLAKSİ ALGORİTMASINA GİT`, key:'pedAnafilaksi'}]}
     ]},{arrow:true},
     {t:'fn-drug', txt:`Neden net değilse: 20mL/kg %0,9 NaCl bolus ile başla, yanıtı izleyerek yeniden değerlendir`}
   ],
@@ -4176,7 +4265,7 @@ const PDF_FLOWS = {
     {t:'fn-action', txt:`Damar yolu aç`},{arrow:true},
     {t:'fn-drug', txt:`%0,9 NaCl 10mL/kg IV (maksimum 500mL), 1 saatte ver`},{arrow:true},
     {t:'fn-action', txt:`Aralıklı olarak kan şekeri, bilinç ve vital bulguları kontrol et`},{arrow:true},
-    {t:'fn-goto', txt:`Bilinç değişikliği ve dolaşım bozukluğu eklenmişse → BİLİNÇ DEĞİŞİKLİKLERİ ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-goto', txt:`Bilinç değişikliği ve dolaşım bozukluğu eklenmişse → BİLİNÇ DEĞİŞİKLİKLERİ ALGORİTMASINA GİT`, key:'pedBilincDegisikligi'},{arrow:true},
     {t:'fn-warning', txt:`Sahada insülin başlatılmaz! Hızlı sıvı replasmanı sonrası DKA yönetimi hastanede yapılır.`}
   ],
 
@@ -4251,11 +4340,11 @@ const PDF_FLOWS = {
     {t:'fn-action', txt:`Damar yolu aç`},{arrow:true},
     {t:'fn-question', txt:`Spontan nistagmus var mı?`},{arrow:true},
     {branch:[
-      {label:`Var — Yön değiştiren/Vertikal/Pür torsiyonel`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`SANTRAL NEDEN — SVO/İNME ALGORİTMASINA GİT`}]},
+      {label:`Var — Yön değiştiren/Vertikal/Pür torsiyonel`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`SANTRAL NEDEN — SVO/İNME ALGORİTMASINA GİT`, key:'inme'}]},
       {label:`Yok / Horizontal nistagmus`, cls:'fb-yes', nodes:[{t:'fn-question', txt:`Bağımsız şekilde ayakta durabiliyor ve yürüyebiliyor mu?`}]}
     ]},{arrow:true},
     {branch:[
-      {label:`Hayır — Santral neden şüphesi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`İNME ALGORİTMASINA GİT`}]},
+      {label:`Hayır — Santral neden şüphesi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`İNME ALGORİTMASINA GİT`, key:'inme'}]},
       {label:`Evet — Periferik neden`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Şok bulguları varsa ilgili algoritmaya git`}]}
     ]},{arrow:true},
     {t:'fn-warning', txt:`Şok için sistemik dolaşım bulgularını (kapiller geri dolum, nabız dolgunluğu ve hızı, cilt dolaşımı, KB, bilinç) ve BEFAST kriterlerini mutlaka değerlendir!`}
@@ -4264,7 +4353,7 @@ const PDF_FLOWS = {
   alerjikReaksiyon: [
     {t:'fn-question', txt:`Hayatı tehdit eden bulgular var mı?<br>Hava yolu: Anjiyoödem, stridor, hırıltılı solunum. Solunum: Takipne, wheezing, siyanoz, SpO2&lt;%90, konfüzyon. Dolaşım: Soluk cilt, hipotansiyon, koma`},{arrow:true},
     {branch:[
-      {label:`Evet`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ANAFİLAKSİ ALGORİTMASINA GİT`}]},
+      {label:`Evet`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ANAFİLAKSİ ALGORİTMASINA GİT`, key:'anafilaksi'}]},
       {label:`Hayır`, cls:'fb-yes', nodes:[
         {t:'fn-action', txt:`Hava yolu açıklığını sağla, O2 ver, damar yolu aç`},
         {t:'fn-action', txt:`Monitörize et: SpO2, EKG, KB takibi`},
@@ -4291,7 +4380,7 @@ const PDF_FLOWS = {
       {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-question', txt:`Nedeni değerlendir: Travmatik mi, non-travmatik mi?`}]}
     ]},{arrow:true},
     {branch:[
-      {label:`Travmatik`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`TRAVMALI HASTADA ACİL OLGU YÖNETİMİ ALGORİTMASINA GİT`}]},
+      {label:`Travmatik`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`TRAVMALI HASTADA ACİL OLGU YÖNETİMİ ALGORİTMASINA GİT`, key:'travma'}]},
       {label:`Non-Travmatik`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Nedene yönelik tedavi et`}]}
     ]}
   ],
@@ -4315,14 +4404,14 @@ const PDF_FLOWS = {
   havaYoluTikanikligiYetiskin: [
     {t:'fn-question', txt:`Bilinç açık mı?`},{arrow:true},
     {branch:[
-      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`}]},
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`, key:'arrest'}]},
       {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-question', txt:`Hasta ses çıkarıyor mu? (öksürük, inleme, konuşma)`}]}
     ]},{arrow:true},
     {branch:[
       {label:`Kısmi Tıkanma (ses var)`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Öksürmesini teşvik et, takip et. Tam tıkanmaya dönüşürse tam tıkanma protokolüne geç`}]},
       {label:`Tam Tıkanma (ses yok)`, cls:'fb-no', nodes:[{t:'fn-drug', txt:`5 kez sırta vur + 5 kez karına bası uygula — cisim çıkana kadar devam et`}]}
     ]},{arrow:true},
-    {t:'fn-goto', txt:`Bilinç kaybı gelişirse → ARREST YÖNETİMİ ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-goto', txt:`Bilinç kaybı gelişirse → ARREST YÖNETİMİ ALGORİTMASINA GİT`, key:'arrest'},{arrow:true},
     {t:'fn-warning', txt:`Kısmi tıkanıklıkta sırta vurmak tam tıkanıklığa neden olabilir! Tam tıkanmada ileri hava yolu uygulamaları başarısız olursa iğne ile krikotirotomi yap`}
   ],
 
@@ -4341,7 +4430,7 @@ const PDF_FLOWS = {
         {t:'fn-action', txt:`Evet ise kordon sarkması koluna geç. Hayır ise: Yenidoğanı ASLA bacaklarından çekme, anneye ıkınmamasını söyle, önde gelen kısmı çekme destek ol`}
       ]}
     ]},{arrow:true},
-    {t:'fn-goto', txt:`Doğum gerçekleşmişse NORMAL YENİDOĞAN BAKIMI ve/veya YENİDOĞAN CANLANDIRMA ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-goto', txt:`Doğum gerçekleşmişse NORMAL YENİDOĞAN BAKIMI ve/veya YENİDOĞAN CANLANDIRMA ALGORİTMASINA GİT`, key:'yenidoganBakimNormal'},{arrow:true},
     {t:'fn-warning', txt:`Kanama kontrolü yap, kontraksiyonları takip et sıklığını not et, vital bulguları sık takip et`}
   ],
 
@@ -4383,26 +4472,26 @@ const PDF_FLOWS = {
     {t:'fn-warning', txt:`Hastayı engellemeye çalışma, nöbeti seyrine bırak. Yaralanmayı önlemek için başının altına yastık, katlanmış battaniye vb. yerleştir`},{arrow:true},
     {t:'fn-action', txt:`Mümkün olan en kısa zamanda AVPU, vital bulgular, ÇKS, oksijen satürasyonu, EKG izlenimi, patella refleksi kontrolü yap`},{arrow:true},
     {t:'fn-question', txt:`Kan şekerine bak`},{arrow:true},
-    {t:'fn-goto', txt:`Glikoz&lt;60mg/dL veya hipoglisemi bulguları varsa → DİYABETİK ACİLLER ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-goto', txt:`Glikoz&lt;60mg/dL veya hipoglisemi bulguları varsa → DİYABETİK ACİLLER ALGORİTMASINA GİT`, key:'hipoglisemi'},{arrow:true},
     {t:'fn-action', txt:`Hastayı sol yanına yatır`},{arrow:true},
     {t:'fn-drug', txt:`Nöbeti olan hastaya 4g MAGNEZYUM SÜLFAT IV bolus, 15-20dk'da (100mL içinde 4g hazır MgSO4 solüsyonu, maks 6g)`},{arrow:true},
     {t:'fn-drug', txt:`İdame: 4g MgSO4, 4 saatte gidecek (1-2g/saat)`},{arrow:true},
     {t:'fn-drug', txt:`MgSO4 ile nöbet durdurulamazsa: DİAZEPAM 5mg IV`},{arrow:true},
-    {t:'fn-goto', txt:`TA ≥160/110mmHg ise → GEBELİKTE AKUT HİPERTANSİYON YÖNETİMİ ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-goto', txt:`TA ≥160/110mmHg ise → GEBELİKTE AKUT HİPERTANSİYON YÖNETİMİ ALGORİTMASINA GİT`, key:'gebelikteAkutHT'},{arrow:true},
     {t:'fn-warning', txt:`Hazır solüsyon yoksa: 100mL %0,9 NaCl içine 3 ampul %15'lik MgSO4, 15-20dk'da IV bolus (200 damla/dk) gidecek şekilde gönder`}
   ],
 
   epiglotit: [
     {t:'fn-question', txt:`Bilinç açık mı?`},{arrow:true},
     {branch:[
-      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`}]},
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`, key:'arrest'}]},
       {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-question', txt:`Hasta ses çıkarıyor mu? (öksürük, inleme, konuşma)`}]}
     ]},{arrow:true},
     {branch:[
       {label:`Kısmi Tıkanma (ses var)`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Öksürmesini teşvik et, takip et. Tam tıkanmaya dönüşürse tam tıkanma protokolüne geç`}]},
       {label:`Tam Tıkanma (ses yok)`, cls:'fb-no', nodes:[{t:'fn-drug', txt:`5 kez sırta vur + 5 kez karına bası uygula — cisim çıkana kadar devam et`}]}
     ]},{arrow:true},
-    {t:'fn-goto', txt:`Bilinç kaybı gelişirse → ARREST YÖNETİMİ ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-goto', txt:`Bilinç kaybı gelişirse → ARREST YÖNETİMİ ALGORİTMASINA GİT`, key:'arrest'},{arrow:true},
     {t:'fn-warning', txt:`Kısmi tıkanıklıkta sırta vurmak tam tıkanıklığa neden olabilir! Tam tıkanmada ileri hava yolu uygulamaları başarısız olursa iğne ile krikotirotomi yap`}
   ],
 
@@ -4498,13 +4587,13 @@ const PDF_FLOWS = {
     ]},{arrow:true},
     {t:'fn-question', txt:`Ritim ve Nabzı Değerlendir`},{arrow:true},
     {branch:[
-      {label:`Şoklanır`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ŞOKLANIR RİTİM VF/nVT ALGORİTMASINA GİT`}]},
+      {label:`Şoklanır`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ŞOKLANIR RİTİM VF/nVT ALGORİTMASINA GİT`, key:'vf'}]},
       {label:`Şoklanamaz`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`ŞOKLANAMAZ RİTİM NEA/ASİSTOLİ ALGORİTMASINA GİT`}]}
     ]}
   ],
 
   vf: [
-    {t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINI UYGULA`},{arrow:true},
+    {t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINI UYGULA`, key:'arrest'},{arrow:true},
     {t:'fn-action', txt:`Göğüs basısına başla, oksijenizasyonu ve ventilasyonu sağla`},{arrow:true},
     {t:'fn-action', txt:`Şok hazır olana kadar KPR'ye ara verme`},{arrow:true},
     {t:'fn-drug', txt:`1. Defibrilasyon (120-360J; firma önerisine göre). Şok sonrası ara vermeden göğüs basısına devam et`},{arrow:true},
@@ -4513,21 +4602,21 @@ const PDF_FLOWS = {
     {t:'fn-action', txt:`2dk arayla ritmi ve nabzı değerlendir. İleri hava yolu uygulaması yap`},{arrow:true},
     {t:'fn-drug', txt:`VF/nVT devam ediyorsa → 3. Defibrilasyon, ara vermeden KPR'ye devam et. AMİODARON 300mg IV/IO bolus (20mL %5 dekstroz içinde, 2-3dk) veya %2 LİDOKAİN 1-1,5mg/kg IV/IO bolus. Tekrarlayan/dirençli VF/nVT'de 5. şoktan sonra AMİODARON 150mg IV/IO bolus (10mL %5 dekstroz, 2-3dk) veya %2 LİDOKAİN 0,5-0,75mg/kg tekrar ver`},{arrow:true},
     {branch:[
-      {label:`Ritim değişikliği / Nabız Var`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`RESÜSİTASYON SONRASI BAKIM ALGORİTMASINA GİT`}]},
-      {label:`Nabız Yok — Ritim Değişikliği Yok`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ŞOKLANAMAZ RİTİM (NEA/ASİSTOLİ) ALGORİTMASINA GİT`}]}
+      {label:`Ritim değişikliği / Nabız Var`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`RESÜSİTASYON SONRASI BAKIM ALGORİTMASINA GİT`, key:'rosc'}]},
+      {label:`Nabız Yok — Ritim Değişikliği Yok`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ŞOKLANAMAZ RİTİM (NEA/ASİSTOLİ) ALGORİTMASINA GİT`, key:'asistoli'}]}
     ]}
   ],
 
   asistoli: [
-    {t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINI UYGULA`},{arrow:true},
+    {t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINI UYGULA`, key:'arrest'},{arrow:true},
     {t:'fn-action', txt:`Göğüs basısına başla, oksijenizasyonu ve ventilasyonu sağla`},{arrow:true},
     {t:'fn-drug', txt:`ADRENALİN 1mg IV/IO 3-5dk arayla tekrarla (1/10000'lik)`},{arrow:true},
     {t:'fn-action', txt:`İleri hava yolu uygulaması yap`},{arrow:true},
     {t:'fn-action', txt:`2dk arayla ritmi ve nabzı değerlendir`},{arrow:true},
     {branch:[
-      {label:`Nabız Var`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`RESÜSİTASYON SONRASI BAKIM ALGORİTMASINA GİT`}]},
+      {label:`Nabız Var`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`RESÜSİTASYON SONRASI BAKIM ALGORİTMASINA GİT`, key:'rosc'}]},
       {label:`Nabız Yok — NEA/Asistoli devam`, cls:'fb-no', nodes:[{t:'fn-action', txt:`2dk boyunca KPR'ye devam et, döngüyü tekrarla`}]},
-      {label:`Nabız Yok — Ritim VF/nVT'ye döndü`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ŞOKLANIR RİTİM ALGORİTMASINA GİT`}]}
+      {label:`Nabız Yok — Ritim VF/nVT'ye döndü`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ŞOKLANIR RİTİM ALGORİTMASINA GİT`, key:'vf'}]}
     ]},{arrow:true},
     {t:'fn-warning', txt:`Geri döndürülebilir nedenler gözden geçirilmeli (5H5T)`}
   ],
@@ -4538,16 +4627,16 @@ const PDF_FLOWS = {
       {label:`Hipotansiyon (SKB&lt;90mmHg)`, cls:'fb-no', nodes:[
         {t:'fn-action', txt:`Hipotansiyon nedenlerini araştır. Hedef değer MAP≥65mmHg`},
         {t:'fn-drug', txt:`Hipotansiyon devam ediyorsa %0,9 NaCl infüzyonu ve/veya ADRENALİN 2-10mcg/dk IV infüzyon ya da DOPAMİN 5-20mcg/kg/dk IV infüzyon`},
-        {t:'fn-goto', txt:`Arrest tekrarında ilgili ritmin algoritmasına git`}
+        {t:'fn-goto', txt:`Arrest tekrarında ilgili ritmin algoritmasına git`, key:'arrest'}
       ]},
       {label:`Prematür Ventriküler Kontraksiyon`, cls:'fb-yes', nodes:[
         {t:'fn-action', txt:`Bigemine, coupletler, tripletler, R-on-T fenomeni, sürekli olmayan VT varlığı`},
         {t:'fn-drug', txt:`%2 LİDOKAİN IV bolus 1-1,5mg/kg veya AMİODARON 150mg IV (%5 dekstroz, 10dk'da)`}
       ]},
-      {label:`Bradiaritmi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`BRADİKARDİ ALGORİTMASINA GİT`}]},
-      {label:`Hipo/Hiperglisemi`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`DİYABETİK ACİLLER ALGORİTMASINA GİT`}]},
-      {label:`Taşiaritmi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`TAŞİARİTMİ ALGORİTMASINA GİT`}]},
-      {label:`Nöbet`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`}]}
+      {label:`Bradiaritmi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`BRADİKARDİ ALGORİTMASINA GİT`, key:'bradikardi'}]},
+      {label:`Hipo/Hiperglisemi`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`DİYABETİK ACİLLER ALGORİTMASINA GİT`, key:'hipoglisemi'}]},
+      {label:`Taşiaritmi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`TAŞİARİTMİ ALGORİTMASINA GİT`, key:'tasikardiDar'}]},
+      {label:`Nöbet`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`, key:'nobet'}]}
     ]}
   ],
 
@@ -4605,16 +4694,16 @@ const PDF_FLOWS = {
       {label:`Evet → Nabız Var mı?`, cls:'fb-yes', nodes:[{t:'fn-question', txt:`Nabız var mı?`}]}
     ]},{arrow:true},
     {branch:[
-      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT — mümkünse 2 büyük damar yolu aç, gerekirse kemik içi yol aç`}]},
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT — mümkünse 2 büyük damar yolu aç, gerekirse kemik içi yol aç`, key:'arrest'}]},
       {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`Hızlı %0,9 NaCl IV infüzyonu (20mL/kg) başla`}]}
     ]},{arrow:true},
     {t:'fn-question', txt:`Dolaşım stabil mi? (KGD&gt;2sn, Nabız&gt;120/dk, SKB&lt;90mmHg)`},{arrow:true},
     {branch:[
-      {label:`Hayır — Pelvis travması şüphesi`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Pelvisi sabitle`},{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`}]},
+      {label:`Hayır — Pelvis travması şüphesi`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Pelvisi sabitle`},{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`, key:'hipovolemikSokYetiskin'}]},
       {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-question', txt:`Bilinç normal mi? GKS=15, uyanık, basit komutlara uyuyor (Anizokori, midriyazis, pin-point pupil, taraf bulgusuna dikkat et)`}]}
     ]},{arrow:true},
     {branch:[
-      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`KAFA TRAVMALI HASTAYA YAKLAŞIM ALGORİTMASINA GİT`}]},
+      {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`KAFA TRAVMALI HASTAYA YAKLAŞIM ALGORİTMASINA GİT`, key:'kafaTravma'}]},
       {label:`Evet`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Tüm giysileri çıkararak vücut kontrolünü tamamla, hipotermiden koru`}]}
     ]},{arrow:true},
     {t:'fn-action', txt:`İkincil değerlendirmeyi tamamla (nakil sırasında), immobilizasyonu sürdür ve naklet`}
@@ -4643,11 +4732,11 @@ const PDF_FLOWS = {
     ]},{arrow:true},
     {t:'fn-action', txt:`Kan şekerini ölç`},{arrow:true},
     {branch:[
-      {label:`KŞ&lt;60 veya &gt;300mg/dL`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`DİYABETİK ACİLLER ALGORİTMASINA GİT`}]},
+      {label:`KŞ&lt;60 veya &gt;300mg/dL`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`DİYABETİK ACİLLER ALGORİTMASINA GİT`, key:'hipoglisemi'}]},
       {label:`60&lt;KŞ&lt;300mg/dL`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`IV sıvı tedavisine başla, SKB&gt;100mmHg olacak şekilde sıvı tedavisini sürdür`}]}
     ]},{arrow:true},
     {branch:[
-      {label:`Nöbet Varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`}]},
+      {label:`Nöbet Varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`, key:'nobet'}]},
       {label:`KİBAS Varsa`, cls:'fb-yes', nodes:[{t:'fn-warning', txt:`Hafif hiperventilasyon düşün`}]}
     ]}
   ],
@@ -4659,7 +4748,7 @@ const PDF_FLOWS = {
     {t:'fn-action', txt:`Damar yolu aç (DAKŞ)`},{arrow:true},
     {t:'fn-action', txt:`Kan glikoz seviyesini ölç`},{arrow:true},
     {branch:[
-      {label:`Glikoz&lt;60mg/dL / hipoglisemi bulguları`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`DİYABETİK ACİLLER ALGORİTMASINA GİT`}]},
+      {label:`Glikoz&lt;60mg/dL / hipoglisemi bulguları`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`DİYABETİK ACİLLER ALGORİTMASINA GİT`, key:'hipoglisemi'}]},
       {label:`Normoglisemi`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`BEFAST hastane öncesi inme skalası pozitif mi?`}]}
     ]},{arrow:true},
     {t:'fn-warning', txt:`BEFAST Hastane Öncesi İnme Skalası: B(balance) denge kaybı, E(eyes) bulanık görme, F(face) yüzde asimetri, A(arms) kollardan birinde güç kaybı, S(speech) konuşma bozukluğu, T(time) arama zamanı`},{arrow:true},
@@ -4675,7 +4764,7 @@ const PDF_FLOWS = {
     {t:'fn-action', txt:`Damar yolu aç (DAKŞ)`},{arrow:true},
     {t:'fn-action', txt:`Kan glikoz seviyesini ölç`},{arrow:true},
     {branch:[
-      {label:`Glikoz&lt;60mg/dL / hipoglisemi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`DİYABETİK ACİLLER ALGORİTMASINA GİT`}]},
+      {label:`Glikoz&lt;60mg/dL / hipoglisemi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`DİYABETİK ACİLLER ALGORİTMASINA GİT`, key:'hipoglisemi'}]},
       {label:`Normoglisemi`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Kardiyak monitörizasyon`}]}
     ]},{arrow:true},
     {t:'fn-warning', txt:`Hastayı engellemeye çalışma. Yaralanmayı önlemek için hastanın başının altına yastık, katlanmış battaniye vb. yerleştir`},{arrow:true},
@@ -4712,7 +4801,7 @@ const PDF_FLOWS = {
     {t:'fn-question', txt:`Glikoz &gt;300mg/dL`},{arrow:true},
     {t:'fn-drug', txt:`%0,9 NaCl IV infüzyon başla`},{arrow:true},
     {t:'fn-question', txt:`Şok ve dehidratasyon bulguları var mı?`},{arrow:true},
-    {t:'fn-goto', txt:`Varsa → HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-goto', txt:`Varsa → HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`, key:'hipovolemikSokYetiskin'},{arrow:true},
     {t:'fn-warning', txt:`SAHADA İNSÜLİN BAŞLANMAZ! Not: Glikoz &lt;60mg/dL saptanırsa Hipoglisemi algoritmasına geçilir.`}
   ],
 
@@ -4740,7 +4829,7 @@ const PDF_FLOWS = {
         {t:'fn-action', txt:`Aritmiden kaçınmak için immobilizasyonu sağla`}
       ]},
       {label:`Ağır Hipotermi (&lt;28°C, bilinç kapalı)`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Orta hipotermi tedavisine ek olarak hava yolu güvenliğini sağla`}]},
-      {label:`Hipotermik Kardiyak Arrest (bilinç kapalı, nabız yok)`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOTERMİDE ARREST YÖNETİMİ ALGORİTMASINA GİT`}]}
+      {label:`Hipotermik Kardiyak Arrest (bilinç kapalı, nabız yok)`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOTERMİDE ARREST YÖNETİMİ ALGORİTMASINA GİT`, key:'hipotermiArrestYetiskin'}]}
     ]}
   ],
 
@@ -4748,14 +4837,14 @@ const PDF_FLOWS = {
     {t:'fn-action', txt:`Acil olgu yönetimini uygula`},{arrow:true},
     {t:'fn-action', txt:`Vücut ısısı &lt;35°C ve bilinç kapalı ise en az 60sn nabız kontrolü yap`},{arrow:true},
     {branch:[
-      {label:`Nabız Var`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`HİPOTERMİ ALGORİTMASINA GİT`}]},
+      {label:`Nabız Var`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`HİPOTERMİ ALGORİTMASINA GİT`, key:'hipotermia'}]},
       {label:`Nabız Yok`, cls:'fb-no', nodes:[{t:'fn-question', txt:`KPR başlama kriterleri var mı?`}]}
     ]},{arrow:true},
     {branch:[
       {label:`Evet`, cls:'fb-yes', nodes:[
         {t:'fn-action', txt:`Standart erişkin ileri yaşam desteği uygulamasına başla. Eş zamanlı olarak pasif ve aktif ısıtma yöntemlerini uygula`},
         {t:'fn-action', txt:`Vücut ısısı ≥35°C olana kadar KPR'yi sonlandırma. Vücut ısısı &gt;35°C olduğunda`},
-        {t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`}
+        {t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`, key:'arrest'}
       ]},
       {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-action', txt:`KPR'ye başlama`}]}
     ]},{arrow:true},
@@ -4771,7 +4860,7 @@ const PDF_FLOWS = {
     ]},{arrow:true},
     {branch:[
       {label:`Spontan solunum geldi`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Maske ile oksijen ver`}]},
-      {label:`Solunum yok / Gasping solunum`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`}]}
+      {label:`Solunum yok / Gasping solunum`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`, key:'arrest'}]}
     ]}
   ],
 
@@ -4783,7 +4872,7 @@ const PDF_FLOWS = {
     {t:'fn-drug', txt:`Ringer Laktat başla`},{arrow:true},
     {t:'fn-question', txt:`Şok bulguları var mı?`},{arrow:true},
     {branch:[
-      {label:`Evet`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`}]},
+      {label:`Evet`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`, key:'hipovolemikSokYetiskin'}]},
       {label:`Hayır`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`Ağrı kontrolü için ANALJEZİK/FENTANİL — Fentanil için: 1mcg/kg IV yavaş, IM`}]}
     ]},{arrow:true},
     {t:'fn-action', txt:`Sıvı yüklemesi yap! 1 saatten daha kısa nakiller için 500mL Ringer Laktat; daha uzun süreli nakiller için PARKLAND formülü kullanılmalıdır`},{arrow:true},
@@ -4824,7 +4913,7 @@ const PDF_FLOWS = {
     {t:'fn-action', txt:`Göbek kordonu kesilene kadar mümkünse bebeği anne üzerine yatır`},{arrow:true},
     {t:'fn-drug', txt:`KARBETOSİN 100mcg/mL (IM veya IV, 1dk'dan kısa olmayacak şekilde yavaş puşe)`},{arrow:true},
     {t:'fn-action', txt:`30-60sn bekleyip göbek kordonunu klemple (ilk klemp bebekten ~10cm, ikinci klemp ilkinden 10cm uzaklıkta) klempler arasından kordonu kes`},{arrow:true},
-    {t:'fn-goto', txt:`NORMAL YENİDOĞAN BAKIMI ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-goto', txt:`NORMAL YENİDOĞAN BAKIMI ALGORİTMASINA GİT`, key:'yenidoganBakimNormal'},{arrow:true},
     {t:'fn-action', txt:`En kısa sürede anneyle tensel temas ve emzirmeyi sağla`},{arrow:true},
     {t:'fn-action', txt:`Perineal bölgeye steril ped koy. Annenin bacaklarını indir bir araya toplanmasına yardımcı ol. Plasenta ayrıldıktan sonra uterusu kontrol et; yumuşak ise uterin masaja başla (fundustan değil pubisin hemen üzerinden masaj yap)`},{arrow:true},
     {t:'fn-action', txt:`Doğum sonrası plasentanın çıkışını gözle, doğum zamanını kaydet. Anne, bebek ve plasentayı uygun hastaneye naklet`}
@@ -4837,7 +4926,7 @@ const PDF_FLOWS = {
       {label:`Hayır`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Kurula, Isıt, Uyaran ver, Pozisyon ver, gerekirse salgıları temizle`}]}
     ]},{arrow:true},
     {branch:[
-      {label:`Solunum yok, iç çekme tarzında solunum veya KH&lt;100/dk`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`YENİDOĞAN CANLANDIRMASI ALGORİTMASINA GİT`}]},
+      {label:`Solunum yok, iç çekme tarzında solunum veya KH&lt;100/dk`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`YENİDOĞAN CANLANDIRMASI ALGORİTMASINA GİT`, key:'yenidogan'}]},
       {label:`Solunum güçlüğü veya inatçı siyanoz`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Pozisyon ver ve hava yolunu temizle. SpO2 izle. Gerektikçe oksijen desteği, PBV`}]}
     ]},{arrow:true},
     {t:'fn-warning', txt:`32 hafta öncesi doğan bebeklerde ısı kaybını önlemek için yenidoğan, kurulama yapılmadan polietilen torba içerisine konur`}
@@ -4848,13 +4937,13 @@ const PDF_FLOWS = {
     {t:'fn-action', txt:`PBV uygula (40-60 soluk/dk). SpO2 izle, EKG izlemini düşün`},
     {t:'fn-warning', txt:`Eğer umblikal venöz yol açılmışsa IV yol olarak kullanılabilir`},{arrow:true},
     {branch:[
-      {label:`KAH ≥100/dk`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`NORMAL YENİDOĞAN BAKIMI ALGORİTMASINA GİT`}]},
+      {label:`KAH ≥100/dk`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`NORMAL YENİDOĞAN BAKIMI ALGORİTMASINA GİT`, key:'yenidoganBakimNormal'}]},
       {label:`KAH &lt;100/dk`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Göğüs hareketlerini kontrol et. Gerekirse ventilasyon düzeltici adımlar uygula. Gerekirse ETT veya laringeal maske uygula`}]}
     ]},{arrow:true},
     {t:'fn-question', txt:`KAH &lt;60 atım/dk?`},{arrow:true},
     {t:'fn-action', txt:`Henüz yapılmamışsa ETT veya LMA yerleştir. KPR'yi (%100 O2 ile eşgüdümlü PBV) başlat, EKG izlemini yap. Henüz açılmamışsa IV veya IO yol aç`},{arrow:true},
     {t:'fn-drug', txt:`KAH &lt;60 atım/dk devam ediyorsa: ADRENALİN 0,02mg/kg (1/10000'lik) IV uygula. KAH halen &lt;60 atım/dk ise hipovolemi ve/veya pnömotoraksı düşün`},{arrow:true},
-    {t:'fn-goto', txt:`KAH &lt;60 atım/dk devam ediyorsa ARREST YÖNETİMİ ALGORİTMASINA GİT`}
+    {t:'fn-goto', txt:`KAH &lt;60 atım/dk devam ediyorsa ARREST YÖNETİMİ ALGORİTMASINA GİT`, key:'arrest'}
   ],
 
   // ───────────── PEDİATRİK ─────────────
@@ -4904,12 +4993,12 @@ const PDF_FLOWS = {
   pedResusSonrasi: [
     {t:'fn-action', txt:`Yeniden Değerlendirme. Spontan solunumu yoksa SpO2 %94-98 olacak oksijenizasyon ve ventilasyonu sürdür (≤1yaş:30/dk, &gt;1yaş:20/dk). 2dk'da bir nabız ve ritim kontrolü. 12 derivasyonlu EKG. Vital bulguları değerlendir. 37,6°C üzeri ateşi kontrol et`},{arrow:true},
     {branch:[
-      {label:`Arrest tekrarında`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`}]},
-      {label:`Dolaşım yetmezliği`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`}]},
-      {label:`Hipoglisemi/Hiperglisemi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOGLİSEMİ/HİPERGLİSEMİ ALGORİTMASINA GİT`}]},
-      {label:`Bradikardi`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`BRADİKARDİ ALGORİTMASINA GİT`}]},
-      {label:`Taşikardi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`TAŞİKARDİ ALGORİTMASINA GİT`}]},
-      {label:`Nöbet`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`}]}
+      {label:`Arrest tekrarında`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`, key:'pediatrikArrest'}]},
+      {label:`Dolaşım yetmezliği`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`, key:'pedHipovolemikSok'}]},
+      {label:`Hipoglisemi/Hiperglisemi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOGLİSEMİ/HİPERGLİSEMİ ALGORİTMASINA GİT`, key:'pedHipoglisemi'}]},
+      {label:`Bradikardi`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`BRADİKARDİ ALGORİTMASINA GİT`, key:'pedBradikardi'}]},
+      {label:`Taşikardi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`TAŞİKARDİ ALGORİTMASINA GİT`, key:'pedTasikardiNabizli'}]},
+      {label:`Nöbet`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`, key:'pediatrikNobet'}]}
     ]}
   ],
 
@@ -4920,15 +5009,15 @@ const PDF_FLOWS = {
     {t:'fn-action', txt:`Damar yolu aç`},{arrow:true},
     {t:'fn-action', txt:`Kan şekerini ölç`},{arrow:true},
     {branch:[
-      {label:`&gt;300mg/dL`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPERGLİSEMİ ALGORİTMASINA GİT`}]},
-      {label:`&lt;60mg/dL (yenidoğanda&lt;40)`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOGLİSEMİ ALGORİTMASINA GİT`}]},
-      {label:`Dolaşım bozukluğu varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`}]},
+      {label:`&gt;300mg/dL`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPERGLİSEMİ ALGORİTMASINA GİT`, key:'pedHiperglisemi'}]},
+      {label:`&lt;60mg/dL (yenidoğanda&lt;40)`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOGLİSEMİ ALGORİTMASINA GİT`, key:'pedHipoglisemi'}]},
+      {label:`Dolaşım bozukluğu varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`, key:'pedHipovolemikSok'}]},
       {label:`Normoglisemi`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Değerlendirmeye devam et`}]}
     ]},{arrow:true},
     {branch:[
-      {label:`Hasta nöbet geçiriyorsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`}]},
-      {label:`Toksik madde alımı şüphesi`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`TOKSİKOLOJİ-ZEHİRLENME/DOZ AŞIMI ALGORİTMASINA GİT`}]},
-      {label:`Ateşi ölç, 38°C üzerindeyse`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ATEŞ YÖNETİMİ ALGORİTMASINA GİT`}]},
+      {label:`Hasta nöbet geçiriyorsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`, key:'pediatrikNobet'}]},
+      {label:`Toksik madde alımı şüphesi`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`TOKSİKOLOJİ-ZEHİRLENME/DOZ AŞIMI ALGORİTMASINA GİT`, key:'pedZehirlenmeDozAsimi'}]},
+      {label:`Ateşi ölç, 38°C üzerindeyse`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ATEŞ YÖNETİMİ ALGORİTMASINA GİT`, key:'pedAtesYonetimi'}]},
       {label:`Nörolojik değerlendirme`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Pupil, ışık reaksiyonu, taraf bulgusuna dikkat et, GKS takibi yap`}]}
     ]}
   ],
@@ -4938,7 +5027,7 @@ const PDF_FLOWS = {
     {t:'fn-action', txt:`Hava yolu açıklığını sağla (airway, aspirasyon), SpO2 %94-98 olacak oksijen ver, gerekirse PBV ile destekle. Monitörize et ve damar yolu aç`},{arrow:true},
     {t:'fn-action', txt:`Kan glikoz seviyesini ölç`},{arrow:true},
     {branch:[
-      {label:`Glikoz&lt;60mg/dL / hipoglisemi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOGLİSEMİ ALGORİTMASINA GİT`}]},
+      {label:`Glikoz&lt;60mg/dL / hipoglisemi`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOGLİSEMİ ALGORİTMASINA GİT`, key:'pedHipoglisemi'}]},
       {label:`Normoglisemi`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Ateş &gt;38°C ise eş zamanlı olarak ATEŞ YÖNETİMİ algoritmasını uygula`}]}
     ]},{arrow:true},
     {t:'fn-warning', txt:`Bukkal veya nazal midazolam kullanımı için anahtar noktalara bak`},{arrow:true},
@@ -4966,7 +5055,7 @@ const PDF_FLOWS = {
         {t:'fn-warning', txt:`Herhangi bir aşamada konvülziyon gelişirse → NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`}
       ]},
       {label:`Var — SKB&lt;100mmHg, SS&gt;22, GKS&lt;15`, cls:'fb-no', nodes:[
-        {t:'fn-goto', txt:`SEPTİK ŞOK ALGORİTMASINA GİT`},
+        {t:'fn-goto', txt:`SEPTİK ŞOK ALGORİTMASINA GİT`, key:'pedSeptikSok'},
         {t:'fn-warning', txt:`2 ay altında olan bebekleri sepsis ve septik şok açısından yakın takip et`}
       ]}
     ]}
@@ -4980,7 +5069,7 @@ const PDF_FLOWS = {
     {t:'fn-action', txt:`SpO2 %94-98 olacak şekilde O2 vermeye başla`},{arrow:true},
     {t:'fn-drug', txt:`%0,9 NaCl IV hidrasyon (20mL/kg) başla`},{arrow:true},
     {branch:[
-      {label:`Bilinç değişikliği ve şok bulguları varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`}]},
+      {label:`Bilinç değişikliği ve şok bulguları varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`, key:'pedHipovolemikSok'}]},
       {label:`Bilinç değişikliği yoksa`, cls:'fb-yes', nodes:[{t:'fn-action', txt:`Ağızdan sıvı ver`}]}
     ]}
   ],
@@ -4996,7 +5085,7 @@ const PDF_FLOWS = {
         {t:'fn-warning', txt:`&lt;32°C aktif dış ısıtma uygulamaları yap. &lt;32°C altında sarsıntılar kardiyak aritmileri tetikleyebileceğinden transport sırasında hastayı fazla hareket ettirme`},
         {t:'fn-action', txt:`Yakın vital bulgu ve kan şekeri takibi yap`}
       ]},
-      {label:`Nabız Yok`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOTERMİDE ARREST YÖNETİMİ ALGORİTMASINA GİT`}]}
+      {label:`Nabız Yok`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOTERMİDE ARREST YÖNETİMİ ALGORİTMASINA GİT`, key:'pedHipotermiArrest'}]}
     ]},{arrow:true},
     {t:'fn-warning', txt:`Yeniden ısıtma sırasında huzursuzluk, ağrı ve ajite durum varlığında analjezik düşün`}
   ],
@@ -5011,7 +5100,7 @@ const PDF_FLOWS = {
       {label:`Ritim NEA/Asistoli ise`, cls:'fb-no', nodes:[{t:'fn-action', txt:`KPR'yi sürdür, vücut ısısı 30°C üstüne çıkana kadar ilaç uygulaması yapma`}]}
     ]},{arrow:true},
     {t:'fn-action', txt:`KPR &gt;35°C oluncaya kadar devam ettir. Vücut ısısı &gt;35°C olunca`},{arrow:true},
-    {t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`},{arrow:true},
+    {t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`, key:'pediatrikArrest'},{arrow:true},
     {t:'fn-action', txt:`Arrest yönetimi sırasında pasif ısıtma ve/veya aktif dış ısıtma uygulamaları yap`},{arrow:true},
     {t:'fn-warning', txt:`Vücut ısısı &gt;35°C olana kadar adrenalin uygulama aralıkları uzatılabilir`}
   ],
@@ -5042,8 +5131,8 @@ const PDF_FLOWS = {
     {t:'fn-action', txt:`Hava yolu güvenliği, oksijenizasyon ve ventilasyonu sağla`},
     {branch:[{label:`Travma şüphesi varsa`, cls:'fb-no', nodes:[{t:'fn-action', txt:`Spinal stabilizasyon sağla`}]}]},{arrow:true},
     {t:'fn-action', txt:`Solunum yoksa / gasping solunum ise 5 kurtarıcı soluk ver`},{arrow:true},
-    {t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`},{arrow:true},
-    {branch:[{label:`Vücut ısısı&lt;35°C ise`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOTERMİ ALGORİTMASINA GİT`}]}]}
+    {t:'fn-goto', txt:`ARREST YÖNETİMİ ALGORİTMASINA GİT`, key:'pediatrikArrest'},{arrow:true},
+    {branch:[{label:`Vücut ısısı&lt;35°C ise`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOTERMİ ALGORİTMASINA GİT`, key:'pedHipotermi'}]}]}
   ],
 
   pedYanik: [
@@ -5057,7 +5146,7 @@ const PDF_FLOWS = {
     {t:'fn-drug', txt:`Ağrı kontrolü için ANALJEZİK/FENTANİL — Fentanil için: 1mcg/kg IV yavaş infüzyon, IM, SC`},{arrow:true},
     {t:'fn-question', txt:`Hipovolemik şok bulguları var mı?`},{arrow:true},
     {branch:[
-      {label:`Evet`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`}]},
+      {label:`Evet`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`, key:'pedHipovolemikSok'}]},
       {label:`Hayır`, cls:'fb-yes', nodes:[{t:'fn-drug', txt:`Yanık boyutuna göre sıvı yüklemesi yap: (3mL × yanmış VYA × kg) / 16 saatte Ringer Laktat`}]}
     ]},{arrow:true},
     {t:'fn-warning', txt:`Yanık merkezi/ünitesi olan merkeze nakil için SKKM/ÇM ile iletişime geçilmelidir`}
@@ -5070,13 +5159,13 @@ const PDF_FLOWS = {
     {t:'fn-action', txt:`Monitörize et`},
     {branch:[{label:`Aritmi varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`UYGUN RİTİM BOZUKLUĞU ALGORİTMASINA GİT`}]}]},{arrow:true},
     {t:'fn-action', txt:`Damar yolu aç`},
-    {branch:[{label:`Dolaşım bozukluğu bulguları varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`}]}]},{arrow:true},
+    {branch:[{label:`Dolaşım bozukluğu bulguları varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPOVOLEMİK ŞOK ALGORİTMASINA GİT`, key:'pedHipovolemikSok'}]}]},{arrow:true},
     {t:'fn-action', txt:`Kan şekerini ölç`},
-    {branch:[{label:`Normal sınırlar dışındaysa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPO/HİPERGLİSEMİ ALGORİTMASINA GİT`}]}]},{arrow:true},
+    {branch:[{label:`Normal sınırlar dışındaysa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`HİPO/HİPERGLİSEMİ ALGORİTMASINA GİT`, key:'pedHipoglisemi'}]}]},{arrow:true},
     {t:'fn-action', txt:`Vücut ısısını ölç`},
     {branch:[{label:`Anormal bulgu varsa`, cls:'fb-no', nodes:[{t:'fn-warning', txt:`Hipotermi ve hipertermiden koru`}]}]},{arrow:true},
     {t:'fn-action', txt:`Nörolojik değerlendirme yap (pupil takibi, ışık reaksiyonu), GKS takibi yap`},
-    {branch:[{label:`Nöbet varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`}]}]},{arrow:true},
+    {branch:[{label:`Nöbet varsa`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`NÖBET/KONVÜLZİYON ALGORİTMASINA GİT`, key:'pediatrikNobet'}]}]},{arrow:true},
     {t:'fn-drug', txt:`Opioid zehirlenmesi şüphesi varsa NALOKSON 0,1mg/kg IV/IM (Maks tek doz: 2mg, maks doz: 10mg) uygulamayı düşün`},{arrow:true},
     {t:'fn-drug', txt:`SKKM/ÇM ile temasa geç, UZEM yönergelerine göre hareket et`}
   ],
@@ -5091,10 +5180,10 @@ const PDF_FLOWS = {
     ]},{arrow:true},
     {t:'fn-question', txt:`Monitör hazır olur olmaz ritim ve nabzı değerlendir`},{arrow:true},
     {branch:[
-      {label:`Şoklanır Ritim`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ŞOKLANIR RİTİM VF/NABIZSIZ VT ALGORİTMASINA GİT`}]},
-      {label:`Şoklanamaz Ritim`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`ŞOKLANAMAZ RİTİM ASİSTOLİ/NEA ALGORİTMASINA GİT`}]}
+      {label:`Şoklanır Ritim`, cls:'fb-no', nodes:[{t:'fn-goto', txt:`ŞOKLANIR RİTİM VF/NABIZSIZ VT ALGORİTMASINA GİT`, key:'pedSoklanirRitim'}]},
+      {label:`Şoklanamaz Ritim`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`ŞOKLANAMAZ RİTİM ASİSTOLİ/NEA ALGORİTMASINA GİT`, key:'pedSoklanamazRitim'}]}
     ]},{arrow:true},
-    {branch:[{label:`Spontan dolaşım geri döndü`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`RESÜSİTASYON SONRASI BAKIM ALGORİTMASINA GİT`}]}]}
+    {branch:[{label:`Spontan dolaşım geri döndü`, cls:'fb-yes', nodes:[{t:'fn-goto', txt:`RESÜSİTASYON SONRASI BAKIM ALGORİTMASINA GİT`, key:'pedResusSonrasi'}]}]}
   ]
 };
 
@@ -6749,6 +6838,121 @@ function showDefibPads(){
   `);
 }
 
+// ======= EĞİTİM VİDEOLARI (Gerçek, resmi AHA videoları — internet gerektirir) =======
+function showVideoLinks(){
+  const videos = [
+    {t:'Nasıl KPR Yapılır (AHA — paramediklerle)', d:'American Heart Association resmi eğitim videosu', u:'https://www.youtube.com/watch?v=khzRoaSmkNo'},
+    {t:'KPR Eğitimi (AHA)', d:'American Heart Association resmi CPR eğitim videosu', u:'https://www.youtube.com/watch?v=RNWi4tF9uOA'},
+    {t:'AED Nasıl Kullanılır (Kızılhaç)', d:'American Red Cross resmi AED kullanım videosu', u:'https://www.youtube.com/watch?v=in8j2Q2z3HE'},
+    {t:'Erişkinde Boğulma — AHA Rehberi', d:'Güncel AHA yabancı cisim tıkanıklığı rehberi anlatımı', u:'https://www.youtube.com/watch?v=GG0_J48fTyQ'},
+    {t:'American Heart Association — Resmi Kanal', d:'Tüm resmi AHA eğitim videoları arşivi', u:'https://www.youtube.com/c/AmericanHeart'},
+  ];
+  const html = `
+    <div class="m-box warning">📶 Bu videolar YouTube üzerinden açılır — <strong>internet bağlantısı gerektirir</strong>. Sahada offline iseniz açılmaz, uygulamanın geri kalanı bundan etkilenmez.</div>
+    ${videos.map(v=>`
+      <a href="${v.u}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+        <div class="proto-card" style="margin-bottom:8px;">
+          <div class="proto-icon" style="background:rgba(220,38,38,0.2);color:#ef4444;">▶️</div>
+          <div class="proto-text"><h4>${v.t}</h4><p>${v.d}</p></div>
+          <i class="fas fa-arrow-up-right-from-square proto-arrow"></i>
+        </div>
+      </a>
+    `).join('')}
+    <div class="m-box info">💡 Kaynak: American Heart Association / American Red Cross resmi YouTube kanalları. Video içeriği Anthropic/Claude tarafından üretilmemiştir, yalnızca resmi kaynağa yönlendirme yapılmaktadır.</div>
+  `;
+  openModal('🎥 EĞİTİM VİDEOLARI (Resmi AHA/Kızılhaç)', html);
+}
+
+// ======= ANİMASYONLU KPR TEKNİĞİ GÖSTERİMİ (Offline, SVG) =======
+let cprDemoInterval = null;
+function showCprDemo(){
+  const html = `
+    <div style="text-align:center;">
+      <svg id="cprDemoSvg" viewBox="0 0 200 160" style="width:100%;max-width:260px;background:#050e1a;border-radius:12px;">
+        <ellipse cx="100" cy="110" rx="55" ry="22" fill="rgba(96,165,250,0.08)" stroke="rgba(148,163,184,0.3)" stroke-width="1"/>
+        <text x="100" y="140" font-size="8" fill="#64748b" text-anchor="middle">Göğüs (sert zemin üzerinde)</text>
+        <circle cx="100" cy="110" r="4" fill="#334155"/>
+        <text x="100" y="128" font-size="6.5" fill="#475569" text-anchor="middle">Sternum alt 1/3'ü</text>
+        <g id="cprHands">
+          <ellipse cx="100" cy="70" rx="20" ry="13" fill="rgba(234,179,8,0.35)" stroke="#eab308" stroke-width="1.5"/>
+          <ellipse cx="100" cy="63" rx="16" ry="10" fill="rgba(234,179,8,0.5)" stroke="#eab308" stroke-width="1.5"/>
+        </g>
+        <line id="cprArrow1" x1="80" y1="30" x2="80" y2="55" stroke="#4ade80" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <line id="cprArrow2" x1="120" y1="55" x2="120" y2="30" stroke="#ef4444" stroke-width="2" marker-end="url(#arrowhead2)"/>
+        <defs>
+          <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="3" refY="5" orient="auto"><path d="M0,0 L6,0 L3,6 Z" fill="#4ade80"/></marker>
+          <marker id="arrowhead2" markerWidth="6" markerHeight="6" refX="3" refY="0" orient="auto"><path d="M0,6 L6,6 L3,0 Z" fill="#ef4444"/></marker>
+        </defs>
+      </svg>
+      <div id="cprDemoLabel" style="font-size:0.85rem;font-weight:800;color:#4ade80;margin-top:8px;font-family:var(--font-mono);">BASKI — 5-6 cm</div>
+      <div style="font-size:0.55rem;color:var(--muted);margin-top:2px;">Hız: 100-120/dk — Her baskıdan sonra tam geri dönüş</div>
+    </div>
+    <div class="m-box info" style="margin-top:10px;">
+      <strong>Doğru teknik:</strong><br>
+      • İki el üst üste, parmaklar kenetli<br>
+      • Dirsekler düz, omuzlar ellerin tam üzerinde<br>
+      • Vücut ağırlığınızla bastırın, sadece kolla değil<br>
+      • Her baskıdan sonra göğsün tam geri gelmesine izin verin — üzerine yaslanmayın
+    </div>
+    <div class="m-box warning">⚠️ Bu offline animasyon gerçek bir eğitim videosunun yerini tutmaz — sertifikalı bir KPR/BLS kursuna katılmanız önerilir.</div>
+  `;
+  openModal('💓 KPR TEKNİĞİ — ANİMASYONLU GÖSTERİM', html);
+  let down = true;
+  if(cprDemoInterval) clearInterval(cprDemoInterval);
+  cprDemoInterval = setInterval(()=>{
+    const hands = document.getElementById('cprHands');
+    const label = document.getElementById('cprDemoLabel');
+    if(!hands || !label){ clearInterval(cprDemoInterval); return; }
+    down = !down;
+    hands.setAttribute('transform', down ? 'translate(0,10)' : 'translate(0,0)');
+    label.textContent = down ? 'BASKI — 5-6 cm' : 'GERİ DÖNÜŞ — Tam Geri Çekil';
+    label.style.color = down ? '#ef4444' : '#4ade80';
+  }, 500);
+}
+
+// ======= ANİMASYONLU HEIMLICH MANEVRASI GÖSTERİMİ (Offline, SVG) =======
+let heimlichDemoInterval = null;
+function showHeimlichDemo(){
+  const html = `
+    <div style="text-align:center;">
+      <svg id="heimlichSvg" viewBox="0 0 200 180" style="width:100%;max-width:240px;background:#050e1a;border-radius:12px;">
+        <ellipse cx="100" cy="60" rx="18" ry="20" fill="rgba(251,191,36,0.25)" stroke="#fbbf24" stroke-width="1.5"/>
+        <rect x="80" y="78" width="40" height="70" rx="16" fill="rgba(96,165,250,0.15)" stroke="#60a5fa" stroke-width="1.5"/>
+        <text x="100" y="165" font-size="7" fill="#64748b" text-anchor="middle">Hasta (öne eğik, öksüremiyor)</text>
+        <g id="heimlichHands">
+          <ellipse cx="100" cy="115" rx="14" ry="10" fill="rgba(239,68,68,0.4)" stroke="#ef4444" stroke-width="1.5"/>
+          <circle cx="100" cy="115" r="4" fill="#fecaca"/>
+        </g>
+        <text id="heimlichPoint" x="100" y="98" font-size="6.5" fill="#fca5a5" text-anchor="middle">Göbek üstü, kaburca altı</text>
+      </svg>
+      <div id="heimlichLabel" style="font-size:0.85rem;font-weight:800;color:#fca5a5;margin-top:8px;font-family:var(--font-mono);">İÇE VE YUKARI İT</div>
+      <div style="font-size:0.55rem;color:var(--muted);margin-top:2px;">Cisim çıkana veya bilinç kaybolana kadar tekrarla</div>
+    </div>
+    <div class="m-box info" style="margin-top:10px;">
+      <strong>Erişkinde adım adım:</strong><br>
+      1. Arkasına geçin, hafifçe öne eğin<br>
+      2. Yumruk yapıp göbek deliği üstü-kaburga altına yerleştirin<br>
+      3. Diğer elinizle yumruğu kavrayın<br>
+      4. İçe ve yukarı doğru sert biçimde itin<br>
+      5. Cisim çıkana kadar tekrarlayın
+    </div>
+    <div class="m-box warning">⚠️ Bebekte (1 yaş altı) Heimlich UYGULANMAZ — 5 sırt vuruşu + 5 göğüs basısı yapılır. Bilinç kaybolursa KPR'ye geçin.</div>
+  `;
+  openModal('🫂 HEIMLICH MANEVRASI — ANİMASYONLU GÖSTERİM', html);
+  let phase = 0;
+  const labels = ['İÇE VE YUKARI İT','GEVŞET — Elleri Yeniden Yerleştir'];
+  if(heimlichDemoInterval) clearInterval(heimlichDemoInterval);
+  heimlichDemoInterval = setInterval(()=>{
+    const hands = document.getElementById('heimlichHands');
+    const label = document.getElementById('heimlichLabel');
+    if(!hands || !label){ clearInterval(heimlichDemoInterval); return; }
+    phase = phase === 0 ? 1 : 0;
+    hands.setAttribute('transform', phase===0 ? 'translate(0,-8) scale(1.1)' : 'translate(0,0) scale(1)');
+    label.textContent = labels[phase];
+    label.style.color = phase===0 ? '#ef4444' : '#93c5fd';
+  }, 600);
+}
+
 // ======= VAKA KAYIT — CSV DIŞA AKTARMA =======
 function exportVakaCSV(){
   const vakalar = getVakalar();
@@ -6771,11 +6975,19 @@ function exportVakaCSV(){
 
 // ======= AHA 2025 ALGORİTMALARI (Flowchart Modal) =======
 const AHA_ALGOS = {
-  bls_adult:{title:'💔 Erişkin BLS — AHA 2025',badges:[{t:'100-120/dk',c:'ab-red'},{t:'5-6 cm',c:'ab-blue'},{t:'30:2',c:'ab-green'},{t:'AED hemen',c:'ab-yellow'}],note:'⭐ Dispatcher KPR talimatı zorunlu. SpO2 ile O2 titrasyonu. Kapnografi ile KPR kalite kontrolü.',flow:[{t:'fn-start',txt:'🚨 YANIT YOK & NORMAL NEFES YOK'},{arrow:true},{t:'fn-action',txt:'📞 112\u2019yi Ara / AED Getirt',bullets:['Çevreyi güvenli hale getir','Başka kurtarıcı varsa CPR başlatsın']},{arrow:true},{t:'fn-action',txt:'💓 GÖĞÜS KOMPRESYONU',bullets:['Hız: 100–120/dk','Derinlik: 5–6 cm','Tam geri dönüş','Aralık <10 sn']},{arrow:true},{t:'fn-shock',txt:'⚡ AED BAĞLA — Analiz Et\nŞok endikasyonunda ŞOK VER\nHemen KPR devam'},{arrow:true},{t:'fn-action',txt:'🔄 Her 2 dk ritim kontrolü\nİleri destek gelene kadar devam'}]},
-  als_vfvt:{title:'⚡ VF / Nabızsız VT',badges:[{t:'Şoklanabilir',c:'ab-purple'},{t:'Adrenalin 1mg/3-5dk',c:'ab-red'},{t:'Amiodaron 300mg',c:'ab-blue'},{t:'3.şoktan sonra ilaç',c:'ab-yellow'}],note:'⭐ Defibrilasyon mümkün en kısa sürede. Adrenalin 3.şoktan sonra başlanır.',flow:[{t:'fn-start',txt:'🔴 VF / NABIPSIZ VT'},{arrow:true},{t:'fn-shock',txt:'⚡ DEFİBRİLASYON\nBifazik: 120–200J | Monofazik: 360J'},{arrow:true},{t:'fn-action',txt:'🔄 Hemen KPR 2 dk + IV/IO Erişim'},{arrow:true},{t:'fn-decision',txt:'Ritim kontrolü — VF/VT devam ediyor mu?'},{branch:[{label:'✅ 2.ŞOK',cls:'fb-yes',nodes:[{t:'fn-shock',txt:'⚡ 2. ŞOK VER\nKPR 2 dk'}]},{label:'⚡ 3.ŞOK+İLAÇ',cls:'fb-yes',nodes:[{t:'fn-drug',txt:'💉 ADRENALİN 1mg IV (Her 3-5dk)\n💊 AMİODARON 300mg\nveya Lidokain 1-1.5mg/kg'}]}]},{arrow:true},{t:'fn-action',txt:'🔬 5H 5T Nedenlerini Ara',bullets:['Hipoksi, Hipovolemi','Hipo/Hiperkalemi, Hipotermi, H⁺','Tansiyon Pnömotoraks, Tamponad','Tromboz PE/AKS, Toksinler']},{arrow:true},{t:'fn-success',txt:'💚 ROSC → Post-Resüsitasyon'}]},
-  als_pea:{title:'📉 PEA / Asistoli',badges:[{t:'Non-Şoklanabilir',c:'ab-blue'},{t:'Adrenalin 1mg hemen',c:'ab-red'},{t:'ŞOK VERİLMEZ',c:'ab-yellow'}],note:'⭐ PEA/Asistolide şok yoktur! ETCO₂ >10 mmHg KPR kalite göstergesi.',flow:[{t:'fn-start',txt:'🔵 PEA / ASİSTOLİ\n(Non-Şoklanabilir)'},{arrow:true},{t:'fn-action',txt:'🔄 KPR 2 dk + IV/IO Erişim'},{arrow:true},{t:'fn-drug',txt:'💉 ADRENALİN 1mg IV/IO\nHemen & Her 3-5 dk'},{arrow:true},{t:'fn-action',txt:'🫁 İleri Hava Yolu',bullets:['ETCO₂ >10 mmHg hedef','10 vent/dk asenkron','Hiperventilasyondan kaçın']},{arrow:true},{t:'fn-decision',txt:'🔬 5H 5T Ara',bullets:['Hipoksi→O2','Hipovolemi→Sıvı','H⁺→NaHCO₃?','Hipo/Hiperkalemi','Hipotermi→Isıt','Tansiyon Pnömo→İğne','Tamponad→Perikardiyosentez','Tromboz PE→TPA','Tromboz AKS→PCI','Toksinler→Antidot']},{arrow:true},{t:'fn-decision',txt:'2dk sonra ritim kontrolü'},{branch:[{label:'⚡ VF/VT',cls:'fb-yes',nodes:[{t:'fn-shock',txt:'VF/VT → ŞOK VER'}]},{label:'📉 PEA/Asist.',cls:'fb-no',nodes:[{t:'fn-action',txt:'KPR devam\nAdrenalin tekrar'}]}]},{arrow:true},{t:'fn-success',txt:'💚 ROSC → Post-Resüsitasyon'}]},
-  rosc:{title:'💚 Post-Resüsitasyon (ROSC)',badges:[{t:'SpO2 %94-98',c:'ab-green'},{t:'ETCO₂ 35-45',c:'ab-blue'},{t:'TTM 32-36°C',c:'ab-yellow'},{t:'STEMI→PCI',c:'ab-red'}],note:'⭐ Hiperoksiden kaçın! SpO2 %94-98. Nörolojik prognoz en erken 72 saat sonra.',flow:[{t:'fn-success',txt:'💚 ROSC SAĞLANDI'},{arrow:true},{t:'fn-action',txt:'🫁 OKSİJENASYON',bullets:['SpO2 %94–98 (Hiperoksiden kaçın!)','ETCO₂ 35–45 mmHg','Normokapni hedef']},{arrow:true},{t:'fn-action',txt:'🩺 HEMODİNAMİK DESTEK',bullets:['SKB ≥90 mmHg | MAB ≥65 mmHg','Kristaloid bolus','Vazopresör: Norepinefrin/Dopamin']},{arrow:true},{t:'fn-decision',txt:'12-lead EKG — STEMI?'},{branch:[{label:'✅ STEMI',cls:'fb-yes',nodes:[{t:'fn-warning',txt:'🏥 ACİL PCI\nKateter lab aktivasyonu'}]},{label:'❌ YOK',cls:'fb-no',nodes:[{t:'fn-action',txt:'Koroner anjiyografi\ngörüşmesi yap'}]}]},{arrow:true},{t:'fn-action',txt:'🌡️ TTM',bullets:['32–36°C arası seç','Min 24 saat','Titreme kontrolü','Hipertermi >37.8°C önle']},{arrow:true},{t:'fn-action',txt:'🧠 NÖROLOJİK PROGNOZ',bullets:['En erken 72 saat','EEG, SSEP, BT/MRI','Erken DNR kararından kaçın']}]},
-  ped_bls:{title:'👶 Pediatrik BLS',badges:[{t:'30:2 (1 kurtarıcı)',c:'ab-blue'},{t:'15:2 (2 kurtarıcı)',c:'ab-green'},{t:'0.01mg/kg Adrenalin',c:'ab-red'},{t:'Solunum öncelikli',c:'ab-yellow'}],note:'⭐ Çocuk arrestinin ana nedeni solunum yetmezliği! İlk 5 nefes kritik.',flow:[{t:'fn-start',txt:'🚨 YANIT YOK — BEBEK/ÇOCUK'},{arrow:true},{t:'fn-decision',txt:'Normal nefes var mı?'},{branch:[{label:'✅ VAR',cls:'fb-yes',nodes:[{t:'fn-action',txt:'Recovery pozisyon\nİzle & Hastane'}]},{label:'❌ YOK',cls:'fb-no',nodes:[{t:'fn-action',txt:'5 KURTARICI NEFES\n(İlk ventilasyon)'}]}]},{arrow:true},{t:'fn-action',txt:'💓 KPR BAŞLAT',bullets:['1 Kurtarıcı: 30:2','2 Kurtarıcı: 15:2','Bebek: 2 parmak (sternum alt 1/3)','Çocuk: 1-2 el — göğüs 1/3']},{arrow:true},{t:'fn-shock',txt:'⚡ AED — Pediatrik pedler\n>8 yaş veya >25kg → Yetişkin ped'},{arrow:true},{t:'fn-drug',txt:'💉 ADRENALİN: 0.01 mg/kg IV/IO\nMaks: 1 mg/doz | Her 3-5 dk'},{arrow:true},{t:'fn-success',txt:'💚 ROSC → Pediatrik YBÜ'}]},
+  bls_adult:{title:'💔 Erişkin BLS — AHA 2025 (Ekim 2025 Kılavuzu)',badges:[{t:'100-120/dk',c:'ab-red'},{t:'5-6 cm',c:'ab-blue'},{t:'30:2',c:'ab-green'},{t:'AED hemen',c:'ab-yellow'},{t:'Tek Chain of Survival',c:'ab-purple'}],note:`⭐ 2025 güncellemesi: Artık TÜM yaş ve ortamlar (hastane içi/dışı, erişkin/pediatrik) için TEK BİR "Chain of Survival" modeli kullanılıyor — "iyileşme" (recovery) zinciri de bu modele eklendi. Dispatcher KPR talimatı zorunlu. Mekanik KPR cihazları rutin önerilmiyor, sadece manuel KPR'ın zorlaştığı özel durumlarda (nakil, personel yetersizliği) düşünülür.`,flow:[{t:'fn-start',txt:'🚨 YANIT YOK & NORMAL NEFES YOK'},{arrow:true},{t:'fn-action',txt:'📞 112\\u2019yi Ara / AED Getirt',bullets:['Çevreyi güvenli hale getir','Başka kurtarıcı varsa CPR başlatsın','Nabız kontrolü ≤10sn (uzatma)']},{arrow:true},{t:'fn-action',txt:'💓 GÖĞÜS KOMPRESYONU',bullets:['Hız: 100–120/dk','Derinlik: 5–6 cm, tam geri dönüş','Sert zemin, dirsekler düz','Kesinti <10sn tutulmalı','Nefesli/nefessiz: istekli ve yeterli ise 30:2']},{arrow:true},{t:'fn-shock',txt:'⚡ AED BAĞLA — Analiz Et\nŞok endikasyonunda TEK ŞOK VER (yığın şok değil)\nŞok sonrası hemen KPR devam'},{arrow:true},{t:'fn-action',txt:'🔄 Her 2 dk kısa ritim kontrolü\nİleri destek (112/ekip) gelene kadar devam\nFeedback cihazı varsa kalite takibi yap'}]},
+  als_vfvt:{title:'⚡ VF / Nabızsız VT — AHA 2025',badges:[{t:'Şoklanabilir',c:'ab-purple'},{t:'Adrenalin: 1. şok başarısız olursa',c:'ab-red'},{t:'Amiodaron 300mg',c:'ab-blue'},{t:'Tek şok + KPR',c:'ab-yellow'}],note:'⭐ 2025 GÜNCEL: Adrenalin artık "3. şoktan sonra" DEĞİL — ilk defibrilasyon denemesi BAŞARISIZ olur olmaz verilir (genelde 1-2. şok sonrası). Yığın şok (stacked shock) yerine TEK şok + hemen KPR. Rutin kalsiyum, sodyum bikarbonat, steroid ÖNERİLMİYOR. Vazopresin adrenalin yerine/ek olarak önerilmiyor. Vektör değişimi ve çift eşzamanlı defibrilasyon (DSED) rutin kullanım için kanıt yetersiz.',flow:[{t:'fn-start',txt:'🔴 VF / NABIZSIZ VT'},{arrow:true},{t:'fn-shock',txt:'⚡ 1. DEFİBRİLASYON (Tek şok)\nBifazik: 120–200J | Monofazik: 360J'},{arrow:true},{t:'fn-action',txt:'🔄 Hemen KPR 2 dk + IV/IO Erişim (IV tercih, IO yedek)'},{arrow:true},{t:'fn-decision',txt:'Ritim kontrolü — VF/VT devam ediyor mu?'},{branch:[{label:'✅ Devam Ediyor',cls:'fb-yes',nodes:[
+    {t:'fn-shock',txt:'⚡ 2. ŞOK VER → Hemen KPR'},
+    {t:'fn-drug',txt:'💉 Bu noktadan itibaren: ADRENALİN 1mg IV/IO (ilk doz — defibrilasyon başarısız oldu), her 3-5dk tekrar'},
+  ]},{label:'❌ Devam Etmiyor',cls:'fb-no',nodes:[{t:'fn-success',txt:'Organize ritim/nabız kontrolü → ROSC değerlendir'}]}]},{arrow:true},
+  {t:'fn-decision',txt:'Refrakter VF/VT devam ederse (3. şoktan itibaren)'},{arrow:true},
+  {t:'fn-drug',txt:'💊 AMİODARON 300mg IV/IO bolus (tekrar gerekirse 150mg) VEYA LİDOKAİN 1-1.5mg/kg IV/IO — ikisi eşdeğer kabul edilir, biri seçilir'},{arrow:true},
+  {t:'fn-action',txt:'🔬 5H 5T Nedenlerini Ara',bullets:['Hipoksi, Hipovolemi','Hipo/Hiperkalemi, Hidrojen (asidoz), Hipotermi','Tansiyon Pnömotoraks, Tamponad','Tromboz PE/AKS, Toksinler']},{arrow:true},
+  {t:'fn-warning',txt:'⚠️ Rutin uygulanmaz: Kalsiyum, NaHCO3, yüksek doz adrenalin, vazopresin+adrenalin kombinasyonu, rutin mekanik KPR cihazı'},{arrow:true},
+  {t:'fn-success',txt:'💚 ROSC → Post-Resüsitasyon Bakımına Geç'}]},
+  als_pea:{title:'📉 PEA / Asistoli — AHA 2025',badges:[{t:'Non-Şoklanabilir',c:'ab-blue'},{t:'Adrenalin: En erken',c:'ab-red'},{t:'ŞOK VERİLMEZ',c:'ab-yellow'},{t:'IV > IO tercih',c:'ab-purple'}],note:'⭐ 2025 GÜNCEL: Non-şoklanabilir ritimde adrenalin mümkün olan EN ERKEN verilir (gecikme her dakika sağkalımı düşürür — pediatride ilk 3 dakika hedeflenir). ETCO₂ >10mmHg KPR kalite göstergesi olmaya devam ediyor. Rutin kalsiyum/bikarbonat hâlâ önerilmiyor.',flow:[{t:'fn-start',txt:'🔵 PEA / ASİSTOLİ\n(Non-Şoklanabilir)'},{arrow:true},{t:'fn-action',txt:'🔄 KPR 2 dk + IV/IO Erişim (IV mümkünse tercih et)'},{arrow:true},{t:'fn-drug',txt:'💉 ADRENALİN 1mg IV/IO\nMÜMKÜN OLAN EN ERKEN (geciktirme!) & Her 3-5 dk tekrar'},{arrow:true},{t:'fn-action',txt:'🫁 İleri Hava Yolu (gerektiğinde)',bullets:['ETCO₂ >10 mmHg hedef','10 vent/dk asenkron','Hiperventilasyondan kaçın']},{arrow:true},{t:'fn-action',txt:'🔬 5H 5T Ara ve Tedavi Et',bullets:['Hipoksi→O2','Hipovolemi→Sıvı','Hipo/Hiperkalemi','Hipotermi→Isıt','Tansiyon Pnömo→İğne','Tamponad→Perikardiyosentez','Tromboz PE→Fibrinolitik','Toksinler→Antidot']},{arrow:true},{t:'fn-warning',txt:'⚠️ Rutin uygulanmaz: NaHCO3, kalsiyum, atropin (artık PEA/asistolide önerilmiyor)'},{arrow:true},{t:'fn-decision',txt:'2dk sonra ritim kontrolü'},{branch:[{label:'⚡ VF/VT\'ye döndü',cls:'fb-yes',nodes:[{t:'fn-shock',txt:'VF/VT → ŞOK VER'}]},{label:'📉 PEA/Asist. devam',cls:'fb-no',nodes:[{t:'fn-action',txt:'KPR devam\nAdrenalin 3-5dk\'da tekrar'}]}]},{arrow:true},{t:'fn-success',txt:'💚 ROSC → Post-Resüsitasyon Bakımına Geç'}]},
+  rosc:{title:'💚 Post-Resüsitasyon (ROSC) — AHA 2025',badges:[{t:'SpO2 %94-98',c:'ab-green'},{t:'ETCO₂ 35-45',c:'ab-blue'},{t:'TTM 32-36°C',c:'ab-yellow'},{t:'STEMI→PCI',c:'ab-red'},{t:'Recovery zinciri',c:'ab-purple'}],note:'⭐ 2025: ROSC sonrası bakım artık tek "Chain of Survival" modelinin resmi bir halkası — "iyileşme" (recovery) süreci de zincire dahil edildi (hasta/aile desteği, rehabilitasyon planı dahil). Hiperoksiden kaçının: SpO2 %94-98 hedeflenir, %100 O2 rutin verilmez. Nörolojik prognoz kararı en erken 72 saat sonra, çoklu yöntemle (EEG+SSEP+görüntüleme) verilir — erken karamsar prognoz asla tek testle konulmaz.',flow:[{t:'fn-success',txt:'💚 ROSC SAĞLANDI'},{arrow:true},{t:'fn-action',txt:'🫁 OKSİJENASYON VE VENTİLASYON',bullets:['SpO2 %94–98 (Hiperoksiden kaçın!)','ETCO₂ 35–45 mmHg, normokapni','Akciğer koruyucu ventilasyon (düşük tidal volüm)']},{arrow:true},{t:'fn-action',txt:'🩺 HEMODİNAMİK DESTEK',bullets:['SKB ≥90 mmHg | MAB ≥65 mmHg','Kristaloid bolus ile başla','Yanıt yoksa Norepinefrin ilk tercih vazopresör']},{arrow:true},{t:'fn-decision',txt:'12-lead EKG çek — STEMI var mı?'},{branch:[{label:'✅ STEMI',cls:'fb-yes',nodes:[{t:'fn-warning',txt:'🏥 ACİL PCI\nKateter lab aktivasyonu — kapı-balon hedefi'}]},{label:'❌ YOK ama şüphe var',cls:'fb-no',nodes:[{t:'fn-action',txt:'Kardiyoloji ile görüş\nAcil anjiyografi endikasyonunu değerlendir'}]}]},{arrow:true},{t:'fn-action',txt:'🌡️ HEDEFLİ SICAKLIK YÖNETİMİ (TTM)',bullets:['32–36°C arası bir hedef seç ve sabit tut','Minimum 24 saat sürdür','Titremeyi kontrol et (sedasyon/paralizi)','Ateşten (>37.8°C) aktif olarak koru']},{arrow:true},{t:'fn-action',txt:'🧠 NÖROLOJİK PROGNOZ VE İYİLEŞME',bullets:['Prognoz kararı en erken 72 saat sonra','Tek teste dayanma — EEG+SSEP+BT/MRI birlikte','Erken DNR kararından kaçın','İyileşme (recovery) planı: rehabilitasyon, psikolojik destek, aile bilgilendirmesi']}]},
+  ped_bls:{title:'👶 Pediatrik BLS — AHA 2025',badges:[{t:'30:2 (1 kurtarıcı)',c:'ab-blue'},{t:'15:2 (2 kurtarıcı)',c:'ab-green'},{t:'0.01mg/kg Adrenalin',c:'ab-red'},{t:'Solunum öncelikli',c:'ab-yellow'},{t:'İlk 3dk kritik',c:'ab-purple'}],note:`⭐ 2025: Çocuk arrestinin ana nedeni solunum yetmezliği! İlk 5 nefes kritik. Non-şoklanabilir ritimde adrenalin İLK DOZ mümkün olduğunca erken verilmeli — çalışmalar 3 dakikadan kısa sürede ilk doz verilen hastalarda en yüksek olumlu sonuç oranını gösteriyor. Vasküler erişim için mükemmeliyet arayışıyla zaman kaybetmeyin, gerekirse IO'ya hızla geçin.`,flow:[{t:'fn-start',txt:'🚨 YANIT YOK — BEBEK/ÇOCUK'},{arrow:true},{t:'fn-decision',txt:'Normal nefes var mı?'},{branch:[{label:'✅ VAR',cls:'fb-yes',nodes:[{t:'fn-action',txt:'Recovery pozisyon\nİzle & Hastane'}]},{label:'❌ YOK',cls:'fb-no',nodes:[{t:'fn-action',txt:'5 KURTARICI NEFES\n(İlk ventilasyon — solunum arresti önceliği)'}]}]},{arrow:true},{t:'fn-action',txt:'💓 KPR BAŞLAT',bullets:['1 Kurtarıcı: 30:2','2 Kurtarıcı: 15:2','Bebek: 2 parmak veya 2 baş parmak-çevreleyen eller (sternum alt 1/3)',"Çocuk: 1-2 el — göğüs ön-arka çapının 1/3'ü kadar bastır"]},{arrow:true},{t:'fn-shock',txt:'⚡ AED — Pediatrik pedler/attenüatör\n>8 yaş veya >25kg → Yetişkin ped kullan'},{arrow:true},{t:'fn-drug',txt:'💉 ADRENALİN: 0.01 mg/kg IV/IO\nMaks: 1 mg/doz | İLK DOZU MÜMKÜN OLAN EN ERKEN ver (hedef <3dk), her 3-5 dk tekrar'},{arrow:true},{t:'fn-action',txt:'🔬 Geri Döndürülebilir Nedenleri Ara',bullets:['Hipoksi en sık neden — havayolu/ventilasyonu doğrula','Hipovolemi, Hipo/Hiperkalemi','Tansiyon pnömotoraks, Tamponad, Toksinler']},{arrow:true},{t:'fn-success',txt:'💚 ROSC → Pediatrik YBÜ, hedefli sıcaklık yönetimi düşün'}]},
   opioid:{title:'💊 Opioid Aşırı Doz',badges:[{t:'Nalokson 0.4-2mg',c:'ab-green'},{t:'IM/IN/IV',c:'ab-blue'},{t:'Takip şart',c:'ab-red'}],note:'⭐ Toplum bazlı nalokson dağıtımı önerilmekte.',flow:[{t:'fn-start',txt:'🚨 OPİOİD AŞIRI DOZ\n(Miozis, bilinç kaybı, solunum dep.)'},{arrow:true},{t:'fn-decision',txt:'Normal nefes var mı?'},{branch:[{label:'✅ VAR',cls:'fb-yes',nodes:[{t:'fn-action',txt:'Nalokson ver\nİzle — Hastane'}]},{label:'❌ YOK',cls:'fb-no',nodes:[{t:'fn-action',txt:'5 Kurtarıcı nefes ver'}]}]},{arrow:true},{t:'fn-drug',txt:'💉 NALOKSON',bullets:['IM/IN: 0.4–2 mg (erişkin)','IV: 0.04 mg titre et','Tekrar: 2–3 dk sonra','Çocuk: 0.01 mg/kg IM']},{arrow:true},{t:'fn-decision',txt:'2–3 dk içinde yanıt var mı?'},{branch:[{label:'✅ YANIT',cls:'fb-yes',nodes:[{t:'fn-action',txt:'Monitörize — 112\nTekrar baskılanma riski!'}]},{label:'❌ YOK',cls:'fb-no',nodes:[{t:'fn-action',txt:'Nabız kontrol\nKPR protokolüne geç'}]}]},{arrow:true},{t:'fn-warning',txt:'⚠️ Nalokson yarı ömrü 30-90 dk!\nHer hasta hastane takibine'}]}
 };
 
@@ -6787,13 +6999,18 @@ function buildFlow(flow){
       h+='<div class="flow-branch">';
       item.branch.forEach(br=>{
         h+=`<div><div class="flow-branch-label ${br.cls}">${br.label}</div>`;
-        br.nodes.forEach(n=>{let nt=n.txt.replace(/\n/g,'<br>');if(n.bullets)nt+='<ul>'+n.bullets.map(b=>`<li>${b}</li>`).join('')+'</ul>';h+=`<div class="flow-node ${n.t}" style="margin-bottom:5px;">${nt}</div>`;});
+        br.nodes.forEach(n=>{
+          let nt=n.txt.replace(/\n/g,'<br>');if(n.bullets)nt+='<ul>'+n.bullets.map(b=>`<li>${b}</li>`).join('')+'</ul>';
+          if(n.key){h+=`<div class="flow-node ${n.t} flow-node-clickable" style="margin-bottom:5px;" onclick="event.stopPropagation();showAlgo('${n.key}')">${nt} <span class="flow-goto-hint">↗ Aç</span></div>`;}
+          else{h+=`<div class="flow-node ${n.t}" style="margin-bottom:5px;">${nt}</div>`;}
+        });
         h+='</div>';
       });
       h+='</div>';
     } else {
       let nt=item.txt.replace(/\n/g,'<br>');if(item.bullets)nt+='<ul>'+item.bullets.map(b=>`<li>${b}</li>`).join('')+'</ul>';
-      h+=`<div class="flow-node ${item.t}">${nt}</div>`;
+      if(item.key){h+=`<div class="flow-node ${item.t} flow-node-clickable" onclick="event.stopPropagation();showAlgo('${item.key}')">${nt} <span class="flow-goto-hint">↗ Aç</span></div>`;}
+      else{h+=`<div class="flow-node ${item.t}">${nt}</div>`;}
     }
   });
   return h+'</div>';

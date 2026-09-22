@@ -1600,7 +1600,22 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
       </div>
       <div class="yon-card" onclick="showYonetmelik('aksama')">
         <div class="yon-icon">🔧</div>
-        <div class="yon-text"><h4>Hizmet Sürekliliği & Yedek Ambulans</h4><p>Yılda 30 gün kuralı, yedek araç zorunluluğu</p></div>
+        <div class="yon-text"><h4>Hizmet Sürekliliği & Yedek Ambulans</h4><p>Yılda 30 gün kuralı, kademeli asgari sayı</p></div>
+        <i class="fas fa-chevron-right yon-arrow"></i>
+      </div>
+      <div class="yon-card" onclick="showYonetmelik('ekipsayisi')">
+        <div class="yon-icon">👥</div>
+        <div class="yon-text"><h4>Ambulans Ekip Kompozisyonu</h4><p>Kaç kişi, kim şoförlük yapabilir, danışman hekim</p></div>
+        <i class="fas fa-chevron-right yon-arrow"></i>
+      </div>
+      <div class="yon-card" onclick="showYonetmelik('bekleme')">
+        <div class="yon-icon">⏱️</div>
+        <div class="yon-text"><h4>Hastane Bekleme Süresi & Danışman Hekim</h4><p>YENİ: 30 dakika sınırı</p></div>
+        <i class="fas fa-chevron-right yon-arrow"></i>
+      </div>
+      <div class="yon-card" onclick="showYonetmelik('yasaklar')">
+        <div class="yon-icon">⛔</div>
+        <div class="yon-text"><h4>Genel Yasaklar & Kısıtlamalar</h4><p>Stajyer çalıştırma, çağrı yönlendirme yasağı</p></div>
         <i class="fas fa-chevron-right yon-arrow"></i>
       </div>
       <div class="yon-card" onclick="showYonetmelik('nakilkisitlama')">
@@ -2261,12 +2276,13 @@ function showYonetmelik(key){
     aksama: {
       title: '🔧 Hizmet Sürekliliği & Yedek Ambulans Kuralı',
       html: `
-        <div class="m-box info">Kaynak: Ambulanslar ve Acil Sağlık Araçları ile Ambulans Hizmetleri Yönetmeliği, Madde 10</div>
+        <div class="m-box info">Kaynak: Ambulanslar ve Acil Sağlık Araçları ile Ambulans Hizmetleri Yönetmeliği, Madde 10 (2025 güncel)</div>
         <ul class="step-list">
-          <li>Kara ambulansı işleten ambulans servisleri <strong>en az 2 ambulans ve ekibi</strong> bulundurmak zorundadır</li>
+          <li>Asgari ambulans sayısı artık <strong>ilin nüfus ve gelişmişlik düzeyine göre 2-5 adet arasında kademelendirilmiştir</strong> (önceden sabit 2 idi)</li>
           <li>5'ten fazla ambulansı olan servisler, her <strong>5 ambulans için 1 yedek ambulans</strong> bulundurabilir (birinin hizmet dışı kaldığı durumlar için)</li>
           <li>Yedek ambulans için ayrıca personel gerekmez</li>
           <li><strong>Ambulansların hizmet dışı kalma süresi yılda 30 günü geçemez</strong> — bu süre aşılırsa hizmet aksaması sayılır</li>
+          <li><strong>Rutin denetim sıklığı yılda 2'den yılda 3'e çıkarılmıştır</strong> (2025 değişikliği)</li>
         </ul>
         <div class="m-box diagnosis">💡 Bu kurallar, sizin sahada karşılaştığınız "araç arızası/bakımı" durumlarının idari çerçevesini oluşturur — istasyonunuzda yedek araç yoksa veya arıza süresi uzuyorsa bu, yönetmeliğe aykırı bir durumdur ve üst amirlere bildirilmelidir.</div>
       `
@@ -2275,13 +2291,62 @@ function showYonetmelik(key){
       title: '🚫 Hasta Nakil Ambulansı Sınırlamaları',
       html: `
         <div class="m-box info">Kaynak: Ambulanslar ve Acil Sağlık Araçları ile Ambulans Hizmetleri Yönetmeliği (2025 değişikliği)</div>
+        <div class="m-box warning">🎨 <strong>2025 GÜNCEL:</strong> Hasta nakil ambulanslarının rengi artık <strong>GRİ</strong> olarak belirlendi. Üzerindeki ibare "Hasta Nakil Ambulansı" değil, sadece <strong>"HASTA NAKİL"</strong> olarak değiştirildi. Bu ambulanslardan <strong>sesli uyarı sistemleri (siren) kaldırılmaktadır.</strong></div>
         <ul class="step-list">
-          <li>Hasta nakil ambulanslarının üzerinde <strong>yalnızca "HASTA NAKİL" ibaresi</strong> yer alır</li>
           <li>Bu ambulanslar, <strong>acil tıbbi müdahale gerektiren</strong> hasta/yaralı taşımada KULLANILAMAZ</li>
-          <li>İstisna: Taşıma sırasında acil müdahale gerektiren bir durum GELİŞİRSE, flaşörler aktif hale getirilir ve <strong>SKKM onayı ile</strong> sesli uyarı (siren) sistemleri kullanılabilir</li>
+          <li>İstisna: Taşıma sırasında acil müdahale gerektiren bir durum GELİŞİRSE, flaşörler aktif hale getirilir ve <strong>SKKM onayı ile</strong> (siren kaldırılmış olsa da istisnai) sesli uyarı kullanılabilir</li>
           <li>Bu araçlar, afet durumları HARİÇ, <strong>cenaze nakli amacıyla kullanılamaz</strong></li>
+          <li>Acil yardım ambulansı ve özel donanımlı ambulansların ışıklı/sesli uyarı sistemlerinde bir değişiklik YOK — bu kısıtlama sadece hasta nakil ambulansına özgü</li>
         </ul>
         <div class="m-box warning">⚠️ Ambulans servisi şirket/dernek/vakıf sahipliğindeyse, faaliyet alanı dışındaki işler ambulans servisinde yapılamaz. Ambulans ve sağlık personeli yerine <strong>stajyer öğrenci çalıştırılamaz</strong>.</div>
+      `
+    },
+    ekipsayisi: {
+      title: '👥 Ambulans Ekip Kompozisyonu (Personel Sayısı)',
+      html: `
+        <div class="m-box info">Kaynak: Ambulanslar ve Acil Sağlık Araçları ile Ambulans Hizmetleri Yönetmeliği, Madde 15 (2025 güncel — 24/6/2025 değişikliği)</div>
+        <div class="m-section"><div class="m-section-title">🚨 Acil Yardım Ambulansı — En Az 3 Kişi</div>
+        <ul class="step-list">
+          <li>Ekipte: <strong>Hekim VEYA Paramedik VEYA</strong> Bakanlıkça belirlenmiş modül eğitimlerini tamamlamış <strong>ATT</strong> + diğer bir sağlık personeli + bir şoför</li>
+          <li>Sürücülük görevini öncelikle <strong>ATT veya (zorunlu hallerde) paramedik</strong> yürütebilir — bu durumda ayrı şoför bulundurulmaz</li>
+          <li><strong>Hekim bulunmayan</strong> ambulanslarda, hasta kabininde nakil sırasında müdahale eden personelden <strong>en az biri paramedik olmalıdır</strong></li>
+        </ul></div>
+        <div class="m-section"><div class="m-section-title">🛏️ Hasta Nakil Ambulansı</div>
+        <p style="font-size:0.6rem;line-height:1.6;">En az <strong>1 sağlık personeli + 1 sürücü</strong> bulunur.</p></div>
+        <div class="m-section"><div class="m-section-title">🫁 Yoğun Bakım / Özel Donanımlı Ambulans — En Az 3 Kişi</div>
+        <p style="font-size:0.6rem;line-height:1.6;">Ekipte <strong>biri hekim veya AABT (Ambulans ve Acil Bakım Teknikeri)</strong> olmak üzere en az <strong>2 sağlık personeli + 1 sürücü</strong> bulunur.</p></div>
+        <div class="m-box warning">⚠️ <strong>Danışman Hekim artık ZORUNLU (2025 yeni):</strong> Ambulans servislerinde danışman hekim bulundurmak zorunludur. Danışman hekim, vaka takibi ve tedavi süreçlerinden ambulans ekibiyle BİRLİKTE sorumludur — tıbbi danışman onayı gereken işlemlerde (ATT'nin bazı yetkileri gibi) bu hekime ulaşılamazsa ilgili işlem yapılamaz.</div>
+        <div class="m-box diagnosis">💡 Ambulanslarda görev yapacak sağlık personeline Bakanlıkça belirlenen eğitimler tamamlatılır; acil sağlık aracında görev tanımına uygun nitelik ve sayıda personel çalışır.</div>
+      `
+    },
+    bekleme: {
+      title: '⏱️ Hastane Bekleme Süresi & Danışman Hekim',
+      html: `
+        <div class="m-box info">Kaynak: Ambulanslar ve Acil Sağlık Araçları ile Ambulans Hizmetleri Yönetmeliği (2025 güncel)</div>
+        <div class="m-box warning">🆕 <strong>YENİ KURAL:</strong> Ambulansların sağlık tesisi yakınındaki (hastane teslim sonrası) bekleme süresi <strong>30 dakika ile sınırlandırılmıştır.</strong></div>
+        <ul class="step-list">
+          <li>Bu kural, ambulansların hastane önünde gereksiz uzun süre bekletilerek sahada hizmet dışı kalmasını önlemeyi amaçlar</li>
+          <li>Teslim işlemini tamamlayıp mümkün olan en kısa sürede tekrar hizmete hazır hale gelmeniz beklenir</li>
+          <li>Danışman hekim, gündüz mesai saatlerinde ambulans servislerinin çağrı merkezinde bulunur; diğer zamanlarda <strong>kendisine ulaşılabilir</strong> olmalıdır</li>
+        </ul>
+        <div class="m-box diagnosis">💡 Sağlık personeli; ambulanslarda uygulanan tıbbi işlemleri, hasta/yaralı kayıtlarını, yapılan müdahalelerin mobil cihaz üzerinden vaka kayıt formuna işlenmesini ve hastanın hastaneye teslim sürecini <strong>ekip sorumlusu koordinesinde</strong> yürütür — bu süreçlerin ASOS'a kaydedilmesi de bu sorumluluğun parçasıdır.</div>
+      `
+    },
+    yasaklar: {
+      title: '⛔ Genel Yasaklar & Kısıtlamalar',
+      html: `
+        <div class="m-box info">Kaynak: Ambulanslar ve Acil Sağlık Araçları ile Ambulans Hizmetleri Yönetmeliği</div>
+        <ul class="step-list">
+          <li>Ambulans servisinde, hasta müdahalesi yapılan alanlarda ve ambulanslarda zorunlu hekim/sağlık personeli yerine <strong>stajyer öğrenci veya çalışma izni olmayan yabancı uyruklu hekim</strong> çalıştırılamaz</li>
+          <li>Sağlık personeli bulundurmayan/sağlık birimi olmayan kurum ve kuruluşlar <strong>ambulans işletemez</strong></li>
+          <li>Müdürlükçe personel çalışma belgesi düzenlenmemiş hekim/sağlık personeli ambulans servisinde <strong>çalıştırılamaz</strong></li>
+          <li><strong>İl ambulans servisi KKM'si dışında</strong>, tek bir çağrı merkezinden diğer ambulans servislerine aracılık edilemez — bu amaçla hiçbir telefon/iletişim aracı/elektronik ortam kullanılamaz</li>
+          <li>Çağrı merkezi telefonu, <strong>3 haneli acil çağrı numaralarını çağrıştıran</strong> bir numara olamaz</li>
+          <li>Ambulanslar üzerinde yönetmelikte belirtilenler dışında <strong>hiçbir yazı, numara veya resim</strong> bulundurulamaz</li>
+          <li>Aynı il sınırları içinde daha önce kullanılmış bir <strong>ticari unvan</strong> başka kuruluşça kullanılamaz; resmi sağlık kuruluşu isimleri ticari isim olarak kullanılamaz</li>
+          <li>Acil sağlık araçları <strong>sadece ambulans servisleri ve sağlık kurumları bünyesinde, amacına uygun</strong> kullanılabilir — başka kişi/kuruluşlarca kullanılamaz</li>
+        </ul>
+        <div class="m-box warning">⚠️ Bu kurallara aykırılık, uygunluk belgesinin iptali dahil idari yaptırımlara yol açabilir — "Denetim, Uygunluk Belgesi ve Yaptırımlar" konusuna bakın.</div>
       `
     },
     denetim: {

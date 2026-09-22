@@ -81,7 +81,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Ar
 .nebula{position:absolute;border-radius:50%;filter:blur(60px);animation:nebulaFloat var(--nd,8s) ease-in-out infinite alternate;}
 @keyframes nebulaFloat{0%{transform:translate(0,0) scale(1);}100%{transform:translate(var(--nx,10px),var(--ny,-10px)) scale(1.1);}}
 .star{position:absolute;border-radius:50%;animation:twinkle var(--d,2s) ease-in-out infinite;}
-.star-of-life-watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:85vmin;height:85vmin;color:var(--blue);opacity:0.09;fill:currentColor;pointer-events:none;}
+.star-of-life-watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:85vmin;height:85vmin;color:var(--blue);fill:currentColor;pointer-events:none;animation:solPulse 3.2s ease-in-out infinite;}
+@keyframes solPulse{0%,100%{opacity:0.06;transform:translate(-50%,-50%) scale(1);}50%{opacity:0.22;transform:translate(-50%,-50%) scale(1.04);}}
 
 @keyframes twinkle{0%,100%{opacity:0.15;transform:scale(1);}50%{opacity:1;transform:scale(1.5);}}
 .light-bar{display:none;}
@@ -96,6 +97,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Ar
 .role-btn{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px 12px;text-align:center;cursor:pointer;transition:var(--trans);flex:1;position:relative;}
 .role-btn:active{transform:scale(0.97);background:var(--card2);}
 .role-icon{width:46px;height:46px;margin-bottom:6px;filter:drop-shadow(0 3px 6px rgba(0,0,0,0.4)) drop-shadow(0 0 6px rgba(46,204,113,0.35));}
+.icon-light-r,.icon-light-r2{animation:iconRedFlash 0.9s steps(1) infinite;}
+.icon-light-b{animation:iconBlueFlash 0.9s steps(1) infinite;}
+@keyframes iconRedFlash{0%,49%{opacity:1;}50%,100%{opacity:0.25;}}
+@keyframes iconBlueFlash{0%,49%{opacity:0.25;}50%,100%{opacity:1;}}
+.icon-mic-wave{transform-origin:26.5px 41.3px;animation:micWave 1.8s ease-out infinite;opacity:0;}
+.icon-mic-wave2{animation-delay:0.9s;}
+@keyframes micWave{0%{transform:scale(1);opacity:0.8;}100%{transform:scale(2.6);opacity:0;}}
+.icon-eq rect{animation:eqBounce 0.9s ease-in-out infinite;transform-box:fill-box;transform-origin:bottom;}
+.icon-radio-led{animation:radioLedBlink 1s steps(1) infinite;filter:drop-shadow(0 0 2px #4ade80);}
+@keyframes radioLedBlink{0%,60%{opacity:1;}61%,100%{opacity:0.15;}}
+.icon-eq rect:nth-child(1){animation-delay:0.15s;}
+.icon-eq rect:nth-child(2){animation-delay:0s;}
+.icon-eq rect:nth-child(3){animation-delay:0.3s;}
+@keyframes eqBounce{0%,100%{transform:scaleY(0.5);}50%{transform:scaleY(1.15);}}
 .role-btn:active .role-icon{filter:drop-shadow(0 0 9px rgba(46,204,113,0.7));}
 .role-btn h3{font-size:0.7rem;margin-bottom:3px;font-weight:700;color:#f1f5f9;letter-spacing:0.3px;}
 .role-btn p{font-size:0.44rem;color:var(--muted);line-height:1.4;}
@@ -551,12 +566,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Ar
 .dose-header{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
 .dose-header input{width:70px;padding:5px 8px;border-radius:8px;background:var(--card2);border:1px solid var(--border);color:white;font-size:0.7rem;font-family:var(--font-mono);font-weight:700;}
 .dose-calc-btn{background:var(--blue);border:none;padding:5px 12px;border-radius:20px;color:white;font-size:0.6rem;cursor:pointer;}
-.drug-item{background:var(--card);border-radius:8px;padding:7px 10px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;border-left:3px solid var(--blue);animation:slideFadeIn 0.3s ease backwards;}
+.drug-item{background:var(--card);border-radius:8px;padding:8px 10px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;border-left:3px solid var(--blue);animation:slideFadeIn 0.3s ease backwards;}
+.drug-name{font-size:0.6rem;font-weight:700;display:block;}
+.drug-etken{font-size:0.5rem;color:#93c5fd;margin-top:2px;}
+.drug-oku{color:var(--muted);font-style:italic;margin-left:3px;}
+.drug-ticari{font-size:0.48rem;color:var(--muted);margin-top:1px;}
+.drug-dose{font-family:var(--font-mono);color:#4ade80;font-weight:700;font-size:0.62rem;flex-shrink:0;text-align:right;white-space:nowrap;}
 @keyframes slideFadeIn{from{opacity:0;transform:translateX(-8px);}to{opacity:1;transform:translateX(0);}}
 .drug-item:nth-child(1){animation-delay:0.02s;}.drug-item:nth-child(2){animation-delay:0.04s;}.drug-item:nth-child(3){animation-delay:0.06s;}.drug-item:nth-child(4){animation-delay:0.08s;}.drug-item:nth-child(5){animation-delay:0.10s;}.drug-item:nth-child(6){animation-delay:0.12s;}.drug-item:nth-child(7){animation-delay:0.14s;}.drug-item:nth-child(8){animation-delay:0.16s;}
 .vital-alert:nth-child(1){animation-delay:0.03s;}.vital-alert:nth-child(2){animation-delay:0.08s;}.vital-alert:nth-child(3){animation-delay:0.13s;}.vital-alert:nth-child(4){animation-delay:0.18s;}
-.drug-name{font-size:0.6rem;}
-.drug-dose{font-family:var(--font-mono);color:#4ade80;font-weight:700;font-size:0.62rem;}
 
 /* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:5000;display:none;align-items:flex-end;justify-content:center;}
@@ -626,6 +644,10 @@ body.day-mode .modal-close,body.day-mode .modal-tts-btn{background:#e5e7eb;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
 .overlay-fade-in{animation:overlayFadeIn 0.25s ease;}
 @keyframes overlayFadeIn{from{background:rgba(0,0,0,0);}to{background:rgba(0,0,0,0.9);}}
+.splash-fade-out{animation:splashFadeOut 0.28s ease forwards;}
+@keyframes splashFadeOut{from{opacity:1;transform:scale(1);}to{opacity:0;transform:scale(0.97);}}
+.quick-continue-btn{background:none;border:1px dashed var(--blue);color:var(--blue);font-size:0.5rem;font-weight:600;padding:6px 12px;border-radius:20px;cursor:pointer;margin-bottom:12px;}
+.quick-continue-btn:active{transform:scale(0.96);background:rgba(46,204,113,0.1);}
 .nav-flash{animation:navFlash 0.9s ease;border-radius:10px;}
 @keyframes navFlash{0%{box-shadow:0 0 0 2px rgba(46,204,113,0);background-color:rgba(46,204,113,0.12);}30%{box-shadow:0 0 0 2px rgba(46,204,113,0.5);background-color:rgba(46,204,113,0.12);}100%{box-shadow:0 0 0 2px rgba(46,204,113,0);background-color:transparent;}}
 
@@ -828,24 +850,39 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
       </div>
     </div>
     <div class="splash-aha">⚕️ AHA / ERC 2025 KILAVUZLARI</div>
+    <div id="quickContinue" style="display:none;"></div>
 
     <div class="role-buttons" id="roleBox" style="display:flex;">
     <div class="role-btn kkm" onclick="selectRole('kkm')">
       <svg class="role-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="hsBand" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5eead4"/><stop offset="100%" stop-color="#0d9488"/></linearGradient>
-          <radialGradient id="hsCup" cx="35%" cy="30%" r="75%"><stop offset="0%" stop-color="#a7f3d0"/><stop offset="55%" stop-color="#2ecc71"/><stop offset="100%" stop-color="#16a34a"/></radialGradient>
-          <radialGradient id="hsMic" cx="35%" cy="30%" r="75%"><stop offset="0%" stop-color="#a7f3d0"/><stop offset="100%" stop-color="#22c55e"/></radialGradient>
+          <linearGradient id="tsBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3f4a52"/><stop offset="45%" stop-color="#20272c"/><stop offset="100%" stop-color="#0b0f12"/></linearGradient>
+          <linearGradient id="tsBodyHi" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="rgba(255,255,255,0.18)"/><stop offset="40%" stop-color="rgba(255,255,255,0)"/></linearGradient>
         </defs>
-        <ellipse cx="24" cy="43" rx="14" ry="2.4" fill="#000" opacity="0.35"/>
-        <path d="M24 6a15 15 0 0 0-15 15v10.5" fill="none" stroke="url(#hsBand)" stroke-width="3.4" stroke-linecap="round"/>
-        <path d="M39 21v10.5" fill="none" stroke="url(#hsBand)" stroke-width="3.4" stroke-linecap="round"/>
-        <circle cx="8.5" cy="28" r="5.6" fill="url(#hsCup)" stroke="#0a2e18" stroke-width="1"/>
-        <ellipse cx="6.6" cy="25.6" rx="1.7" ry="1.1" fill="rgba(255,255,255,0.7)"/>
-        <circle cx="39.5" cy="28" r="5.6" fill="url(#hsCup)" stroke="#0a2e18" stroke-width="1"/>
-        <ellipse cx="37.6" cy="25.6" rx="1.7" ry="1.1" fill="rgba(255,255,255,0.7)"/>
-        <path d="M39 33.2v2.7a4 4 0 0 1-4 4h-5.5" fill="none" stroke="url(#hsBand)" stroke-width="2.6" stroke-linecap="round"/>
-        <circle cx="28" cy="39.9" r="3.2" fill="url(#hsMic)" stroke="#0a2e18" stroke-width="0.8"/>
+        <ellipse cx="24" cy="43.5" rx="12" ry="2.2" fill="#000" opacity="0.35"/>
+        <rect x="10" y="34" width="4" height="7" rx="1.3" fill="#15191c"/>
+        <rect x="20" y="6" width="2.2" height="10" rx="1" fill="#4b5563"/>
+        <circle cx="21.1" cy="6" r="1.4" fill="#94a3b8"/>
+        <rect x="13" y="15" width="22" height="27" rx="4" fill="url(#tsBody)" stroke="#000" stroke-width="0.6"/>
+        <rect x="13" y="15" width="7" height="27" rx="4" fill="url(#tsBodyHi)"/>
+        <rect x="16" y="18.5" width="16" height="8.5" rx="1.4" fill="#0a2e18"/>
+        <rect x="17.2" y="19.7" width="13.6" height="6.1" rx="0.8" fill="#0f3d20"/>
+        <text x="24" y="24.3" font-size="4.6" fill="#4ade80" text-anchor="middle" font-family="monospace" font-weight="bold">112</text>
+        <circle class="icon-radio-led" cx="30.5" cy="30" r="1.6" fill="#4ade80"/>
+        <text x="17.5" y="31.4" font-size="2.6" fill="#9ca3af" font-family="monospace">CH-01</text>
+        <g fill="#4b5563">
+          <circle cx="18.5" cy="34.8" r="2.3"/>
+          <circle cx="24" cy="34.8" r="2.3"/>
+          <circle cx="29.5" cy="34.8" r="2.3"/>
+        </g>
+        <g fill="#6b7280">
+          <circle cx="18.5" cy="34.8" r="1.7"/>
+          <circle cx="24" cy="34.8" r="1.7"/>
+          <circle cx="29.5" cy="34.8" r="1.7"/>
+        </g>
+        <rect x="16.5" y="38.2" width="15" height="2.4" rx="1.2" fill="#374151"/>
+        <rect x="34.5" y="18" width="3.4" height="10" rx="1.5" fill="#dc2626"/>
+        <rect x="35.1" y="19" width="0.9" height="5" rx="0.4" fill="rgba(255,255,255,0.4)"/>
       </svg>
       <h3>KKM GÖREVLİSİ</h3>
       <p>Komuta Kontrol Merkezi<br>Çağrı Yönetimi & Sevk</p>
@@ -857,26 +894,31 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
           <linearGradient id="ambCab" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e2e8f0"/><stop offset="100%" stop-color="#94a3b8"/></linearGradient>
           <linearGradient id="ambGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#bae6fd"/><stop offset="50%" stop-color="#0891b2"/><stop offset="100%" stop-color="#0c4a6e"/></linearGradient>
           <radialGradient id="ambWheel" cx="35%" cy="30%" r="75%"><stop offset="0%" stop-color="#475569"/><stop offset="60%" stop-color="#1e293b"/><stop offset="100%" stop-color="#020617"/></radialGradient>
+          <linearGradient id="ambGrille" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4b5563"/><stop offset="100%" stop-color="#111827"/></linearGradient>
         </defs>
-        <ellipse cx="23" cy="41.5" rx="21" ry="2.6" fill="#000" opacity="0.4"/>
-        <rect x="3" y="17" width="27" height="17" rx="3" fill="url(#ambBody)" stroke="#475569" stroke-width="0.5"/>
-        <path d="M30 21h8.5L43 27.5V34H30Z" fill="url(#ambCab)" stroke="#475569" stroke-width="0.5"/>
-        <path d="M33.2 23.2h6L42.3 27.8H33.2Z" fill="url(#ambGlass)"/>
-        <path d="M34 24l2.5 3.2" stroke="rgba(255,255,255,0.55)" stroke-width="1" stroke-linecap="round"/>
-        <rect x="3" y="28.5" width="40" height="5.5" fill="#b91c1c"/>
-        <rect x="3" y="28.5" width="40" height="1.6" fill="rgba(255,255,255,0.25)"/>
-        <rect x="13" y="20" width="7" height="7" fill="#fff"/>
-        <rect x="15.6" y="20" width="1.8" height="7" fill="#dc2626"/>
-        <rect x="13" y="22.6" width="7" height="1.8" fill="#dc2626"/>
-        <circle cx="12" cy="36" r="4.6" fill="url(#ambWheel)" stroke="#0f172a" stroke-width="0.5"/>
-        <circle cx="12" cy="36" r="1.7" fill="#94a3b8"/>
-        <circle cx="34" cy="36" r="4.6" fill="url(#ambWheel)" stroke="#0f172a" stroke-width="0.5"/>
-        <circle cx="34" cy="36" r="1.7" fill="#94a3b8"/>
-        <rect x="9" y="11.5" width="18" height="4.2" rx="1.4" fill="#1e293b"/>
-        <rect x="10.3" y="12.5" width="3.4" height="2.2" fill="#ef4444"/>
-        <rect x="14.3" y="12.5" width="3.4" height="2.2" fill="#f8fafc" opacity="0.85"/>
-        <rect x="18.3" y="12.5" width="3.4" height="2.2" fill="#3b82f6"/>
-        <rect x="22.3" y="12.5" width="3.4" height="2.2" fill="#ef4444"/>
+        <ellipse cx="23" cy="41.8" rx="22" ry="2.4" fill="#000" opacity="0.4"/>
+        <rect x="3" y="17" width="27" height="17" rx="2.5" fill="url(#ambBody)" stroke="#475569" stroke-width="0.5"/>
+        <line x1="21.5" y1="19" x2="21.5" y2="34" stroke="#94a3b8" stroke-width="0.5"/>
+        <path d="M30 20.5h7.2L43 27.3V34H30Z" fill="url(#ambCab)" stroke="#475569" stroke-width="0.5"/>
+        <path d="M33 22.6h5L42 27H33Z" fill="url(#ambGlass)"/>
+        <path d="M33.7 23.4l2.2 2.9" stroke="rgba(255,255,255,0.6)" stroke-width="0.9" stroke-linecap="round"/>
+        <rect x="39.5" y="28.5" width="3" height="5.3" rx="1" fill="url(#ambGrille)"/>
+        <circle cx="41.5" cy="26" r="1.1" fill="#fef9c3"/>
+        <rect x="30.5" y="19.3" width="2.6" height="1.4" rx="0.5" fill="#334155"/>
+        <rect x="3" y="28.7" width="40" height="5.3" fill="#b91c1c"/>
+        <rect x="3" y="28.7" width="40" height="1.5" fill="rgba(255,255,255,0.25)"/>
+        <rect x="12.5" y="19.7" width="7.4" height="7.4" fill="#fff"/>
+        <rect x="15.25" y="19.7" width="1.9" height="7.4" fill="#dc2626"/>
+        <rect x="12.5" y="22.45" width="7.4" height="1.9" fill="#dc2626"/>
+        <circle cx="12" cy="36.2" r="4.8" fill="url(#ambWheel)" stroke="#0f172a" stroke-width="0.5"/>
+        <circle cx="12" cy="36.2" r="1.8" fill="#94a3b8"/>
+        <circle cx="34.5" cy="36.2" r="4.8" fill="url(#ambWheel)" stroke="#0f172a" stroke-width="0.5"/>
+        <circle cx="34.5" cy="36.2" r="1.8" fill="#94a3b8"/>
+        <rect x="9" y="11.3" width="18" height="4.3" rx="1.4" fill="#1e293b"/>
+        <rect class="icon-light-r" x="10.3" y="12.3" width="3.4" height="2.3" fill="#ef4444"/>
+        <rect x="14.3" y="12.3" width="3.4" height="2.3" fill="#f8fafc" opacity="0.85"/>
+        <rect class="icon-light-b" x="18.3" y="12.3" width="3.4" height="2.3" fill="#3b82f6"/>
+        <rect class="icon-light-r2" x="22.3" y="12.3" width="3.4" height="2.3" fill="#ef4444"/>
       </svg>
       <h3>SAHA EKİBİ</h3>
       <p>Ambulans Personeli<br>Algoritmalar & Dozlar</p>
@@ -1267,6 +1309,7 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
       <div class="algo-card c-yellow" onclick="showAlgo('hipoglisemi')"><div class="card-badge" style="background:var(--yellow);color:black;">KŞ</div><div class="card-icon">🍬</div><h3>HİPOGLİSEMİ</h3><p>Dekstroz, Glukagon, Tiamin uyarı</p></div>
       <div class="algo-card c-orange" onclick="showAlgo('yanik')"><div class="card-badge" style="background:var(--orange);">YANIK</div><div class="card-icon">🔥</div><h3>YANIK</h3><p>TBSA, Parkland, Hava yolu yanığı</p></div>
       <div class="algo-card c-pink" onclick="showAlgo('obstetrik')"><div class="card-badge" style="background:#ec4899;">OBSTETRİK</div><div class="card-icon">🤰</div><h3>OBSTETRİK ACİL</h3><p>Eklampsi, Acil doğum, Apgar</p></div>
+      <div class="algo-card c-red" onclick="showAlgo('gebeKpr')"><div class="card-badge" style="background:var(--red);">ARREST</div><div class="card-icon">🫄</div><h3>GEBE HASTADA KPR</h3><p>Manuel uterus deplasmanı, histerotomi</p></div>
       <div class="algo-card c-teal" onclick="showAlgo('zehirlenme')"><div class="card-badge" style="background:#14b8a6;">ZEHİR</div><div class="card-icon">☠️</div><h3>ZEHİRLENME</h3><p>OP, CO, Alkol, Antidotlar</p></div>
       <div class="algo-card c-cyan" onclick="showAlgo('hipotermia')"><div class="card-badge" style="background:var(--cyan);">HİPO</div><div class="card-icon">🥶</div><h3>HİPOTERMİ</h3><p>Isınma, Arrest yönetimi</p></div>
       <div class="algo-card c-orange" onclick="showAlgo('hipertermiYetiskin')"><div class="card-badge" style="background:var(--orange);">Y-23</div><div class="card-icon">🌡️</div><h3>HİPERTERMİ</h3><p>Kramp/Stres/Çarpması ayrımı</p></div>
@@ -1384,6 +1427,15 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
       <div class="yon-card" onclick="showEkipman('tasima')"><div class="yon-icon">🛏️</div><div class="yon-text"><h4>Taşıma Ekipmanları (Scoop/Sked/Sandalye)</h4><p>Hangi durumda hangisi kullanılır</p></div><i class="fas fa-chevron-right yon-arrow"></i></div>
       <div class="yon-card" onclick="showEkipman('glukometre')"><div class="yon-icon">🩸</div><div class="yon-text"><h4>Glukometre (Kan Şekeri Ölçümü)</h4><p>Doğru teknik, hata kaynakları</p></div><i class="fas fa-chevron-right yon-arrow"></i></div>
       <div class="yon-card" onclick="showEkipman('monitor')"><div class="yon-icon">📟</div><div class="yon-text"><h4>Hasta Monitörü (EKG/NIBP/SpO₂)</h4><p>Elektrot yerleşimi, otomatik tansiyon</p></div><i class="fas fa-chevron-right yon-arrow"></i></div>
+      <div class="yon-card" onclick="showEkipman('ked')"><div class="yon-icon">🦺</div><div class="yon-text"><h4>KED (Araç İçi Çıkarma Yeleği)</h4><p>Oturur pozisyonda spinal immobilizasyon</p></div><i class="fas fa-chevron-right yon-arrow"></i></div>
+      <div class="yon-card" onclick="showEkipman('turnike')"><div class="yon-icon">🩹</div><div class="yon-text"><h4>Turnike (CAT vb.)</h4><p>Ciddi ekstremite kanamasında hayat kurtarıcı</p></div><i class="fas fa-chevron-right yon-arrow"></i></div>
+      <div class="yon-card" onclick="showEkipman('hemostatik')"><div class="yon-icon">🧴</div><div class="yon-text"><h4>Hemostatik Ajan (QuikClot vb.)</h4><p>Turnike uygulanamayan bölgelerde kanama kontrolü</p></div><i class="fas fa-chevron-right yon-arrow"></i></div>
+      <div class="yon-card" onclick="showEkipman('pelvik')"><div class="yon-icon">🦴</div><div class="yon-text"><h4>Pelvik Binder (Pelvik Kemer)</h4><p>Pelvis kırığında hemoraji kontrolü</p></div><i class="fas fa-chevron-right yon-arrow"></i></div>
+      <div class="yon-card" onclick="showEkipman('infuzyon')"><div class="yon-icon">💧</div><div class="yon-text"><h4>İnfüzyon Pompası / Perfüzör</h4><p>Kontrollü ilaç/sıvı infüzyonu</p></div><i class="fas fa-chevron-right yon-arrow"></i></div>
+      <div class="yon-card" onclick="showEkipman('isibattaniye')"><div class="yon-icon">🧣</div><div class="yon-text"><h4>Isı Battaniyesi (Folyo Battaniye)</h4><p>Hipotermiden koruma, travma paketinin parçası</p></div><i class="fas fa-chevron-right yon-arrow"></i></div>
+      <div class="yon-card" onclick="showEkipman('rijitatel')"><div class="yon-icon">🪵</div><div class="yon-text"><h4>Rijit Atel (SAM Splint vb.)</h4><p>Vakum atelden farkı, ne zaman tercih edilir</p></div><i class="fas fa-chevron-right yon-arrow"></i></div>
+      <div class="yon-card" onclick="showEkipman('sirtsedye')"><div class="yon-icon">🛹</div><div class="yon-text"><h4>Uzun Sırt Tahtası (Long Board)</h4><p>Artık ne zaman/nasıl kullanılmalı</p></div><i class="fas fa-chevron-right yon-arrow"></i></div>
+      <div class="yon-card" onclick="showEkipman('termometre')"><div class="yon-icon">🌡️</div><div class="yon-text"><h4>Termometre</h4><p>Ölçüm yerleri, doğruluk farkları</p></div><i class="fas fa-chevron-right yon-arrow"></i></div>
     </div>
 
     <div class="sec"><i class="fas fa-diagram-project"></i> AKIŞ ŞEMALARI (AHA 2025)</div>
@@ -1641,6 +1693,16 @@ select{-webkit-appearance:none;appearance:none;background-image:url("data:image/
       <div class="yon-card" onclick="showYonetmelik('adlivaka')">
         <div class="yon-icon">🚔</div>
         <div class="yon-text"><h4>Adli Vaka Bildirimi & Delil Koruma</h4><p>Hangi vakalar adli, delile ne yapılmamalı</p></div>
+        <i class="fas fa-chevron-right yon-arrow"></i>
+      </div>
+      <div class="yon-card" onclick="showYonetmelik('umke')">
+        <div class="yon-icon">🆘</div>
+        <div class="yon-text"><h4>Afet & UMKE (Ulusal Medikal Kurtarma)</h4><p>SAKOM, Triyaj Kartı, UMKE nedir</p></div>
+        <i class="fas fa-chevron-right yon-arrow"></i>
+      </div>
+      <div class="yon-card" onclick="showYonetmelik('cagrimerkezi')">
+        <div class="yon-icon">📞</div>
+        <div class="yon-text"><h4>112 Çağrı Merkezi (Çok Kurumlu Sistem)</h4><p>Polis/İtfaiye/Sağlık ortak yapısı</p></div>
         <i class="fas fa-chevron-right yon-arrow"></i>
       </div>
     </div>
@@ -2124,6 +2186,173 @@ function showEkipman(key){
         </ul></div>
         <div class="m-box warning">⚠️ Monitör "kesin tanı" koymaz — ritim yorumunu her zaman klinik tablo ile birlikte değerlendirin. Elektrotların cilde tam temas etmemesi (kıl, terleme, gevşek yapışkan) hatalı/gürültülü izlem verir.</div>
       `
+    },
+    ked: {
+      title: '🦺 KED (Kendrick Extrication Device)',
+      html: `
+        <div class="m-box diagnosis">Araç içinde oturur pozisyonda sıkışmış, spinal yaralanma şüphesi olan hastayı araçtan güvenli şekilde çıkarmak için kullanılan, sert çıtalı, sarılabilir yelek tipi immobilizasyon aracıdır.</div>
+        <div class="m-section"><div class="m-section-title">📍 Ne Zaman Kullanılır</div>
+        <ul class="step-list">
+          <li>Araç içi trafik kazasında, <strong>hemodinamik olarak stabil</strong> ve acil çıkarma gerektirmeyen, oturur pozisyondaki hasta</li>
+          <li>Spinal yaralanma şüphesi varken, hastayı doğrudan sert sedyeye alamayacağınız dar/sıkışık araç içi ortamlarda</li>
+          <li>Acil durum (yangın, araç suya batıyor, hasta arrest) varsa KED'i BEKLEMEDEN hızlı çıkarma tekniği (rapid extrication) tercih edilir</li>
+        </ul></div>
+        <div class="m-section"><div class="m-section-title">🔧 Uygulama Sırası</div>
+        <ul class="step-list">
+          <li>Bir kişi manuel servikal stabilizasyonu sürdürür, servikal boyunluk takılır</li>
+          <li>KED, hasta ile koltuk arkalığı arasına kaydırılır</li>
+          <li>Önce gövde kayışları (orta-alt), sonra üst kayışlar, en son kasık kayışları bağlanır — sıkılık: nefes almayı engellemeyecek ama hareketi kısıtlayacak kadar</li>
+          <li>Baş desteği/pedleri yerleştirilip baş sabitlenir</li>
+          <li>Hasta KED ile birlikte döndürülüp araçtan çıkarılır, ana sedyeye yatırılır</li>
+        </ul></div>
+        <div class="m-box warning">⚠️ KED tek başına transport immobilizasyonu için yeterli değildir — araçtan çıkarma sonrası ana sedyeye/vakum şilteye aktarılmalıdır. Kasık kayışlarını gevşek bağlamayın, aksi halde çıkarma sırasında hasta kaymaya devam eder.</div>
+      `
+    },
+    turnike: {
+      title: '🩹 Turnike (CAT — Combat Application Tourniquet vb.)',
+      html: `
+        <div class="m-box warning">🆘 <strong>Hayat kurtarıcı ekipman</strong> — kontrolsüz ekstremite kanamalarında ölümü önleyen en hızlı yöntemdir. "Turnike uzuv kaybettirir" korkusu güncel kanıtlarla desteklenmiyor; doğru süre içinde (birkaç saat) çıkarılan uzuvlarda kalıcı hasar riski düşüktür.</div>
+        <div class="m-section"><div class="m-section-title">📍 Ne Zaman Kullanılır</div>
+        <ul class="step-list">
+          <li>Doğrudan bası ile durdurulamayan, hayatı tehdit eden ekstremite (kol/bacak) kanaması</li>
+          <li>Çoklu yaralı/güvensiz ortam (KBRN, çatışma benzeri) nedeniyle bası uygulama süresi olmadığında ilk tercih olarak da kullanılabilir</li>
+        </ul></div>
+        <div class="m-section"><div class="m-section-title">🔧 Uygulama</div>
+        <ul class="step-list">
+          <li>Yaranın <strong>5-7cm proksimaline</strong> (kalbe daha yakın tarafına) yerleştirin — eklem üzerine koymayın</li>
+          <li>Kanama tamamen durana ve distal nabız kaybolana kadar sıkın</li>
+          <li>Uyguladığınız <strong>SAATİ mutlaka yazın</strong> (turnike üzerine veya hastanın alnına/vaka formuna) — bu bilgi hastanede kritik</li>
+          <li>Kanama devam ediyorsa ikinci turnikeyi ilkinin hemen proksimaline (üstüne) ekleyin</li>
+          <li>Bir kez uygulandıktan sonra hastane dışında GEVŞETMEYİN/ÇIKARMAYIN — bu karar hastanede verilir</li>
+        </ul></div>
+        <div class="m-box diagnosis">💡 Doğru uygulanmış turnike belirgin ağrı verir (hasta şikayet edebilir) — bu, yeterli basınç uygulandığının işaretidir, hafif sıkılmış turnike sadece venöz dönüşü engelleyip kanamayı ARTIRABİLİR.</div>
+      `
+    },
+    hemostatik: {
+      title: '🧴 Hemostatik Ajan (QuikClot® vb.)',
+      html: `
+        <div class="m-box diagnosis">Kanamayı hızlandırılmış pıhtılaşma yoluyla durduran, emdirilmiş gazlı bez veya toz/granül formunda ürünlerdir.</div>
+        <div class="m-section"><div class="m-section-title">📍 Ne Zaman Kullanılır</div>
+        <ul class="step-list">
+          <li><strong>Turnike uygulanamayan bölgelerde</strong> ciddi kanama: boyun, koltuk altı, kasık, gövde yaraları</li>
+          <li>Ekstremite yaralanmasında turnikeye ek/tamamlayıcı olarak da kullanılabilir</li>
+        </ul></div>
+        <div class="m-section"><div class="m-section-title">🔧 Uygulama</div>
+        <ul class="step-list">
+          <li>Mümkünse yara içindeki görünür kan/sıvıyı temizleyin (emici gazlı bezle bastırarak, ovmadan)</li>
+          <li>Hemostatik gazlı bezi, kanama noktasına <strong>doğrudan temas edecek şekilde</strong> yaranın içine sıkıca paketleyin (sadece üstüne koymak yetersiz kalır)</li>
+          <li>Paketledikten sonra üzerine <strong>en az 3 dakika sürekli, güçlü doğrudan bası</strong> uygulayın</li>
+          <li>Bası sonrası basınçlı sargı ile sabitleyin</li>
+        </ul></div>
+        <div class="m-box warning">⚠️ Göz bölgesine ve büyük damar yaralanmalarının bazı türlerinde (üretici talimatına göre) kullanılmaz — ürün talimatını kontrol edin. Kanama tekrar başlarsa gazlı bezi çıkarmadan üzerine yeni bası/ek gazlı bez uygulayın.</div>
+      `
+    },
+    pelvik: {
+      title: '🦴 Pelvik Binder (Pelvik Kemer)',
+      html: `
+        <div class="m-box diagnosis">Kırılmış pelvisi çevresel olarak sıkıştırarak stabilize eden, kemik parçalarının hareketini ve buna bağlı iç kanamayı azaltan geniş kemer/bant sistemidir.</div>
+        <div class="m-section"><div class="m-section-title">📍 Ne Zaman Kullanılır</div>
+        <ul class="step-list">
+          <li>Yüksek enerjili travma (araç kazası, yüksekten düşme) + pelvik instabilite şüphesi (ağrı, deformite, dolaşım bozukluğu bulguları)</li>
+          <li>Pelvis kırıkları büyük miktarda gizli kan kaybına yol açabilir (birkaç litreye kadar) — erken stabilizasyon hayat kurtarıcıdır</li>
+        </ul></div>
+        <div class="m-section"><div class="m-section-title">🔧 Uygulama</div>
+        <ul class="step-list">
+          <li>Doğru seviye: <strong>büyük trokanterler</strong> hizasında (kalça kemiklerinin en çıkıntılı noktası) — göbek hizasında DEĞİL</li>
+          <li>Hasta sırtüstü düz pozisyondayken kemer altından geçirilip simetrik şekilde sıkılır</li>
+          <li>"Kitaplama" (pelvisin açılıp kapanması) hareketinden kaçının — pelvisi tekrar tekrar manuel muayene etmeyin, ilk şüphede direkt kemer uygulayın</li>
+          <li>Bacakları hafif iç rotasyonda ve birbirine bağlı tutmak ek stabilizasyon sağlar</li>
+        </ul></div>
+        <div class="m-box warning">⚠️ Ticari pelvik binder yoksa geniş bir çarşaf/battaniye ile improvize edilebilir — aynı seviye ve sıkılık kurallarına uyulmalıdır. Fazla sıkmaktan (cilt/doku hasarı) kaçının, "yeterli stabilizasyon" hedeftir.</div>
+      `
+    },
+    infuzyon: {
+      title: '💧 İnfüzyon Pompası / Perfüzör',
+      html: `
+        <div class="m-box diagnosis">IV sıvı veya ilaçları, önceden ayarlanan hızda ve hacimde, tutarlı/kontrollü şekilde vermeyi sağlayan elektronik cihazdır — damla sayarak manuel titrasyona göre çok daha hassastır.</div>
+        <div class="m-section"><div class="m-section-title">📍 Ne Zaman Kullanılır</div>
+        <ul class="step-list">
+          <li>Titre edilmesi gereken vazopresör infüzyonları (Adrenalin, Dopamin, Noradrenalin infüzyonu)</li>
+          <li>Uzun nakil sırasında sabit hızda sıvı/ilaç infüzyonu gereken hastalar</li>
+          <li>Pediatrik hastalarda hassas doz kontrolü gereken durumlar</li>
+        </ul></div>
+        <div class="m-section"><div class="m-section-title">🔧 Kullanım Noktaları</div>
+        <ul class="step-list">
+          <li>Doğru infüzyon setini (pompaya özel) kullanın — uyumsuz set hatalı akışa yol açabilir</li>
+          <li>mL/saat veya mcg/kg/dk gibi doğru birimde, doğru hastanın kilosuna göre programlayın — <strong>çift kontrol</strong> yapın (özellikle vazopresörlerde)</li>
+          <li>Hava kabarcığı/tıkanıklık alarmlarını asla görmezden gelmeyin</li>
+          <li>Pil/batarya seviyesini nakil öncesi kontrol edin</li>
+        </ul></div>
+        <div class="m-box warning">⚠️ Pompa arızalanırsa/yoksa, kritik infüzyonlar (vazopresör gibi) manuel damla sayarak titre edilebilir ama bu çok daha fazla dikkat ve sık kontrol gerektirir — mümkünse pompayı tercih edin.</div>
+      `
+    },
+    isibattaniye: {
+      title: '🧣 Isı Battaniyesi (Folyo/Termal Battaniye)',
+      html: `
+        <div class="m-box diagnosis">İnce, metalize (genelde altın/gümüş renkli) folyo yapısıyla vücut ısısını yansıtarak hipotermiyi önleyen veya hipertermi tedavisinde soğutmaya yardımcı olan basit ama kritik bir ekipmandır.</div>
+        <div class="m-section"><div class="m-section-title">📍 Ne Zaman Kullanılır</div>
+        <ul class="step-list">
+          <li><strong>Her travma hastasında rutin olarak</strong> — "Travma Üçlüsü" (asidoz-hipotermi-koagülopati) sarmalını önlemek için erken ısı koruması standart bakımın parçasıdır</li>
+          <li>Yenidoğan bakımında (Normal Yenidoğan Bakımı algoritmasını hatırlayın)</li>
+          <li>Islak/soğuk ortamdan kurtarılan, suda boğulma vakalarında</li>
+          <li>Uzun süre dışarıda kalmış, yaşlı veya düşkün hastalarda</li>
+        </ul></div>
+        <div class="m-section"><div class="m-section-title">🔧 Doğru Kullanım</div>
+        <ul class="step-list">
+          <li>Islak kıyafetler varsa mümkünse çıkarıp kuru örtüyle sarıp ÜZERİNE folyo battaniyeyi örtün (ıslak cilde direkt folyo etkisiz kalır)</li>
+          <li>Parlak/metalize yüz VÜCUDA dönük olmalı (ısıyı vücuda yansıtmak için)</li>
+          <li>Baş, boyun gibi ısı kaybının en fazla olduğu bölgeleri de örtmeye özen gösterin</li>
+        </ul></div>
+        <div class="m-box diagnosis">💡 Basit ama gözden kaçırılan bir adımdır — özellikle uzun müdahale/nakil sürelerinde hastanın üstü açık kalırsa hipotermi sessizce gelişebilir, koagülopatiyi kötüleştirip kanamayı artırabilir.</div>
+      `
+    },
+    rijitatel: {
+      title: '🪵 Rijit Atel (SAM Splint® ve benzerleri)',
+      html: `
+        <div class="m-box diagnosis">Şekillendirilebilir alüminyum çekirdekli köpük atel (SAM Splint) veya sert plastik/tahta atellerdir — vakum atelin aksine elektrik/pompa gerektirmez, hızlı ve tekrar kullanılabilir.</div>
+        <div class="m-section"><div class="m-section-title">⚖️ Vakum Atel ile Farkı</div>
+        <ul class="step-list">
+          <li><strong>Rijit atel (SAM Splint):</strong> Daha hızlı uygulanır, elle bükülüp şekillendirilir, ucuz ve tekrar kullanılabilir. Karmaşık/açılı kırıklarda tam şekle uyum sağlamayabilir</li>
+          <li><strong>Vakum atel:</strong> Şekle tam uyum sağlar (özellikle açılı/deformiteli kırıklarda üstündür), ama pompa gerektirir ve delinmeye karşı hassastır</li>
+          <li>Pratikte: basit, düz kırıklarda rijit atel hızlı ve yeterli; deforme/açılı kırıklarda vakum atel tercih edilir</li>
+        </ul></div>
+        <div class="m-section"><div class="m-section-title">🔧 Uygulama İlkeleri</div>
+        <ul class="step-list">
+          <li>Atellemeden önce ve sonra <strong>nabız-hareket-duyu (NHD)</strong> kontrolü yapıp kaydedin</li>
+          <li>Kırığın <strong>bir eklem üstü, bir eklem altı</strong> olacak şekilde atellenmesi kuralına uyun</li>
+          <li>Deformiteyi zorla düzeltmeye çalışmayın — "olduğu gibi" atelleyin (istisna: dolaşımı tehdit eden ciddi deformite ve nakil uzunsa, tıbbi kontrol ile hizalama düşünülebilir)</li>
+        </ul></div>
+        <div class="m-box warning">⚠️ Atel çok sıkı sarılırsa şişme ile birlikte dolaşımı kesebilir — uygulama sonrası ve nakil sırasında periyodik NHD kontrolüne devam edin.</div>
+      `
+    },
+    sirtsedye: {
+      title: '🛹 Uzun Sırt Tahtası (Long Spine Board)',
+      html: `
+        <div class="m-box warning">🔄 <strong>2024 güncel yaklaşım:</strong> Sert sırt tahtası artık RUTİN spinal immobilizasyon aracı olarak önerilmiyor — "seçici spinal hareket kısıtlaması" ve vakum şilte gibi alternatifler tercih ediliyor. Ancak hâlâ önemli bir aracı/transfer ekipmanıdır.</div>
+        <div class="m-section"><div class="m-section-title">📍 Bugün Hâlâ Ne Zaman Kullanılır</div>
+        <ul class="step-list">
+          <li><strong>Transfer/taşıma aracı olarak:</strong> Hastayı yerden sedyeye, sedyeden hastane yatağına aktarmak için (log-roll tekniğiyle) — kısa süreli kullanım</li>
+          <li>Scoop sedye veya vakum şilte YOKSA, geçici immobilizasyon için</li>
+          <li>Suda kurtarma senaryolarında yüzdürme/çıkarma aracı olarak</li>
+        </ul></div>
+        <div class="m-box warning">⚠️ Hasta üzerinde <strong>uzun süre (20-30 dakikadan fazla) bırakılmamalıdır</strong> — sert yüzey basınç yarası (özellikle sakrum, topuklar, art bölgesi), ağrı ve solunum kısıtlaması riski taşır. Mümkün olan en kısa sürede vakum şilteye veya normal sedyeye aktarım yapılmalıdır.</div>
+        <div class="m-box diagnosis">💡 Eğer hasta uzun tahta üzerinde nakledilecekse, basınç yarasını azaltmak için altına yastıklama (özellikle bel çukuru ve baş altı) yapılması önerilir.</div>
+      `
+    },
+    termometre: {
+      title: '🌡️ Termometre',
+      html: `
+        <div class="m-box diagnosis">Vücut ısısını ölçen cihazdır — hipotermi, hipertermi, sepsis değerlendirmesinde vital bulgunun bir parçasıdır.</div>
+        <div class="m-section"><div class="m-section-title">📍 Ölçüm Yerleri ve Doğruluk</div>
+        <ul class="step-list">
+          <li><strong>Timpanik (kulak):</strong> Hızlı, sahada pratik, ama kulak kiri/yanlış açı ölçümü etkileyebilir — orta derecede güvenilir</li>
+          <li><strong>Aksiller (koltuk altı):</strong> En kolay ama en az doğru — gerçek vücut ısısından ~0,5-1°C düşük çıkabilir</li>
+          <li><strong>Oral (ağızdan):</strong> Bilinci açık, iş birliği yapabilen hastada orta derecede güvenilir; sıcak/soğuk içecek sonrası yanıltıcı olabilir</li>
+          <li><strong>Rektal:</strong> En doğru kabul edilir (santral ısıya en yakın) ama sahada pratik/uygun değildir, genelde ciddi hipotermi şüphesinde hastanede ölçülür</li>
+        </ul></div>
+        <div class="m-box warning">⚠️ Ciddi hipotermi şüphesinde standart timpanik/aksiller termometreler düşük dereceleri (özellikle &lt;32°C) doğru ölçemeyebilir — "hipotermi ölçüm aralığı" özellikli özel düşük-aralıklı termometre gerekebilir. Cihazınız çok düşük değer gösteriyorsa ve klinikle uyuşmuyorsa hatalı ölçüm ihtimalini düşünün, tekrar ölçün.</div>
+        <div class="m-box diagnosis">💡 Ateş (&gt;38°C) ve hipotermi (&lt;35°C) sınırlarını bilin — her iki yönde de ilgili algoritmaya (Hipertermi/Hipotermi) yönlenmeniz gerekir.</div>
+      `
     }
   };
   const d = data[key];
@@ -2449,6 +2678,52 @@ function showYonetmelik(key){
         </ul>
         <div class="m-box diagnosis">💡 Görüşme kayıtlarını izinsiz paylaşmak veya açıklamak yasaktır ve adli/idari işlem gerektirir — bu hem sizi hem hastayı korur.</div>
       `
+    },
+    umke: {
+      title: '🆘 Afet & UMKE (Ulusal Medikal Kurtarma Ekipleri)',
+      html: `
+        <div class="m-box info">Kaynak: Afetlerde ve Acil Durumlarda Sağlık Hizmetleri Yönetmeliği (RG 25/5/2021)</div>
+        <div class="m-section"><div class="m-section-title">📖 Temel Tanımlar</div>
+        <ul class="step-list">
+          <li><strong>Afet:</strong> Toplumun tamamı/bir kesimi için fiziksel-ekonomik-sosyal kayıplara yol açan, toplumun kendi imkanlarıyla baş edemediği doğal/teknolojik/insan kaynaklı olay</li>
+          <li><strong>Acil Durum:</strong> Normal hayatı durduran/kesintiye uğratan, acil müdahale gerektiren olay (afetten daha sınırlı kapsamlı)</li>
+          <li><strong>Medikal Kurtarma:</strong> Olay yerinde başlayıp uygun sağlık tesisine/ekibe teslime kadar süren acil tıbbi müdahale</li>
+          <li><strong>Seyyar Hastane:</strong> Şişme/konteyner tipi çadır hastaneler, mobil komuta araçları, dekontaminasyon üniteleri vb. — sahaya konuşlanan tüm sağlık üniteleri</li>
+        </ul></div>
+        <div class="m-section"><div class="m-section-title">🚨 UMKE Nedir?</div>
+        <ul class="step-list">
+          <li>Yurt içi/dışı afet ve acil durumlarda medikal kurtarma yapmak üzere <strong>gönüllü başvuru ile</strong> seçilip UMKE temel eğitimini tamamlamış sağlık personelinden oluşur</li>
+          <li>UMKE timi: Tercihen en az 1 hekim + UMKE eğitimli 5 sağlık personelinden oluşan özel donanımlı ekip</li>
+          <li>UMKE personeli önce kendi asli görevini yapar, afet/acil durumda Bakanlık/valilik görevlendirmesiyle katılır</li>
+          <li><strong>Çalışma süresi kuralı:</strong> UMKE faaliyetlerine (eğitim, tatbikat, seyyar hastane kurulumu vb.) katılım, günde en az 8 saat olmak kaydıyla aylık çalışma süresinden sayılır. Gerçek medikal kurtarma operasyonlarında geçen sürenin TAMAMI çalışma süresinden sayılır</li>
+        </ul></div>
+        <div class="m-section"><div class="m-section-title">🏥 Koordinasyon Zinciri</div>
+        <ul class="step-list">
+          <li><strong>SAKOM</strong> (Sağlık Afet Koordinasyon Merkezi): Bakanlık düzeyinde koordinasyon</li>
+          <li><strong>İl SAKOM:</strong> İl düzeyinde koordinasyon, il sağlık müdürü sorumluluğunda</li>
+          <li><strong>Bölge Koordinatörü İl:</strong> Bakanlıkça belirlenen, komşu illere afet desteği koordine eden il</li>
+          <li><strong>Triyaj Kartı:</strong> Bakanlıkça yayımlanan, hastaneler/112 istasyonları/UMKE timlerince ortak kullanılan standart triyaj kartı — kitlesel vakalarda bu kart kullanılır</li>
+        </ul></div>
+        <div class="m-box diagnosis">💡 Bazı A tipi 112 istasyonları, il talebi + Bakanlık onayıyla "afet öncelikli istasyon" olarak belirlenir — bu istasyonlarda UMKE temel eğitimi almış personel bulunur, olağan zamanlarda normal 112 hizmetine devam ederler.</div>
+      `
+    },
+    cagrimerkezi: {
+      title: '📞 112 Çağrı Merkezi (Çok Kurumlu Sistem)',
+      html: `
+        <div class="m-box info">Kaynak: 112 Acil Çağrı Merkezleri Kuruluş, Görev ve Çalışma Yönetmeliği (İçişleri Bakanlığı)</div>
+        <div class="m-box warning">⚠️ Bu, sizin bildiğiniz "Acil Sağlık Hizmetleri Yönetmeliği"nden (Sağlık Bakanlığı) FARKLI bir yönetmeliktir — 112'yi arayan vatandaşın çağrısını ilk karşılayan, sağlık/polis/itfaiye/jandarma arasında yönlendiren İçişleri Bakanlığı sistemini düzenler.</div>
+        <ul class="step-list">
+          <li><strong>Acil çağrı</strong> tanımı sadece sağlığı değil, kamu düzeni/güvenliği, toplum sağlığı, doğaya yönelik ani tehditler ve mala yönelik zararları da kapsar</li>
+          <li>Vatandaş 112'yi aradığında önce <strong>ortak çağrı merkezi</strong> karşılar, çağrının niteliğine göre ilgili kuruma (Sağlık KKM, Polis, İtfaiye, Jandarma, AFAD) yönlendirilir/aktarılır</li>
+          <li>Bu sistem 3152 sayılı İçişleri Bakanlığı Teşkilat Kanunu ve 5442 sayılı İl İdaresi Kanununa dayanır</li>
+        </ul>
+        <div class="m-section"><div class="m-section-title">📻 Telsiz/Frekans Kullanımı</div>
+        <ul class="step-list">
+          <li>İl düzeyinde KKM ile istasyonlar arası iletişim, <strong>özel tahsisli telsiz frekansı</strong> üzerinden yapılır</li>
+          <li>Bu frekanslar acil sağlık hizmeti AMACI DIŞINDA hiçbir birim/kişi tarafından kullanılamaz</li>
+        </ul></div>
+        <div class="m-box diagnosis">💡 Pratikte size yansıyan yönü: bir olayda hem sağlık hem güvenlik/itfaiye müdahalesi gerekiyorsa (örn. trafik kazası, yangın+yaralı), bu çok kurumlu koordinasyon sayesinde ekipler eş zamanlı yönlendirilir — KKM'niz diğer kurumlarla bu çerçevede koordine olur.</div>
+      `
     }
   };
   const d = data[key];
@@ -2506,21 +2781,44 @@ function createStars(){
 createStars();
 
 // ======= ROLE SELECT =======
+// ======= SON KULLANILAN ROLÜ HATIRLA =======
+(function initQuickContinue(){
+  let lastRole = null;
+  try{ lastRole = localStorage.getItem('urfa112_lastrole'); }catch(e){}
+  if(!lastRole) return;
+  const el = document.getElementById('quickContinue');
+  if(!el) return;
+  const label = lastRole==='kkm' ? 'KKM Görevlisi' : 'Saha Ekibi';
+  const emoji = lastRole==='kkm' ? '📡' : '🚑';
+  el.innerHTML = `<button class="quick-continue-btn" onclick="selectRole('${lastRole}')">${emoji} Kaldığın yerden devam et: <strong>${label}</strong> →</button>`;
+  el.style.display='block';
+})();
+
 function selectRole(role){
-  document.getElementById('splash').style.display='none';
-  if(role==='kkm'){document.getElementById('appKKM').style.display='flex';initKKM();}
-  else{
-    document.getElementById('appSaha').style.display='flex';
-    calcDoses();
-    initECG();
-    if(!localStorage.getItem('urfa112_user')) localStorage.setItem('urfa112_user','Saha Ekibi');
-    initEkipDurum();
-  }
+  if('vibrate' in navigator) navigator.vibrate(35);
+  try{ localStorage.setItem('urfa112_lastrole', role); }catch(e){}
+  const splash = document.getElementById('splash');
+  splash.classList.add('splash-fade-out');
+  setTimeout(()=>{
+    splash.style.display='none';
+    splash.classList.remove('splash-fade-out');
+    if(role==='kkm'){document.getElementById('appKKM').style.display='flex';initKKM();}
+    else{
+      document.getElementById('appSaha').style.display='flex';
+      calcDoses();
+      initECG();
+      if(!localStorage.getItem('urfa112_user')) localStorage.setItem('urfa112_user','Saha Ekibi');
+      initEkipDurum();
+    }
+  }, 280);
 }
 function logout(){
   document.getElementById('appKKM').style.display='none';
   document.getElementById('appSaha').style.display='none';
-  document.getElementById('splash').style.display='flex';
+  const splash = document.getElementById('splash');
+  splash.style.display='flex';
+  splash.classList.add('fade-in');
+  setTimeout(()=>splash.classList.remove('fade-in'), 400);
   stopAllECG();
 }
 
@@ -2914,31 +3212,31 @@ function calcDoses(){
   kg=Math.min(200,Math.max(1,kg));
   document.getElementById('sahaKg').value=kg;
   const drugs=[
-    ['💉 Adrenalin (KPR)',`${Math.min(1,kg*0.01).toFixed(2)} mg IV/IO (her 3-5 dk)`,'var(--red)'],
-    ['💉 Adrenalin (Anafilaksi)',`${Math.min(0.5,kg*0.01).toFixed(2)} mg IM lateral uyluk`,'var(--red)'],
-    ['💉 Amiodaron (VF/VT 1.doz)',`${Math.min(300,kg*5).toFixed(0)} mg IV bolus`,'var(--orange)'],
-    ['💉 Amiodaron (VF/VT 2.doz)',`${Math.min(150,kg*2.5).toFixed(0)} mg IV bolus`,'var(--orange)'],
-    ['💉 Adenozin (SVT 1.doz)','6 mg IV hızlı puşe (geniş delikten)','var(--yellow)'],
-    ['💉 Adenozin (SVT 2.doz)','12 mg IV hızlı puşe','var(--yellow)'],
-    ['💉 Atropin (Bradikardi)',`${Math.min(0.5,kg*0.02).toFixed(2)} mg IV (max 3 mg)`,'var(--blue)'],
-    ['💉 Midazolam (Nöbet)',`${Math.min(10,kg*0.2).toFixed(1)} mg IM/IN (Bucal/IV de)`,'var(--purple)'],
-    ['💉 Diazepam (Nöbet)',`${Math.min(20,kg*0.3).toFixed(1)} mg IV yavaş`,'var(--purple)'],
-    ['🍬 Dekstroz %10 (Hipoglisemi)',`${Math.min(200,kg*2).toFixed(0)} mL IV bolus`,'var(--green)'],
-    ['💊 Glukagon (Hipoglisemi)',kg<25?'0.5 mg IM':'1 mg IM','var(--green)'],
-    ['🧪 NaCl %9 / Kristaloid (Şok)',`${Math.min(1000,kg*20).toFixed(0)} mL IV hızlı bolus`,'var(--cyan)'],
-    ['💊 Aspirin (AKS)','300 mg PO (çiğnenerek)','var(--red)'],
-    ['💊 Tikagrelor (AKS)','180 mg PO yükleme dozu','var(--red)'],
-    ['💊 Furosemid (Pulmoner ödem)',`${Math.min(80,kg*1).toFixed(0)} mg IV yavaş`,'var(--blue)'],
-    ['💊 Metilprednizolon (Anafilaksi/KOAH)','125 mg IV','var(--orange)'],
-    ['🫧 Salbutamol Nebül (Astım/KOAH)','2.5-5 mg nebülizasyon','var(--cyan)'],
-    ['💉 Morfin (AKS/Ağrı)',`${Math.min(10,kg*0.1).toFixed(1)} mg IV yavaş (titrasyon)`,'var(--purple)'],
-    ['🧪 Magnezyum Sülfat (Eklampsi)','4-6 g IV 15-20 dk','#14b8a6'],
-    ['💊 Naloksan (Opioid OD)',`${Math.min(2,kg*0.01).toFixed(2)} mg IV/IN`,'var(--orange)'],
-    ['💉 Kalsiyum Glukonat (HiperK)','1-2 g IV yavaş 5-10 dk','var(--green)'],
-    ['💉 MgSO4 (Torsades/Astım)','2 g IV bolus','var(--teal,#14b8a6)'],
+    ['💉 Adrenalin (KPR)',`${Math.min(1,kg*0.01).toFixed(2)} mg IV/IO (her 3-5 dk)`,'var(--red)','Adrenalin (Epinefrin)','[ad-re-na-lin]','Adrenalin® (jenerik, çoğu üretici aynı isimle satar)'],
+    ['💉 Adrenalin (Anafilaksi)',`${Math.min(0.5,kg*0.01).toFixed(2)} mg IM lateral uyluk`,'var(--red)','Adrenalin (Epinefrin)','[ad-re-na-lin]','Adrenalin®, Penepin® (oto-enjektör)'],
+    ['💉 Amiodaron (VF/VT 1.doz)',`${Math.min(300,kg*5).toFixed(0)} mg IV bolus`,'var(--orange)','Amiodaron HCl','[a-mi-yo-da-ron]','Cordarone®, Cordalin®'],
+    ['💉 Amiodaron (VF/VT 2.doz)',`${Math.min(150,kg*2.5).toFixed(0)} mg IV bolus`,'var(--orange)','Amiodaron HCl','[a-mi-yo-da-ron]','Cordarone®, Cordalin®'],
+    ['💉 Adenozin (SVT 1.doz)','6 mg IV hızlı puşe (geniş delikten)','var(--yellow)','Adenozin','[a-de-no-zin]','Adenotek®, Adozin®'],
+    ['💉 Adenozin (SVT 2.doz)','12 mg IV hızlı puşe','var(--yellow)','Adenozin','[a-de-no-zin]','Adenotek®, Adozin®'],
+    ['💉 Atropin (Bradikardi)',`${Math.min(0.5,kg*0.02).toFixed(2)} mg IV (max 3 mg)`,'var(--blue)','Atropin Sülfat','[at-ro-pin]','Atropin Sülfat® (çoğunlukla jenerik)'],
+    ['💉 Midazolam (Nöbet)',`${Math.min(10,kg*0.2).toFixed(1)} mg IM/IN (Bucal/IV de)`,'var(--purple)','Midazolam','[mi-da-zo-lam]','Dormicum®, Zolamid®, Midolam®'],
+    ['💉 Diazepam (Nöbet)',`${Math.min(20,kg*0.3).toFixed(1)} mg IV yavaş`,'var(--purple)','Diazepam','[di-a-ze-pam]','Diazem®'],
+    ['🍬 Dekstroz %10 (Hipoglisemi)',`${Math.min(200,kg*2).toFixed(0)} mL IV bolus`,'var(--green)','Dekstroz (Glikoz)','[dek-stroz]','Dekstroz Solüsyonu® (jenerik, çoklu üretici)'],
+    ['💊 Glukagon (Hipoglisemi)',kg<25?'0.5 mg IM':'1 mg IM','var(--green)','Glukagon','[glu-ka-gon]','GlucaGen®'],
+    ['🧪 NaCl %9 / Kristaloid (Şok)',`${Math.min(1000,kg*20).toFixed(0)} mL IV hızlı bolus`,'var(--cyan)','Sodyum Klorür %0,9','[sod-yum klo-rür]','Serum Fizyolojik® (jenerik)'],
+    ['💊 Aspirin (AKS)','300 mg PO (çiğnenerek)','var(--red)','Asetilsalisilik Asit','[a-se-til-sa-li-si-lik a-sit]','Aspirin®, Ecopirin®, Coraspin®'],
+    ['💊 Tikagrelor (AKS)','180 mg PO yükleme dozu','var(--red)','Tikagrelor','[ti-ka-gre-lor]','Brilinta®'],
+    ['💊 Furosemid (Pulmoner ödem)',`${Math.min(80,kg*1).toFixed(0)} mg IV yavaş`,'var(--blue)','Furosemid','[fu-ro-se-mid]','Lasix®, Desal®'],
+    ['💊 Metilprednizolon (Anafilaksi/KOAH)','125 mg IV','var(--orange)','Metilprednizolon','[me-til-pred-ni-zo-lon]','Prednol®, Depo-Medrol®'],
+    ['🫧 Salbutamol Nebül (Astım/KOAH)','2.5-5 mg nebülizasyon','var(--cyan)','Salbutamol','[sal-bu-ta-mol]','Ventolin®'],
+    ['💉 Morfin (AKS/Ağrı)',`${Math.min(10,kg*0.1).toFixed(1)} mg IV yavaş (titrasyon)`,'var(--purple)','Morfin Sülfat','[mor-fin]','Morfin HCl® (jenerik, kontrollü ilaç)'],
+    ['🧪 Magnezyum Sülfat (Eklampsi)','4-6 g IV 15-20 dk','#14b8a6','Magnezyum Sülfat','[mag-nez-yum sül-fat]','Magnezyum Sülfat® (jenerik)'],
+    ['💊 Naloksan (Opioid OD)',`${Math.min(2,kg*0.01).toFixed(2)} mg IV/IN`,'var(--orange)','Nalokson HCl','[na-lok-son]','Narcan®'],
+    ['💉 Kalsiyum Glukonat (HiperK)','1-2 g IV yavaş 5-10 dk','var(--green)','Kalsiyum Glukonat','[kal-si-yum glu-ko-nat]','Kalsiyum Glukonat® (jenerik)'],
+    ['💉 MgSO4 (Torsades/Astım)','2 g IV bolus','var(--teal,#14b8a6)','Magnezyum Sülfat','[mag-nez-yum sül-fat]','Magnezyum Sülfat® (jenerik)'],
   ];
-  document.getElementById('doseList').innerHTML=drugs.map(([n,d,c])=>
-    `<div class="drug-item" style="border-color:${c}"><span class="drug-name">${n}</span><span class="drug-dose">${d}</span></div>`
+  document.getElementById('doseList').innerHTML=drugs.map(([n,d,c,etken,oku,ticari])=>
+    `<div class="drug-item" style="border-color:${c}"><div style="flex:1;"><span class="drug-name">${n}</span><div class="drug-etken">🧬 ${etken} <span class="drug-oku">${oku}</span></div><div class="drug-ticari">🏷️ ${ticari}</div></div><span class="drug-dose">${d}</span></div>`
   ).join('');
 }
 
@@ -3904,6 +4202,18 @@ const algoData={
     </ul>
     <div class="m-box warning">⚠️ Elektrik yanığı: Kardiyak monitorizasyon zorunlu!</div>
   `},
+  gebeKpr:{title:'🫄 GEBE HASTADA KARDİYAK ARREST (KPR) — AHA 2025',html:`
+    <div class="m-box warning">⚠️ İKİ HASTA BİRDEN: Anne ve fetüs. Öncelik HER ZAMAN anneyi resüsite etmektir — anne resüsite olursa fetüsün de en iyi şansı olur.</div>
+    <ul class="step-list">
+      <li>Standart KPR'yi hemen başlat — göğüs basısı yeri, derinliği ve hızında DEĞİŞİKLİK YOK</li>
+      <li>Eş zamanlı olarak MANUEL SOL UTERUS DEPLASMANI uygula (elle uterusu sola it) — pozisyonel yan yatırma DEĞİL</li>
+      <li>Standart defibrilasyon, standart ilaç/dozlar — fetüs endişesiyle geciktirme/atlama YAPMA</li>
+      <li>IV/IO yolu DİYAFRAM ÜSTÜNDE (üst ekstremite) aç</li>
+      <li>Erken ileri hava yolu düşün (hızlı desatürasyon + aspirasyon riski yüksek)</li>
+      <li>Magnezyum infüzyonu açıksa DURDUR, Kalsiyum Glukonat/Klorür ver</li>
+      <li>Fundus göbek hizasında/üstündeyse (~20 hafta+) ve ROSC sağlanamıyorsa RESÜSİTATİF HİSTEREKTOMİ (perimortem sezaryen) için hazırlan</li>
+    </ul>
+  `},
   obstetrik:{title:'🤰 OBSTETRİK ACİL',html:`
     <div class="m-section"><div class="m-section-title">🔴 EKLAMPSI</div>
     <ul class="step-list">
@@ -4691,7 +5001,32 @@ function renderAsFlowchart(html){
 // kutu/ok/karar yapısı korunarak aktarılmıştır). showAlgo() bu veriyi
 // bulursa önce bunu kullanır; yoksa genel otomatik dönüştürücüye düşer.
 // ═══════════════════════════════════════════════════════════════════════
-const PDF_FLOWS = {  astimYetiskin: [
+const PDF_FLOWS = {
+  gebeKpr: [
+    {t:'fn-start', txt:`🚨 GEBE HASTA — BİLİNÇ YOK, NABIZ YOK\n(C-A-B-U: Kompresyon-Havayolu-Solunum-Uterus deplasmanı EŞ ZAMANLI başlar)`},{arrow:true},
+    {t:'fn-action', txt:`Standart göğüs kompresyonuna HEMEN başla — yer, derinlik (5-6cm), hız (100-120/dk) DEĞİŞMEZ. En az 4 kişilik ekip idealdir (kompresyon/havayolu/uterus/ilaç-defib için ayrı kişiler)`},{arrow:true},
+    {t:'fn-drug', txt:`✋ MANUEL SOL UTERUS DEPLASMANI (LUD) başlat ve KPR boyunca KESİNTİSİZ sürdür — iki elle yandan veya tek elle uterusu SOLA doğru it.\n⚠️ Pozisyonel yan yatırma/tilt KULLANMA — kompresyon kalitesini, defibrilasyonu ve havayolu girişimini bozar`},{arrow:true},
+    {t:'fn-action', txt:`⚡ Standart defibrilasyon (ped yerleşimi ve enerji dozu DEĞİŞMEZ) + Standart ACLS ilaçları/dozları — fetal teratojenite endişesiyle GECİKTİRME veya ATLAMA yapma`},{arrow:true},
+    {t:'fn-action', txt:`IV/IO yolu DİYAFRAM ÜSTÜNDE (üst ekstremite/santral) aç — alt vücuttan verilen ilaçlar sıkışmış vena kava nedeniyle kalbe ulaşamayabilir`},{arrow:true},
+    {t:'fn-warning', txt:`🫁 Erken ileri hava yolu düşün — gebelikte hızlı desatürasyon ve yüksek aspirasyon riski var. %100 O2 ile pre-oksijenizasyon`},{arrow:true},
+    {t:'fn-action', txt:`Fetal monitör TAKMA/varsa ÇIKAR — resüsitasyonu geciktirir, düşük öncelikli. Eklampsi nedeniyle Magnezyum Sülfat infüzyonu açıksa DURDUR ve Kalsiyum Glukonat/Klorür ver (Mg toksisitesi olabilir)`},{arrow:true},
+    {t:'fn-question', txt:`Fundus (rahim üstü) göbek hizasında veya üstünde mi? (~20 hafta ve üzeri gebelik göstergesi — kesin tarih bilinmiyorsa bu klinik bulgu kullanılır)`},{arrow:true},
+    {branch:[
+      {label:`Evet — ≥20 Hafta Gebelik`, cls:'fb-no', nodes:[
+        {t:'fn-warning', txt:`🔪 RESÜSİTATİF HİSTEREKTOMİ (Perimortem Sezaryen) HAZIRLIĞINA HEMEN BAŞLA — ilk birkaç dakika içinde ROSC sağlanamazsa uygula`},
+        {t:'fn-action', txt:`"4 dakika kuralı" katı bir eşik değil, bir hatırlatıcıdır — HER dakikalık gecikme hem anne hem bebek sağkalım şansını azaltır. Kararı geciktirme!`},
+        {t:'fn-action', txt:`En yetkin/mevcut kişi uygular — kadın doğum uzmanının gelmesini BEKLEME. Amaç: arrest başlangıcından itibaren 5 dakika içinde doğum`},
+        {t:'fn-info', txt:`Bu işlem hem ANNENİN aortakaval basısını gidererek KPR'ı etkinleştirir hem de bebek için son şanstır — SADECE "bebeği kurtarma" değil, "anneyi de resüsite etme" aracıdır`}
+      ]},
+      {label:`Hayır — <20 Hafta`, cls:'fb-yes', nodes:[
+        {t:'fn-action', txt:`Standart ACLS protokolüne (Arrest Yönetimi / Şoklanır-Şoklanamaz Ritim algoritmaları) devam et — histerotomi endikasyonu yok, uterus henüz büyük damarlara bası yapacak boyutta değil`}
+      ]}
+    ]},{arrow:true},
+    {t:'fn-action', txt:`🔬 Gebeliğe özgü geri döndürülebilir nedenleri de düşün: Standart 5H5T + Eklampsi/Mg toksisitesi, Amniyotik sıvı embolisi, Postpartum hemoraji/uterin atoni, Aort diseksiyonu`},{arrow:true},
+    {t:'fn-warning', txt:`Amniyotik sıvı embolisi şüphesi varsa (ani kollaps, hipoksi, koagülopati) → Masif transfüzyon protokolünü aktive et, hastane ön bildirimi yap`}
+  ],
+
+  astimYetiskin: [
     {t:'fn-action', txt:`Acil olgu yönetimini uygula`},
     {t:'fn-warning', txt:`Etiyolojide anafilaksiyi göz önünde bulundur`},{arrow:true},
     {t:'fn-action', txt:`Hastayı rahat ettiği (tercihen oturur) pozisyonda tut`},{arrow:true},
